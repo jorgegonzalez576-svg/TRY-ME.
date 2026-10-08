@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&amp;family=Figtree:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+@keyframes crFade{from{opacity:0}to{opacity:1}}
+@keyframes crRise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes crCard{from{opacity:0;transform:translateY(60px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes crDealL{from{opacity:0;transform:translateY(40px) rotate(-6deg)}to{opacity:1;transform:rotate(-1.6deg)}}
+@keyframes crDealR{from{opacity:0;transform:translateY(40px) rotate(6deg)}to{opacity:1;transform:rotate(1.6deg)}}
+@keyframes crSeal{0%{transform:translate(-50%,-50%) scale(1.35);opacity:0}60%{opacity:1}100%{transform:translate(-50%,-50%) scale(1);opacity:1}}
+@keyframes crFloat{0%{opacity:0;transform:translateY(6px)}20%{opacity:1;transform:translateY(0)}80%{opacity:1;transform:translateY(-14px)}100%{opacity:0;transform:translateY(-20px)}}
+@keyframes crShake{0%,100%{transform:none}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+@keyframes crPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+@keyframes crSheet{from{transform:translateY(100%)}to{transform:none}}
+@keyframes crToast{0%{opacity:0;transform:translate(-50%,-10px)}12%{opacity:1;transform:translate(-50%,0)}85%{opacity:1}100%{opacity:0}}
+@keyframes crFlap{from{transform:rotateX(0)}to{transform:rotateX(-178deg)}}
+@keyframes crGlow{0%{box-shadow:0 0 0 0 rgba(214,184,169,.7)}100%{box-shadow:0 0 0 26px rgba(214,184,169,0)}}
+@keyframes crWin{0%{transform:scale(1)}40%{transform:scale(1.08)}100%{transform:scale(1)}}
+</style>
+</helmet>
+<div style="position:absolute;inset:0;overflow:hidden;background:{{ p.surface }};transition:{{ bgTr }};font-family:'Figtree',sans-serif;color:{{ p.ink }}">
+<img src="assets/crave-living.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:{{ livingOp }};transition:opacity .8s ease">
+<img src="assets/crave-bedroom.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:{{ bedroomOp }};transition:opacity .8s ease">
+<div style="position:absolute;inset:0;background:{{ wash }};transition:{{ bgTr }}"></div>
+<div style="position:absolute;inset:0;background-image:var(--grain);opacity:.65"></div>
+
+<div style="position:absolute;top:60px;left:16px;right:16px;display:flex;align-items:center;gap:8px;z-index:5">
+<button onClick="{{ exit }}" aria-label="Back" style="width:44px;height:44px;border:0;cursor:pointer;border-radius:50%;background:{{ p.ctl }};box-shadow:inset 0 0 0 1px {{ p.ctlLine }};display:grid;place-items:center;transition:{{ bgTr }}" style-active="transform:scale(.94)"><span style="width:9px;height:9px;border-left:1.8px solid {{ p.ctlInk }};border-bottom:1.8px solid {{ p.ctlInk }};transform:translateX(2px) rotate(45deg)"></span></button>
+<div style="flex:1;font:400 21px/1 'Gloock',serif;color:{{ p.accent }};padding-left:4px;transition:color .6s">Crave</div>
+<div role="group" style="display:flex;height:44px;padding:3px;box-sizing:border-box;border-radius:22px;background:{{ p.ctl }};box-shadow:inset 0 0 0 1px {{ p.ctlLine }};transition:{{ bgTr }}">
+<button onClick="{{ setEs }}" style="width:44px;border:0;cursor:pointer;border-radius:19px;background:{{ esBg }};color:{{ esFg }};font:600 12px/1 'Figtree';letter-spacing:.06em">ES</button>
+<button onClick="{{ setEn }}" style="width:44px;border:0;cursor:pointer;border-radius:19px;background:{{ enBg }};color:{{ enFg }};font:600 12px/1 'Figtree';letter-spacing:.06em">EN</button>
+</div>
+<button onClick="{{ menu }}" aria-label="Menu" style="width:44px;height:44px;border:0;cursor:pointer;border-radius:50%;background:{{ p.ctl }};box-shadow:inset 0 0 0 1px {{ p.ctlLine }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;transition:{{ bgTr }}"><span style="width:16px;height:1.6px;background:{{ p.ctlInk }};border-radius:1px"></span><span style="width:16px;height:1.6px;background:{{ p.ctlInk }};border-radius:1px"></span><span style="width:16px;height:1.6px;background:{{ p.ctlInk }};border-radius:1px"></span></button>
+</div>
+
+<sc-if value="{{ v.level }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:122px;left:24px;right:24px;animation:{{ a.rise }}">
+<div style="font:700 11px/1 'Figtree';letter-spacing:.22em;color:#6E605B">{{ t.prepare }}</div>
+<div style="margin-top:8px;font:400 34px/1.05 'Gloock',serif;color:#241A18">{{ t.selectedLevel }}</div>
+</div>
+<div role="group" style="position:absolute;top:208px;left:20px;right:20px;display:grid;grid-template-columns:1fr 1fr;height:44px;padding:3px;box-sizing:border-box;border-radius:22px;background:#F8F3F0;box-shadow:inset 0 0 0 1px #DDCFCA">
+<button onClick="{{ setProg }}" style="border:0;cursor:pointer;border-radius:19px;background:{{ progBg }};color:{{ progFg }};font:600 14px/1 'Figtree'">{{ t.progressive }}</button>
+<button onClick="{{ setFixed }}" style="border:0;cursor:pointer;border-radius:19px;background:{{ fixBg }};color:{{ fixFg }};font:600 14px/1 'Figtree'">{{ t.fixed }}</button>
+</div>
+<div style="position:absolute;top:266px;left:20px;right:20px;display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ levelTiles }}" as="L" hint-placeholder-count="4">
+<button onClick="{{ L.pick }}" aria-pressed="{{ L.inRange }}" style="position:relative;height:76px;border:0;cursor:pointer;border-radius:16px;background:{{ L.bg }};box-shadow:{{ L.shadow }};display:flex;align-items:center;justify-content:space-between;padding:0 18px;text-align:left;opacity:{{ L.op }};transform:{{ L.tf }};transition:transform .2s,box-shadow .2s,opacity .2s" style-active="transform:scale(.98)">
+<span style="display:flex;flex-direction:column;gap:6px"><span style="font:400 24px/1 'Gloock',serif;color:{{ L.ink }}">{{ L.name }}</span><span style="font:500 13px/1.2 'Figtree';color:{{ L.muted }};font-style:{{ L.fs }}">{{ L.head }}</span></span>
+<span style="display:flex;flex-direction:column;align-items:flex-end;gap:6px"><span style="display:flex;gap:3px"><sc-for list="{{ L.bars }}" as="b" hint-placeholder-count="4"><span style="width:12px;height:4px;border-radius:2px;background:{{ b }}"></span></sc-for></span><span style="font:700 10px/1 'Figtree';letter-spacing:.14em;color:{{ L.ink }};opacity:{{ L.chipOp }}">{{ L.chip }}</span></span>
+</button>
+</sc-for>
+</div>
+<div style="position:absolute;top:610px;left:24px;right:24px;font:500 13px/1.45 'Figtree';color:#6E605B">{{ levelNote }}</div>
+<div style="position:absolute;top:660px;left:20px;right:20px;display:flex;align-items:center;justify-content:space-between;padding:0 4px">
+<span style="font:600 15px/1 'Figtree';color:#241A18">{{ t.targetLabel }}</span>
+<span style="display:flex;align-items:center;gap:6px">
+<button onClick="{{ goalDown }}" aria-label="−" style="width:44px;height:44px;border:0;cursor:pointer;border-radius:50%;background:#F8F3F0;box-shadow:inset 0 0 0 1px #DDCFCA;font:500 20px/1 'Figtree';color:#721E19">−</button>
+<span style="min-width:44px;text-align:center;font:400 28px/1 'Gloock',serif;color:#241A18">{{ goal }}</span>
+<button onClick="{{ goalUp }}" aria-label="+" style="width:44px;height:44px;border:0;cursor:pointer;border-radius:50%;background:#F8F3F0;box-shadow:inset 0 0 0 1px #DDCFCA;font:500 20px/1 'Figtree';color:#721E19">+</button>
+</span>
+</div>
+<div style="position:absolute;left:20px;right:20px;bottom:42px">
+<button onClick="{{ startPlay }}" style="width:100%;height:56px;border:0;cursor:pointer;border-radius:14px;background:#721E19;color:#fff;font:600 16px/1 'Figtree';box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 8px 18px -8px rgba(114,30,25,.7)" style-active="transform:scale(.98);background:#5E1814">{{ t.play }}</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ v.plate }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:116px;left:20px;right:20px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:12px 18px;background:{{ p.score }};border-radius:16px;box-shadow:inset 0 0 0 1px {{ p.line }},0 10px 20px -16px rgba(0,0,0,.5);transition:{{ bgTr }};z-index:3">
+<div><div style="display:flex;align-items:center;gap:6px;font:700 13px/1 'Figtree';color:{{ nameA }}"><span style="width:6px;height:6px;border-radius:50%;background:{{ p.cardAccent }};opacity:{{ dotA }}"></span>Ana</div><div style="margin-top:6px;font:400 32px/1 'Gloock',serif;color:{{ scoreAColor }};animation:{{ scoreAAnim }};transition:color .3s">{{ dispA }}</div></div>
+<div style="text-align:center"><div style="font:700 10px/1 'Figtree';letter-spacing:.18em;color:{{ p.scoreMuted }}">{{ t.target }} {{ goal }}</div><div style="display:flex;gap:4px;margin:9px 0 7px;justify-content:center"><sc-for list="{{ bars }}" as="b" hint-placeholder-count="4"><span style="width:18px;height:5px;border-radius:3px;background:{{ b }};transition:background .5s"></span></sc-for></div><div style="font:600 12px/1 'Figtree';color:{{ p.scoreInk }}">{{ levelName }}</div></div>
+<div style="text-align:right"><div style="display:flex;align-items:center;justify-content:flex-end;gap:6px;font:700 13px/1 'Figtree';color:{{ nameB }}">Leo<span style="width:6px;height:6px;border-radius:50%;background:{{ p.cardAccent }};opacity:{{ dotB }}"></span></div><div style="margin-top:6px;font:400 32px/1 'Gloock',serif;color:{{ scoreBColor }};animation:{{ scoreBAnim }};transition:color .3s">{{ dispB }}</div></div>
+<sc-if value="{{ flashOn }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:38px;left:{{ flashLeft }};padding:4px 8px;border-radius:999px;background:{{ flashBg }};color:#fff;font:700 12px/1 'Figtree';animation:{{ floatAnim }}">{{ flashText }}</span></sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ v.turn }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:208px;left:24px;right:24px;display:flex;align-items:baseline;justify-content:space-between">
+<span style="font:400 20px/1 'Gloock',serif;color:{{ p.ink }}">{{ t.yourturn }} <span style="color:{{ p.accent }}">{{ activeName }}</span></span>
+<span style="display:flex;align-items:center;gap:6px;font:700 10px/1 'Figtree';letter-spacing:.18em;color:{{ p.muted }}">{{ t.block }}<span style="display:flex;gap:3px"><sc-for list="{{ blockDots }}" as="d" hint-placeholder-count="3"><span style="width:6px;height:6px;border-radius:50%;background:{{ d.bg }};box-shadow:{{ d.ring }}"></span></sc-for></span></span>
+</div>
+<sc-if value="{{ forcedOn }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;top:240px;left:20px;right:20px;padding:9px 12px;border-radius:10px;box-shadow:inset 0 0 0 1px {{ p.line }};font:500 13px/1.35 'Figtree';color:{{ p.ink }}">{{ forcedText }}</div></sc-if>
+<div style="position:absolute;top:{{ choiceTop }};left:20px;right:20px;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<button onClick="{{ pickTruth }}" disabled="{{ truthOff }}" style="position:relative;height:262px;border:0;cursor:pointer;border-radius:18px;background:{{ p.truth }};box-shadow:inset 0 0 0 1px {{ p.truthLine }},0 2px 3px rgba(0,0,0,.12),0 26px 36px -22px rgba(0,0,0,.55);color:{{ p.truthInk }};opacity:{{ truthOp }};animation:{{ a.dealL }};transform:rotate(-1.6deg);transition:transform .18s" style-active="transform:rotate(-1.6deg) scale(.97)">
+<span style="position:absolute;inset:7px;border-radius:13px;box-shadow:inset 0 0 0 1px {{ p.truthLine }}"></span>
+<span style="position:absolute;left:50%;top:62px;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:{{ sealBg }};box-shadow:inset 0 2px 0 rgba(255,255,255,.16),inset 0 -3px 6px rgba(0,0,0,.35),0 7px 12px -4px rgba(0,0,0,.5);display:grid;place-items:center"><span style="width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,243,239,.3);display:grid;place-items:center;font:400 18px/1 'Gloock',serif;color:#FFF3EF">+1</span></span>
+<span style="position:absolute;left:0;right:0;bottom:54px;text-align:center;font:400 34px/1 'Gloock',serif">{{ t.truth }}</span>
+<span style="position:absolute;left:0;right:0;bottom:28px;text-align:center;font:600 13px/1 'Figtree';opacity:.8">{{ t.point }}</span>
+</button>
+<button onClick="{{ pickDare }}" disabled="{{ dareOff }}" style="position:relative;height:262px;border:0;cursor:pointer;border-radius:18px;background:{{ p.dare }};box-shadow:0 2px 3px rgba(0,0,0,.18),0 26px 36px -22px rgba(0,0,0,.65);color:{{ p.dareInk }};opacity:{{ dareOp }};animation:{{ a.dealR }};transform:rotate(1.6deg);transition:transform .18s" style-active="transform:rotate(1.6deg) scale(.97)">
+<span style="position:absolute;inset:7px;border-radius:13px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)"></span>
+<span style="position:absolute;left:50%;top:62px;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:radial-gradient(circle at 34% 30%,#FFFAF6 0,#EBD9D2 50%,#BFA196 100%);box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -3px 6px rgba(0,0,0,.2),0 7px 12px -4px rgba(0,0,0,.5);display:grid;place-items:center"><span style="width:42px;height:42px;border-radius:50%;border:1px solid rgba(90,22,18,.25);display:grid;place-items:center;font:400 18px/1 'Gloock',serif;color:{{ p.dareSealInk }}">+3</span></span>
+<span style="position:absolute;left:0;right:0;bottom:54px;text-align:center;font:400 34px/1 'Gloock',serif">{{ t.dare }}</span>
+<span style="position:absolute;left:0;right:0;bottom:28px;text-align:center;font:600 13px/1 'Figtree';color:{{ p.dareSub }}">{{ t.darepoints }}</span>
+</button>
+</div>
+<div style="position:absolute;left:20px;right:20px;bottom:42px;display:flex;flex-direction:column;gap:8px">
+<button onClick="{{ pickRandom }}" style="height:54px;border:0;cursor:pointer;border-radius:14px;background:transparent;box-shadow:inset 0 0 0 1px {{ p.stop }};color:{{ p.ink }};font:600 15px/1 'Figtree'" style-active="transform:scale(.98)">{{ t.random }}</button>
+<button onClick="{{ exit }}" style="height:44px;border:0;cursor:pointer;background:transparent;color:{{ p.ink }};font:600 15px/1 'Figtree';opacity:.85">{{ t.endGame }}</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ v.card }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:208px;left:24px;right:24px;display:flex;align-items:baseline;justify-content:space-between">
+<span style="font:400 20px/1 'Gloock',serif;color:{{ p.ink }}">{{ t.yourturn }} <span style="color:{{ p.accent }}">{{ activeName }}</span></span>
+<span style="display:flex;align-items:center;gap:6px;font:700 10px/1 'Figtree';letter-spacing:.18em;color:{{ p.muted }}">{{ t.block }}<span style="display:flex;gap:3px"><sc-for list="{{ blockDots }}" as="d" hint-placeholder-count="3"><span style="width:6px;height:6px;border-radius:50%;background:{{ d.bg }};box-shadow:{{ d.ring }}"></span></sc-for></span></span>
+</div>
+<div style="position:absolute;top:270px;left:20px;right:20px;height:372px;border-radius:20px;background:{{ p.card }};box-shadow:inset 0 0 0 1px {{ p.truthLine }},inset 0 0 0 6px {{ p.card }},inset 0 0 0 7px {{ p.truthLine }},0 2px 3px rgba(0,0,0,.12),0 30px 46px -26px rgba(0,0,0,.6);animation:{{ a.card }};color:{{ p.cardInk }}">
+<div style="position:absolute;inset:0;border-radius:20px;background-image:var(--grain);opacity:.5"></div>
+<div style="position:absolute;left:50%;top:0;width:64px;height:64px;border-radius:50%;background:{{ sealBg }};box-shadow:inset 0 2px 0 rgba(255,255,255,.16),inset 0 -3px 6px rgba(0,0,0,.35),0 8px 14px -4px rgba(0,0,0,.55);display:grid;place-items:center;animation:{{ a.seal }};transform:translate(-50%,-50%)"><div style="width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,243,239,.3);display:grid;place-items:center;font:400 19px/1 'Gloock',serif;color:#FFF3EF">{{ sealText }}</div></div>
+<div style="position:absolute;top:48px;left:24px;right:24px;text-align:center">
+<div style="font:700 10px/1 'Figtree';letter-spacing:.2em;color:{{ p.cardAccent }}">{{ cardKicker }}</div>
+<div style="margin-top:20px;font:600 15px/1 'Figtree';color:{{ p.cardAccent }}">{{ activeName }}:</div>
+<div style="margin-top:10px;font:400 {{ cardSize }}/1.22 'Gloock',serif;text-wrap:balance">{{ cardText }}</div>
+<sc-if value="{{ hasFail }}" hint-placeholder-val="{{ false }}"><div style="margin-top:12px;font:500 13px/1.3 'Figtree';color:{{ p.cardMuted }}">{{ t.failLabel }}: {{ failText }}</div></sc-if>
+</div>
+<sc-if value="{{ isDare }}" hint-placeholder-val="{{ true }}">
+<div style="position:absolute;left:50%;bottom:40px;width:108px;height:108px;margin-left:-54px">
+<svg width="108" height="108" viewBox="0 0 108 108" style="position:absolute;inset:0"><circle cx="54" cy="54" r="49" fill="none" stroke="{{ p.track }}" stroke-width="5"></circle><circle cx="54" cy="54" r="49" fill="none" stroke="{{ p.ring }}" stroke-width="5" stroke-linecap="round" stroke-dasharray="307.9" stroke-dashoffset="{{ dash }}" transform="rotate(-90 54 54)" style="transition:stroke-dashoffset .25s linear"></circle></svg>
+<div style="position:absolute;inset:0;display:grid;place-items:center;font:400 30px/1 'Gloock',serif;color:{{ p.cardAccent }};font-variant-numeric:tabular-nums;animation:{{ clockAnim }}">{{ clock }}</div>
+</div>
+<div style="position:absolute;left:0;right:0;bottom:16px;text-align:center;font:500 12px/1 'Figtree';color:{{ p.cardMuted }}">{{ timerHint }}</div>
+</sc-if>
+</div>
+<div style="position:absolute;left:20px;right:20px;bottom:42px;display:flex;flex-direction:column;gap:10px">
+<sc-if value="{{ ph.idle }}" hint-placeholder-val="{{ true }}">
+<button onClick="{{ primaryAct }}" style="height:54px;border:0;cursor:pointer;border-radius:14px;background:{{ p.primary }};color:{{ p.primaryInk }};font:600 16px/1 'Figtree';box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 8px 18px -8px rgba(0,0,0,.5)" style-active="transform:scale(.98)">{{ primaryLabel }}</button>
+<button onClick="{{ askPass }}" style="height:52px;border:0;cursor:pointer;border-radius:14px;background:transparent;box-shadow:inset 0 0 0 1px {{ p.stop }};color:{{ p.ink }};font:600 15px/1 'Figtree'" style-active="transform:scale(.98)">{{ t.passBtn }}</button>
+</sc-if>
+<sc-if value="{{ ph.running }}" hint-placeholder-val="{{ false }}">
+<div style="height:54px;border-radius:14px;display:grid;place-items:center;font:600 15px/1 'Figtree';color:{{ p.ink }};box-shadow:inset 0 0 0 1px {{ p.line }}">{{ t.running }}</div>
+<button onClick="{{ abandon }}" style="height:52px;border:0;cursor:pointer;border-radius:14px;background:transparent;box-shadow:inset 0 0 0 1px {{ p.stop }};color:{{ p.ink }};font:600 15px/1 'Figtree'">{{ t.abandon }}</button>
+</sc-if>
+<sc-if value="{{ ph.done }}" hint-placeholder-val="{{ false }}">
+<button onClick="{{ complete }}" style="height:54px;border:0;cursor:pointer;border-radius:14px;background:{{ p.primary }};color:{{ p.primaryInk }};font:600 16px/1 'Figtree'" style-active="transform:scale(.98)">{{ t.complete }}</button>
+<div style="height:52px;display:grid;place-items:center;font:500 14px/1 'Figtree';color:{{ p.muted }}">{{ t.elapsed }}</div>
+</sc-if>
+<sc-if value="{{ ph.verdict }}" hint-placeholder-val="{{ false }}">
+<div style="text-align:center;font:400 19px/1.2 'Gloock',serif;color:{{ p.ink }}">{{ verdictText }}</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<button onClick="{{ madeIt }}" style="height:54px;border:0;cursor:pointer;border-radius:14px;background:{{ p.primary }};color:{{ p.primaryInk }};font:600 15px/1 'Figtree'">{{ t.madeIt }}</button>
+<button onClick="{{ didnt }}" style="height:54px;border:0;cursor:pointer;border-radius:14px;background:transparent;box-shadow:inset 0 0 0 1px {{ p.stop }};color:{{ p.ink }};font:600 15px/1 'Figtree'">{{ t.didntMakeIt }}</button>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ v.pass }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;z-index:20">
+<div onClick="{{ cancelPass }}" style="position:absolute;inset:0;background:rgba(20,8,6,.5);animation:crFade .2s ease both"></div>
+<div role="alertdialog" aria-modal="true" style="position:absolute;left:0;right:0;bottom:0;padding:12px 20px 44px;background:#F8EEEC;border-radius:28px 28px 0 0;color:#2A1716;animation:{{ a.sheet }}">
+<div style="position:absolute;inset:0;border-radius:28px 28px 0 0;background-image:var(--grain);opacity:.5;pointer-events:none"></div>
+<div style="width:36px;height:5px;border-radius:3px;background:#D3B5AF;margin:0 auto 20px"></div>
+<div style="position:relative;display:flex;align-items:flex-start;justify-content:space-between;gap:16px">
+<div><div style="font:400 28px/1.1 'Gloock',serif">{{ t.passTitle }}</div><div style="margin-top:10px;font:500 15px/1.45 'Figtree';color:#6B4E4A">{{ passText }}</div></div>
+<div style="flex:none;width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 34% 30%,#D25A6D 0,#C44359 45%,#7E1E2E 100%);box-shadow:inset 0 2px 0 rgba(255,255,255,.2),inset 0 -3px 6px rgba(0,0,0,.3),0 8px 14px -6px rgba(126,30,46,.6);display:grid;place-items:center;font:400 22px/1 'Gloock',serif;color:#fff">−1</div>
+</div>
+<div style="position:relative;margin-top:16px;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-radius:14px;background:#F3E5E2;box-shadow:inset 0 0 0 1px #D3B5AF;font:600 14px/1 'Figtree'"><span>{{ activeName }}</span><span style="display:flex;align-items:center;gap:10px;font:400 22px/1 'Gloock',serif">{{ passFrom }}<span style="font:500 14px/1 'Figtree';color:#6B4E4A">→</span><span style="color:#C44359">{{ passTo }}</span></span></div>
+<div style="position:relative;margin-top:8px;font:500 12px/1.4 'Figtree';color:#6B4E4A">{{ t.passFloor }}</div>
+<div style="position:relative;margin-top:18px;display:flex;flex-direction:column;gap:10px">
+<button onClick="{{ confirmPass }}" style="height:54px;border:0;cursor:pointer;border-radius:14px;background:#8A2522;color:#fff;font:600 16px/1 'Figtree'" style-active="transform:scale(.98)">{{ t.passConfirm }}</button>
+<button onClick="{{ cancelPass }}" style="height:52px;border:0;cursor:pointer;border-radius:14px;background:transparent;box-shadow:inset 0 0 0 1px #B48A83;color:#2A1716;font:600 15px/1 'Figtree'">{{ t.keepPlaying }}</button>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ v.score }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:130px;left:24px;right:24px;text-align:center;animation:{{ a.rise }}">
+<div style="font:700 11px/1 'Figtree';letter-spacing:.22em;color:{{ p.accent }}">{{ scoreKicker }}</div>
+<div style="margin-top:10px;font:400 30px/1.1 'Gloock',serif;color:{{ p.ink }}">{{ t.finalScoreLive }}</div>
+</div>
+<div style="position:absolute;top:224px;left:20px;right:20px;padding:26px 22px;border-radius:22px;background:{{ p.card }};box-shadow:inset 0 0 0 1px {{ p.truthLine }},inset 0 0 0 6px {{ p.card }},inset 0 0 0 7px {{ p.truthLine }},0 30px 46px -26px rgba(0,0,0,.6);color:{{ p.cardInk }};animation:{{ a.card }}">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+<div><div style="font:700 13px/1 'Figtree';color:{{ p.cardAccent }}">Ana</div><div style="margin-top:8px;font:400 64px/1 'Gloock',serif;font-variant-numeric:tabular-nums;color:{{ scoreAColor }};animation:{{ bigAAnim }}">{{ dispA }}</div><div style="margin-top:12px;height:5px;border-radius:3px;background:{{ p.track }}"><div style="height:100%;width:{{ barA }};border-radius:3px;background:{{ p.cardAccent }};transition:width .6s cubic-bezier(.2,.8,.2,1)"></div></div></div>
+<div style="text-align:right"><div style="font:700 13px/1 'Figtree';color:{{ p.cardMuted }}">Leo</div><div style="margin-top:8px;font:400 64px/1 'Gloock',serif;font-variant-numeric:tabular-nums;color:{{ scoreBColor }}">{{ dispB }}</div><div style="margin-top:12px;height:5px;border-radius:3px;background:{{ p.track }};display:flex;justify-content:flex-end"><div style="height:100%;width:{{ barB }};border-radius:3px;background:{{ p.cardMuted }};transition:width .6s cubic-bezier(.2,.8,.2,1)"></div></div></div>
+</div>
+<div style="margin-top:22px;padding-top:16px;border-top:1px solid {{ p.truthLine }};display:flex;justify-content:space-between;font:600 13px/1 'Figtree';color:{{ p.cardMuted }}"><span>{{ t.target }} {{ goal }}</span><span>{{ leadText }}</span></div>
+</div>
+<div style="position:absolute;top:520px;left:24px;right:24px;text-align:center;font:400 22px/1.2 'Gloock',serif;color:{{ p.ink }}">{{ nextTurnText }}</div>
+<div style="position:absolute;left:20px;right:20px;bottom:42px">
+<button onClick="{{ afterScore }}" style="width:100%;height:56px;border:0;cursor:pointer;border-radius:14px;background:{{ p.primary }};color:{{ p.primaryInk }};font:600 16px/1 'Figtree'" style-active="transform:scale(.98)">{{ t.continue }}</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ v.duel }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:126px;left:24px;right:24px;text-align:center;animation:{{ a.rise }}">
+<div style="font:400 50px/1 'Gloock',serif;color:#E4E4E3">{{ t.duelTitle }}</div>
+<div style="margin-top:10px;font:700 11px/1 'Figtree';letter-spacing:.24em;color:#D6B8A9">{{ duelNameUp }}</div>
+<div style="margin-top:14px;font:500 15px/1.4 'Figtree';color:#E4E4E3">{{ duelRoles }}</div>
+</div>
+<sc-if value="{{ dp.envelope }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ openEnvelope }}" style="position:absolute;top:300px;left:36px;right:36px;height:220px;cursor:pointer;perspective:900px;animation:{{ a.card }}">
+<div style="position:absolute;inset:0;border-radius:10px;background:linear-gradient(160deg,#7E241E,#5E1814);box-shadow:0 30px 40px -20px rgba(0,0,0,.8)"></div>
+<div style="position:absolute;left:0;right:0;bottom:0;height:62%;clip-path:polygon(0 100%,50% 14%,100% 100%);background:linear-gradient(0deg,#6A1B16,#561410);border-radius:0 0 10px 10px"></div>
+<div style="position:absolute;left:0;right:0;top:0;height:60%;transform-origin:50% 0;transform-style:preserve-3d;animation:{{ flapAnim }}"><div style="position:absolute;inset:0;clip-path:polygon(0 0,100% 0,50% 100%);background:linear-gradient(180deg,#8A2A22,#6E1D18)"></div></div>
+<div style="position:absolute;left:50%;top:60%;width:66px;height:66px;margin:-33px 0 0 -33px;border-radius:50%;background:radial-gradient(circle at 34% 30%,#A9382E 0,#7A1D17 48%,#4A0F0C 100%);box-shadow:inset 0 2px 0 rgba(255,255,255,.14),inset 0 -3px 6px rgba(0,0,0,.4),0 8px 14px -4px rgba(0,0,0,.7);display:grid;place-items:center;opacity:{{ sealOp }};transition:opacity .2s;animation:{{ glowAnim }}"><span style="width:48px;height:48px;border-radius:50%;border:1px solid rgba(243,237,232,.26);display:grid;place-items:center;font:400 17px/1 'Gloock',serif;color:#E9D3CB">TM</span></div>
+</div>
+<div style="position:absolute;top:548px;left:0;right:0;text-align:center;font:700 11px/1 'Figtree';letter-spacing:.24em;color:#D6B8A9">{{ t.duelTapUp }}</div>
+</sc-if>
+<sc-if value="{{ dp.card }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:262px;left:20px;right:20px;height:380px;border-radius:20px;background:#F3EDE8;box-shadow:inset 0 0 0 1px #E3CCC7,inset 0 0 0 6px #F3EDE8,inset 0 0 0 7px #E2D0CA,0 34px 50px -24px rgba(0,0,0,.8);color:#2A1716;animation:{{ a.card }}">
+<div style="position:absolute;inset:0;border-radius:20px;background-image:var(--grain);opacity:.5"></div>
+<div style="position:absolute;top:30px;left:24px;right:24px">
+<div style="font:700 10px/1 'Figtree';letter-spacing:.2em;color:#721E19">{{ duelOnly }}</div>
+<div style="margin-top:18px;display:flex;flex-direction:column;gap:14px">
+<div><div style="font:600 14px/1 'Figtree';color:#721E19">{{ attackerName }}:</div><div style="margin-top:6px;font:400 22px/1.25 'Gloock',serif">{{ duelA }}</div></div>
+<div><div style="font:600 14px/1 'Figtree';color:#721E19">{{ resisterName }}:</div><div style="margin-top:6px;font:400 22px/1.25 'Gloock',serif">{{ duelB }}</div></div>
+</div>
+<div style="margin-top:12px;font:500 13px/1.3 'Figtree';color:#6B4E4A">{{ t.failLabel }}: {{ duelFail }}</div>
+</div>
+<div style="position:absolute;left:24px;right:24px;bottom:26px;display:flex;align-items:center;justify-content:space-between">
+<span style="font:500 12px/1.3 'Figtree';color:#6B4E4A">{{ t.timerHint }}</span>
+<span style="position:relative;width:84px;height:84px">
+<svg width="84" height="84" viewBox="0 0 84 84" style="position:absolute;inset:0"><circle cx="42" cy="42" r="38" fill="none" stroke="#E9DDD8" stroke-width="4"></circle><circle cx="42" cy="42" r="38" fill="none" stroke="#721E19" stroke-width="4" stroke-linecap="round" stroke-dasharray="238.8" stroke-dashoffset="{{ duelDash }}" transform="rotate(-90 42 42)" style="transition:stroke-dashoffset .25s linear"></circle></svg>
+<span style="position:absolute;inset:0;display:grid;place-items:center;font:400 24px/1 'Gloock',serif;color:#721E19;font-variant-numeric:tabular-nums;animation:{{ duelClockAnim }}">{{ duelClock }}</span>
+</span>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ dp.question }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:300px;left:24px;right:24px;text-align:center;font:400 32px/1.1 'Gloock',serif;color:#E4E4E3;animation:{{ a.rise }}">{{ t.duelQuestion }}</div>
+</sc-if>
+<sc-if value="{{ dp.result }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:290px;left:0;right:0;display:flex;flex-direction:column;align-items:center;text-align:center">
+<div style="width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 34% 30%,#FFFAF6 0,#EBD9D2 50%,#BFA196 100%);box-shadow:inset 0 3px 0 rgba(255,255,255,.6),inset 0 -5px 9px rgba(0,0,0,.2),0 16px 26px -10px rgba(0,0,0,.7);display:grid;place-items:center;animation:{{ winAnim }}"><span style="font:400 36px/1 'Gloock',serif;color:#721E19">{{ duelDelta }}</span></div>
+<div style="margin-top:26px;font:400 36px/1.05 'Gloock',serif;color:#E4E4E3;animation:{{ a.rise }}">{{ duelWinner }}</div>
+<div style="margin-top:10px;font:500 15px/1.4 'Figtree';color:#D6B8A9;padding:0 30px">{{ duelOutcome }}</div>
+</div>
+</sc-if>
+<div style="position:absolute;left:20px;right:20px;bottom:42px;display:flex;flex-direction:column;gap:10px">
+<sc-if value="{{ dp.card }}" hint-placeholder-val="{{ false }}">
+<button onClick="{{ duelPrimary }}" style="height:60px;border:0;cursor:pointer;border-radius:14px;background:#F3EDE8;color:#721E19;font:600 17px/1 'Figtree';box-shadow:0 8px 18px -8px rgba(0,0,0,.6)" style-active="transform:scale(.98)">{{ duelPrimaryLabel }}</button>
+</sc-if>
+<sc-if value="{{ dp.question }}" hint-placeholder-val="{{ false }}">
+<button onClick="{{ duelHeld }}" style="height:56px;border:0;cursor:pointer;border-radius:14px;background:#F3EDE8;color:#721E19;font:600 15px/1 'Figtree'">{{ duelHeldLabel }}</button>
+<button onClick="{{ duelFailed }}" style="height:56px;border:0;cursor:pointer;border-radius:14px;background:transparent;box-shadow:inset 0 0 0 1px rgba(214,184,169,.5);color:#E4E4E3;font:600 15px/1 'Figtree'">{{ duelFailedLabel }}</button>
+</sc-if>
+<sc-if value="{{ dp.result }}" hint-placeholder-val="{{ false }}">
+<button onClick="{{ afterDuel }}" style="height:56px;border:0;cursor:pointer;border-radius:14px;background:#F3EDE8;color:#721E19;font:600 16px/1 'Figtree'">{{ t.continue }}</button>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ v.levelup }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:150px;left:28px;right:28px">
+<div style="font:700 11px/1 'Figtree';letter-spacing:.24em;color:{{ p.accent }};animation:{{ a.rise }}">{{ t.levelChange }}</div>
+<div style="margin-top:14px;font:400 40px/1.04 'Gloock',serif;color:{{ p.ink }};animation:{{ a.rise2 }}">{{ t.levelTitle }}</div>
+</div>
+<div style="position:absolute;top:330px;left:20px;right:20px;padding:26px 24px;border-radius:22px;background:{{ p.card }};box-shadow:0 34px 50px -24px rgba(0,0,0,.6);color:{{ p.cardInk }};animation:{{ a.card }};transition:{{ bgTr }}">
+<div style="display:flex;align-items:center;justify-content:space-between"><span style="font:700 10px/1 'Figtree';letter-spacing:.2em;color:{{ p.cardAccent }}">{{ t.levelLabel }}</span><span style="display:flex;gap:4px"><sc-for list="{{ bars }}" as="b" hint-placeholder-count="4"><span style="width:22px;height:5px;border-radius:3px;background:{{ b }};transition:background .5s .3s"></span></sc-for></span></div>
+<div style="margin-top:16px;font:400 46px/1 'Gloock',serif;color:{{ p.cardAccent }}">{{ levelName }}</div>
+<div style="margin-top:12px;font:400 22px/1.2 'Gloock',serif">{{ levelHead }}</div>
+<div style="margin-top:10px;font:500 14px/1.45 'Figtree';color:{{ p.cardMuted }}">{{ levelDesc }}</div>
+<div style="margin-top:18px;padding-top:14px;border-top:1px solid {{ p.truthLine }};font:600 13px/1 'Figtree';color:{{ p.cardMuted }}">{{ newPlace }}</div>
+</div>
+<div style="position:absolute;left:20px;right:20px;bottom:42px">
+<button onClick="{{ afterLevel }}" style="width:100%;height:56px;border:0;cursor:pointer;border-radius:14px;background:{{ p.primary }};color:{{ p.primaryInk }};font:600 16px/1 'Figtree';transition:{{ bgTr }}" style-active="transform:scale(.98)">{{ t.letsDoIt }}</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ v.prize }}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{ pz.winner }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:124px;left:24px;right:24px;text-align:center;animation:{{ a.rise }}">
+<div style="font:700 11px/1 'Figtree';letter-spacing:.24em;color:#D6B8A9">{{ t.completeGame }}</div>
+<div style="margin-top:12px;font:400 44px/1 'Gloock',serif;color:#F3EDE8">Ana, {{ t.won }}</div>
+<div style="margin-top:12px;font:500 15px/1.4 'Figtree';color:#E8D6CF">{{ t.finalScore }} · 16 – 12 · {{ wonBy }}</div>
+</div>
+<div onClick="{{ openPrize }}" style="position:absolute;top:290px;left:36px;right:36px;height:230px;cursor:pointer;perspective:900px;animation:{{ a.card }}">
+<div style="position:absolute;inset:0;border-radius:10px;background:#F3EDE8;background-image:var(--grain);box-shadow:0 34px 44px -20px rgba(0,0,0,.75)"></div>
+<div style="position:absolute;left:0;right:0;bottom:0;height:62%;clip-path:polygon(0 100%,50% 14%,100% 100%);background:linear-gradient(0deg,#E8DCD6,#DDCDC6)"></div>
+<div style="position:absolute;left:0;right:0;top:0;height:60%;transform-origin:50% 0;animation:{{ prizeFlap }}"><div style="position:absolute;inset:0;clip-path:polygon(0 0,100% 0,50% 100%);background:linear-gradient(180deg,#FBF6F3,#E6D8D2)"></div></div>
+<div style="position:absolute;left:24px;bottom:22px;font:400 20px/1 'Gloock',serif;color:#721E19">{{ t.forYou }} Ana</div>
+<div style="position:absolute;left:50%;top:60%;width:66px;height:66px;margin:-33px 0 0 -33px;border-radius:50%;background:radial-gradient(circle at 34% 30%,#A9382E 0,#7A1D17 48%,#4A0F0C 100%);box-shadow:inset 0 2px 0 rgba(255,255,255,.14),inset 0 -3px 6px rgba(0,0,0,.4),0 8px 14px -4px rgba(0,0,0,.5);display:grid;place-items:center;animation:{{ glowAnim }}"><span style="width:48px;height:48px;border-radius:50%;border:1px solid rgba(243,237,232,.26);display:grid;place-items:center;font:400 17px/1 'Gloock',serif;color:#E9D3CB">TM</span></div>
+</div>
+<div style="position:absolute;top:556px;left:0;right:0;text-align:center;font:700 11px/1.5 'Figtree';letter-spacing:.2em;color:#D6B8A9;padding:0 40px">{{ t.tapPrize }}</div>
+<div style="position:absolute;left:20px;right:20px;bottom:42px">
+<button onClick="{{ openPrize }}" style="width:100%;height:56px;border:0;cursor:pointer;border-radius:14px;background:#F3EDE8;color:#721E19;font:600 16px/1 'Figtree'">{{ t.revealPrize }}</button>
+</div>
+</sc-if>
+<sc-if value="{{ pz.choose }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:124px;left:24px;right:24px;animation:{{ a.rise }}">
+<div style="font:700 11px/1 'Figtree';letter-spacing:.24em;color:#D6B8A9">{{ t.claimNote }}</div>
+<div style="margin-top:10px;font:400 36px/1.05 'Gloock',serif;color:#F3EDE8">{{ t.prizeChoice }}</div>
+</div>
+<div style="position:absolute;top:226px;left:20px;right:20px;display:flex;flex-direction:column;gap:14px">
+<sc-for list="{{ prizes }}" as="z" hint-placeholder-count="2">
+<div style="position:relative;padding:20px 20px 16px;border-radius:18px;background:#F3EDE8;box-shadow:0 22px 32px -20px rgba(0,0,0,.7);color:#2A1716;transform:rotate({{ z.rot }});animation:{{ z.anim }}">
+<div style="font:700 10px/1 'Figtree';letter-spacing:.2em;color:#721E19">{{ z.label }}</div>
+<div style="margin-top:10px;font:400 26px/1.1 'Gloock',serif">{{ z.title }}</div>
+<div style="margin-top:8px;font:500 13px/1.45 'Figtree';color:#6B4E4A">{{ z.text }}</div>
+<button onClick="{{ z.pick }}" style="margin-top:14px;width:100%;height:46px;border:0;cursor:pointer;border-radius:12px;background:#721E19;color:#fff;font:600 15px/1 'Figtree'">{{ t.choosePrize }}</button>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{ pz.chosen }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:220px;left:24px;right:24px;text-align:center">
+<div style="width:96px;height:96px;margin:0 auto;border-radius:50%;background:radial-gradient(circle at 34% 30%,#A9382E 0,#7A1D17 48%,#4A0F0C 100%);box-shadow:inset 0 2px 0 rgba(255,255,255,.14),inset 0 -4px 8px rgba(0,0,0,.4),0 14px 24px -8px rgba(0,0,0,.7);display:grid;place-items:center;animation:{{ glowAnim }}"><span style="width:70px;height:70px;border-radius:50%;border:1px solid rgba(243,237,232,.26);display:grid;place-items:center;font:400 24px/1 'Gloock',serif;color:#E9D3CB">TM</span></div>
+<div style="margin-top:28px;font:700 11px/1 'Figtree';letter-spacing:.24em;color:#D6B8A9">{{ t.chosen }}</div>
+<div style="margin-top:12px;font:400 40px/1.05 'Gloock',serif;color:#F3EDE8">{{ t.moment }}</div>
+<div style="margin-top:14px;font:400 22px/1.2 'Gloock',serif;color:#E8D6CF">{{ chosenTitle }}</div>
+</div>
+<div style="position:absolute;left:20px;right:20px;bottom:42px;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<button onClick="{{ exit }}" style="height:56px;border:0;cursor:pointer;border-radius:14px;background:#F3EDE8;color:#721E19;font:600 15px/1 'Figtree'">{{ t.orgasm }}</button>
+<button onClick="{{ exit }}" style="height:56px;border:0;cursor:pointer;border-radius:14px;background:transparent;box-shadow:inset 0 0 0 1px rgba(214,184,169,.5);color:#F3EDE8;font:600 15px/1 'Figtree'">{{ t.enough }}</button>
+</div>
+</sc-if>
+</sc-if>
+
+<sc-if value="{{ toastOn }}" hint-placeholder-val="{{ false }}"><div role="status" style="position:absolute;top:202px;left:50%;padding:10px 16px;border-radius:999px;background:#2A1716;color:#F8EEEC;font:600 14px/1 'Figtree';white-space:nowrap;z-index:12;box-shadow:0 10px 20px -10px rgba(0,0,0,.6);animation:crToast 1.8s ease both">{{ toastText }}</div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { view: 'turn', level: 1, start: 0, max: 2, mode: 'prog', goal: 15, scores: [7, 5], disp: [7, 5], active: 0, round: 6, duels: 0, blocks: [['truth'], []], ctype: 'dare', cidx: 0, phase: 'idle', left: 0, total: 0, passSheet: false, flash: null, toast: null, scoreDelta: 0, scoreKind: '', duelPhase: 'envelope', duelResult: null, luFrom: 1, luStage: 1, prizePhase: 'winner', chosen: 0, opening: false };
+  names = ['Ana', 'Leo'];
+  lv = ['spark', 'tease', 'heat', 'afterdark'];
+  P = {
+    spark: { surface: '#EFE6E2', card: '#FBF8F6', ink: '#241A18', muted: '#6E605B', accent: '#721E19', line: '#DDCFCA', score: '#F8F3F0', scoreInk: '#241A18', scoreMuted: '#6E605B', truth: '#FBF8F6', truthInk: '#241A18', truthLine: '#DDCFCA', dare: '#E6CEC8', dareInk: '#5A1612', dareSub: '#5A1612', dareSealInk: '#721E19', primary: '#721E19', primaryInk: '#FFFFFF', stop: '#B9A49E', track: '#E9DFDB', ring: '#721E19', bar: '#721E19', barEmpty: '#DDCFCA', cardInk: '#241A18', cardAccent: '#721E19', cardMuted: '#6E605B', photo: 'living', ctl: '#F8F3F0', ctlLine: '#CDBBB5', ctlInk: '#241A18', tint: 'dark', seal: ['#A9382E', '#721E19', '#4A0F0C'], gain: '#158353', loss: '#C44359' },
+    tease: { surface: '#E5CBC6', card: '#F8EEEC', ink: '#2A1716', muted: '#6B4E4A', accent: '#8A2522', line: '#D3B5AF', score: '#F3E5E2', scoreInk: '#2A1716', scoreMuted: '#6B4E4A', truth: '#F6ECEA', truthInk: '#2A1716', truthLine: '#D3B5AF', dare: '#8A2522', dareInk: '#FFF3EF', dareSub: '#F4D6CF', dareSealInk: '#8A2522', primary: '#8A2522', primaryInk: '#FFFFFF', stop: '#B48A83', track: '#EBD7D3', ring: '#8A2522', bar: '#8A2522', barEmpty: '#D3B5AF', cardInk: '#2A1716', cardAccent: '#8A2522', cardMuted: '#6B4E4A', photo: 'living', ctl: '#F3E5E2', ctlLine: '#C9A59E', ctlInk: '#2A1716', tint: 'dark', seal: ['#B7443A', '#8A2522', '#561310'], gain: '#158353', loss: '#C44359' },
+    heat: { surface: '#9B2621', card: '#F7ECE9', ink: '#FFF1EC', muted: '#F2C9C0', accent: '#FFD3C8', line: '#B5453E', score: '#F5E6E2', scoreInk: '#2A1716', scoreMuted: '#6B4E4A', truth: '#F5E6E2', truthInk: '#2A1716', truthLine: '#E8CFC9', dare: '#5C1310', dareInk: '#FFF1EC', dareSub: '#F2C9C0', dareSealInk: '#5C1310', primary: '#F5E6E2', primaryInk: '#721E19', stop: '#F2C9C0', track: '#EDD8D3', ring: '#9B2621', bar: '#FFD3C8', barEmpty: '#B5453E', cardInk: '#241A18', cardAccent: '#9B2621', cardMuted: '#6B4E4A', photo: 'bedroom', ctl: '#F5E6E2', ctlLine: '#CDBBB5', ctlInk: '#721E19', tint: 'light', seal: ['#C2453A', '#9B2621', '#5C1310'], gain: '#158353', loss: '#C44359' },
+    afterdark: { surface: '#29213C', card: '#1B1E39', ink: '#F1EAF5', muted: '#B7A9C6', accent: '#D4A574', line: '#3B2F55', score: '#1B1E39', scoreInk: '#F1EAF5', scoreMuted: '#B7A9C6', truth: '#1B1E39', truthInk: '#F1EAF5', truthLine: '#452552', dare: '#4F0E70', dareInk: '#FFFFFF', dareSub: '#DCC6EA', dareSealInk: '#4F0E70', primary: '#4F0E70', primaryInk: '#FFFFFF', stop: '#5E4A78', track: '#3B2F55', ring: '#D4A574', bar: '#D4A574', barEmpty: '#3B2F55', cardInk: '#F1EAF5', cardAccent: '#D4A574', cardMuted: '#B7A9C6', photo: 'bedroom', ctl: '#1B1E39', ctlLine: '#452552', ctlInk: '#D4A574', tint: 'light', seal: ['#E0B88C', '#B98A57', '#7A5530'], gain: '#7ED9A8', loss: '#F08AA0' },
+    duel: { surface: '#3D0F0C', ink: '#E4E4E3', muted: '#D6B8A9', accent: '#D6B8A9', ctl: 'rgba(228,228,227,.08)', ctlLine: 'rgba(228,228,227,.28)', ctlInk: '#E4E4E3', tint: 'light', photo: 'none' },
+    prize: { surface: '#721E19', ink: '#F3EDE8', muted: '#D6B8A9', accent: '#E6C9BC', ctl: 'rgba(243,237,232,.1)', ctlLine: 'rgba(243,237,232,.3)', ctlInk: '#F3EDE8', tint: 'light', photo: 'bedroom' }
+  };
+  pool = {
+    spark: { truth: [['¿Qué fue lo primero que te llamó la atención de {partner} el día que se conocieron?', 'What was the first thing that caught your eye about {partner} the day you met?'], ['¿Qué prenda de {partner} te parece especialmente atractiva?', "Which piece of {partner}'s clothing do you find especially attractive?"]], dare: [[ 'Acerca tu boca a la de {partner} como si fueras a besarle y detente a un centímetro. Repite hasta que suene la alarma sin llegar a besarle.', "Bring your mouth to {partner}'s as if you're about to kiss them, and stop an inch away. Repeat until the alarm goes off without actually kissing them.", 30, 'Le besas', 'You kiss them'], ['Dale a {partner} besos suaves en el cuello buscando su punto más sensible.', 'Give {partner} soft kisses on the neck, searching for their most sensitive spot.', 20]] },
+    tease: { truth: [['¿Qué fantasía sensual has tenido con {partner} hace poco y todavía no le has contado?', "What sensual fantasy have you had about {partner} recently that you haven't told them yet?"], ['¿Qué caricia o tipo de beso te enciende al instante?', 'What touch or kind of kiss turns you on instantly?'], ['¿En qué lugar inusual de la casa te gustaría tener un encuentro íntimo con {partner}?', 'Where in the house, somewhere unusual, would you like to have an intimate encounter with {partner}?']], dare: [['Quítale a {partner} una prenda usando solo los dientes.', "Take off one piece of {partner}'s clothing using only your teeth.", 45], ['Desabrocha la ropa de {partner} sin dejar de besarle en la boca.', "Unbutton {partner}'s clothes without breaking the kiss.", 45], ['Recorre con la lengua el cuello de {partner} hasta la clavícula y quédate besando ahí.', "Run your tongue along {partner}'s neck down to the collarbone and stay there kissing.", 30]] },
+    heat: { truth: [['En la cama, ¿prefieres llevar el control del ritmo o dejarte dominar?', 'In bed, do you prefer to control the pace or to let yourself be dominated?'], ['¿Qué palabras o frases al oído te llevan más rápido al límite?', 'What words or phrases whispered in your ear push you to the edge fastest?']], dare: [['Quítate toda la ropa. Ya no te la puedes volver a poner en lo que queda de partida.', "Take off all your clothes. You can't put them back on for the rest of the game.", 30, 'Te vistes antes del final', 'You get dressed before the end'], ['Desnuda a {partner} por completo usando las manos y la boca para quitarle cada prenda.', 'Undress {partner} completely, using your hands and mouth to remove each piece of clothing.', 90]] }
+  };
+  dict = {
+    es: { levels: ['Chispa', 'Coqueteo', 'Pasión', 'Medianoche'], heads: ['[Texto pendiente]', 'Un poco más cerca.', 'Fuera la ropa.', 'Sin filtro.'], descs: ['', 'Coqueteo: caricias, provocación y algo de piel.', 'Pasión: manos, boca y sexo oral.', 'Medianoche: penetración, juego anal, ataduras y retos de aguante. Tengan el lubricante cerca. Penetrar puede ser con el pene, los dedos o un juguete.'],
+      prepare: 'PREPARAR PARTIDA', selectedLevel: 'Elige tu nivel', progressive: 'Progresiva', fixed: 'Nivel fijo', initial: 'NIVEL INICIAL', maximum: 'NIVEL MÁXIMO', chosenLevel: 'ELEGIDO', levelNote: 'En Progresiva, el nivel sube solo hasta el máximo que elijan.', fixedLevelNote: 'Con Nivel fijo, todas las tarjetas son del nivel elegido.', targetLabel: 'Meta de puntos', play: 'Comenzar a jugar',
+      yourturn: 'A ver,', block: 'BLOQUE', truth: 'Verdad', dare: 'Reto', point: '1 punto', darepoints: '3 puntos · con timer', random: 'Sorpréndeme · Aleatorio', endGame: 'Terminar partida', forcedDare: 'Para equilibrar tu bloque, esta vez te toca Reto.', forcedTruth: 'Para equilibrar tu bloque, esta vez te toca Verdad.',
+      truthUp: 'VERDAD · 1 PUNTO', dareUp: 'RETO · 3 PUNTOS · CON TIMER', answered: 'Respondido · +1', begin: 'Comenzar', running: 'En curso', elapsed: 'Tiempo terminado', complete: 'Completado · +3', abandon: 'Abandonar reto', timerHint: 'Duración fija · sin pausa', failLabel: 'Se pierde si', verdict: '{partner}, tú decides', madeIt: 'Lo logró · +3', didntMakeIt: 'No lo logró · 0',
+      passBtn: 'Pasar turno · −1', passTitle: '¿Pasar turno?', passText: 'Pasar cuesta 1 punto. El turno pasa a {partner}.', passFloor: 'El marcador nunca baja de 0.', passConfirm: 'Pasar · −1', keepPlaying: 'Seguir jugando', toastPass: '−1 para {name}', toastAbandon: 'Reto abandonado · 0',
+      target: 'META', lead: 'Ventaja {name} +{n}', tied: 'Empate', turnOf: 'Turno de {name}', continue: 'Seguir', finalScoreLive: 'Marcador',
+      duelTitle: '¡Alto!', duelName: 'Duelo de aguante', duelRoles: '{resister}, aguanta. {attacker}, haz que se rinda.', duelTapUp: 'TOCA EL SOBRE', duelStart: 'Iniciar', duelStop: '¡Paro!', duelOnly: 'Solo {resister}', duelQuestion: '¿Cómo terminó?', duelHeld: '{resister} aguantó · +3', duelFailed: '{resister} falló · +1 para {attacker}',
+      duelText: ['besa el cuello y las orejas de {resister}.', 'ojos cerrados, sin moverte ni hacer ningún sonido.'], duelFail: 'Te mueves o haces un sonido',
+      levelChange: '¿UN POCO MÁS?', levelTitle: 'Subimos la intensidad.', levelLabel: 'NIVEL', letsDoIt: '¡Vamos a hacerlo!', newPlace: 'Nuevo lugar: {place}', bedroom: 'Cuarto',
+      completeGame: 'PARTIDA COMPLETADA', won: 'ganaste.', finalScore: 'Marcador final', wonBy: 'Ganó por {n} puntos', forYou: 'Para ti,', tapPrize: 'TOCA EL SOBRE PARA REVELAR TU PREMIO', revealPrize: 'Revelar tu premio', claimNote: 'AHORA RECLAMA TU PREMIO', prizeChoice: 'Elige tu premio', choosePrize: 'Elegir este premio', optionA: 'OPCIÓN A', optionB: 'OPCIÓN B', chosen: 'ELECCIÓN CONFIRMADA', moment: 'El momento es de ustedes.', orgasm: 'Orgasmo logrado', enough: 'Es suficiente',
+      prizes: [['Trato VIP', '{winner} se acuesta y no mueve ni un dedo. {partner} usa lo que quiera (manos, boca, cuerpo o juguetes) para llevarle al orgasmo; {winner} solo puede dar instrucciones.'], ['Manos atadas', '{partner} tiene las manos atadas a la cabecera y {winner} usa su cuerpo (boca, manos y sexo) como quiera hasta llegar al orgasmo.']] },
+    en: { levels: ['Spark', 'Tease', 'Heat', 'After Dark'], heads: ['[Pending copy]', 'A little closer.', 'Clothes off.', 'No filter.'], descs: ['', 'Tease: touching, teasing, and a little skin.', 'Heat: hands, mouths, and oral sex.', 'After Dark: penetration, anal play, restraints, and endurance dares. Keep the lube close. Penetration can be with a penis, fingers, or a toy.'],
+      prepare: 'SET UP YOUR GAME', selectedLevel: 'Choose your level', progressive: 'Progressive', fixed: 'Fixed level', initial: 'STARTING LEVEL', maximum: 'MAXIMUM LEVEL', chosenLevel: 'SELECTED', levelNote: 'Progressive moves up automatically, up to your selected maximum.', fixedLevelNote: 'With Fixed level, every card comes from the chosen level.', targetLabel: 'Target score', play: 'Start playing',
+      yourturn: 'Your turn,', block: 'BLOCK', truth: 'Truth', dare: 'Dare', point: '1 point', darepoints: '3 points · timed', random: 'Surprise me · Random', endGame: 'End game', forcedDare: 'To balance your block, this one has to be a Dare.', forcedTruth: 'To balance your block, this one has to be a Truth.',
+      truthUp: 'TRUTH · 1 POINT', dareUp: 'DARE · 3 POINTS · TIMED', answered: 'Answered · +1', begin: 'Start timer', running: 'In progress', elapsed: 'Time is up', complete: 'Completed · +3', abandon: 'Abandon dare', timerHint: 'Fixed duration · no pause', failLabel: 'You lose if', verdict: '{partner}, you decide', madeIt: 'Made it · +3', didntMakeIt: "Didn't make it · 0",
+      passBtn: 'Pass turn · −1', passTitle: 'Pass this turn?', passText: 'Passing costs 1 point. The turn goes to {partner}.', passFloor: 'Scores never go below 0.', passConfirm: 'Pass · −1', keepPlaying: 'Keep playing', toastPass: '−1 for {name}', toastAbandon: 'Dare abandoned · 0',
+      target: 'TARGET', lead: 'Lead {name} +{n}', tied: 'Tied', turnOf: "{name}'s turn", continue: 'Continue', finalScoreLive: 'Score',
+      duelTitle: 'Hold on!', duelName: 'Endurance duel', duelRoles: '{resister}, hold out. {attacker}, make them give in.', duelTapUp: 'TAP THE ENVELOPE', duelStart: 'Start', duelStop: 'Stop!', duelOnly: '{resister} only', duelQuestion: 'How did it end?', duelHeld: '{resister} held out · +3', duelFailed: '{resister} failed · +1 for {attacker}',
+      duelText: ["kiss {resister}'s neck and ears.", 'eyes closed, no moving and no sound.'], duelFail: 'You move or make a sound',
+      levelChange: 'A LITTLE MORE?', levelTitle: 'Turning up the spark.', levelLabel: 'LEVEL', letsDoIt: 'Let’s do it', newPlace: 'New place: {place}', bedroom: 'Bedroom',
+      completeGame: 'GAME COMPLETE', won: 'you won.', finalScore: 'Final score', wonBy: 'Won by {n} points', forYou: 'For you,', tapPrize: 'TAP THE ENVELOPE TO REVEAL YOUR PRIZE', revealPrize: 'Reveal your prize', claimNote: 'NOW CLAIM YOUR PRIZE', prizeChoice: 'Choose your prize', choosePrize: 'Choose this prize', optionA: 'OPTION A', optionB: 'OPTION B', chosen: 'CHOICE CONFIRMED', moment: 'The moment is yours.', orgasm: 'Orgasm reached', enough: "That's enough",
+      prizes: [['VIP treatment', "{winner} lies back and doesn't lift a finger. {partner} uses whatever they want (hands, mouth, body, or toys) to bring them to orgasm; {winner} can only give instructions."], ['Tied hands', '{partner} has their hands tied to the headboard and {winner} uses their body (mouth, hands, and sex) however they like until they orgasm.']] }
+  };
+
+  componentDidMount() { this.applyStart(); }
+  componentDidUpdate(p, ps) {
+    if (p.nonce !== this.props.nonce) this.applyStart();
+    const tint = this.pal().tint; if (tint !== this.lastTint) { this.lastTint = tint; this.props.onTint && this.props.onTint(tint); }
+  }
+  componentWillUnmount() { this.clear(); }
+  clear() { clearInterval(this.iv); clearInterval(this.cnt); clearTimeout(this.t1); clearTimeout(this.t2); clearTimeout(this.t3); }
+  red() { return !!this.props.reduced; }
+  pal() { const s = this.state; if (s.view === 'duel') return this.P.duel; if (s.view === 'prize') return this.P.prize; if (s.view === 'level') return this.P.spark; const L = s.view === 'levelup' ? (s.luStage ? s.level : s.luFrom) : s.level; return this.P[this.lv[L]]; }
+  applyStart() {
+    this.clear();
+    const id = this.props.startAt || 'crave-level';
+    const base = { level: 1, scores: [7, 5], disp: [7, 5], active: 0, round: 6, duels: 0, blocks: [['truth'], []], ctype: 'dare', cidx: 0, phase: 'idle', left: 45000, total: 45000, passSheet: false, flash: null, toast: null, duelPhase: 'envelope', duelResult: null, luStage: 1, prizePhase: 'winner', opening: false };
+    const m = {
+      'crave-level': { view: 'level' }, 'crave-turn': { view: 'turn' }, 'crave-card': { view: 'card' }, 'crave-pass': { view: 'card', passSheet: true },
+      'crave-score': { view: 'score', scores: [10, 5], disp: [10, 5], scoreDelta: 3, scoreKind: 'complete', blocks: [['truth', 'dare'], []] },
+      'crave-duel': { view: 'duel', duelPhase: 'card', left: 45000, total: 45000 }, 'crave-levelup': { view: 'levelup', level: 2, luFrom: 1, luStage: 1 }, 'crave-prize': { view: 'prize', scores: [16, 12], disp: [16, 12] }
+    };
+    this.setState(Object.assign(base, m[id] || m['crave-level']), () => { if (id === 'crave-levelup') this.animateLevel(1, 2); });
+    const tint = (m[id] && ['duel', 'prize'].includes(m[id].view)) ? 'light' : 'dark';
+    this.lastTint = tint; this.props.onTint && this.props.onTint(tint);
+  }
+  card() { const s = this.state; const key = this.lv[Math.min(s.level, 2)]; const list = this.pool[key][s.ctype]; return list[s.cidx % list.length]; }
+  forced() { const b = this.state.blocks[this.state.active]; if (b.length === 2 && b[0] === b[1]) return b[0] === 'truth' ? 'dare' : 'truth'; return null; }
+  choose(type) {
+    const f = this.forced(); if (f && f !== type) return;
+    const s = this.state, key = this.lv[Math.min(s.level, 2)], list = this.pool[key][type];
+    const cidx = Math.floor(Math.random() * list.length), c = list[cidx];
+    this.setState({ view: 'card', ctype: type, cidx, phase: 'idle', left: (c[2] || 0) * 1000, total: (c[2] || 0) * 1000 });
+  }
+  startTimer() {
+    const end = Date.now() + this.state.left;
+    this.setState({ phase: 'running' });
+    clearInterval(this.iv);
+    this.iv = setInterval(() => { const left = Math.max(0, end - Date.now()); this.setState({ left }); if (!left) { clearInterval(this.iv); this.setState({ phase: this.card()[3] ? 'verdict' : 'done' }); } }, 200);
+  }
+  award(i, delta, kind) {
+    const s = this.state, scores = s.scores.slice(), from = scores[i];
+    scores[i] = Math.max(0, from + delta);
+    this.setState({ scores, flash: { i, delta, ts: Date.now() }, scoreDelta: delta, scoreKind: kind });
+    this.countTo(i, from, scores[i]);
+    clearTimeout(this.t3); this.t3 = setTimeout(() => this.setState({ flash: null }), 1100);
+  }
+  countTo(i, from, to) {
+    clearInterval(this.cnt);
+    if (this.red() || from === to) { const d = this.state.disp.slice(); d[i] = to; this.setState({ disp: d }); return; }
+    let v = from; const step = to > from ? 1 : -1;
+    this.cnt = setInterval(() => { v += step; const d = this.state.disp.slice(); d[i] = v; this.setState({ disp: d }); if (v === to) clearInterval(this.cnt); }, 130);
+  }
+  toast(text) { this.setState({ toast: { text, ts: Date.now() } }); clearTimeout(this.t2); this.t2 = setTimeout(() => this.setState({ toast: null }), 1800); }
+  endTurn(type) {
+    const s = this.state, blocks = s.blocks.map(b => b.slice());
+    if (type) { blocks[s.active].push(type); if (blocks[s.active].length >= 3) blocks[s.active] = []; }
+    const active = 1 - s.active;
+    let round = s.round, next = 'turn';
+    if (active === 0) {
+      round++;
+      const [a, b] = s.scores, hi = Math.max(a, b);
+      if (hi >= s.goal && Math.abs(a - b) >= 2) next = 'prize';
+      else if (s.mode === 'prog' && round % 4 === 0 && s.level < s.max) next = 'levelup';
+      else if (round > 3 && s.duels < 2 && Math.random() < 0.15) next = 'duel';
+    }
+    clearInterval(this.iv);
+    const extra = next === 'levelup' ? { luFrom: s.level, level: s.level + 1, luStage: 0 } : next === 'duel' ? { duelPhase: 'envelope', duels: s.duels + 1, left: 45000, total: 45000 } : next === 'prize' ? { prizePhase: 'winner' } : {};
+    this.setState(Object.assign({ blocks, active, round, view: next, phase: 'idle', passSheet: false }, extra), () => { if (next === 'levelup') this.animateLevel(s.level, s.level + 1); });
+  }
+  animateLevel() { this.setState({ luStage: 0 }); clearTimeout(this.t1); this.t1 = setTimeout(() => this.setState({ luStage: 1 }), this.red() ? 0 : 450); }
+  resister() { const [a, b] = this.state.scores; return a < b ? 0 : 1; }
+  startDuel() {
+    const end = Date.now() + this.state.left;
+    this.setState({ duelPhase: 'running' });
+    clearInterval(this.iv);
+    this.iv = setInterval(() => { const left = Math.max(0, end - Date.now()); this.setState({ left }); if (!left) { clearInterval(this.iv); this.setState({ duelPhase: 'question' }); } }, 200);
+  }
+
+  renderVals() {
+    const s = this.state, lang = this.props.lang === 'en' ? 'en' : 'es', t = this.dict[lang], red = this.red(), isEs = lang === 'es';
+    const p = this.pal(), N = this.names, act = s.active, partner = 1 - act;
+    const A = (full) => red ? 'crFade .2s ease both' : full;
+    const a = { rise: A('crRise .45s cubic-bezier(.2,.8,.2,1) both'), rise2: A('crRise .45s .08s cubic-bezier(.2,.8,.2,1) both'), card: A('crCard .46s cubic-bezier(.2,.8,.2,1) both'), dealL: A('crDealL .45s cubic-bezier(.2,.8,.2,1) both'), dealR: A('crDealR .45s .07s cubic-bezier(.2,.8,.2,1) both'), seal: A('crSeal .5s .15s cubic-bezier(.2,.8,.2,1) both'), sheet: A('crSheet .32s cubic-bezier(.2,.8,.2,1) both') };
+    const photo = p.photo || 'none';
+    const sealBg = p.seal ? 'radial-gradient(circle at 34% 30%,' + p.seal[0] + ' 0,' + p.seal[1] + ' 48%,' + p.seal[2] + ' 100%)' : 'none';
+    const dark = ['heat', 'afterdark'].includes(this.lv[s.level]) && !['duel', 'prize', 'level'].includes(s.view);
+    let wash = 'linear-gradient(to bottom,' + p.surface + 'e2,' + p.surface + 'c4 40%,' + p.surface + '96)';
+    if (dark) wash = 'linear-gradient(to bottom,' + p.surface + 'f0,' + p.surface + 'd1 40%,' + p.surface + 'ad)';
+    if (s.view === 'duel') wash = 'radial-gradient(ellipse at 50% 44%,#D6B8A92a 0,transparent 68%),#3D0F0C';
+    if (s.view === 'prize') wash = 'linear-gradient(to bottom,#721E19f2,#721E19d8 45%,#4A0F0Cf0)';
+    if (s.view === 'level') wash = 'linear-gradient(to bottom,#EFE6E2f4,#EFE6E2e6 50%,#EFE6E2cc)';
+    const barsFor = (L) => [0, 1, 2, 3].map(i => i <= L ? p.bar : p.barEmpty);
+    const curL = s.view === 'levelup' ? (s.luStage ? s.level : s.luFrom) : s.level;
+    const c = (s.view === 'card' || s.passSheet) ? this.card() : null;
+    const subst = (x) => x.replaceAll('{partner}', N[partner]).replaceAll('{player}', N[act]);
+    const f = this.forced();
+    const block = s.blocks[act];
+    const fl = s.flash;
+    const scoreColor = (i) => fl && fl.i === i ? (fl.delta > 0 ? p.gain : p.loss) : (p.scoreInk || p.ink);
+    const scoreAnim = (i) => fl && fl.i === i && fl.delta < 0 && !red ? 'crShake .32s ease both' : 'none';
+    const sec = Math.ceil(s.left / 1000);
+    const clock = Math.floor(sec / 60) + ':' + String(sec % 60).padStart(2, '0');
+    const res = this.resister(), att = 1 - res;
+    const dsub = (x) => x.replaceAll('{resister}', N[res]).replaceAll('{attacker}', N[att]);
+    const lead = Math.abs(s.scores[0] - s.scores[1]);
+    const leader = s.scores[0] >= s.scores[1] ? 0 : 1;
+    const levelTiles = t.levels.map((name, i) => {
+      const pp = this.P[this.lv[i]], inRange = s.mode === 'prog' ? (i >= s.start && i <= s.max) : i === s.start;
+      const chip = s.mode === 'prog' ? (i === s.start ? t.initial : i === s.max ? t.maximum : '') : (i === s.start ? t.chosenLevel : '');
+      return { name, head: t.heads[i], fs: i === 0 ? 'italic' : 'normal', bg: pp.surface, ink: pp.ink, muted: pp.muted, inRange, chip, chipOp: chip ? 1 : 0,
+        bars: [0, 1, 2, 3].map(k => k <= i ? pp.bar : pp.barEmpty), op: inRange ? 1 : 0.55,
+        shadow: inRange ? 'inset 0 0 0 2px ' + pp.accent + ', 0 12px 20px -14px rgba(0,0,0,.5)' : 'inset 0 0 0 1px rgba(0,0,0,.08)', tf: inRange ? 'none' : 'scale(.985)',
+        pick: () => { if (s.mode === 'fixed') this.setState({ start: i, max: i }); else if (i < s.start || i === s.start) this.setState({ start: i, max: Math.max(i, s.max) }); else this.setState({ max: i }); } };
+    });
+    const goals = [10, 15, 20, 30, 40, 50], gi = goals.indexOf(s.goal);
+    const dp = { envelope: s.duelPhase === 'envelope', card: s.duelPhase === 'card' || s.duelPhase === 'running', question: s.duelPhase === 'question', result: s.duelPhase === 'result' };
+    return {
+      t, a, p, v: { level: s.view === 'level', plate: ['turn', 'card'].includes(s.view), turn: s.view === 'turn', card: s.view === 'card', pass: s.passSheet, score: s.view === 'score', duel: s.view === 'duel', levelup: s.view === 'levelup', prize: s.view === 'prize' },
+      bgTr: red ? 'none' : 'background .6s ease, background-color .6s ease, color .6s ease, box-shadow .6s ease',
+      livingOp: photo === 'living' ? 1 : 0, bedroomOp: photo === 'bedroom' ? 1 : 0, wash, sealBg,
+      esBg: isEs ? p.ctlInk : 'transparent', esFg: isEs ? (p.ctl.startsWith('rgba') || p.tint === 'light' && p.ctl === '#1B1E39' ? p.surface : p.ctl) : p.ctlInk,
+      enBg: !isEs ? p.ctlInk : 'transparent', enFg: !isEs ? (p.ctl.startsWith('rgba') || p.tint === 'light' && p.ctl === '#1B1E39' ? p.surface : p.ctl) : p.ctlInk,
+      setEs: () => this.props.onLang && this.props.onLang('es'), setEn: () => this.props.onLang && this.props.onLang('en'),
+      exit: () => this.props.onExit && this.props.onExit(), menu: () => this.props.onMenu && this.props.onMenu(),
+      progBg: s.mode === 'prog' ? '#721E19' : 'transparent', progFg: s.mode === 'prog' ? '#fff' : '#241A18', fixBg: s.mode === 'fixed' ? '#721E19' : 'transparent', fixFg: s.mode === 'fixed' ? '#fff' : '#241A18',
+      setProg: () => this.setState({ mode: 'prog', max: Math.max(s.max, s.start) }), setFixed: () => this.setState({ mode: 'fixed', max: s.start }),
+      levelTiles, levelNote: s.mode === 'prog' ? t.levelNote : t.fixedLevelNote, goal: s.goal,
+      goalDown: () => gi > 0 && this.setState({ goal: goals[gi - 1] }), goalUp: () => gi < goals.length - 1 && this.setState({ goal: goals[gi + 1] }),
+      startPlay: () => this.setState({ view: 'turn', level: s.start, scores: [0, 0], disp: [0, 0], active: 0, round: 0, blocks: [[], []], duels: 0 }),
+      nameA: act === 0 ? p.cardAccent || p.accent : p.scoreMuted, nameB: act === 1 ? p.cardAccent || p.accent : p.scoreMuted, dotA: act === 0 ? 1 : 0, dotB: act === 1 ? 1 : 0,
+      dispA: s.disp[0], dispB: s.disp[1], scoreAColor: scoreColor(0), scoreBColor: scoreColor(1), scoreAAnim: scoreAnim(0), scoreBAnim: scoreAnim(1),
+      bigAAnim: red || s.scoreDelta <= 0 ? 'none' : 'crWin .6s .2s cubic-bezier(.2,.8,.2,1) both',
+      bars: barsFor(curL), levelName: t.levels[curL], levelHead: t.heads[s.level], levelDesc: t.descs[s.level], newPlace: t.newPlace.replace('{place}', t.bedroom),
+      flashOn: !!fl, flashLeft: fl && fl.i === 1 ? 'calc(100% - 92px)' : '62px', flashBg: fl && fl.delta > 0 ? '#158353' : '#C44359', flashText: fl ? (fl.delta > 0 ? '+' + fl.delta : '−' + Math.abs(fl.delta)) : '', floatAnim: red ? 'crFade .2s both' : 'crFloat 1.1s ease both',
+      activeName: N[act], blockDots: [0, 1, 2].map(i => ({ bg: i < block.length ? p.accent : 'transparent', ring: i < block.length ? 'none' : 'inset 0 0 0 1px ' + p.stop })),
+      forcedOn: !!f, forcedText: f === 'dare' ? t.forcedDare : t.forcedTruth, choiceTop: f ? '296px' : '262px',
+      truthOff: f === 'dare', dareOff: f === 'truth', truthOp: f === 'dare' ? 0.4 : 1, dareOp: f === 'truth' ? 0.4 : 1,
+      pickTruth: () => this.choose('truth'), pickDare: () => this.choose('dare'), pickRandom: () => this.choose(f || (Math.random() < 0.5 ? 'truth' : 'dare')),
+      isDare: s.ctype === 'dare', sealText: s.ctype === 'dare' ? '+3' : '+1', cardKicker: s.ctype === 'dare' ? t.dareUp : t.truthUp,
+      cardText: c ? subst(c[lang === 'es' ? 0 : 1]) : '', cardSize: c && c[0].length > 90 ? '22px' : '27px',
+      hasFail: !!(c && c[3]), failText: c && c[3] ? (lang === 'es' ? c[3] : c[4]) : '',
+      dash: s.total ? (307.9 * (1 - s.left / s.total)).toFixed(1) : '0', clock, clockAnim: s.phase === 'running' && sec <= 5 && !red ? 'crPulse .9s ease-in-out infinite' : 'none',
+      timerHint: t.timerHint,
+      ph: { idle: s.phase === 'idle', running: s.phase === 'running', done: s.phase === 'done', verdict: s.phase === 'verdict' },
+      primaryLabel: s.ctype === 'dare' ? t.begin : t.answered,
+      primaryAct: () => { if (s.ctype === 'dare') this.startTimer(); else { this.award(act, 1, 'answered'); this.setState({ view: 'score' }); } },
+      complete: () => { this.award(act, 3, 'complete'); this.setState({ view: 'score' }); },
+      madeIt: () => { this.award(act, 3, 'complete'); this.setState({ view: 'score' }); },
+      didnt: () => { this.toast(t.didntMakeIt); this.endTurn(s.ctype); },
+      abandon: () => { clearInterval(this.iv); this.toast(t.toastAbandon); this.endTurn(s.ctype); },
+      verdictText: t.verdict.replace('{partner}', N[partner]),
+      askPass: () => this.setState({ passSheet: true }), cancelPass: () => this.setState({ passSheet: false }),
+      passText: t.passText.replace('{partner}', N[partner]), passFrom: s.scores[act], passTo: Math.max(0, s.scores[act] - 1),
+      confirmPass: () => { this.award(act, -1, 'pass'); this.toast(t.toastPass.replace('{name}', N[act])); this.setState({ passSheet: false }); clearTimeout(this.t1); this.t1 = setTimeout(() => this.endTurn(null), red ? 300 : 900); },
+      scoreKicker: s.scoreKind === 'answered' ? t.answered.toUpperCase() : t.complete.toUpperCase(),
+      barA: Math.min(100, Math.round(s.scores[0] / s.goal * 100)) + '%', barB: Math.min(100, Math.round(s.scores[1] / s.goal * 100)) + '%',
+      leadText: lead ? t.lead.replace('{name}', N[leader]).replace('{n}', lead) : t.tied,
+      nextTurnText: t.turnOf.replace('{name}', N[partner]),
+      afterScore: () => this.endTurn(s.ctype),
+      duelNameUp: t.duelName.toUpperCase(), duelRoles: dsub(t.duelRoles), dp,
+      flapAnim: s.opening && !red ? 'crFlap .42s cubic-bezier(.4,0,.2,1) both' : 'none', sealOp: s.opening ? 0 : 1,
+      glowAnim: red ? 'none' : 'crGlow 1.6s ease-out infinite',
+      openEnvelope: () => { this.setState({ opening: true }); clearTimeout(this.t1); this.t1 = setTimeout(() => this.setState({ duelPhase: 'card', opening: false }), red ? 100 : 520); },
+      duelOnly: t.duelOnly.replace('{resister}', N[res]).toUpperCase() + ' · ' + t.duelStop.toUpperCase(),
+      attackerName: N[att], resisterName: N[res], duelA: dsub(t.duelText[0]), duelB: dsub(t.duelText[1]), duelFail: t.duelFail,
+      duelDash: s.total ? (238.8 * (1 - s.left / s.total)).toFixed(1) : '0', duelClock: clock, duelClockAnim: s.duelPhase === 'running' && sec <= 5 && !red ? 'crPulse .9s ease-in-out infinite' : 'none',
+      duelPrimaryLabel: s.duelPhase === 'running' ? t.duelStop + ' · ' + t.duelOnly.replace('{resister}', N[res]) : t.duelStart,
+      duelPrimary: () => { if (s.duelPhase === 'running') { clearInterval(this.iv); this.setState({ duelPhase: 'question' }); } else this.startDuel(); },
+      duelHeldLabel: dsub(t.duelHeld), duelFailedLabel: dsub(t.duelFailed),
+      duelHeld: () => { this.award(res, 3, 'duel'); this.setState({ duelPhase: 'result', duelResult: 'held' }); },
+      duelFailed: () => { this.award(att, 1, 'duel'); this.setState({ duelPhase: 'result', duelResult: 'failed' }); },
+      winAnim: red ? 'none' : 'crWin .7s cubic-bezier(.2,.8,.2,1) both, crGlow 1.2s .2s ease-out 2',
+      duelDelta: s.duelResult === 'failed' ? '+1' : '+3', duelWinner: s.duelResult === 'failed' ? N[att] : N[res],
+      duelOutcome: s.duelResult === 'failed' ? dsub(t.duelFailed) : dsub(t.duelHeld),
+      afterDuel: () => this.setState({ view: 'turn', duelPhase: 'envelope', duelResult: null }),
+      afterLevel: () => this.setState({ view: 'turn' }),
+      pz: { winner: s.prizePhase === 'winner', choose: s.prizePhase === 'choose', chosen: s.prizePhase === 'chosen' },
+      wonBy: t.wonBy.replace('{n}', Math.abs(s.scores[0] - s.scores[1]) || 4),
+      prizeFlap: s.opening && !red ? 'crFlap .42s cubic-bezier(.4,0,.2,1) both' : 'none',
+      openPrize: () => { this.setState({ opening: true }); clearTimeout(this.t1); this.t1 = setTimeout(() => this.setState({ prizePhase: 'choose', opening: false }), red ? 100 : 520); },
+      prizes: t.prizes.map((z, i) => ({ label: i ? t.optionB : t.optionA, title: z[0], text: z[1].replaceAll('{winner}', N[0]).replaceAll('{partner}', N[1]), rot: i ? '.8deg' : '-.8deg', anim: red ? 'crFade .2s both' : (i ? 'crDealR .45s .08s cubic-bezier(.2,.8,.2,1) both' : 'crDealL .45s cubic-bezier(.2,.8,.2,1) both'), pick: () => this.setState({ prizePhase: 'chosen', chosen: i }) })),
+      chosenTitle: t.prizes[s.chosen][0],
+      toastOn: !!s.toast, toastText: s.toast ? s.toast.text : ''
+    };
+  }
+}
+</script>
+</body>
+</html>

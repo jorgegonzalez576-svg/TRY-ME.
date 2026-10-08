@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&amp;family=Figtree:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+@keyframes cnDeal{from{opacity:0;transform:translateY(22px) rotate(2.5deg) scale(.97)}to{opacity:1;transform:none}}
+@keyframes cnFade{from{opacity:0}to{opacity:1}}
+@keyframes cnStamp{0%{opacity:0;transform:scale(1.5) rotate(-14deg)}60%{opacity:1;transform:scale(.96) rotate(-6deg)}100%{opacity:1;transform:scale(1) rotate(-6deg)}}
+@keyframes cnTick{0%{transform:scale(1.25);opacity:.2}100%{transform:scale(1);opacity:1}}
+@keyframes cnSlip{from{opacity:0;transform:translateY(30px) rotate(4deg)}to{opacity:1;transform:rotate(1.5deg)}}
+@keyframes cnToast{0%{opacity:0;transform:translate(-50%,-10px)}12%{opacity:1;transform:translate(-50%,0)}85%{opacity:1}100%{opacity:0}}
+</style>
+</helmet>
+<div style="position:absolute;inset:0;overflow:hidden;background:#E1DBD4;font-family:'Figtree',sans-serif;color:#473B40">
+<img src="assets/connect-office.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+<div style="position:absolute;inset:0;background:linear-gradient(to bottom,#E1DBD4ec,#E1DBD4c8 45%,#E1DBD494)"></div>
+<div style="position:absolute;inset:0;background-image:var(--grain);opacity:.7"></div>
+
+<div style="position:absolute;top:60px;left:16px;right:16px;display:flex;align-items:center;gap:8px;z-index:5">
+<button onClick="{{ exit }}" aria-label="{{ t.games }}" style="width:44px;height:44px;border:0;cursor:pointer;border-radius:50%;background:#F6F0EDee;box-shadow:inset 0 0 0 1px #A39590;display:grid;place-items:center" style-active="transform:scale(.94)"><span style="width:9px;height:9px;border-left:1.8px solid #473B40;border-bottom:1.8px solid #473B40;transform:translateX(2px) rotate(45deg)"></span></button>
+<div style="flex:1;font:400 21px/1 'Gloock',serif;color:#473B40;padding-left:4px">Connect</div>
+<div role="group" style="display:flex;height:44px;padding:3px;box-sizing:border-box;border-radius:22px;background:#F6F0EDee;box-shadow:inset 0 0 0 1px #A39590">
+<button onClick="{{ setEs }}" style="width:44px;border:0;cursor:pointer;border-radius:19px;background:{{ esBg }};color:{{ esFg }};font:600 12px/1 'Figtree';letter-spacing:.06em">ES</button>
+<button onClick="{{ setEn }}" style="width:44px;border:0;cursor:pointer;border-radius:19px;background:{{ enBg }};color:{{ enFg }};font:600 12px/1 'Figtree';letter-spacing:.06em">EN</button>
+</div>
+<button onClick="{{ menu }}" aria-label="Menu" style="width:44px;height:44px;border:0;cursor:pointer;border-radius:50%;background:#F6F0EDee;box-shadow:inset 0 0 0 1px #A39590;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><span style="width:16px;height:1.6px;background:#473B40;border-radius:1px"></span><span style="width:16px;height:1.6px;background:#473B40;border-radius:1px"></span><span style="width:16px;height:1.6px;background:#473B40;border-radius:1px"></span></button>
+</div>
+
+<sc-if value="{{ v.start }}" hint-placeholder-val="{{ true }}">
+<div style="position:absolute;top:122px;left:20px;right:20px;height:552px;animation:{{ a.deal }}">
+<div style="position:absolute;inset:0;border-radius:6px 16px 16px 6px;background:#74586A;transform:translate(3px,5px);box-shadow:0 22px 34px -22px rgba(71,59,64,.6)"></div>
+<div style="position:absolute;inset:0;right:6px;border-radius:4px 12px 12px 4px;background:#F6F0ED;box-shadow:inset 10px 0 12px -10px rgba(71,59,64,.35),0 1px 1px rgba(71,59,64,.15);overflow:hidden">
+<div style="position:absolute;inset:0;background-image:var(--grain);opacity:.5"></div>
+<div style="position:absolute;left:26px;right:24px;top:26px">
+<span style="display:inline-block;padding:6px 9px 5px;border:1.5px solid #735568;border-radius:3px;color:#735568;font:700 10px/1 'Figtree';letter-spacing:.2em;transform:rotate(-2deg)">CONNECT</span>
+<div style="margin-top:16px;font:400 17px/1.3 'Gloock',serif;color:#735568">{{ t.tagline }}</div>
+<div style="margin-top:14px;font:400 32px/1.08 'Gloock',serif;color:#473B40;text-wrap:balance">{{ t.time }}</div>
+<div style="margin-top:10px;font:500 15px/1.45 'Figtree';color:#62535C">{{ t.timeHelp }}</div>
+<div role="radiogroup" style="margin-top:22px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px">
+<sc-for list="{{ durations }}" as="d" hint-placeholder-count="5">
+<button onClick="{{ d.pick }}" role="radio" aria-checked="{{ d.on }}" style="height:66px;border:0;cursor:pointer;border-radius:10px 10px 4px 4px;background:{{ d.bg }};box-shadow:{{ d.shadow }};color:{{ d.fg }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;transition:background .2s,color .2s,transform .2s;transform:{{ d.lift }}" style-active="transform:scale(.95)"><span style="font:400 24px/1 'Gloock',serif">{{ d.n }}</span><span style="font:600 11px/1 'Figtree';letter-spacing:.08em">{{ t.minute }}</span></button>
+</sc-for>
+</div>
+<div style="margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<label style="display:flex;flex-direction:column;gap:6px;font:600 12px/1 'Figtree';color:#62535C">{{ t.name }} 1<input value="{{ name0 }}" onChange="{{ onName0 }}" maxlength="24" style="border:0;border-bottom:1.5px solid #735568;background:transparent;padding:8px 0 6px;font:400 22px/1.2 'Gloock',serif;color:#473B40;outline:none;border-radius:0;min-height:44px;box-sizing:border-box"></label>
+<label style="display:flex;flex-direction:column;gap:6px;font:600 12px/1 'Figtree';color:#62535C">{{ t.name }} 2<input value="{{ name1 }}" onChange="{{ onName1 }}" maxlength="24" style="border:0;border-bottom:1.5px solid #735568;background:transparent;padding:8px 0 6px;font:400 22px/1.2 'Gloock',serif;color:#473B40;outline:none;border-radius:0;min-height:44px;box-sizing:border-box"></label>
+</div>
+</div>
+<div style="position:absolute;left:26px;right:24px;bottom:22px;font:500 12px/1.45 'Figtree';color:#62535C">{{ t.rulesShort }}</div>
+</div>
+</div>
+<div style="position:absolute;left:20px;right:20px;bottom:42px;display:flex;flex-direction:column;gap:8px">
+<button onClick="{{ begin }}" style="height:54px;border:0;cursor:pointer;border-radius:14px;background:#74586A;color:#FFF9F6;font:600 16px/1 'Figtree';box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 6px 14px -8px rgba(71,59,64,.7)" style-active="transform:scale(.98);background:#634C5C">{{ t.start }}</button>
+<div style="height:44px;display:grid;place-items:center;font:600 15px/1 'Figtree';color:#473B40">{{ t.rules }}</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ v.cardViews }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:120px;left:24px;right:24px;display:flex;align-items:center;justify-content:space-between;z-index:2">
+<span style="font:500 14px/1.3 'Figtree';color:#473B40">{{ topline }}</span>
+<span style="display:flex;align-items:center;gap:10px"><span style="font:600 12px/1 'Figtree';color:#62535C">{{ cardLabel }}</span><span style="width:72px;height:3px;border-radius:3px;background:#A3959040;overflow:hidden"><span style="display:block;width:{{ progress }};height:100%;background:#735568;transition:width .4s"></span></span></span>
+</div>
+</sc-if>
+
+<sc-if value="{{ v.roundintro }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:158px;left:22px;right:22px;height:456px;animation:{{ a.deal }}">
+<div style="position:absolute;inset:0;border-radius:6px;background:#EAE1DC;transform:translate(5px,7px) rotate(2.2deg)"></div>
+<div style="position:absolute;inset:0;border-radius:6px;background:#F6F0ED;transform:rotate(-.6deg);box-shadow:0 1px 1px rgba(71,59,64,.14),0 26px 40px -24px rgba(71,59,64,.55);overflow:hidden">
+<div style="position:absolute;inset:0;background-image:var(--grain);opacity:.5"></div>
+<div style="position:absolute;top:24px;left:22px;right:22px"><span style="display:inline-block;padding:6px 9px 5px;border:1.5px solid #735568;border-radius:3px;color:#735568;font:700 10px/1 'Figtree';letter-spacing:.18em;transform:rotate(-2deg)">{{ t.whoFamily }}</span>
+<div style="margin-top:18px;font:400 30px/1.1 'Gloock',serif;color:#473B40">{{ t.who }}</div>
+<div style="margin-top:6px;font:500 15px/1.3 'Figtree';color:#62535C">{{ t.whoSub }}</div></div>
+<div style="position:absolute;top:150px;left:0;right:0;height:1px;background:#735568;opacity:.55"></div>
+<div style="position:absolute;top:153px;left:0;right:0;height:1px;background:#735568;opacity:.55"></div>
+<div style="position:absolute;top:160px;left:22px;right:22px;display:flex;flex-direction:column">
+<sc-for list="{{ whoItems }}" as="w" hint-placeholder-count="5">
+<div style="min-height:44px;display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(115,85,104,.18);font:500 15px/1.3 'Figtree';color:#473B40"><span style="width:16px;font:400 15px/1 'Gloock',serif;color:#735568">{{ w.n }}</span>{{ w.text }}</div>
+</sc-for>
+</div>
+<div style="position:absolute;left:0;right:0;bottom:26px;text-align:center;font:400 21px/1 'Gloock',serif;color:#735568">{{ t.point }}</div>
+</div>
+</div>
+<div style="position:absolute;left:20px;right:20px;bottom:42px;display:flex;flex-direction:column;gap:8px">
+<button onClick="{{ roundStart }}" style="height:54px;border:0;cursor:pointer;border-radius:14px;background:#74586A;color:#FFF9F6;font:600 16px/1 'Figtree';box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 6px 14px -8px rgba(71,59,64,.7)" style-active="transform:scale(.98);background:#634C5C">{{ t.roundStart }}</button>
+<button onClick="{{ passCard }}" style="height:44px;border:0;cursor:pointer;background:transparent;font:600 15px/1 'Figtree';color:#473B40">{{ t.pass }}</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ v.round }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:158px;left:22px;right:22px;height:420px">
+<div style="position:absolute;inset:0;border-radius:6px;background:#EAE1DC;transform:translate(5px,7px) rotate(2.2deg)"></div>
+<div style="position:absolute;inset:0;border-radius:6px;background:#F6F0ED;transform:rotate(-.6deg);box-shadow:0 1px 1px rgba(71,59,64,.14),0 26px 40px -24px rgba(71,59,64,.55);overflow:hidden">
+<div style="position:absolute;inset:0;background-image:var(--grain);opacity:.5"></div>
+<div style="position:absolute;top:24px;left:22px;right:22px;display:flex;justify-content:space-between;align-items:center"><span style="font:400 18px/1 'Gloock',serif;color:#735568">{{ t.who }}</span><span style="font:600 12px/1 'Figtree';color:#62535C">{{ roundCount }}</span></div>
+<div style="position:absolute;top:66px;left:0;right:0;height:1px;background:#735568;opacity:.55"></div>
+<div style="position:absolute;top:69px;left:0;right:0;height:1px;background:#735568;opacity:.55"></div>
+<div style="position:absolute;top:96px;left:26px;right:26px;text-align:center;font:400 30px/1.18 'Gloock',serif;color:#473B40;text-wrap:balance">{{ roundItem }}</div>
+<div style="position:absolute;left:50%;bottom:34px;width:132px;height:132px;margin-left:-66px">
+<div style="width:100%;height:100%;border-radius:50%;box-shadow:inset 0 0 0 2px #735568,inset 0 0 0 7px #F6F0ED,inset 0 0 0 8px #73556888;display:grid;place-items:center;color:#735568;transform:rotate(-6deg)">
+<span style="font:400 {{ countSize }}/1 'Gloock',serif;animation:{{ countAnim }};text-align:center;padding:0 10px">{{ countText }}</span>
+</div>
+</div>
+</div>
+</div>
+<div style="position:absolute;top:598px;left:0;right:0;display:flex;justify-content:center;gap:8px">
+<sc-for list="{{ marks }}" as="m" hint-placeholder-count="5"><span style="width:10px;height:10px;border-radius:50%;background:{{ m.bg }};box-shadow:{{ m.ring }}"></span></sc-for>
+</div>
+<div style="position:absolute;left:20px;right:20px;bottom:42px;display:flex;flex-direction:column;gap:8px">
+<div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+<button onClick="{{ markHit }}" disabled="{{ counting }}" style="height:54px;border:0;cursor:pointer;border-radius:14px;background:#74586A;color:#FFF9F6;font:600 16px/1 'Figtree';opacity:{{ btnOp }};transition:opacity .2s" style-active="transform:scale(.98)">{{ t.matched }}</button>
+<button onClick="{{ markMiss }}" disabled="{{ counting }}" style="height:54px;border:0;cursor:pointer;border-radius:14px;background:#DCCBD3;box-shadow:inset 0 0 0 1px #A3959070;color:#473B40;font:600 16px/1 'Figtree';opacity:{{ btnOp }};transition:opacity .2s" style-active="transform:scale(.98)">{{ t.nope }}</button>
+</div>
+<button onClick="{{ markSkip }}" style="height:44px;border:0;cursor:pointer;background:transparent;font:600 15px/1 'Figtree';color:#473B40">{{ t.skip }}</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ v.roundend }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:158px;left:22px;right:22px;height:440px;animation:{{ a.deal }}">
+<div style="position:absolute;inset:0;border-radius:6px;background:#F6F0ED;transform:rotate(-.6deg);box-shadow:0 1px 1px rgba(71,59,64,.14),0 26px 40px -24px rgba(71,59,64,.55);overflow:hidden">
+<div style="position:absolute;inset:0;background-image:var(--grain);opacity:.5"></div>
+<div style="position:absolute;top:24px;left:22px"><span style="display:inline-block;padding:6px 9px 5px;border:1.5px solid #735568;border-radius:3px;color:#735568;font:700 10px/1 'Figtree';letter-spacing:.18em;transform:rotate(-2deg)">{{ t.whoFamily }}</span></div>
+<div style="position:absolute;top:22px;right:22px;width:96px;height:96px;border-radius:50%;box-shadow:inset 0 0 0 2px #735568,inset 0 0 0 6px #F6F0ED,inset 0 0 0 7px #735568;display:grid;place-items:center;color:#735568;animation:{{ a.stamp }}"><span style="font:400 30px/1 'Gloock',serif">{{ score }}</span></div>
+<div style="position:absolute;top:140px;left:24px;right:24px">
+<div style="font:400 30px/1.12 'Gloock',serif;color:#473B40;text-wrap:balance">{{ resultTitle }}</div>
+<div style="margin-top:10px;font:500 17px/1.4 'Figtree';color:#62535C">{{ resultVerdict }}</div>
+<div style="margin-top:22px;display:flex;gap:8px"><sc-for list="{{ marks }}" as="m" hint-placeholder-count="5"><span style="width:12px;height:12px;border-radius:50%;background:{{ m.bg }};box-shadow:{{ m.ring }}"></span></sc-for></div>
+</div>
+<div style="position:absolute;left:24px;right:24px;bottom:28px;padding-top:18px;border-top:1px solid rgba(115,85,104,.25);font:400 21px/1.3 'Gloock',serif;color:#735568">{{ t.explain }}</div>
+</div>
+</div>
+<div style="position:absolute;left:20px;right:20px;bottom:42px">
+<button onClick="{{ toQuestion }}" style="width:100%;height:54px;border:0;cursor:pointer;border-radius:14px;background:#74586A;color:#FFF9F6;font:600 16px/1 'Figtree';box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 6px 14px -8px rgba(71,59,64,.7)" style-active="transform:scale(.98);background:#634C5C">{{ t.next }}</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ v.question }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:158px;left:22px;right:22px;height:438px;transform:{{ leaveTf }};opacity:{{ leaveOp }};transition:{{ leaveTr }}">
+<div style="position:absolute;inset:0;animation:{{ a.deal }}">
+<div style="position:absolute;inset:0;border-radius:6px;background:#EAE1DC;transform:translate(5px,7px) rotate(2.4deg);box-shadow:0 14px 26px -18px rgba(71,59,64,.45)"></div>
+<div style="position:absolute;inset:0;border-radius:6px;background:#F6F0ED;transform:rotate(-.7deg);box-shadow:0 1px 1px rgba(71,59,64,.14),0 26px 40px -24px rgba(71,59,64,.55);overflow:hidden">
+<div style="position:absolute;inset:0;background-image:var(--grain);opacity:.5"></div>
+<div style="position:absolute;top:24px;left:22px;right:22px;display:flex;align-items:center;justify-content:space-between">
+<span style="padding:6px 9px 5px;border:1.5px solid #735568;border-radius:3px;color:#735568;font:700 10px/1 'Figtree';letter-spacing:.18em;transform:rotate(-2deg)">{{ t.openFamily }}</span>
+</div>
+<div style="position:absolute;top:74px;left:0;right:0;height:1px;background:#735568;opacity:.55"></div>
+<div style="position:absolute;top:77px;left:0;right:0;height:1px;background:#735568;opacity:.55"></div>
+<div style="position:absolute;top:80px;left:0;right:0;bottom:0;background-image:repeating-linear-gradient(to bottom,transparent 0 33px,rgba(115,85,104,.17) 33px 34px)"></div>
+<div style="position:absolute;top:87px;left:24px;right:22px;font:400 24px/34px 'Gloock',serif;color:#473B40;text-wrap:pretty">{{ t.o02 }}</div>
+</div>
+<sc-if value="{{ layer }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;left:14px;right:-6px;bottom:-26px;padding:18px 20px 20px;background:#FBF8F6;border-radius:4px;box-shadow:0 2px 3px rgba(71,59,64,.16),0 20px 30px -18px rgba(71,59,64,.6);transform:rotate(1.5deg);animation:{{ a.slip }}">
+<div style="position:absolute;top:-9px;left:40px;width:56px;height:18px;background:rgba(220,203,211,.85);transform:rotate(-4deg)"></div>
+<div style="font:700 10px/1 'Figtree';letter-spacing:.18em;color:#735568">{{ t.layerUp }}</div>
+<div style="margin-top:10px;font:400 20px/1.3 'Gloock',serif;color:#473B40">{{ t.o02b }}</div>
+</div>
+</sc-if>
+</div>
+</div>
+<sc-if value="{{ toastOn }}" hint-placeholder-val="{{ false }}"><div role="status" style="position:absolute;top:118px;left:50%;padding:10px 16px;border-radius:999px;background:#473B40;color:#F6F0ED;font:600 14px/1 'Figtree';white-space:nowrap;z-index:9;animation:cnToast 1.6s ease both">{{ t.passMessage }}</div></sc-if>
+<div style="position:absolute;left:20px;right:20px;bottom:42px;display:flex;flex-direction:column;gap:10px">
+<sc-if value="{{ noLayer }}" hint-placeholder-val="{{ true }}">
+<button onClick="{{ openLayer }}" style="min-height:56px;border:0;cursor:pointer;border-radius:14px;background:#DCCBD3;box-shadow:inset 0 0 0 1px #A3959070;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px" style-active="transform:scale(.98)"><span style="font:600 16px/1.2 'Figtree';color:#473B40">{{ t.stay }}</span><span style="font:500 12px/1.2 'Figtree';color:#62535C">{{ t.stayNote }}</span></button>
+</sc-if>
+<button onClick="{{ toChallenge }}" style="height:54px;border:0;cursor:pointer;border-radius:14px;background:#74586A;color:#FFF9F6;font:600 16px/1 'Figtree';box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 6px 14px -8px rgba(71,59,64,.7)" style-active="transform:scale(.98);background:#634C5C">{{ t.next }}</button>
+<button onClick="{{ passCard }}" style="height:44px;border:0;cursor:pointer;background:transparent;font:600 15px/1 'Figtree';color:#473B40">{{ t.pass }}</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ v.challenge }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:158px;left:22px;right:22px;height:450px;animation:{{ a.deal }}">
+<div style="position:absolute;inset:0;border-radius:14px;background-color:#DCCBD3;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.08) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(71,59,64,.05) 0 1px,transparent 1px 3px);transform:rotate(.8deg);box-shadow:0 1px 1px rgba(71,59,64,.14),0 26px 40px -24px rgba(71,59,64,.55)">
+<div style="position:absolute;inset:10px;border:1.5px dashed rgba(116,88,106,.45);border-radius:8px"></div>
+<div style="position:absolute;top:28px;left:26px"><span style="display:inline-block;padding:6px 9px 5px;border:1.5px solid #5E4757;border-radius:3px;color:#5E4757;font:700 10px/1 'Figtree';letter-spacing:.18em;transform:rotate(-2deg)">{{ t.doFamily }}</span></div>
+<sc-if value="{{ choosing }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:84px;left:26px;right:26px">
+<div style="font:400 30px/1.12 'Gloock',serif;color:#473B40">{{ t.contact }}</div>
+<div style="margin-top:10px;font:500 15px/1.45 'Figtree';color:#473B40">{{ t.touchNote }}</div>
+<div style="margin-top:26px;display:flex;flex-direction:column;gap:10px">
+<button onClick="{{ pickTouch }}" style="height:60px;border:0;cursor:pointer;border-radius:12px;background:#F6F0ED;box-shadow:0 1px 2px rgba(71,59,64,.18);font:400 20px/1 'Gloock',serif;color:#473B40" style-active="transform:scale(.98)">{{ t.withTouch }}</button>
+<button onClick="{{ pickNoTouch }}" style="height:60px;border:0;cursor:pointer;border-radius:12px;background:#F6F0ED;box-shadow:0 1px 2px rgba(71,59,64,.18);font:400 20px/1 'Gloock',serif;color:#473B40" style-active="transform:scale(.98)">{{ t.noTouch }}</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ notChoosing }}" hint-placeholder-val="{{ true }}">
+<div style="position:absolute;top:84px;left:26px;right:26px;font:400 24px/1.3 'Gloock',serif;color:#473B40;text-wrap:pretty">{{ doText }}</div>
+<div style="position:absolute;left:50%;bottom:32px;width:118px;height:118px;margin-left:-59px;border-radius:50%;background:{{ ring }};display:grid;place-items:center;transform:rotate(-4deg)">
+<div style="width:106px;height:106px;border-radius:50%;background:#DCCBD3;box-shadow:inset 0 0 0 1px rgba(116,88,106,.35);display:grid;place-items:center;font:400 30px/1 'Gloock',serif;color:#5E4757;font-variant-numeric:tabular-nums">{{ clock }}</div>
+</div>
+</sc-if>
+</div>
+</div>
+<div style="position:absolute;left:20px;right:20px;bottom:42px;display:flex;flex-direction:column;gap:8px">
+<sc-if value="{{ notChoosing }}" hint-placeholder-val="{{ true }}">
+<button onClick="{{ doAction }}" disabled="{{ doDisabled }}" style="width:100%;height:54px;border:0;cursor:pointer;border-radius:14px;background:#74586A;color:#FFF9F6;font:600 16px/1 'Figtree';opacity:{{ doOp }};box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 6px 14px -8px rgba(71,59,64,.7)" style-active="transform:scale(.98)">{{ doLabel }}</button>
+</sc-if>
+<button onClick="{{ passCard }}" style="height:44px;border:0;cursor:pointer;background:transparent;font:600 15px/1 'Figtree';color:#473B40">{{ t.pass }}</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ v.end }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:128px;left:50%;width:220px;height:200px;margin-left:-110px;animation:{{ a.deal }}">
+<div style="position:absolute;inset:0;border-radius:5px 14px 14px 5px;background-color:#74586A;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(0,0,0,.06) 0 1px,transparent 1px 3px);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 2px 3px rgba(36,26,24,.18),0 26px 34px -18px rgba(36,26,24,.55);transform:rotate(-3deg);overflow:hidden">
+<div style="position:absolute;left:0;top:0;bottom:0;width:14px;background:linear-gradient(90deg,#4F3B49,#634C5C 70%,#7C6273)"></div>
+<div style="position:absolute;right:30px;top:0;bottom:0;width:9px;background:linear-gradient(90deg,#33262F,#45343F 50%,#33262F)"></div>
+<div style="position:absolute;left:32px;top:58px;padding:9px 14px 11px;background:#F6F0ED;border-radius:3px;font:400 26px/1 'Gloock',serif;color:#473B40">Connect</div>
+</div>
+</div>
+<div style="position:absolute;top:372px;left:24px;right:24px;text-align:center;animation:{{ a.rise }}">
+<div style="font:400 36px/1.08 'Gloock',serif;color:#473B40">{{ t.final }}</div>
+<div style="margin-top:10px;font:500 17px/1.4 'Figtree';color:#62535C">{{ t.finalText }}</div>
+</div>
+<div style="position:absolute;top:490px;left:24px;right:24px;display:flex;flex-direction:column">
+<sc-for list="{{ recap }}" as="r" hint-placeholder-count="3"><div style="min-height:44px;display:flex;align-items:center;border-top:1px solid rgba(115,85,104,.25);font:500 15px/1.35 'Figtree';color:#473B40">{{ r }}</div></sc-for>
+</div>
+<div style="position:absolute;left:20px;right:20px;bottom:42px;display:flex;flex-direction:column;gap:8px">
+<button onClick="{{ exit }}" style="height:54px;border:0;cursor:pointer;border-radius:14px;background:#74586A;color:#FFF9F6;font:600 16px/1 'Figtree'" style-active="transform:scale(.98)">{{ t.done }}</button>
+<button onClick="{{ again }}" style="height:50px;border:0;cursor:pointer;border-radius:14px;background:#DCCBD3;box-shadow:inset 0 0 0 1px #A3959070;color:#473B40;font:600 15px/1 'Figtree'">{{ t.again }}</button>
+<div style="height:36px;display:grid;place-items:center;font:600 14px/1 'Figtree';color:#721E19">{{ t.crave }}</div>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { view: 'start', minutes: 10, names: ['Ana', 'Leo'], ri: 0, marks: [], count: 3, layer: false, leaving: false, toast: 0, contact: null, phase: 'choose', left: 20000, running: false, cardNo: 1 };
+
+  dict = {
+    es: { games: '← Juegos', tagline: 'Menos scroll. Más de lo nuestro.', time: '¿Cuánto tiempo tienen?', timeHelp: 'Elijan un tiempo. Del resto nos encargamos.', minute: 'min', name: 'Nombre', start: 'Empezar Connect', rules: 'Cómo jugar Connect', rulesShort: 'Pueden pasar o terminar cuando quieran, sin castigo. Las respuestas desaparecen al pasar cada tarjeta.', reads: '{b} lee · {a} responde', card: 'Tarjeta {n}', whoFamily: '¿QUIÉN DE LOS DOS?', who: '¿Quién de los dos…?', whoSub: 'El día a día', point: '3, 2, 1, ¡señalen!', pointNow: '¡Señalen!', roundStart: 'Empezar ronda', matched: 'Coincidimos', nope: 'No', skip: 'Saltar', whoResult: 'Coincidieron en {n} de {total}.', telepathy: 'Telepatía total.', know: 'Se conocen bien.', interesting: 'Esto se pone interesante. ¿Quién tiene razón?', explain: '¿Alguna respuesta merece explicación?', next: 'Siguiente tarjeta', pass: 'Pasar', passMessage: 'Probemos con otra.', stay: 'Una pregunta más', stayNote: 'Opcional · sobre esta misma tarjeta', layerUp: '¿UNA CAPA MÁS?', openFamily: 'CONVERSACIÓN', doFamily: 'MINI RETO', contact: 'Elijan en pareja', touchNote: 'Elijan lo que les haga sentir bien a ambas personas.', withTouch: 'Con contacto', noTouch: 'Sin contacto', noTouchText: 'Quédense cerca sin tocarse. Conversen, sonrían o compartan un momento de calma.', doStart: 'Iniciar', doDone: 'Listo', final: 'Eso estuvo bueno.', finalText: '¿Repetimos pronto?', done: 'Listo', again: 'Jugar de nuevo', crave: '¿Siguen con ganas? Prueben Crave.', played: 'Hoy jugaron {n} tarjetas', matchedTotal: 'Coincidieron en {n} de {t}', talked: 'Hablaron de: lo que valoran, sus costumbres, su mundo de hoy', bothTurn: 'Los dos señalan',
+      o02: '¿Qué hago que yo creo que es normal, pero que para ti es tan mío que nadie más lo haría igual?', o02b: '¿Por qué crees que se te quedó grabado?',
+      d01: 'Elijan en pareja: tomarse de las manos o sentarse lado a lado durante 20 segundos. No hace falta hablar.',
+      items: ['se duerme viendo la película', 'dice “estoy bien” cuando no lo está', 'necesita tener la razón', 'pide perdón primero', 'nota que su pareja está triste antes de que lo diga'] },
+    en: { games: '← Games', tagline: 'Less scrolling. More us.', time: 'How much time do you have?', timeHelp: "Pick a time. We'll handle the rest.", minute: 'min', name: 'Name', start: 'Start Connect', rules: 'How to play Connect', rulesShort: 'Pass or finish whenever you like, without a penalty. Answers disappear after each card.', reads: '{b} reads · {a} answers', card: 'Card {n}', whoFamily: 'WHO OF US?', who: 'Who of us…', whoSub: 'Day to day', point: '3, 2, 1, point!', pointNow: 'Point!', roundStart: 'Start round', matched: 'We matched', nope: 'No', skip: 'Skip', whoResult: 'You matched on {n} of {total}.', telepathy: 'Total telepathy.', know: 'You know each other well.', interesting: "This is getting interesting. Who's right?", explain: 'Any answer worth explaining?', next: 'Next card', pass: 'Pass', passMessage: "Let's try another one.", stay: 'One more question', stayNote: 'Optional · about this same card', layerUp: 'ONE MORE LAYER?', openFamily: 'CONVERSATION', doFamily: 'MINI CHALLENGE', contact: 'Choose together', touchNote: 'Choose what feels right for both of you.', withTouch: 'With contact', noTouch: 'Without contact', noTouchText: 'Stay near each other without touching. Talk, smile, or share a quiet moment.', doStart: 'Start', doDone: 'Done', final: 'That was good.', finalText: 'Again soon?', done: 'Done', again: 'Play again', crave: 'Still in the mood? Try Crave.', played: 'You played {n} cards today', matchedTotal: 'You matched on {n} of {t}', talked: 'You talked about: what you value, your rituals, your world today', bothTurn: 'You both point',
+      o02: 'What do I do that I probably think is normal, but to you is so me that nobody else would do it the same way?', o02b: 'Why do you think it stuck with you?',
+      d01: 'Choose together: hold hands or sit side by side for 20 seconds. No need to talk.',
+      items: ['falls asleep during the movie', 'says "I\'m fine" when they\'re not', 'needs to be right', 'apologizes first', 'notices the other is sad before they say it'] }
+  };
+
+  componentDidMount() { this.props.onTint && this.props.onTint('dark'); this.applyStart(); }
+  componentDidUpdate(p) { if (p.nonce !== this.props.nonce) this.applyStart(); }
+  componentWillUnmount() { this.clear(); }
+  clear() { clearInterval(this.iv); clearTimeout(this.to); clearTimeout(this.to2); }
+  applyStart() {
+    this.clear();
+    const id = this.props.startAt || 'connect-start';
+    const base = { layer: false, leaving: false, toast: 0, running: false, left: 20000, contact: null, phase: 'choose' };
+    const map = {
+      'connect-start': { view: 'start', cardNo: 1 },
+      'connect-round': { view: 'roundintro', cardNo: 2, ri: 0, marks: [] },
+      'connect-roundend': { view: 'roundend', cardNo: 2, marks: ['hit', 'hit', 'miss', 'hit', 'hit'] },
+      'connect-question': { view: 'question', cardNo: 3 },
+      'connect-challenge': { view: 'challenge', cardNo: 4, contact: 'with', phase: 'ready' },
+      'connect-end': { view: 'end', cardNo: 4, marks: ['hit', 'hit', 'miss', 'hit', 'hit'] }
+    };
+    this.setState(Object.assign(base, map[id] || map['connect-start']));
+  }
+  red() { return !!this.props.reduced; }
+  startCount() {
+    clearInterval(this.iv);
+    this.setState({ count: 3 });
+    this.iv = setInterval(() => {
+      const c = this.state.count - 1;
+      this.setState({ count: c });
+      if (c <= 0) clearInterval(this.iv);
+    }, 1000);
+  }
+  mark(kind) {
+    const marks = this.state.marks.concat(kind);
+    if (marks.length >= 5) { clearInterval(this.iv); this.setState({ marks, view: 'roundend' }); return; }
+    this.setState({ marks, ri: marks.length }, () => this.startCount());
+  }
+  leaveTo(next) {
+    if (this.red()) { this.setState(Object.assign({ layer: false }, next)); return; }
+    this.setState({ leaving: true });
+    this.to = setTimeout(() => this.setState(Object.assign({ leaving: false, layer: false }, next)), 280);
+  }
+  startTimer() {
+    const end = Date.now() + 20000;
+    this.setState({ phase: 'running', left: 20000 });
+    clearInterval(this.iv);
+    this.iv = setInterval(() => {
+      const left = Math.max(0, end - Date.now());
+      this.setState({ left });
+      if (!left) { clearInterval(this.iv); this.setState({ phase: 'done' }); }
+    }, 100);
+  }
+
+  renderVals() {
+    const s = this.state, lang = this.props.lang === 'en' ? 'en' : 'es', t = this.dict[lang], red = this.red();
+    const isEs = lang === 'es', names = s.names;
+    const A = (full) => red ? 'cnFade .2s ease both' : full;
+    const a = { deal: A('cnDeal .42s cubic-bezier(.2,.8,.2,1) both'), stamp: A('cnStamp .5s .2s cubic-bezier(.2,.8,.2,1) both'), slip: A('cnSlip .38s cubic-bezier(.2,.8,.2,1) both'), rise: A('cnFade .5s .2s ease both') };
+    const hits = s.marks.filter(m => m === 'hit').length, counted = s.marks.filter(m => m !== 'skip').length;
+    const marks = [0, 1, 2, 3, 4].map(i => { const m = s.marks[i]; return { bg: m === 'hit' ? '#735568' : 'transparent', ring: m === 'hit' ? 'none' : m === 'miss' ? 'inset 0 0 0 1.5px #735568' : m === 'skip' ? 'inset 0 0 0 1.5px #A3959088' : 'inset 0 0 0 1.5px #A3959055' }; });
+    const verdict = hits === counted && counted > 0 ? t.telepathy : hits >= 3 ? t.know : t.interesting;
+    const counting = s.view === 'round' && s.count > 0;
+    const sec = Math.ceil(s.left / 1000), deg = ((20000 - s.left) / 20000) * 360;
+    const views = { start: s.view === 'start', roundintro: s.view === 'roundintro', round: s.view === 'round', roundend: s.view === 'roundend', question: s.view === 'question', challenge: s.view === 'challenge', end: s.view === 'end' };
+    views.cardViews = ['roundintro', 'round', 'roundend', 'question', 'challenge'].includes(s.view);
+    const topline = s.view === 'question' ? t.reads.replace('{b}', names[1]).replace('{a}', names[0]) : t.bothTurn;
+    const progressMap = { roundintro: '20%', round: '28%', roundend: '34%', question: '46%', challenge: '68%' };
+    return {
+      t, a, v: views, topline, cardLabel: t.card.replace('{n}', s.cardNo), progress: progressMap[s.view] || '0%',
+      esBg: isEs ? '#473B40' : 'transparent', esFg: isEs ? '#F6F0ED' : '#473B40', enBg: !isEs ? '#473B40' : 'transparent', enFg: !isEs ? '#F6F0ED' : '#473B40',
+      setEs: () => this.props.onLang && this.props.onLang('es'), setEn: () => this.props.onLang && this.props.onLang('en'),
+      exit: () => this.props.onExit && this.props.onExit(), menu: () => this.props.onMenu && this.props.onMenu(),
+      durations: [5, 10, 15, 20, 30].map(n => ({ n, on: s.minutes === n, pick: () => this.setState({ minutes: n }), bg: s.minutes === n ? '#74586A' : '#EFE6E2', fg: s.minutes === n ? '#FFF9F6' : '#473B40', shadow: s.minutes === n ? '0 6px 12px -6px rgba(71,59,64,.6)' : 'inset 0 0 0 1px #A3959070', lift: s.minutes === n ? 'translateY(-4px)' : 'none' })),
+      name0: names[0], name1: names[1],
+      onName0: (e) => this.setState({ names: [e.target.value, names[1]] }), onName1: (e) => this.setState({ names: [names[0], e.target.value] }),
+      begin: () => this.setState({ view: 'roundintro', cardNo: 2, ri: 0, marks: [] }),
+      whoItems: t.items.map((x, i) => ({ n: i + 1, text: x })),
+      roundStart: () => this.setState({ view: 'round', ri: 0, marks: [] }, () => this.startCount()),
+      roundItem: t.items[Math.min(s.ri, 4)], roundCount: (Math.min(s.ri, 4) + 1) + ' / 5',
+      countText: s.count > 0 ? String(s.count) : t.pointNow, countSize: s.count > 0 ? '58px' : '24px',
+      countAnim: red ? 'none' : (s.count % 2 ? 'cnTick .35s ease-out both' : 'cnTick .351s ease-out both'),
+      counting, btnOp: counting ? 0.45 : 1, marks,
+      markHit: () => this.mark('hit'), markMiss: () => this.mark('miss'), markSkip: () => this.mark('skip'),
+      score: hits + '/' + (counted || 5), resultTitle: t.whoResult.replace('{n}', hits).replace('{total}', counted || 5), resultVerdict: verdict,
+      toQuestion: () => this.leaveTo({ view: 'question', cardNo: 3 }),
+      layer: s.layer, noLayer: !s.layer, openLayer: () => this.setState({ layer: true }),
+      leaveTf: s.leaving ? 'translateX(-46px) rotate(-7deg)' : 'none', leaveOp: s.leaving ? 0 : 1, leaveTr: s.leaving ? 'transform .28s cubic-bezier(.4,0,1,1), opacity .28s ease-in' : 'none',
+      toastOn: s.toast > 0,
+      toChallenge: () => this.leaveTo({ view: 'challenge', cardNo: 4, contact: null, phase: 'choose', left: 20000 }),
+      passCard: () => {
+        this.setState({ toast: Date.now() });
+        clearTimeout(this.to2); this.to2 = setTimeout(() => this.setState({ toast: 0 }), 1600);
+        if (s.view === 'question' || s.view === 'roundintro') this.leaveTo({ view: 'challenge', cardNo: 4, contact: null, phase: 'choose', left: 20000 });
+        else if (s.view === 'challenge') this.leaveTo({ view: 'end' });
+      },
+      choosing: s.phase === 'choose', notChoosing: s.phase !== 'choose',
+      pickTouch: () => this.setState({ contact: 'with', phase: 'ready' }), pickNoTouch: () => this.setState({ contact: 'without', phase: 'ready' }),
+      doText: s.contact === 'without' ? t.noTouchText : t.d01,
+      clock: '0:' + String(sec).padStart(2, '0'),
+      ring: 'conic-gradient(#74586A ' + deg + 'deg, rgba(116,88,106,.22) 0)',
+      doLabel: s.phase === 'ready' ? t.doStart : t.doDone,
+      doDisabled: s.phase === 'running', doOp: s.phase === 'running' ? 0.5 : 1,
+      doAction: () => { if (s.phase === 'ready') this.startTimer(); else if (s.phase === 'done') this.leaveTo({ view: 'end' }); },
+      recap: [t.played.replace('{n}', 4), t.matchedTotal.replace('{n}', hits || 4).replace('{t}', counted || 5), t.talked],
+      again: () => this.setState({ view: 'start', cardNo: 1, marks: [], ri: 0 })
+    };
+  }
+}
+</script>
+</body>
+</html>

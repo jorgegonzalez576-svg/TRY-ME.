@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&amp;family=Figtree:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+@keyframes rlTossA{0%{transform:translateY(0)}32%{transform:translateY(-150px)}64%{transform:translateY(0)}76%{transform:translateY(-16px)}88%{transform:translateY(0)}94%{transform:translateY(-3px)}100%{transform:translateY(0)}}
+@keyframes rlTossB{0%{transform:translateY(0)}32%{transform:translateY(-150px)}64%{transform:translateY(0)}76%{transform:translateY(-16px)}88%{transform:translateY(0)}94%{transform:translateY(-3px)}100%{transform:translateY(0)}}
+@keyframes rlShadowA{0%{transform:scale(1);opacity:.55}32%{transform:scale(.45);opacity:.2}64%{transform:scale(1);opacity:.6}100%{transform:scale(1);opacity:.55}}
+@keyframes rlShadowB{0%{transform:scale(1);opacity:.55}32%{transform:scale(.45);opacity:.2}64%{transform:scale(1);opacity:.6}100%{transform:scale(1);opacity:.55}}
+@keyframes rlHover{0%,100%{transform:translateY(-96px)}50%{transform:translateY(-110px)}}
+@keyframes rlSpin{from{transform:rotateX(0) rotateY(0) rotateZ(0)}to{transform:rotateX(360deg) rotateY(720deg) rotateZ(180deg)}}
+@keyframes rlDeal{from{opacity:0;transform:translateY(120px) rotate(-8deg)}to{opacity:1;transform:rotate(1.4deg)}}
+@keyframes rlFade{from{opacity:0}to{opacity:1}}
+@keyframes rlSwipe{0%{transform:translateY(10px);opacity:0}40%{opacity:1}100%{transform:translateY(-14px);opacity:0}}
+@keyframes rlSheet{from{transform:translateY(100%)}to{transform:none}}
+@keyframes rlGlow{0%{box-shadow:0 0 0 0 rgba(246,194,207,.9)}100%{box-shadow:0 0 0 14px rgba(246,194,207,0)}}
+</style>
+</helmet>
+<div style="position:absolute;inset:0;overflow:hidden;background:#2E3440;font-family:'Figtree',sans-serif;color:#EEF1F5">
+<img src="assets/roll-table.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 80%">
+<div style="position:absolute;inset:0;background:linear-gradient(to bottom,#2E3440f2,#2E3440d4 42%,#2E3440ea)"></div>
+<div style="position:absolute;inset:0;background-image:var(--grain);opacity:.6"></div>
+
+<div style="position:absolute;top:60px;left:16px;right:16px;display:flex;align-items:center;gap:8px;z-index:5">
+<button onClick="{{ exit }}" aria-label="Back" style="width:44px;height:44px;border:0;cursor:pointer;border-radius:50%;background:rgba(238,241,245,.08);box-shadow:inset 0 0 0 1px rgba(238,241,245,.28);display:grid;place-items:center" style-active="transform:scale(.94)"><span style="width:9px;height:9px;border-left:1.8px solid #EEF1F5;border-bottom:1.8px solid #EEF1F5;transform:translateX(2px) rotate(45deg)"></span></button>
+<div style="flex:1;font:400 21px/1 'Gloock',serif;color:#EEF1F5;padding-left:4px">Roll</div>
+<div role="group" style="display:flex;height:44px;padding:3px;box-sizing:border-box;border-radius:22px;background:rgba(238,241,245,.08);box-shadow:inset 0 0 0 1px rgba(238,241,245,.28)">
+<button onClick="{{ setEs }}" style="width:44px;border:0;cursor:pointer;border-radius:19px;background:{{ esBg }};color:{{ esFg }};font:600 12px/1 'Figtree';letter-spacing:.06em">ES</button>
+<button onClick="{{ setEn }}" style="width:44px;border:0;cursor:pointer;border-radius:19px;background:{{ enBg }};color:{{ enFg }};font:600 12px/1 'Figtree';letter-spacing:.06em">EN</button>
+</div>
+<button onClick="{{ menu }}" aria-label="Menu" style="width:44px;height:44px;border:0;cursor:pointer;border-radius:50%;background:rgba(238,241,245,.08);box-shadow:inset 0 0 0 1px rgba(238,241,245,.28);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><span style="width:16px;height:1.6px;background:#EEF1F5;border-radius:1px"></span><span style="width:16px;height:1.6px;background:#EEF1F5;border-radius:1px"></span><span style="width:16px;height:1.6px;background:#EEF1F5;border-radius:1px"></span></button>
+</div>
+
+<div style="position:absolute;top:118px;left:24px;right:24px;z-index:2">
+<div style="display:flex;justify-content:space-between;font:500 13px/1 'Figtree';color:#D5DBE3"><span>{{ turnLabel }}</span><span>{{ levelLabel }}</span></div>
+<div style="margin-top:10px;height:2px;border-radius:2px;background:rgba(238,241,245,.14)"><div style="width:{{ progress }};height:100%;background:#C1123F;border-radius:2px;transition:width .4s"></div></div>
+</div>
+
+<sc-if value="{{ v.tray }}" hint-placeholder-val="{{ true }}">
+<div style="position:absolute;top:158px;left:24px;right:24px">
+<div style="font:700 11px/1 'Figtree';letter-spacing:.22em;color:#F6C2CF">{{ kicker }}</div>
+<div style="margin-top:12px;font:400 32px/1.08 'Gloock',serif;color:#EEF1F5;text-wrap:balance;min-height:70px">{{ title }}</div>
+<div style="margin-top:10px;font:500 15px/1.45 'Figtree';color:#D5DBE3">{{ t.mystery }}</div>
+<div style="margin-top:4px;font:500 13px/1.45 'Figtree';color:#AEB7C3">{{ t.expectation }}</div>
+</div>
+<div onPointerDown="{{ swipeDown }}" onPointerUp="{{ swipeUp }}" onClick="{{ trayTap }}" style="position:absolute;left:20px;right:20px;top:340px;height:290px;border-radius:26px;background:#E2E7ED;box-shadow:inset 0 0 0 2px #D0D8E1,inset 0 6px 18px rgba(46,52,64,.22),0 30px 40px -24px rgba(0,0,0,.7);touch-action:none;cursor:grab">
+<div style="position:absolute;inset:10px;border-radius:18px;border:1px dashed rgba(46,52,64,.18);pointer-events:none"></div>
+<div style="position:absolute;top:26px;left:0;right:0;display:grid;grid-template-columns:1fr 1fr;text-align:center;font:700 11px/1 'Figtree';letter-spacing:.2em;color:#2E3440;pointer-events:none"><span>{{ t.actionUp }}</span><span>{{ t.styleUp }}</span></div>
+
+<div style="position:absolute;left:46px;top:84px;width:104px;height:104px;perspective:720px;pointer-events:none">
+<div style="position:absolute;left:12%;right:12%;bottom:-22px;height:22px;border-radius:50%;background:rgba(46,52,64,.42);filter:blur(6px);animation:{{ shadowAnim }}"></div>
+<div style="position:absolute;inset:0;transform-style:preserve-3d;animation:{{ flightAnim }}">
+<div style="position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(-18deg) rotateY(-20deg)">
+<div style="position:absolute;inset:0;transform-style:preserve-3d;transform:{{ cubeA }};transition:{{ cubeTr }};animation:{{ spinAnim }}">
+<div style="position:absolute;inset:6%;background:#A30F35;transform:translateZ(0)"></div>
+<div style="position:absolute;inset:6%;background:#A30F35;transform:rotateY(90deg)"></div>
+<div style="position:absolute;inset:6%;background:#A30F35;transform:rotateX(90deg)"></div>
+<div style="position:absolute;inset:0;transform:translateZ(52px);backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;background:linear-gradient(145deg,#CF2A53,#C1123F 65%);box-shadow:inset 0 2px 3px rgba(255,255,255,.22),inset 0 -3px 6px rgba(46,52,64,.2);display:grid;place-items:center;padding:8px;box-sizing:border-box"><div style="position:absolute;inset:6px;border-radius:10px;box-shadow:{{ fa0.ring }}"></div><span style="position:relative;font:400 17px/1.1 'Gloock',serif;color:#fff;text-align:center">{{ fa0.label }}</span></div>
+<div style="position:absolute;inset:0;transform:rotateY(90deg) translateZ(52px);backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;background:linear-gradient(145deg,#CF2A53,#C1123F 65%);box-shadow:inset 0 2px 3px rgba(255,255,255,.22),inset 0 -3px 6px rgba(46,52,64,.2);display:grid;place-items:center;padding:8px;box-sizing:border-box"><div style="position:absolute;inset:6px;border-radius:10px;box-shadow:{{ fa1.ring }}"></div><span style="position:relative;font:400 17px/1.1 'Gloock',serif;color:#fff;text-align:center">{{ fa1.label }}</span></div>
+<div style="position:absolute;inset:0;transform:rotateY(180deg) translateZ(52px);backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;background:linear-gradient(145deg,#CF2A53,#C1123F 65%);box-shadow:inset 0 2px 3px rgba(255,255,255,.22),inset 0 -3px 6px rgba(46,52,64,.2);display:grid;place-items:center;padding:8px;box-sizing:border-box"><div style="position:absolute;inset:6px;border-radius:10px;box-shadow:{{ fa2.ring }}"></div><span style="position:relative;font:400 17px/1.1 'Gloock',serif;color:#fff;text-align:center">{{ fa2.label }}</span></div>
+<div style="position:absolute;inset:0;transform:rotateY(-90deg) translateZ(52px);backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;background:linear-gradient(145deg,#CF2A53,#C1123F 65%);box-shadow:inset 0 2px 3px rgba(255,255,255,.22),inset 0 -3px 6px rgba(46,52,64,.2);display:grid;place-items:center;padding:8px;box-sizing:border-box"><div style="position:absolute;inset:6px;border-radius:10px;box-shadow:{{ fa3.ring }}"></div><span style="position:relative;font:400 17px/1.1 'Gloock',serif;color:#fff;text-align:center">{{ fa3.label }}</span></div>
+<div style="position:absolute;inset:0;transform:rotateX(90deg) translateZ(52px);backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;background:linear-gradient(145deg,#CF2A53,#C1123F 65%);box-shadow:inset 0 2px 3px rgba(255,255,255,.22),inset 0 -3px 6px rgba(46,52,64,.2);display:grid;place-items:center;padding:8px;box-sizing:border-box"><div style="position:absolute;inset:6px;border-radius:10px;box-shadow:{{ fa4.ring }}"></div><span style="position:relative;font:400 17px/1.1 'Gloock',serif;color:#fff;text-align:center">{{ fa4.label }}</span></div>
+<div style="position:absolute;inset:0;transform:rotateX(-90deg) translateZ(52px);backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;background:linear-gradient(145deg,#CF2A53,#C1123F 65%);box-shadow:inset 0 2px 3px rgba(255,255,255,.22),inset 0 -3px 6px rgba(46,52,64,.2);display:grid;place-items:center;padding:8px;box-sizing:border-box"><div style="position:absolute;inset:6px;border-radius:10px;box-shadow:{{ fa5.ring }}"></div><span style="position:relative;font:400 17px/1.1 'Gloock',serif;color:#fff;text-align:center">{{ fa5.label }}</span></div>
+</div>
+</div>
+</div>
+</div>
+
+<div style="position:absolute;right:46px;top:84px;width:104px;height:104px;perspective:720px;pointer-events:none">
+<div style="position:absolute;left:12%;right:12%;bottom:-22px;height:22px;border-radius:50%;background:rgba(46,52,64,.42);filter:blur(6px);animation:{{ shadowAnim2 }}"></div>
+<div style="position:absolute;inset:0;transform-style:preserve-3d;animation:{{ flightAnim2 }}">
+<div style="position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(-18deg) rotateY(20deg)">
+<div style="position:absolute;inset:0;transform-style:preserve-3d;transform:{{ cubeB }};transition:{{ cubeTr2 }};animation:{{ spinAnim2 }}">
+<div style="position:absolute;inset:6%;background:#1F242D;transform:translateZ(0)"></div>
+<div style="position:absolute;inset:6%;background:#1F242D;transform:rotateY(90deg)"></div>
+<div style="position:absolute;inset:6%;background:#1F242D;transform:rotateX(90deg)"></div>
+<div style="position:absolute;inset:0;transform:translateZ(52px);backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;background:linear-gradient(145deg,#3B4252,#2E3440 65%);box-shadow:inset 0 2px 3px rgba(255,255,255,.16),inset 0 -3px 6px rgba(0,0,0,.25);display:grid;place-items:center;padding:8px;box-sizing:border-box"><div style="position:absolute;inset:6px;border-radius:10px;box-shadow:{{ fb0.ring }}"></div><span style="position:relative;font:400 17px/1.1 'Gloock',serif;color:#EEF1F5;text-align:center">{{ fb0.label }}</span></div>
+<div style="position:absolute;inset:0;transform:rotateY(90deg) translateZ(52px);backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;background:linear-gradient(145deg,#3B4252,#2E3440 65%);box-shadow:inset 0 2px 3px rgba(255,255,255,.16),inset 0 -3px 6px rgba(0,0,0,.25);display:grid;place-items:center;padding:8px;box-sizing:border-box"><div style="position:absolute;inset:6px;border-radius:10px;box-shadow:{{ fb1.ring }}"></div><span style="position:relative;font:400 17px/1.1 'Gloock',serif;color:#EEF1F5;text-align:center">{{ fb1.label }}</span></div>
+<div style="position:absolute;inset:0;transform:rotateY(180deg) translateZ(52px);backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;background:linear-gradient(145deg,#3B4252,#2E3440 65%);box-shadow:inset 0 2px 3px rgba(255,255,255,.16),inset 0 -3px 6px rgba(0,0,0,.25);display:grid;place-items:center;padding:8px;box-sizing:border-box"><div style="position:absolute;inset:6px;border-radius:10px;box-shadow:{{ fb2.ring }}"></div><span style="position:relative;font:400 17px/1.1 'Gloock',serif;color:#EEF1F5;text-align:center">{{ fb2.label }}</span></div>
+<div style="position:absolute;inset:0;transform:rotateY(-90deg) translateZ(52px);backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;background:linear-gradient(145deg,#3B4252,#2E3440 65%);box-shadow:inset 0 2px 3px rgba(255,255,255,.16),inset 0 -3px 6px rgba(0,0,0,.25);display:grid;place-items:center;padding:8px;box-sizing:border-box"><div style="position:absolute;inset:6px;border-radius:10px;box-shadow:{{ fb3.ring }}"></div><span style="position:relative;font:400 17px/1.1 'Gloock',serif;color:#EEF1F5;text-align:center">{{ fb3.label }}</span></div>
+<div style="position:absolute;inset:0;transform:rotateX(90deg) translateZ(52px);backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;background:linear-gradient(145deg,#3B4252,#2E3440 65%);box-shadow:inset 0 2px 3px rgba(255,255,255,.16),inset 0 -3px 6px rgba(0,0,0,.25);display:grid;place-items:center;padding:8px;box-sizing:border-box"><div style="position:absolute;inset:6px;border-radius:10px;box-shadow:{{ fb4.ring }}"></div><span style="position:relative;font:400 17px/1.1 'Gloock',serif;color:#EEF1F5;text-align:center">{{ fb4.label }}</span></div>
+<div style="position:absolute;inset:0;transform:rotateX(-90deg) translateZ(52px);backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;background:linear-gradient(145deg,#3B4252,#2E3440 65%);box-shadow:inset 0 2px 3px rgba(255,255,255,.16),inset 0 -3px 6px rgba(0,0,0,.25);display:grid;place-items:center;padding:8px;box-sizing:border-box"><div style="position:absolute;inset:6px;border-radius:10px;box-shadow:{{ fb5.ring }}"></div><span style="position:relative;font:400 17px/1.1 'Gloock',serif;color:#EEF1F5;text-align:center">{{ fb5.label }}</span></div>
+</div>
+</div>
+</div>
+</div>
+
+<div style="position:absolute;left:0;right:0;bottom:22px;display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none;opacity:{{ hintOp }};transition:opacity .3s">
+<span style="width:2px;height:24px;border-radius:2px;background:linear-gradient(transparent,#C1123F);animation:{{ swipeAnim }}"></span>
+<span style="font:600 12px/1 'Figtree';color:#2E3440">{{ hintText }}</span>
+</div>
+</div>
+<div style="position:absolute;left:20px;right:20px;bottom:42px">
+<button onClick="{{ roll }}" disabled="{{ busy }}" style="width:100%;height:56px;border:0;cursor:pointer;border-radius:14px;background:#C1123F;color:#fff;font:600 16px/1 'Figtree';opacity:{{ busyOp }};box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 8px 18px -8px rgba(193,18,63,.7);transition:opacity .2s" style-active="transform:scale(.98);background:#A30F35">{{ rollLabel }}</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ v.choose }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:158px;left:24px;right:24px;animation:rlFade .3s ease both">
+<div style="font:700 11px/1 'Figtree';letter-spacing:.22em;color:#F6C2CF">{{ t.longingUp }}</div>
+<div style="margin-top:12px;font:400 30px/1.12 'Gloock',serif;color:#EEF1F5;text-wrap:balance">{{ chooseTitle }}</div>
+<div style="margin-top:10px;font:500 15px/1.45 'Figtree';color:#D5DBE3">{{ chooseNote }}</div>
+</div>
+<div style="position:absolute;top:356px;left:20px;right:20px;display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ cats }}" as="c" hint-placeholder-count="5">
+<button onClick="{{ c.pick }}" disabled="{{ c.off }}" style="height:62px;border:0;cursor:pointer;border-radius:12px;background:#F6C2CF;opacity:{{ c.op }};box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 10px 16px -10px rgba(0,0,0,.6);display:flex;align-items:center;justify-content:space-between;padding:0 20px;color:#2E3440;transform:rotate({{ c.rot }})" style-active="transform:scale(.98)"><span style="font:400 22px/1 'Gloock',serif">{{ c.label }}</span><span style="width:8px;height:8px;border-right:1.8px solid #2E3440;border-top:1.8px solid #2E3440;transform:rotate(45deg)"></span></button>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{ v.card }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:150px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:14px">
+<div style="width:110px;height:50px;border-radius:12px;background:#C1123F;box-shadow:inset 0 2px 1px rgba(255,255,255,.22),2px 4px 0 #861233,4px 10px 14px rgba(0,0,0,.35);display:grid;place-items:center;font:400 17px/1 'Gloock',serif;color:#fff;transform:rotate(-3deg)">{{ actionName }}</div>
+<span style="font:400 20px/1 'Gloock',serif;color:#8B97A6">+</span>
+<div style="width:110px;height:50px;border-radius:12px;background:#232831;box-shadow:inset 0 0 0 1px rgba(238,241,245,.22),inset 0 2px 1px rgba(255,255,255,.12),2px 4px 0 #14181E,4px 10px 14px rgba(0,0,0,.35);display:grid;place-items:center;font:400 17px/1 'Gloock',serif;color:#EEF1F5;transform:rotate(3deg)">{{ styleName }}</div>
+</div>
+<sc-if value="{{ notReversed }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;top:222px;left:0;right:0;text-align:center;font:500 14px/1 'Figtree';color:#EEF1F5">{{ roles }}</div></sc-if>
+<sc-if value="{{ reversed }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;top:212px;left:36px;right:36px;padding:9px 12px;border-radius:10px;background:#F6C2CF;color:#2E3440;text-align:center;font:600 13px/1.3 'Figtree'">{{ reverseBanner }}</div></sc-if>
+
+<div onClick="{{ flip }}" style="position:absolute;left:48px;top:256px;width:297px;height:388px;perspective:1200px;cursor:pointer;animation:{{ dealAnim }}">
+<div style="position:absolute;inset:0;transform-style:preserve-3d;transform:{{ flipTf }};transition:{{ flipTr }}">
+
+<div style="position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;background-color:#C1123F;background-image:radial-gradient(circle,rgba(238,241,245,.16) 1.6px,transparent 2.2px);background-size:15px 15px;background-position:4px 4px;box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 2px 3px rgba(0,0,0,.3),0 36px 50px -20px rgba(0,0,0,.7);opacity:{{ backOp }};transition:{{ fadeTr }};display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
+<div style="position:absolute;inset:10px;border:1px solid rgba(238,241,245,.45);border-radius:9px"></div>
+<div style="width:74px;height:74px;border-radius:16px;transform:rotate(-8deg);border:1.5px solid rgba(238,241,245,.85);background-color:#C1123F;box-shadow:0 0 0 9px #C1123F;background-image:radial-gradient(circle at 25% 25%,#EEF1F5 5px,transparent 5.6px),radial-gradient(circle at 75% 25%,#EEF1F5 5px,transparent 5.6px),radial-gradient(circle at 50% 50%,#EEF1F5 5px,transparent 5.6px),radial-gradient(circle at 25% 75%,#EEF1F5 5px,transparent 5.6px),radial-gradient(circle at 75% 75%,#EEF1F5 5px,transparent 5.6px)"></div>
+<div style="margin-top:22px;padding:0 10px;background:#C1123F;font:400 30px/1 'Gloock',serif;color:#EEF1F5">Roll</div>
+<div style="margin-top:12px;padding:2px 8px;background:#C1123F;font:500 13px/1.45 'Figtree';color:#EEF1F5;max-width:180px">{{ t.cardBack }}</div>
+</div>
+
+<div style="position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:{{ frontTf }};border-radius:16px;background:#F6C2CF;box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 2px 3px rgba(0,0,0,.3),0 36px 50px -20px rgba(0,0,0,.7);opacity:{{ frontOp }};transition:{{ fadeTr }};color:#2E3440">
+<div style="position:absolute;inset:0;border-radius:16px;background-image:var(--grain);opacity:.45"></div>
+<div style="position:absolute;inset:8px;border:1px solid rgba(46,52,64,.22);border-radius:10px"></div>
+<div style="position:absolute;top:18px;left:18px;display:flex;align-items:center;gap:6px"><span style="width:20px;height:20px;border-radius:5px;background-color:#C1123F;background-image:radial-gradient(circle at 27% 27%,#fff 1.8px,transparent 2.3px),radial-gradient(circle at 50% 50%,#fff 1.8px,transparent 2.3px),radial-gradient(circle at 73% 73%,#fff 1.8px,transparent 2.3px);box-shadow:1px 2px 0 rgba(46,52,64,.25)"></span><b style="font:700 9px/1 'Figtree';letter-spacing:.14em">{{ actionUp }}</b></div>
+<div style="position:absolute;bottom:18px;right:18px;display:flex;align-items:center;gap:6px;transform:rotate(180deg)"><span style="width:20px;height:20px;border-radius:5px;background-color:#2E3440;background-image:radial-gradient(circle at 50% 50%,#fff 1.8px,transparent 2.3px);box-shadow:1px 2px 0 rgba(46,52,64,.25)"></span><b style="font:700 9px/1 'Figtree';letter-spacing:.14em">{{ styleUp }}</b></div>
+<div style="position:absolute;inset:52px 26px;display:flex;flex-direction:column;justify-content:center;text-align:center">
+<div style="font:700 10px/1 'Figtree';letter-spacing:.2em;opacity:.75">{{ levelUp }}</div>
+<div style="margin-top:14px;font:400 21px/1.32 'Gloock',serif;text-wrap:balance">{{ cardText }}</div>
+<sc-if value="{{ hasStyleLine }}" hint-placeholder-val="{{ true }}">
+<div style="width:28px;height:1px;background:rgba(46,52,64,.35);margin:16px auto"></div>
+<div style="font:500 13.5px/1.45 'Figtree'"><b style="font-weight:700">{{ styleName }}</b> · {{ styleLine }}</div>
+</sc-if>
+<div style="margin-top:14px;font:700 12px/1 'Figtree';letter-spacing:.08em">{{ secondsLabel }}</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div style="position:absolute;left:20px;right:20px;bottom:42px;display:flex;flex-direction:column;gap:10px">
+<sc-if value="{{ v.back }}" hint-placeholder-val="{{ false }}">
+<button onClick="{{ flip }}" style="width:100%;height:56px;border:0;cursor:pointer;border-radius:14px;background:#C1123F;color:#fff;font:600 16px/1 'Figtree';box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 8px 18px -8px rgba(193,18,63,.7)" style-active="transform:scale(.98);background:#A30F35">{{ t.reveal }}</button>
+</sc-if>
+<sc-if value="{{ v.front }}" hint-placeholder-val="{{ false }}">
+<button onClick="{{ startPlay }}" style="width:100%;height:56px;border:0;cursor:pointer;border-radius:14px;background:#C1123F;color:#fff;font:600 16px/1 'Figtree';box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 8px 18px -8px rgba(193,18,63,.7)" style-active="transform:scale(.98);background:#A30F35">{{ startLabel }}</button>
+<button onClick="{{ askReroll }}" disabled="{{ noRerolls }}" style="width:100%;height:52px;border:0;cursor:pointer;border-radius:14px;background:transparent;box-shadow:inset 0 0 0 1px rgba(238,241,245,.35);color:#EEF1F5;font:600 15px/1 'Figtree';opacity:{{ rerollOp }}" style-active="transform:scale(.98)">{{ rerollLabel }}</button>
+</sc-if>
+<sc-if value="{{ v.timer }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding:0 4px"><span style="font:600 12px/1 'Figtree';letter-spacing:.14em;color:#D5DBE3">{{ t.remainingUp }}</span><span style="font:400 32px/1 'Gloock',serif;color:#EEF1F5;font-variant-numeric:tabular-nums">{{ clock }}</span></div>
+<div style="height:3px;border-radius:3px;background:rgba(238,241,245,.16);overflow:hidden"><div style="height:100%;width:{{ timerPct }};background:#C1123F;transition:width .25s linear"></div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<button onClick="{{ togglePause }}" style="height:52px;border:0;cursor:pointer;border-radius:14px;background:transparent;box-shadow:inset 0 0 0 1px rgba(238,241,245,.35);color:#EEF1F5;font:600 15px/1 'Figtree'">{{ pauseLabel }}</button>
+<button onClick="{{ endTurn }}" disabled="{{ endLocked }}" style="height:52px;border:0;cursor:pointer;border-radius:14px;background:#C1123F;color:#fff;font:600 15px/1 'Figtree';opacity:{{ endOp }};transition:opacity .3s">{{ endLabel }}</button>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ v.reroll }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;z-index:20">
+<div onClick="{{ cancelReroll }}" style="position:absolute;inset:0;background:rgba(10,12,16,.55);animation:rlFade .2s ease both"></div>
+<div role="dialog" aria-modal="true" style="position:absolute;left:0;right:0;bottom:0;padding:12px 20px 44px;background:#EEF1F5;border-radius:28px 28px 0 0;color:#2E3440;animation:{{ sheetAnim }}">
+<div style="width:36px;height:5px;border-radius:3px;background:#CAD1DA;margin:0 auto 20px"></div>
+<div style="font:400 28px/1.1 'Gloock',serif">{{ t.rerollWho }}</div>
+<div style="margin-top:18px;display:flex;flex-direction:column;gap:10px">
+<button onClick="{{ rerollA }}" disabled="{{ noA }}" style="height:54px;border:0;cursor:pointer;border-radius:14px;background:#fff;box-shadow:inset 0 0 0 1px #CAD1DA;color:#2E3440;font:600 16px/1 'Figtree';opacity:{{ opA }}">{{ optA }}</button>
+<button onClick="{{ rerollB }}" disabled="{{ noB }}" style="height:54px;border:0;cursor:pointer;border-radius:14px;background:#fff;box-shadow:inset 0 0 0 1px #CAD1DA;color:#2E3440;font:600 16px/1 'Figtree';opacity:{{ opB }}">{{ optB }}</button>
+<button onClick="{{ cancelReroll }}" style="height:48px;border:0;cursor:pointer;background:transparent;color:#A30F35;font:600 15px/1 'Figtree'">{{ t.rerollCancel }}</button>
+</div>
+</div>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { view: 'ready', turn: 3, roller: 0, rerolls: [2, 2], act: 2, sty: 0, cat: 2, rx: 0, ry: 0, rx2: 0, ry2: 0, spins: 0, rolling: false, frozen: false, landed: false, flipped: false, dealt: false, left: 0, total: 0, paused: false, rerollSheet: false };
+  names = ['Ana', 'Leo'];
+  faces = [[0, 0], [0, -90], [0, 180], [0, 90], [-90, 0], [90, 0]];
+  faceTf = ['translateZ(52px)', 'rotateY(90deg) translateZ(52px)', 'rotateY(180deg) translateZ(52px)', 'rotateY(-90deg) translateZ(52px)', 'rotateX(90deg) translateZ(52px)', 'rotateX(-90deg) translateZ(52px)'];
+  catKeys = ['saborear', 'provocar', 'acariciar', 'delinear', 'esculpir'];
+  cards = {
+    saborear: [{ s: 30, es: '{da}, toma la mano de {recibe} y besa la palma, luego la muñeca, sin prisa por llegar a ningún otro lugar.', en: "{da}, take {recibe}'s hand and kiss the palm, then the wrist, in no hurry to go anywhere else." }, { s: null, es: '{da}, besa la frente de {recibe}, después cada párpado, y termina en la punta de la nariz.', en: "{da}, kiss {recibe}'s forehead, then each eyelid, and finish on the tip of their nose." }],
+    provocar: [{ s: 30, es: '{da}, acerca tus labios a los de {recibe} hasta casi tocarlos y quédate ahí sin besar. Solo cuando termine el tiempo, un beso breve.', en: "{da}, bring your lips almost to {recibe}'s and stay there without kissing. Only when time runs out, one brief kiss." }, { s: 30, es: '{da}, sopla suavemente sobre el cuello de {recibe}, de la oreja al hombro, sin que tus labios toquen la piel.', en: "{da}, blow softly along {recibe}'s neck, from ear to shoulder, without your lips touching the skin." }],
+    acariciar: [{ s: 30, es: '{da}, acaricia el cabello de {recibe} desde la frente hacia atrás, con la mano entera, sin detenerte.', en: "{da}, stroke {recibe}'s hair from the forehead back, with your whole hand, without stopping." }, { s: 30, es: '{da}, sostén la cara de {recibe} entre tus manos y acaricia sus mejillas con los pulgares.', en: "{da}, hold {recibe}'s face in your hands and stroke their cheeks with your thumbs." }],
+    delinear: [{ s: 30, es: '{da}, dibuja con la yema de un dedo el contorno de los labios de {recibe}, muy despacio.', en: "{da}, trace the outline of {recibe}'s lips with a fingertip, very slowly." }, { s: null, es: '{da}, escribe una palabra con el dedo en la palma de la mano de {recibe}. Al terminar, {recibe} dice cuál era.', en: "{da}, write a word with your finger on {recibe}'s palm. When you finish, {recibe} says what it was." }],
+    esculpir: [{ s: 45, es: '{da}, dale a {recibe} un masaje en los hombros, apretando y soltando con las manos enteras.', en: "{da}, give {recibe} a shoulder massage, squeezing and releasing with your whole hands." }, { s: 45, es: '{da}, masajea una mano de {recibe}: la palma con los pulgares y luego cada dedo, de la base a la punta.', en: "{da}, massage one of {recibe}'s hands: the palm with your thumbs, then each finger, from base to tip." }]
+  };
+  styleLines = [
+    { es: 'Más despacio de lo que te sale natural.', en: 'Slower than feels natural.' },
+    { es: 'Lo más leve posible: que {recibe} tenga que prestar atención para sentirlo.', en: 'As light as possible: {recibe} should have to pay attention to feel it.' },
+    { es: '{recibe} cierra los ojos de principio a fin.', en: '{recibe} keeps their eyes closed from start to finish.' },
+    { es: 'Ni una palabra, ninguno de los dos, hasta que termine.', en: 'Not a word from either of you until it ends.' },
+    { es: 'Unos segundos de contacto, una pausa breve, y otra vez.', en: 'A few seconds of contact, a brief pause, and again.' },
+    null
+  ];
+  dict = {
+    es: { turn: 'Turno {n} de {total}', level: 'Anticipación', levelUp: 'ANTICIPACIÓN', rollIntro: 'EL AZAR EMPIEZA CONTIGO', rolling: 'Los dados deciden', yourRoll: '{name}, te toca lanzar.', mystery: 'Dos palabras. Una sorpresa para los dos.', expectation: 'Quien lanza recibe.', roll: 'Lanzar los dados', toss: 'Lanzando…', swipeHint: 'Desliza hacia arriba para lanzar', actionUp: 'ACCIÓN', styleUp: 'ESTILO', longingUp: 'ANHELO', choose: 'Anhelo. {name}, ¿qué se te antoja?', chooseNote: 'El estilo sigue siendo {estilo}. Lo demás es sorpresa.', doubleReverse: 'Doble giro: {lanza} da y {recibe} elige.', reverse: 'Cambio de planes, {name}. Esta vez te toca dar.', roles: '{giver} da · {receiver} recibe', reveal: 'Revelar jugada', cardBack: 'Tu próxima jugada está dentro.', atPace: 'A su ritmo', start: 'Empezar', next: 'Seguir', reroll: 'Otra tirada ({n})', rerollWho: '¿Quién la cambia?', rerollCancel: 'Mejor la jugamos', pause: 'Pausar', continue: 'Continuar', endTurn: 'Terminar turno', remainingUp: 'TIEMPO RESTANTE',
+      actions: ['Saborear', 'Provocar', 'Acariciar', 'Delinear', 'Esculpir', 'Anhelo'], styles: ['Lento', 'Sutil', 'A ciegas', 'En silencio', 'En oleadas', 'Al revés'] },
+    en: { turn: 'Turn {n} of {total}', level: 'Anticipation', levelUp: 'ANTICIPATION', rollIntro: 'THE SURPRISE STARTS WITH YOU', rolling: 'The dice decide', yourRoll: '{name}, your turn to roll.', mystery: 'Two words. One surprise for you both.', expectation: 'The person who rolls receives.', roll: 'Roll the dice', toss: 'Rolling…', swipeHint: 'Swipe up to throw', actionUp: 'ACTION', styleUp: 'STYLE', longingUp: 'LONGING', choose: 'Longing. {name}, what are you in the mood for?', chooseNote: 'The style is still {estilo}. The rest is a surprise.', doubleReverse: 'Double twist: {lanza} gives and {recibe} chooses.', reverse: 'Change of plans, {name}. This time, you give.', roles: '{giver} gives · {receiver} receives', reveal: 'Reveal your play', cardBack: 'Your next play is inside.', atPace: 'At your pace', start: 'Start', next: 'Next', reroll: 'Roll again ({n})', rerollWho: "Who's changing it?", rerollCancel: "Let's play it", pause: 'Pause', continue: 'Continue', endTurn: 'End turn', remainingUp: 'TIME REMAINING',
+      actions: ['Savor', 'Tease', 'Caress', 'Trace', 'Sculpt', 'Longing'], styles: ['Slow', 'Subtle', 'Eyes closed', 'In silence', 'In waves', 'Reversed'] }
+  };
+
+  componentDidMount() { this.props.onTint && this.props.onTint('light'); this.applyStart(); }
+  componentDidUpdate(p) { if (p.nonce !== this.props.nonce) this.applyStart(); }
+  componentWillUnmount() { this.clear(); }
+  clear() { clearTimeout(this.t1); clearTimeout(this.t2); clearInterval(this.iv); }
+  red() { return !!this.props.reduced; }
+  applyStart() {
+    this.clear();
+    const id = this.props.startAt || 'roll-ready';
+    const base = { turn: 3, roller: 0, rerolls: [2, 2], act: 2, sty: 0, cat: 2, rolling: false, frozen: false, landed: false, flipped: false, dealt: false, left: 0, total: 0, paused: false, rerollSheet: false, spins: 0, rx: 0, ry: 0, rx2: 0, ry2: 0 };
+    if (id === 'roll-ready') this.setState(Object.assign(base, { view: 'ready' }));
+    else if (id === 'roll-rolling') this.setState(Object.assign(base, { view: 'ready', rolling: true, frozen: true }));
+    else if (id === 'roll-back') this.setState(Object.assign(base, { view: 'back', dealt: true }));
+    else if (id === 'roll-card') this.setState(Object.assign(base, { view: 'front', dealt: true, flipped: true }));
+    else this.setState(Object.assign(base, { view: 'ready' }));
+  }
+  pick() {
+    let act = Math.floor(Math.random() * 6), sty = Math.floor(Math.random() * 6);
+    while (act === 4 && sty === 1) sty = Math.floor(Math.random() * 6);
+    return { act, sty };
+  }
+  roll(fixed) {
+    if (this.state.rolling && !this.state.frozen) return;
+    const r = fixed || this.pick();
+    const k = this.state.spins + 2;
+    const [fx, fy] = this.faces[r.act], [gx, gy] = this.faces[r.sty];
+    const cat = r.act < 5 ? r.act : this.state.cat;
+    this.setState({ act: r.act, sty: r.sty, cat, rolling: true, frozen: false, landed: false, spins: k, rx: 360 * k + fx, ry: 360 * k + fy, rx2: 360 * (k + 1) + gx, ry2: 360 * k + gy, flipped: false, dealt: false, view: 'ready' });
+    const dur = this.red() ? 250 : 1250;
+    clearTimeout(this.t1); clearTimeout(this.t2);
+    this.t1 = setTimeout(() => this.setState({ rolling: false, landed: true }), dur);
+    this.t2 = setTimeout(() => this.setState({ view: r.act === 5 ? 'choose' : 'back', dealt: true, landed: false }), dur + (this.red() ? 500 : 900));
+  }
+  receiver() { const s = this.state; return s.sty === 5 ? 1 - s.roller : s.roller; }
+  seconds() { const s = this.state; const c = this.cards[this.catKeys[s.cat]][(s.turn + 1) % 2]; if (c.s == null) return null; return s.sty === 0 ? Math.round((c.s * 1.5) / 5) * 5 : c.s; }
+  startTimer() {
+    const sec = this.seconds();
+    if (sec == null) { this.nextTurn(); return; }
+    this.setState({ view: 'timer', left: sec * 1000, total: sec * 1000, paused: false });
+    this.tick();
+  }
+  tick() {
+    clearInterval(this.iv);
+    let last = Date.now();
+    this.iv = setInterval(() => {
+      const now = Date.now(), dt = now - last; last = now;
+      if (this.state.paused) return;
+      const left = Math.max(0, this.state.left - dt);
+      this.setState({ left });
+      if (!left) clearInterval(this.iv);
+    }, 200);
+  }
+  nextTurn() {
+    clearInterval(this.iv);
+    this.setState(s => ({ view: 'ready', turn: Math.min(12, s.turn + 1), roller: 1 - s.roller, flipped: false, dealt: false, landed: false }));
+  }
+
+  renderVals() {
+    const s = this.state, lang = this.props.lang === 'en' ? 'en' : 'es', t = this.dict[lang], red = this.red(), isEs = lang === 'es';
+    const N = this.names, rec = this.receiver(), giv = 1 - rec;
+    const cat = this.catKeys[s.cat], card = this.cards[cat][(s.turn + 1) % 2];
+    const sub = (x) => x.replaceAll('{da}', N[giv]).replaceAll('{recibe}', N[rec]).replaceAll('{lanza}', N[s.roller]);
+    const sec = this.seconds();
+    const tray = ['ready'].includes(s.view);
+    const cardV = ['back', 'front', 'timer'].includes(s.view);
+    const toss = s.spins % 4 === 2 ? 'A' : 'B';
+    let flightAnim = 'none', flightAnim2 = 'none', shadowAnim = 'none', shadowAnim2 = 'none', spinAnim = 'none', spinAnim2 = 'none';
+    if (s.frozen) {
+      if (!red) { flightAnim = 'rlHover 1.6s ease-in-out infinite'; flightAnim2 = 'rlHover 1.6s .2s ease-in-out infinite'; spinAnim = 'rlSpin 1.3s linear infinite'; spinAnim2 = 'rlSpin 1.5s linear infinite reverse'; }
+    } else if (s.rolling && !red) {
+      flightAnim = 'rlToss' + toss + ' 1.25s cubic-bezier(.3,.1,.4,1) both'; flightAnim2 = 'rlToss' + toss + ' 1.25s .09s cubic-bezier(.3,.1,.4,1) both';
+      shadowAnim = 'rlShadow' + toss + ' 1.25s both'; shadowAnim2 = 'rlShadow' + toss + ' 1.25s .09s both';
+    }
+    const frozenPose = s.frozen && red;
+    const cubeTr = red || s.frozen ? 'none' : 'transform 1.25s cubic-bezier(.15,.65,.25,1)';
+    const glow = (on) => on ? 'inset 0 0 0 1.5px #F6C2CF, 0 0 18px rgba(246,194,207,.7)' : 'inset 0 0 0 1px rgba(238,241,245,.18)';
+    const facesA = t.actions.map((label, i) => ({ label, tf: this.faceTf[i], bg: 'linear-gradient(145deg,#CF2A53,#C1123F 65%)', ring: glow(s.landed && i === s.act) }));
+    const facesB = t.styles.map((label, i) => ({ label, tf: this.faceTf[i], bg: 'linear-gradient(145deg,#3B4252,#2E3440 65%)', ring: glow(s.landed && i === s.sty) }));
+    const rollerName = N[s.roller];
+    const elapsed = s.total ? (s.total - s.left) / s.total : 0;
+    const endLocked = s.view === 'timer' && s.left > 0 && elapsed < 0.5;
+    return {
+      t, v: { tray, choose: s.view === 'choose', card: cardV, back: s.view === 'back', front: s.view === 'front', timer: s.view === 'timer', reroll: s.rerollSheet },
+      esBg: isEs ? '#EEF1F5' : 'transparent', esFg: isEs ? '#2E3440' : '#EEF1F5', enBg: !isEs ? '#EEF1F5' : 'transparent', enFg: !isEs ? '#2E3440' : '#EEF1F5',
+      setEs: () => this.props.onLang && this.props.onLang('es'), setEn: () => this.props.onLang && this.props.onLang('en'),
+      exit: () => this.props.onExit && this.props.onExit(), menu: () => this.props.onMenu && this.props.onMenu(),
+      turnLabel: t.turn.replace('{n}', s.turn).replace('{total}', 12), levelLabel: t.level, levelUp: t.levelUp, progress: Math.round((s.turn - 1) / 12 * 100) + '%',
+      kicker: t.rollIntro, title: s.rolling ? t.rolling : t.yourRoll.replace('{name}', rollerName),
+      cubeA: frozenPose ? 'rotateX(200deg) rotateY(140deg)' : 'rotateX(' + s.rx + 'deg) rotateY(' + s.ry + 'deg)',
+      cubeB: frozenPose ? 'rotateX(120deg) rotateY(230deg)' : 'rotateX(' + s.rx2 + 'deg) rotateY(' + s.ry2 + 'deg)',
+      cubeTr, cubeTr2: red || s.frozen ? 'none' : 'transform 1.25s .09s cubic-bezier(.15,.65,.25,1)',
+      flightAnim, flightAnim2, shadowAnim, shadowAnim2, spinAnim, spinAnim2, fa0: facesA[0], fa1: facesA[1], fa2: facesA[2], fa3: facesA[3], fa4: facesA[4], fa5: facesA[5], fb0: facesB[0], fb1: facesB[1], fb2: facesB[2], fb3: facesB[3], fb4: facesB[4], fb5: facesB[5],
+      hintOp: s.rolling ? 0 : 1, swipeAnim: red ? 'none' : 'rlSwipe 1.4s ease-in-out infinite', hintText: t.swipeHint,
+      busy: s.rolling && !s.frozen, busyOp: s.rolling ? 0.6 : 1, rollLabel: s.rolling ? t.toss : t.roll,
+      roll: () => this.roll(), trayTap: () => { if (s.frozen) this.roll({ act: 2, sty: 0 }); },
+      swipeDown: (e) => { this.y0 = e.clientY; }, swipeUp: (e) => { if (this.y0 != null && this.y0 - e.clientY > 40) this.roll(); this.y0 = null; },
+      chooseTitle: s.sty === 5 ? t.doubleReverse.replace('{lanza}', N[s.roller]).replace('{recibe}', N[rec]) : t.choose.replace('{name}', N[rec]),
+      chooseNote: t.chooseNote.replace('{estilo}', t.styles[s.sty]),
+      cats: t.actions.slice(0, 5).map((label, i) => ({ label, off: i === 4 && s.sty === 1, op: i === 4 && s.sty === 1 ? 0.4 : 1, rot: (i % 2 ? 0.8 : -0.8) + 'deg', pick: () => this.setState({ cat: i, view: 'back', dealt: true }) })),
+      actionName: s.act === 5 ? t.actions[5] : t.actions[s.act], styleName: t.styles[s.sty],
+      actionUp: (s.act === 5 ? t.actions[s.cat] : t.actions[s.act]).toUpperCase(), styleUp: t.styles[s.sty].toUpperCase(),
+      roles: t.roles.replace('{giver}', N[giv]).replace('{receiver}', N[rec]),
+      reversed: s.sty === 5, notReversed: s.sty !== 5, reverseBanner: t.reverse.replace('{name}', N[s.roller]),
+      cardText: sub(card[lang]), hasStyleLine: !!this.styleLines[s.sty], styleLine: this.styleLines[s.sty] ? sub(this.styleLines[s.sty][lang]) : '',
+      secondsLabel: sec == null ? t.atPace : sec + ' s',
+      dealAnim: red ? 'rlFade .2s ease both' : 'rlDeal .5s cubic-bezier(.2,.8,.2,1) both',
+      flipTf: !red && s.flipped ? 'rotateY(180deg)' : 'none', flipTr: red ? 'none' : 'transform .68s cubic-bezier(.2,.7,.2,1)',
+      frontTf: red ? 'none' : 'rotateY(180deg)', backOp: s.flipped ? 0 : 1, frontOp: s.flipped ? 1 : 0, fadeTr: red ? 'opacity .2s ease' : 'opacity 0s linear .34s',
+      flip: () => { if (s.view === 'back') this.setState({ flipped: true, view: 'front' }); },
+      startLabel: sec == null ? t.next : t.start, startPlay: () => this.startTimer(),
+      rerollLabel: t.reroll.replace('{n}', s.rerolls[0] + s.rerolls[1]), noRerolls: s.rerolls[0] + s.rerolls[1] === 0, rerollOp: s.rerolls[0] + s.rerolls[1] === 0 ? 0.4 : 1,
+      askReroll: () => this.setState({ rerollSheet: true }), cancelReroll: () => this.setState({ rerollSheet: false }),
+      sheetAnim: red ? 'rlFade .18s ease both' : 'rlSheet .32s cubic-bezier(.2,.8,.2,1) both',
+      optA: N[0] + ' (' + s.rerolls[0] + ')', optB: N[1] + ' (' + s.rerolls[1] + ')', noA: !s.rerolls[0], noB: !s.rerolls[1], opA: s.rerolls[0] ? 1 : 0.4, opB: s.rerolls[1] ? 1 : 0.4,
+      rerollA: () => { const r = s.rerolls.slice(); r[0]--; this.setState({ rerolls: r, rerollSheet: false }, () => this.roll()); },
+      rerollB: () => { const r = s.rerolls.slice(); r[1]--; this.setState({ rerolls: r, rerollSheet: false }, () => this.roll()); },
+      clock: Math.floor(Math.ceil(s.left / 1000) / 60) + ':' + String(Math.ceil(s.left / 1000) % 60).padStart(2, '0'),
+      timerPct: s.total ? Math.round(s.left / s.total * 100) + '%' : '100%',
+      pauseLabel: s.paused ? t.continue : t.pause, togglePause: () => this.setState({ paused: !s.paused }),
+      endLocked, endOp: endLocked ? 0.4 : 1, endLabel: s.left > 0 ? t.endTurn : t.next, endTurn: () => this.nextTurn()
+    };
+  }
+}
+</script>
+</body>
+</html>
