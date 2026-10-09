@@ -1,495 +1,47 @@
 <!doctype html>
-<html lang="en-US">
+<html lang="es-419">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#EDEBE9">
+<meta name="theme-color" content="#EFE8E1">
 <meta name="robots" content="noindex,nofollow">
-<meta name="description" content="Try Me — games for couples.">
+<meta name="description" content="Try Me — juegos para parejas.">
 <title>Try Me</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%228%22%20fill%3D%22%23721E19%22%2F%3E%3Ctext%20x%3D%2216%22%20y%3D%2224%22%20text-anchor%3D%22middle%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2225%22%20fill%3D%22%23E4E4E3%22%3ET%3C%2Ftext%3E%3C%2Fsvg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2215%22%20fill%3D%22%23721E19%22%2F%3E%3Ctext%20x%3D%2216%22%20y%3D%2220.5%22%20text-anchor%3D%22middle%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2213%22%20fill%3D%22%23F3E2DA%22%3ETM%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="preload" href="fonts/gloock-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/figtree-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts/fonts.css?v=1a-1">
+<link rel="stylesheet" href="css/tokens.css?v=1a-1">
+<link rel="stylesheet" href="css/app.css?v=1a-1">
+<link rel="stylesheet" href="css/crave.css?v=1a-1">
+<link rel="stylesheet" href="connect/connect.css?v=1a-1">
+<link rel="stylesheet" href="connect/motion.css?v=1a-1">
+<link rel="stylesheet" href="roll/roll.css?v=1a-1">
 </head>
 <body>
-<div id="tryme-preview" >
-
-  <section class="tm-phone" aria-label="Try Me mobile preview">
-    <header><span class="tm-brand">Try Me<span class="tm-dot">.</span></span><div class="tm-header-tools"><label id="tm-language-label" for="tm-language">Language</label><select id="tm-language"><option value="en-US">English</option><option value="es-419">Español</option></select><button type="button" class="tm-menu-button" data-action="rulesmenu" aria-haspopup="dialog" aria-controls="tm-rules-menu">Menu</button><span class="tm-small" id="tm-adult">JUST FOR TWO · 18+</span></div></header>
+<div id="tryme-preview">
+  <section class="tm-phone" data-game="home" aria-label="Try Me">
+    <div class="tm-ambient" aria-hidden="true"><div class="tm-ambient-photo" data-place="living"></div><div class="tm-ambient-photo" data-place="bedroom"></div><div class="tm-ambient-photo" data-place="kitchen"></div><div class="tm-ambient-photo" data-place="office"></div><div class="tm-ambient-photo" data-place="table"></div><div class="tm-ambient-wash"></div><div class="tm-ambient-grain"></div></div>
+    <header class="tm-bar">
+      <button type="button" class="tm-icon tm-back-btn" data-shell="back" aria-label="Volver">Volver</button>
+      <div class="tm-bar-brand"><span class="tm-seal tm-seal-40" id="tm-home-seal" aria-hidden="true"><b>TM</b></span><span>Try Me</span></div>
+      <span class="tm-bar-title" id="tm-bar-title"></span>
+      <div class="tm-lang" role="group" aria-label="Idioma"><button type="button" data-lang="es" aria-pressed="true" lang="es">ES</button><button type="button" data-lang="en" aria-pressed="false" lang="en">EN</button></div>
+      <label id="tm-language-label" class="tm-sr" for="tm-language">Idioma</label><select id="tm-language" class="tm-sr" tabindex="-1" aria-hidden="true"><option value="en-US">English</option><option value="es-419">Español</option></select>
+      <button type="button" class="tm-icon tm-menu-btn" data-action="rulesmenu" aria-haspopup="dialog" aria-controls="tm-rules-menu">Menú</button>
+      <span class="tm-sr" id="tm-adult"></span>
+    </header>
     <main id="tm-content" aria-live="polite"></main>
     <dialog id="tm-rules-menu" class="tm-rules-menu" aria-labelledby="tm-rules-title"></dialog>
-    <footer>Un poco de azar. Mucha complicidad.</footer>
+    <footer hidden></footer>
   </section>
   <dialog id="tm-orgasm-dialog" class="tm-orgasm-dialog" aria-labelledby="tm-orgasm-title"></dialog>
-  <dialog id="tm-leave-dialog" class="tm-orgasm-dialog" aria-labelledby="tm-leave-title"></dialog>
-  <dialog id="tm-delete-dialog" class="tm-orgasm-dialog tm-entry-delete-dialog" aria-labelledby="tm-delete-title"></dialog>
+  <dialog id="tm-leave-dialog" class="tm-orgasm-dialog tm-modal" aria-labelledby="tm-leave-title"></dialog>
+  <dialog id="tm-delete-dialog" class="tm-orgasm-dialog tm-modal" aria-labelledby="tm-delete-title"></dialog>
+  <dialog id="tm-sheet" class="tm-sheet" aria-labelledby="tm-sheet-title"></dialog>
   <div id="tm-dare-dock" class="tm-dare-dock" hidden></div>
 </div>
-<style>
-@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&display=swap");
-#tryme-preview{padding:20px 8px;background-color:transparent;font-family:Arial,sans-serif}
-#tryme-preview .tm-phone{--petrol:#DDD0CC;--deep:#241A18;--cream:#E4E4E3;--coral:#721E19;--gold:#928478;background:var(--petrol);color:var(--cream);max-width:390px;margin:auto;border-radius:30px;overflow:hidden;box-shadow:0 14px 35px #721E1920}
-#tryme-preview header{display:flex;align-items:center;justify-content:space-between;padding:25px 24px;gap:12px;border-bottom:1px solid #721E1919}
-#tryme-preview .tm-brand{font-family:'Caveat','Segoe Script',Georgia,cursive;font-style:normal;font-size:38px;white-space:nowrap}.tm-dot{color:#721E19}
-#tryme-preview .tm-small{font-size:11px;letter-spacing:1px;line-height:1.6}
-#tryme-preview main{padding:28px 24px;min-height:440px;position:relative}
-#tryme-preview h1{font-family:Georgia,serif;font-weight:400;font-size:33px;line-height:1.12;margin:12px 0 18px}
-#tryme-preview h2{font-family:Georgia,serif;font-weight:400;font-size:25px;margin:10px 0 20px}
-#tryme-preview p{font-size:15px;line-height:1.6;margin:12px 0 22px}
-#tryme-preview label{display:block;font-size:13px;margin:17px 0 8px}
-#tryme-preview input,#tryme-preview select{box-sizing:border-box;width:100%;padding:14px;background:var(--cream);color:var(--deep);border:0;border-radius:12px;font-size:16px}
-#tryme-preview button{font-family:inherit;min-height:44px}
-#tryme-preview .tm-action{display:block;width:100%;border:0;border-radius:13px;background:var(--coral);color:var(--cream);padding:16px;font-size:15px;margin-top:22px}
-#tryme-preview .tm-secondary{background:transparent;border:1px solid #721E1950;color:var(--cream);width:100%;border-radius:12px;padding:12px;margin-top:10px}
-#tryme-preview .tm-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
-#tryme-preview .tm-option{background:var(--cream);color:var(--deep);border:0;border-radius:16px;padding:19px 10px;text-align:left;font-size:18px}
-#tryme-preview .tm-option small{display:block;font-size:12px;margin-top:8px}
-#tryme-preview .tm-scores{display:flex;justify-content:space-between;gap:10px;background:var(--deep);padding:13px;border-radius:12px;font-size:13px}
-#tryme-preview .tm-paper{position:relative;background:var(--cream);color:var(--deep);padding:22px;border-radius:17px;margin-top:18px;box-shadow:0 8px 20px #721E1915}
-#tryme-preview .tm-paper p{font-family:Georgia,serif;font-size:22px;line-height:1.4}
-#tryme-preview .tm-time{text-align:center;font-size:38px;font-variant-numeric:tabular-nums;margin:18px 0;color:var(--petrol)}
-#tryme-preview .tm-envelope{position:relative;background:var(--cream);color:var(--deep);border:0;border-radius:8px;width:100%;min-height:170px;margin:30px 0 12px;padding:70px 20px 20px;font-family:Georgia,serif;font-size:25px;box-shadow:0 8px 22px #721E1920}
-#tryme-preview .tm-envelope:before{content:'';position:absolute;top:0;left:0;right:0;height:85px;background:#D6B8A9;clip-path:polygon(0 0,100% 0,50% 100%)}
-#tryme-preview .tm-seal{position:absolute;left:calc(50% - 20px);top:62px;border-radius:50%;background:var(--coral);color:var(--cream);width:40px;height:40px;display:grid;place-items:center;font-size:17px;box-shadow:0 0 13px #721E1925}
-#tryme-preview .tm-room{height:100px;position:relative;opacity:.8;margin:16px 0 0;border-bottom:1px solid #92847870}
-#tryme-preview .tm-sofa{position:absolute;bottom:12px;left:15%;width:70%;height:43px;background:#D6B8A9;border-radius:10px 10px 5px 5px;box-shadow:inset 0 -13px 0 #b4978a}
-#tryme-preview .tm-sofa:before,#tryme-preview .tm-sofa:after{content:'';position:absolute;bottom:0;width:15px;height:35px;background:#c6a596;border-radius:6px;left:-7px}
-#tryme-preview .tm-sofa:after{left:auto;right:-7px}
-#tryme-preview .tm-bed{position:absolute;bottom:10px;left:15%;width:70%;height:55px;background:#D6B8A9;border-radius:7px;box-shadow:inset 0 -30px 0 #721E19}
-#tryme-preview .tm-bed:before{content:'';position:absolute;top:7px;left:10%;right:10%;height:15px;background:var(--cream);border-radius:4px}
-#tryme-preview .tm-route{font-size:12px;color:var(--gold);margin:12px 0}
-#tryme-preview footer{text-align:center;font-size:11px;padding:18px 15px;color:#DDD0CC;background:var(--deep)}
-#tryme-preview button:disabled{opacity:.45}
-@media(max-width:360px){#tryme-preview header,#tryme-preview main{padding:22px 18px}#tryme-preview .tm-brand{font-size:25px}}
-#tryme-preview .tm-name{color:#721E19}
-#tryme-preview .tm-envelope{font-family:'Caveat','Segoe Script',Georgia,cursive;font-size:30px;overflow-wrap:anywhere}
-#tryme-preview .tm-envelope:before{transform-origin:top;transition:transform .6s ease,opacity .6s ease}
-#tryme-preview .tm-opening:before{transform:rotateX(170deg);opacity:.15}
-#tryme-preview .tm-opening .tm-seal{transform:translateY(15px) rotate(-12deg);opacity:0;transition:transform .35s ease,opacity .35s ease}
-#tryme-preview .tm-open .tm-seal{opacity:1;transform:none}
-#tryme-preview .tm-paper:after{content:'';position:absolute;right:0;top:0;width:22px;height:22px;background:#D6B8A9;clip-path:polygon(0 0,100% 100%,0 100%);border-radius:0 0 0 4px}
-#tryme-preview .tm-paper{animation:tm-reveal .35s ease both}
-#tryme-preview .tm-action:active{box-shadow:0 0 14px #721E1940}
-@keyframes tm-reveal{from{transform:translateY(10px)}to{transform:translateY(0)}}
-#tryme-preview[data-motion="reduced"] .tm-paper{animation:none}#tryme-preview[data-motion="reduced"] .tm-envelope:before,#tryme-preview[data-motion="reduced"] .tm-opening .tm-seal{transition:none}
-#tryme-preview .tm-phone{color:var(--deep)}
-#tryme-preview .tm-action{color:var(--cream)}
-#tryme-preview .tm-secondary{color:var(--deep)}
-#tryme-preview .tm-scores{background:#D6B8A9;color:var(--deep)}
-#tryme-preview .tm-route{color:#65544C}
-#tryme-preview .tm-brand{color:var(--coral)}
-#tryme-preview .tm-dot{color:var(--coral)}
-#tryme-preview .tm-time{color:var(--coral)}
-#tryme-preview .tm-phone[data-view="envelope"],#tryme-preview .tm-phone:is([data-view="winner"],[data-view="prizecomplete"]){background:#721E19;color:var(--cream)}
-#tryme-preview .tm-phone[data-view="envelope"] .tm-brand,#tryme-preview .tm-phone:is([data-view="winner"],[data-view="prizecomplete"]) .tm-brand,#tryme-preview .tm-phone[data-view="envelope"] .tm-dot,#tryme-preview .tm-phone:is([data-view="winner"],[data-view="prizecomplete"]) .tm-dot{color:var(--cream)}
-#tryme-preview .tm-phone:is([data-view="winner"],[data-view="prizecomplete"]) .tm-route{color:var(--cream)}
-#tryme-preview .tm-phone[data-view="envelope"] header,#tryme-preview .tm-phone:is([data-view="winner"],[data-view="prizecomplete"]) header{border-bottom-color:#E4E4E330}
-#tryme-preview .tm-phone main,#tryme-preview .tm-phone header{color:#241A18}
-#tryme-preview .tm-phone h1,#tryme-preview .tm-phone h2,#tryme-preview .tm-phone p,#tryme-preview .tm-phone label,#tryme-preview .tm-phone .tm-small{color:#241A18}
-#tryme-preview .tm-phone .tm-paper,#tryme-preview .tm-phone .tm-paper p,#tryme-preview .tm-phone .tm-paper .tm-small{color:#241A18}
-#tryme-preview .tm-phone button.tm-action,#tryme-preview .tm-phone .tm-seal{color:#FFFFFF}
-#tryme-preview .tm-phone[data-view="envelope"] main,#tryme-preview .tm-phone:is([data-view="winner"],[data-view="prizecomplete"]) main,#tryme-preview .tm-phone[data-view="envelope"] header,#tryme-preview .tm-phone:is([data-view="winner"],[data-view="prizecomplete"]) header,#tryme-preview .tm-phone[data-view="envelope"] h1,#tryme-preview .tm-phone:is([data-view="winner"],[data-view="prizecomplete"]) h1,#tryme-preview .tm-phone[data-view="envelope"] .tm-small,#tryme-preview .tm-phone:is([data-view="winner"],[data-view="prizecomplete"]) .tm-small,#tryme-preview .tm-phone:is([data-view="winner"],[data-view="prizecomplete"]) p{color:#FFFFFF}
-#tryme-preview .tm-phone[data-view="envelope"] .tm-brand,#tryme-preview .tm-phone:is([data-view="winner"],[data-view="prizecomplete"]) .tm-brand,#tryme-preview .tm-phone[data-view="envelope"] .tm-dot,#tryme-preview .tm-phone:is([data-view="winner"],[data-view="prizecomplete"]) .tm-dot{color:#FFFFFF}
-#tryme-preview .tm-phone .tm-action:disabled{opacity:1;background:#C8BCB8;color:#4A3630}
-#tryme-preview .tm-phone footer{color:#E4E4E3}
-#tryme-preview .tm-phone .tm-option,#tryme-preview .tm-phone .tm-option small,#tryme-preview .tm-phone .tm-scores span,#tryme-preview .tm-phone .tm-scores strong{color:#241A18}
-#tryme-preview .tm-header-tools{display:flex;flex-direction:column;gap:5px;align-items:flex-end;min-width:120px}
-#tryme-preview .tm-header-tools label{margin:0;font-size:11px;color:#241A18}
-#tryme-preview .tm-header-tools select{padding:8px 10px;font-size:14px;min-height:38px;width:126px}
-#tryme-preview .tm-phone[data-view="envelope"] .tm-header-tools label,#tryme-preview .tm-phone:is([data-view="winner"],[data-view="prizecomplete"]) .tm-header-tools label{color:#FFFFFF}
-#tryme-preview .tm-player-fields{border:0;padding:0;margin:22px 0 0;min-width:0}
-#tryme-preview .tm-player-fields legend{font-size:13px;font-weight:500;color:#721E19}
-#tryme-preview .tm-player-fields label{margin-top:10px}
-#tryme-preview .tm-scores span{min-width:0;flex:1;overflow-wrap:anywhere;text-align:center}
-#tryme-preview .tm-scores strong{display:block;font-size:22px;font-weight:500;margin-top:5px;font-variant-numeric:tabular-nums}
-#tryme-preview .tm-scores .tm-active-player{border-bottom:2px solid #721E19;padding-bottom:4px}
-#tryme-preview .tm-phone .tm-option:disabled{opacity:1;background:#C8BCB8;color:#4A3630}
-#tryme-preview .tm-phone .tm-option:disabled small{color:#4A3630}
-#tryme-preview .tm-phone .tm-rule,#tryme-preview .tm-timer-hint{font-size:12px;line-height:1.5;color:#4A3630}
-#tryme-preview .tm-timer-hint{text-align:center}
-#tryme-preview .tm-phone h1 .tm-name{overflow-wrap:anywhere}
-#tryme-preview .tm-phone{position:relative;isolation:isolate}
-#tryme-preview main{isolation:isolate;min-height:540px}
-#tryme-preview .tm-foreground{position:relative;z-index:1}
-#tryme-preview .tm-scene{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;opacity:.24;color:#721E19}
-#tryme-preview .tm-scene-wall{position:absolute;inset:0 0 24%;background:#E4E4E3}
-#tryme-preview .tm-scene-floor{position:absolute;inset:76% 0 0;background:#928478;clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}
-#tryme-preview .tm-scene-panels{position:absolute;inset:8% 7% 27%;border:2px solid #928478;background:linear-gradient(90deg,transparent 32%,#928478 32%,#928478 32.5%,transparent 32.5%,transparent 67%,#928478 67%,#928478 67.5%,transparent 67.5%)}
-#tryme-preview .tm-scene-window{position:absolute;top:16%;right:9%;width:24%;height:26%;border:4px solid #928478;background:#E4E4E3}
-#tryme-preview .tm-scene-window:before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 48%,#928478 48%,#928478 52%,transparent 52%),linear-gradient(transparent 48%,#928478 48%,#928478 52%,transparent 52%)}
-#tryme-preview .tm-scene-art{position:absolute;top:20%;left:11%;width:22%;height:20%;border:4px solid #928478;background:#DDD0CC}
-#tryme-preview .tm-scene-art:before{content:'';position:absolute;inset:15% 20%;border-radius:55% 40% 45% 35%;background:#721E19;transform:rotate(-18deg)}
-#tryme-preview .tm-scene-pendant{position:absolute;left:49%;top:0;height:20%;width:2px;background:#928478}
-#tryme-preview .tm-scene-pendant:after{content:'';position:absolute;bottom:-14px;left:-29px;width:60px;height:29px;border-radius:30px 30px 4px 4px;background:#D6B8A9;border:2px solid #928478}
-#tryme-preview .tm-scene-rug{position:absolute;left:9%;right:9%;bottom:4%;height:14%;border-radius:50%;background:#D6B8A9;box-shadow:inset 0 0 0 5px #E4E4E3}
-#tryme-preview .tm-scene-plant{position:absolute;right:5%;bottom:24%;height:25%;width:14%;border-bottom:35px solid #928478;border-radius:0 0 15px 15px;box-sizing:border-box}
-#tryme-preview .tm-scene-plant:before{content:'';position:absolute;left:45%;bottom:0;width:4px;height:100%;background:#928478;transform:rotate(5deg)}
-#tryme-preview .tm-scene-plant span{position:absolute;background:#928478;border-radius:80% 0 80% 0;width:70%;height:28%;left:4%;top:8%;transform:rotate(-25deg)}
-#tryme-preview .tm-scene-plant span:nth-child(2){left:34%;top:32%;transform:rotate(65deg)}
-#tryme-preview .tm-scene-plant span:nth-child(3){left:0;top:50%;transform:rotate(-35deg)}
-#tryme-preview .tm-scene-lamp{position:absolute;left:8%;bottom:23%;width:2px;height:33%;background:#928478}
-#tryme-preview .tm-scene-lamp:before{content:'';position:absolute;top:-16px;left:-23px;width:48px;height:36px;background:#D6B8A9;clip-path:polygon(25% 0,75% 0,100% 100%,0 100%)}
-#tryme-preview .tm-scene-lamp:after{content:'';position:absolute;bottom:0;left:-14px;width:30px;height:5px;background:#928478;border-radius:50%}
-#tryme-preview .tm-scene-couch{position:absolute;left:16%;right:17%;bottom:22%;height:24%;border-radius:25px 25px 8px 8px;background:#721E19;box-shadow:inset 0 -26px 0 #928478}
-#tryme-preview .tm-scene-couch:before,#tryme-preview .tm-scene-couch:after{content:'';position:absolute;width:13%;height:57%;bottom:10%;background:#721E19;border:2px solid #928478;border-radius:12px;left:-6%}
-#tryme-preview .tm-scene-couch:after{left:auto;right:-6%}
-#tryme-preview .tm-scene-cushion{position:absolute;left:12%;top:13%;width:31%;height:42%;background:#E4E4E3;border-radius:10px;transform:rotate(-6deg)}
-#tryme-preview .tm-scene-cushion:nth-child(2){left:auto;right:12%;transform:rotate(7deg);background:#D6B8A9}
-#tryme-preview .tm-scene-table{position:absolute;left:27%;right:25%;bottom:13%;height:10%;border-radius:50%;background:#928478;border-bottom:6px solid #721E19}
-#tryme-preview .tm-scene-headboard{position:absolute;left:18%;right:18%;bottom:30%;height:27%;background:#721E19;border:4px solid #928478;border-radius:28px 28px 2px 2px}
-#tryme-preview .tm-scene-bed{position:absolute;left:12%;right:12%;bottom:17%;height:27%;background:#E4E4E3;border:3px solid #928478;border-radius:12px 12px 7px 7px;box-shadow:inset 0 -30px 0 #721E19}
-#tryme-preview .tm-scene-pillow{position:absolute;left:9%;top:8%;height:22%;width:34%;border-radius:10px;background:#D6B8A9;border:2px solid #928478;transform:rotate(-4deg)}
-#tryme-preview .tm-scene-pillow:nth-child(2){left:auto;right:9%;transform:rotate(4deg)}
-#tryme-preview .tm-scene-blanket{position:absolute;left:8%;bottom:-3%;width:28%;height:72%;background:#928478;border-radius:0 0 10px 10px}
-#tryme-preview .tm-scene-nightstand{position:absolute;bottom:25%;left:1%;width:12%;height:16%;background:#D6B8A9;border:2px solid #928478}
-#tryme-preview .tm-scene-nightstand:after{content:'';position:absolute;top:50%;width:100%;height:2px;background:#928478}
-#tryme-preview .tm-scene-nightstand:nth-of-type(2){left:auto;right:1%}
-#tryme-preview .tm-scene-cabinets{position:absolute;left:9%;right:9%;top:16%;height:24%;background:repeating-linear-gradient(90deg,#D6B8A9 0,#D6B8A9 31%,#928478 31%,#928478 33%);border:3px solid #928478}
-#tryme-preview .tm-scene-counter{position:absolute;left:6%;right:6%;bottom:24%;height:26%;background:repeating-linear-gradient(90deg,#DDD0CC 0,#DDD0CC 31%,#928478 31%,#928478 33%);border:3px solid #928478;border-top:10px solid #721E19}
-#tryme-preview .tm-scene-oven{position:absolute;left:36%;bottom:26%;width:28%;height:22%;background:#928478;border:3px solid #721E19;border-radius:4px}
-#tryme-preview .tm-scene-oven:after{content:'';position:absolute;inset:25% 10% 10%;background:#241A18;border:3px solid #D6B8A9;border-radius:3px}
-#tryme-preview .tm-scene-sink{position:absolute;left:12%;bottom:51%;width:23%;height:5px;background:#928478}
-#tryme-preview .tm-scene-sink:before{content:'';position:absolute;left:40%;bottom:0;width:13px;height:25px;border:3px solid #928478;border-bottom:0;border-radius:12px 12px 0 0}
-#tryme-preview .tm-scene-island{position:absolute;left:19%;right:18%;bottom:6%;height:17%;background:#D6B8A9;border:3px solid #928478;border-top:10px solid #721E19}
-#tryme-preview .tm-phone:is([data-view="winner"],[data-view="prizecomplete"]) .tm-scene{opacity:.14}
-#tryme-preview .tm-phone:is([data-view="winner"],[data-view="prizecomplete"]) .tm-foreground h1,#tryme-preview .tm-phone:is([data-view="winner"],[data-view="prizecomplete"]) .tm-foreground p,#tryme-preview .tm-phone:is([data-view="winner"],[data-view="prizecomplete"]) .tm-foreground .tm-small{color:#FFFFFF}
-#tryme-preview .tm-paper,#tryme-preview .tm-option,#tryme-preview .tm-scores{background-color:#E4E4E3}
-#tryme-preview .tm-secondary{background-color:#DDD0CC}
-#tryme-preview .tm-splash{position:absolute;inset:0;z-index:5;background:#721E19;display:flex;align-items:center;justify-content:center;border-radius:30px;animation:tm-splash-exit .25s ease 1.3s forwards;pointer-events:none}
-#tryme-preview .tm-splash-logo{font-family:'Caveat','Segoe Script',Georgia,cursive;font-size:76px;font-weight:400;color:#E4E4E3;position:relative;white-space:nowrap}
-#tryme-preview .tm-splash-word{display:inline-block;clip-path:inset(0 100% 0 0);animation:tm-logo-write 1s ease .1s forwards}
-#tryme-preview .tm-splash-dot{display:inline-block;color:#D6B8A9;opacity:0;animation:tm-logo-dot .25s ease 1.05s forwards}
-@keyframes tm-logo-write{to{clip-path:inset(0 0 0 0)}}
-@keyframes tm-logo-dot{0%{opacity:0;transform:scale(.7)}70%{opacity:1;transform:scale(1.12)}100%{opacity:1;transform:scale(1)}}
-@keyframes tm-splash-exit{to{opacity:0;visibility:hidden}}
-#tryme-preview[data-motion="reduced"] .tm-splash,#tryme-preview[data-motion="reduced"] .tm-splash-word,#tryme-preview[data-motion="reduced"] .tm-splash-dot{animation:none}#tryme-preview[data-motion="reduced"] .tm-splash-word{clip-path:none}#tryme-preview[data-motion="reduced"] .tm-splash-dot{opacity:1}
-
-#tryme-preview .tm-scene-nightstand.tm-scene-right{left:auto;right:1%}
-#tryme-preview .tm-splash{pointer-events:auto}
-#tryme-preview .tm-phone main{box-sizing:border-box;min-height:600px;padding-top:24px;padding-bottom:24px}
-#tryme-preview .tm-player-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
-#tryme-preview .tm-player-row>div{min-width:0}
-#tryme-preview .tm-player-fields{margin-top:18px}
-#tryme-preview .tm-player-fields input,#tryme-preview .tm-player-fields select{display:block;box-sizing:border-box;width:100%;height:46px;min-height:46px;padding:12px 10px;font-family:inherit;font-size:16px;line-height:22px}
-#tryme-preview .tm-player-fields label{margin-top:8px;margin-bottom:6px}
-#tryme-preview .tm-phone[data-view="home"] h1{margin-bottom:12px}
-#tryme-preview .tm-phone[data-view="home"] p{margin-bottom:16px}
-#tryme-preview .tm-splash{animation:tm-splash-exit .4s ease 3.2s forwards;padding:28px;box-sizing:border-box}
-#tryme-preview .tm-splash-logo{display:flex;align-items:baseline;justify-content:center;gap:2px;width:100%;font-size:clamp(48px,16vw,70px);line-height:1.5;padding:10px 0;overflow:visible;text-align:center}
-#tryme-preview .tm-splash-word{clip-path:none;opacity:0;animation:tm-logo-appear .65s ease .1s forwards;overflow:visible}
-#tryme-preview .tm-splash-dot{animation:tm-logo-dot .35s ease .7s forwards}
-@keyframes tm-logo-appear{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
-#tryme-preview[data-motion="reduced"] .tm-splash,#tryme-preview[data-motion="reduced"] .tm-splash-word,#tryme-preview[data-motion="reduced"] .tm-splash-dot{animation:none}#tryme-preview[data-motion="reduced"] .tm-splash-word,#tryme-preview[data-motion="reduced"] .tm-splash-dot{opacity:1;clip-path:none;transform:none}
-#tryme-preview .tm-level-range{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
-#tryme-preview .tm-level-range>div{min-width:0}
-#tryme-preview .tm-level-range select{padding:12px 8px}
-#tryme-preview .tm-phone .tm-consent{display:flex;align-items:center;gap:10px;color:#241A18;min-height:48px;margin:12px 0;font-size:14px;line-height:1.5}
-#tryme-preview .tm-phone .tm-consent input{width:22px;height:22px;min-width:22px;padding:0;accent-color:#721E19}
-#tryme-preview .tm-phone .tm-paper h2{color:#241A18;font-size:22px;line-height:1.35}
-#tryme-preview .tm-phone{container-type:inline-size}
-#tryme-preview .tm-splash{padding:26px 18px;animation:tm-splash-exit .7s ease 4.1s forwards}
-#tryme-preview .tm-splash-logo{width:auto;max-width:100%;box-sizing:border-box;gap:0;font-size:clamp(42px,17cqw,64px);line-height:1.65;padding:14px 0;flex-wrap:nowrap;overflow:visible}
-#tryme-preview .tm-splash-word{flex:none;display:block;padding:0 .16em;clip-path:none;animation:tm-logo-appear .85s ease .1s forwards}
-#tryme-preview .tm-splash-dot{flex:none;margin-left:-.08em;padding-right:.12em;animation:tm-logo-dot .45s ease 1s forwards}
-#tryme-preview .tm-letter-area{position:relative;height:305px;margin-top:12px;margin-bottom:12px;isolation:isolate}
-#tryme-preview .tm-prize-envelope{position:absolute;left:0;bottom:0;width:100%;height:180px;min-height:180px;padding:0;margin:0;overflow:visible;opacity:1;color:#241A18;perspective:700px}
-#tryme-preview .tm-prize-envelope:disabled{opacity:1}
-#tryme-preview .tm-prize-envelope:before{height:92px;z-index:4;transition:transform .7s ease,opacity .7s ease;backface-visibility:visible}
-#tryme-preview .tm-prize-envelope:after{content:'';position:absolute;inset:62px 0 0;background:linear-gradient(32deg,#D6B8A9 0 49%,transparent 50%),linear-gradient(-32deg,#E4E4E3 0 49%,#DDD0CC 50%);border-radius:0 0 8px 8px;z-index:3}
-#tryme-preview .tm-prize-envelope.tm-opening:before,#tryme-preview .tm-prize-envelope.tm-letter-open:before{transform:rotateX(180deg);opacity:1;z-index:1}
-#tryme-preview .tm-letter-sheet{position:absolute;top:14px;left:9%;width:82%;height:202px;box-sizing:border-box;padding:20px 14px;background:#F3ECE5;border-radius:5px;box-shadow:0 3px 12px #241A1820;z-index:2;opacity:0;transform:translateY(0);transition:transform 1s cubic-bezier(.22,.7,.25,1) .6s,opacity .3s ease .6s;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:8px;pointer-events:none}
-#tryme-preview .tm-prize-envelope.tm-opening .tm-letter-sheet,#tryme-preview .tm-prize-envelope.tm-letter-open .tm-letter-sheet{transform:translateY(-114px);opacity:1}
-#tryme-preview .tm-letter-kicker{font-family:Arial,sans-serif;font-size:12px;line-height:1.5;color:#65544C}
-#tryme-preview .tm-letter-name{font-family:'Caveat','Segoe Script',Georgia,cursive;font-size:42px;line-height:1.2;color:#721E19;max-width:100%;overflow-wrap:anywhere}
-#tryme-preview .tm-letter-mark{font-family:Georgia,serif;font-style:italic;font-size:14px;color:#721E19}
-#tryme-preview .tm-envelope-address{position:absolute;left:8%;right:8%;bottom:20px;z-index:5;font-family:'Caveat','Segoe Script',Georgia,cursive;font-size:25px;line-height:1.35;color:#241A18;overflow-wrap:anywhere}
-#tryme-preview .tm-prize-envelope .tm-seal{z-index:5}
-#tryme-preview .tm-prize-envelope.tm-letter-open .tm-seal{opacity:0}
-#tryme-preview .tm-phone:is([data-view="winner"],[data-view="prizecomplete"]) h1{overflow-wrap:anywhere}
-#tryme-preview[data-motion="reduced"] .tm-splash,#tryme-preview[data-motion="reduced"] .tm-splash-word,#tryme-preview[data-motion="reduced"] .tm-splash-dot{animation:none}#tryme-preview[data-motion="reduced"] .tm-splash-word,#tryme-preview[data-motion="reduced"] .tm-splash-dot{opacity:1;transform:none}#tryme-preview[data-motion="reduced"] .tm-prize-envelope:before,#tryme-preview[data-motion="reduced"] .tm-letter-sheet{transition:none}
-#tryme-preview .tm-phone{transition:background-color .5s ease,color .4s ease}
-#tryme-preview header{transition:border-color .5s ease}
-#tryme-preview .tm-brand,#tryme-preview .tm-dot{transition:color .4s ease}
-#tryme-preview .tm-paper{animation:tm-card-soft .5s cubic-bezier(.2,.65,.3,1) both}
-#tryme-preview .tm-scene{animation:tm-room-soft .7s ease both}
-#tryme-preview .tm-level-notice{animation:tm-card-soft .6s ease both}
-@keyframes tm-card-soft{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
-@keyframes tm-room-soft{from{opacity:0}to{opacity:.24}}
-#tryme-preview .tm-phone:is([data-view="winner"],[data-view="prizecomplete"]) .tm-scene{animation:tm-winner-room-soft .7s ease both}
-@keyframes tm-winner-room-soft{from{opacity:0}to{opacity:.14}}
-#tryme-preview[data-motion="reduced"] .tm-phone,#tryme-preview[data-motion="reduced"] header,#tryme-preview[data-motion="reduced"] .tm-brand,#tryme-preview[data-motion="reduced"] .tm-dot{transition:none}#tryme-preview[data-motion="reduced"] .tm-paper,#tryme-preview[data-motion="reduced"] .tm-scene,#tryme-preview[data-motion="reduced"] .tm-level-notice{animation:none}
-#tryme-preview .tm-resume-card{background:#E4E4E3;border-radius:14px;padding:16px;margin-top:18px;color:#241A18}
-#tryme-preview .tm-resume-card p{font-size:14px;margin:8px 0;overflow-wrap:anywhere}
-#tryme-preview .tm-resume-card .tm-action{margin-top:12px}
-#tryme-preview .tm-text-action{display:block;background:transparent;border:0;color:#721E19;font-size:13px;padding:14px 8px;margin:16px auto 0;min-height:44px}
-#tryme-preview .tm-phone[data-view="envelope"] .tm-text-action{color:#FFFFFF}
-#tryme-preview .tm-level-notice{animation:tm-level-arrival .8s cubic-bezier(.2,.65,.3,1) both}
-@keyframes tm-level-arrival{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:none}}
-#tryme-preview[data-motion="reduced"] .tm-level-notice{animation:none}
-#tryme-preview .tm-route-summary{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:12px 0;color:#721E19;font-size:12px;line-height:1.5}
-#tryme-preview .tm-route-place{background:#E4E4E3;padding:6px 8px;border-radius:8px;color:#241A18}
-#tryme-preview .tm-route-arrow{color:#721E19}
-
-#tryme-preview .tm-phone{position:relative}
-#tryme-preview .tm-menu-button{background:#E4E4E3;color:#721E19;border:1px solid #721E1930;border-radius:12px;min-height:44px;padding:8px 16px;font-size:14px}
-#tryme-preview .tm-rules-menu{position:absolute;inset:90px 14px auto;width:auto;max-width:362px;max-height:none;box-sizing:border-box;margin:0 auto;padding:22px;background:#E4E4E3;color:#241A18;border:1px solid #92847855;border-radius:22px;box-shadow:0 16px 40px #241A1830}
-#tryme-preview .tm-rules-menu::backdrop{background:#241A185C}
-#tryme-preview .tm-rules-menu[open]{animation:tm-menu-in .3s ease both}
-#tryme-preview .tm-rules-menu h2{color:#721E19;font-size:25px;line-height:1.15;margin:8px 0 10px}
-#tryme-preview .tm-rules-menu p{font-size:14px;line-height:1.5;margin:10px 0 16px;color:#241A18}
-#tryme-preview .tm-rules-menu details{border-bottom:1px solid #92847840}
-#tryme-preview .tm-rules-menu summary{min-height:44px;box-sizing:border-box;padding:13px 0;font-size:14px;line-height:1.35;color:#721E19}
-#tryme-preview .tm-rules-menu .tm-secondary{margin-top:18px;min-height:44px}
-@keyframes tm-menu-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-#tryme-preview[data-motion="reduced"] .tm-rules-menu[open]{animation:none}
-
-
-#tryme-preview .tm-resume-card{position:relative}
-#tryme-preview .tm-resume-card>.tm-small,#tryme-preview .tm-resume-card>p{padding-right:40px}
-#tryme-preview .tm-delete-saved{position:absolute;top:5px;right:5px;width:44px;height:44px;border:0;border-radius:12px;background:transparent;color:#721E19;font-size:25px;line-height:1;display:flex;align-items:center;justify-content:center}
-#tryme-preview .tm-delete-saved:hover{background:#DDD0CC}
-
-
-#tryme-preview .tm-card-context{display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.45;color:#721E19;margin:12px 0}
-#tryme-preview .tm-inventory{margin-top:18px;color:#241A18}
-#tryme-preview .tm-inventory summary{min-height:44px;padding:12px 0;box-sizing:border-box;font-size:14px;color:#721E19}
-#tryme-preview .tm-inventory-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-#tryme-preview .tm-inventory-grid label{display:flex;align-items:center;gap:8px;font-size:13px;min-height:44px;margin:0}
-#tryme-preview .tm-inventory-grid input{width:18px;min-height:18px;height:18px;margin:0;padding:0;accent-color:#721E19}
-#tryme-preview .tm-reward-option{margin-top:16px}
-#tryme-preview .tm-reward-option p{font-size:17px;line-height:1.5}
-
-
-#tryme-preview .tm-duration-label{color:#721E19;font-size:13px;line-height:1.5;margin-top:20px}
-#tryme-preview .tm-random-reveal{padding:60px 0 40px;text-align:center;color:#721E19}
-#tryme-preview .tm-random-choices{display:flex;gap:12px;margin:28px 0;justify-content:center}
-#tryme-preview .tm-random-choices span{padding:20px 16px;background:#E4E4E3;color:#721E19;border-radius:18px;min-width:88px;font-size:20px}
-#tryme-preview .tm-random-truth{animation:tm-random-pulse .72s ease-in-out 2}
-#tryme-preview .tm-random-dare{animation:tm-random-pulse .72s ease-in-out .36s 2}
-#tryme-preview .tm-random-result{font-family:Georgia,serif;font-size:42px;animation:tm-reveal-result .65s cubic-bezier(.2,.65,.3,1) 1.8s both}
-#tryme-preview .tm-winner-intro{text-align:center;padding:100px 0 60px;color:#721E19;animation:tm-winner-in .65s ease both}
-#tryme-preview .tm-winner-intro h1{font-family:Georgia,serif;font-size:54px;margin:22px 0 18px;line-height:1.15}
-#tryme-preview .tm-winner-name{font-family:'Caveat',Georgia,serif;font-size:36px;overflow-wrap:anywhere}
-#tryme-preview .tm-winner-intro p{font-size:16px;margin-top:22px;color:#721E19}
-@keyframes tm-random-pulse{0%,100%{transform:scale(1);background:#E4E4E3;color:#721E19}50%{transform:scale(1.04);background:#721E19;color:#E4E4E3}}
-@keyframes tm-reveal-result{from{opacity:0;transform:translateY(8px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
-@keyframes tm-winner-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-#tryme-preview[data-motion="reduced"] .tm-random-choices span,#tryme-preview[data-motion="reduced"] .tm-random-result,#tryme-preview[data-motion="reduced"] .tm-winner-intro{animation:none}
-
-#tryme-preview .tm-card-performer{color:#721E19;font-weight:600}
-
-#tryme-preview .tm-prize-medal{position:relative;display:flex;align-items:center;justify-content:center;width:34px;height:34px;flex:none;margin-bottom:8px;border:2px solid #721E19;border-radius:50%;color:#721E19;font-family:Georgia,serif;font-size:20px;line-height:1;background:#E4E4E3}
-#tryme-preview .tm-prize-medal::before,#tryme-preview .tm-prize-medal::after{content:'';position:absolute;top:30px;width:10px;height:16px;background:#721E19;clip-path:polygon(0 0,100% 0,100% 100%,50% 76%,0 100%);z-index:-1}
-#tryme-preview .tm-prize-medal::before{left:4px;transform:rotate(16deg)}
-#tryme-preview .tm-prize-medal::after{right:4px;transform:rotate(-16deg)}
-#tryme-preview .tm-prize-letter-title{font-family:Georgia,serif;font-size:22px;line-height:1.25;color:#721E19}
-#tryme-preview .tm-prize-letter-note{font-family:Arial,sans-serif;font-size:15px;line-height:1.35;color:#721E19;max-width:200px}
-
-#tryme-preview .tm-card-meta{font-family:Arial,sans-serif;font-size:12px;font-weight:400;line-height:1.5;letter-spacing:normal;text-transform:none}
-#tryme-preview .tm-final-result{margin:16px 0 20px}
-#tryme-preview .tm-final-scores{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:12px;margin-top:10px}
-#tryme-preview .tm-final-scores>div{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0}
-#tryme-preview .tm-final-scores>div>span{font-size:13px;overflow-wrap:anywhere;text-align:center}
-#tryme-preview .tm-final-scores strong{font-size:28px;font-weight:500;line-height:1.2}
-#tryme-preview .tm-final-scores>span{font-size:22px}
-#tryme-preview .tm-final-margin{margin:8px 0 0;font-size:13px}
-#tryme-preview .tm-name-error{color:#721E19;font-size:13px;margin:10px 0}
-#tryme-preview input[aria-invalid="true"]{border-color:#721E19}
-
-html{background:#DDD0CC;color:#241A18;color-scheme:light}
-body{margin:0;font-family:Arial,sans-serif}
-*,*::before,*::after{box-sizing:border-box}
-#tryme-preview input,#tryme-preview select,#tryme-preview textarea{font-size:16px}
-#tryme-preview button,#tryme-preview select{touch-action:manipulation}
-@media(max-width:480px){
- #tryme-preview{padding:0}
- #tryme-preview .tm-phone{max-width:none;width:100%;border-radius:0;box-shadow:none;min-height:100svh}
- #tryme-preview header{padding-top:max(18px,env(safe-area-inset-top))}
- #tryme-preview footer{padding-bottom:max(22px,env(safe-area-inset-bottom))}
-}
-
-#tryme-preview .tm-confetti{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
-#tryme-preview .tm-confetti span{position:absolute;left:50%;top:58%;width:var(--piece-size);height:calc(var(--piece-size)*1.65);border-radius:2px;background:var(--piece-color);opacity:0;animation:tm-confetti-burst var(--burst-time) linear var(--burst-delay) both}
-#tryme-preview .tm-confetti span:nth-child(3n){border-radius:50%;height:var(--piece-size)}
-@keyframes tm-confetti-burst{0%{opacity:0;transform:translate3d(0,0,0) rotate(0) scale(.5)}3%{opacity:.95}18%{opacity:.95;transform:translate3d(var(--burst-x),var(--burst-y),0) rotate(var(--burst-turn)) scale(1)}60%{opacity:.8;transform:translate3d(var(--drift-x),var(--drift-y),0) rotate(var(--drift-turn))}100%{opacity:0;transform:translate3d(var(--end-x),var(--end-y),0) rotate(var(--piece-turn))}}
-#tryme-preview[data-motion="reduced"] .tm-confetti{display:none}
-
-#tryme-preview .tm-daring-badge{display:inline-block;margin:10px 0 0;padding:5px 10px;border:1px solid #928478;border-radius:20px;font-size:12px;line-height:1.4;color:#721E19}
-#tryme-preview .tm-paper .tm-fail-note{font-family:Arial,sans-serif;font-size:14px;line-height:1.5;margin:10px 0;color:#721E19}
-#tryme-preview .tm-paper .tm-safety-note{font-family:Arial,sans-serif;font-size:13px;line-height:1.5;margin:10px 0;color:#928478}
-#tryme-preview .tm-verdict h2{font-size:23px;line-height:1.3;margin:24px 0 10px;overflow-wrap:anywhere}
-#tryme-preview .tm-verdict[hidden]{display:none}
-#tryme-preview .tm-body-field{margin-top:8px}
-#tryme-preview #tm-body-help{margin-top:14px}
-#tryme-preview .tm-phone[data-view="notice"]{background:#DDD0CC}
-#tryme-preview .tm-notice h1{color:#721E19;font-size:36px}
-#tryme-preview .tm-notice p,#tryme-preview .tm-notice li{font-size:16px;line-height:1.6}
-#tryme-preview .tm-notice ol{padding-left:24px;margin:22px 0}
-#tryme-preview .tm-notice li{padding-left:4px;margin-bottom:14px}
-#tryme-preview .tm-notice-checks{border:0;padding:0;margin:24px 0 14px;min-width:0}
-#tryme-preview label.tm-notice-check{display:flex;align-items:flex-start;gap:12px;padding:14px 12px;margin:10px 0;background:#E4E4E380;border:1px solid #92847855;border-radius:12px;font-size:16px;line-height:1.5;cursor:pointer}
-#tryme-preview .tm-notice-check input{width:22px;height:22px;min-height:22px;margin:1px 0 0;padding:0;flex:0 0 22px;accent-color:#721E19}
-#tryme-preview .tm-notice-check span{min-width:0;overflow-wrap:anywhere}
-#tryme-preview .tm-stop-reminder{font-size:13px;line-height:1.5;margin:18px 0;color:#FFFFFF}
-#tryme-preview .tm-dare-dock{position:fixed;left:0;right:0;bottom:0;z-index:30;width:100%;max-width:390px;margin:0 auto;padding:12px 20px max(12px,env(safe-area-inset-bottom));background:#DDD0CC;border-top:1px solid #92847855;box-shadow:0 -6px 22px #241A1815;color:#241A18}
-#tryme-preview .tm-dare-dock[hidden]{display:none}
-#tryme-preview .tm-dare-dock .tm-action,#tryme-preview .tm-dare-dock .tm-secondary{margin-top:8px;padding:12px;color:#E4E4E3;font-size:15px;line-height:1.35}
-#tryme-preview .tm-dare-dock .tm-action{background:#721E19}
-#tryme-preview .tm-dare-dock .tm-secondary{color:#241A18}
-#tryme-preview .tm-dare-dock .tm-action:disabled{opacity:1;background:#C8BCB8;color:#4A3630}
-#tryme-preview .tm-dare-dock .tm-verdict h2{font-family:Georgia,serif;font-size:20px;line-height:1.3;margin:12px 0 8px;color:#721E19}
-#tryme-preview .tm-dare-dock .tm-verdict[hidden]{display:none}
-#tryme-preview .tm-new-place{font-size:16px;font-weight:500;color:#721E19}
-#tryme-preview .tm-phone[data-view="envelope"] .tm-route{color:#E4E4E3}
-#tryme-preview .tm-envelope-address[hidden]{display:none}
-#tryme-preview .tm-phone[data-view="winner"] .tm-scene{opacity:.035;animation:tm-final-scene-soft .7s ease both}
-@keyframes tm-final-scene-soft{from{opacity:0}to{opacity:.035}}
-#tryme-preview .tm-phone[data-view="winner"] .tm-final-result{background:#721E19;border-radius:12px;padding:14px 10px}
-@media(max-width:480px){#tryme-preview .tm-dare-dock{max-width:none}}
-#tryme-preview[data-motion="reduced"] .tm-phone[data-view="winner"] .tm-scene{animation:none}
-#tryme-preview .tm-orgasm-link{display:block;width:100%;border:0;background:transparent;color:#721E19;text-decoration:underline;font-size:13px;padding:8px 4px;margin-top:5px;line-height:1.4}
-#tryme-preview .tm-orgasm-dialog{width:calc(100% - 32px);max-width:380px;border:1px solid #928478;border-radius:18px;padding:24px;background:#DDD0CC;color:#241A18}
-#tryme-preview .tm-orgasm-dialog::backdrop{background:#241A1870}
-#tryme-preview .tm-orgasm-dialog h2{color:#721E19}
-#tryme-preview .tm-orgasm-dialog .tm-action{background:#721E19;color:#E4E4E3}
-#tryme-preview .tm-orgasm-dialog .tm-secondary{color:#241A18}
-#tryme-preview .tm-phone[data-view="duelintro"]{background:#721E19;color:#E4E4E3}
-#tryme-preview .tm-phone[data-view="duelintro"] header,#tryme-preview .tm-phone[data-view="duelintro"] .tm-brand,#tryme-preview .tm-phone[data-view="duelintro"] .tm-dot,#tryme-preview .tm-phone[data-view="duelintro"] .tm-header-tools label,#tryme-preview .tm-duel-intro h1,#tryme-preview .tm-duel-intro h2,#tryme-preview .tm-duel-intro p,#tryme-preview .tm-duel-intro .tm-route{color:#E4E4E3}
-#tryme-preview .tm-phone[data-view="duelintro"] header{border-color:#E4E4E330}
-#tryme-preview .tm-duel-envelope{background:#928478}
-#tryme-preview .tm-duel-envelope:before{background:#B5A496}
-#tryme-preview .tm-duel-envelope:after{background:linear-gradient(32deg,#928478 0 49%,transparent 50%),linear-gradient(-32deg,#AA9B8F 0 49%,#928478 50%)}
-#tryme-preview .tm-duel-envelope .tm-envelope-address{color:#E4E4E3}
-#tryme-preview .tm-dare-dock #tm-duel-stop{font-size:23px;padding:17px;font-weight:600}
-#tryme-preview .tm-dare-dock [hidden]{display:none}
-#tryme-preview .tm-duel-only{text-align:center;font-size:13px;margin:8px 0 0;color:#721E19}
-#tryme-preview #tm-duel-verdict h2{font-family:Georgia,serif;font-size:22px;color:#721E19;margin:8px 0}
-#tryme-preview .tm-person-0{color:#721E19}
-#tryme-preview .tm-person-1{color:#6B5F55}
-#tryme-preview .tm-card-tools{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:-8px -6px 4px}
-#tryme-preview .tm-card-tools>div{display:flex;gap:4px}
-#tryme-preview .tm-card-icon{border:0;background:transparent;color:#721E19;font-size:25px;width:44px;min-height:44px;border-radius:10px;padding:4px}
-#tryme-preview .tm-card-icon[aria-pressed="true"]{background:#D6B8A950}
-#tryme-preview .tm-card-icon:disabled{opacity:.4}
-#tryme-preview .tm-custom-badge{font-size:12px;color:#6B5F55;border:1px solid #92847880;padding:4px 8px;border-radius:8px}
-#tryme-preview .tm-block-last .tm-secondary{font-size:13px;margin-top:16px;border:0;text-decoration:underline;color:#721E19;padding:8px}
-#tryme-preview .tm-personal-row{padding:12px 0;border-bottom:1px solid #92847840}
-#tryme-preview .tm-personal-row p{font-size:15px;line-height:1.5;overflow-wrap:anywhere;white-space:pre-wrap;margin:8px 0}
-#tryme-preview .tm-row-actions,#tryme-preview .tm-marker-buttons{display:flex;gap:8px}
-#tryme-preview .tm-row-actions .tm-secondary,#tryme-preview .tm-marker-buttons .tm-secondary{width:auto;flex:1;font-size:14px;padding:10px}
-#tryme-preview #tm-rules-menu select,#tryme-preview #tm-rules-menu textarea{width:100%;border:0;border-radius:12px;padding:12px;background:#E4E4E3;color:#241A18;font:16px Arial,sans-serif}
-#tryme-preview #tm-rules-menu textarea{resize:vertical;line-height:1.5}
-#tryme-preview #tm-rules-menu .tm-action{background:#721E19;color:#E4E4E3}
-#tryme-preview #tm-rules-menu .tm-secondary{color:#241A18}
-#tryme-preview .tm-switch-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;font-size:15px}
-#tryme-preview .tm-switch-row input{appearance:none;width:46px;height:26px;min-width:46px;min-height:26px;padding:0;border-radius:20px;background:#928478;position:relative;cursor:pointer}
-#tryme-preview .tm-switch-row input:before{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#E4E4E3;transition:transform .2s}
-#tryme-preview .tm-switch-row input:checked{background:#721E19}
-#tryme-preview .tm-switch-row input:checked:before{transform:translateX(20px)}
-#tryme-preview .tm-char-count{text-align:right;color:#6B5F55;margin-top:8px}
-#tryme-preview .tm-paper p{white-space:pre-wrap}
-#tryme-preview .tm-rules-menu{position:fixed;inset:max(16px,env(safe-area-inset-top)) 14px auto;width:calc(100% - 28px);max-width:420px;max-height:calc(100vh - 40px);max-height:calc(100dvh - max(32px,env(safe-area-inset-top)) - env(safe-area-inset-bottom));overflow-y:auto;overscroll-behavior:contain}
-#tryme-preview .tm-phone:is([data-view="winner"],[data-view="winnerintro"],[data-view="duelintro"]) .tm-block-last .tm-secondary{color:#E4E4E3}
-
-/* One viewport per screen; only setup, notice and menu content scroll. */
-html,body{height:100%;overflow:hidden;overscroll-behavior:none}
-#tryme-preview{padding:0;height:100dvh;overflow:hidden}
-#tryme-preview .tm-phone{height:100dvh;min-height:0;max-height:100dvh;display:flex;flex-direction:column;border-radius:0}
-#tryme-preview header{flex:none;padding:max(12px,env(safe-area-inset-top)) 20px 8px;min-height:84px}
-#tryme-preview .tm-header-tools{display:grid;grid-template-columns:126px auto;align-items:center;gap:4px 8px}
-#tryme-preview .tm-header-tools label,#tryme-preview #tm-adult{display:none}
-#tryme-preview .tm-header-tools select{grid-column:1;grid-row:1}
-#tryme-preview .tm-menu-button{grid-column:2;grid-row:1}
-#tryme-preview .tm-brand{font-size:34px}
-#tryme-preview .tm-phone main{flex:1;min-height:0!important;overflow:hidden;padding:16px 20px;position:relative}
-#tryme-preview .tm-phone:is([data-view="setup"],[data-view="notice"]) main{overflow-y:auto;overscroll-behavior:contain;padding-bottom:max(24px,env(safe-area-inset-bottom))}
-#tryme-preview .tm-phone footer{display:none}
-#tryme-preview .tm-fit-content{transform-origin:top center;position:relative}
-#tryme-preview .tm-phone:not([data-view="setup"]):not([data-view="notice"]) h1{font-size:30px;margin:10px 0 14px}
-#tryme-preview .tm-phone:not([data-view="setup"]):not([data-view="notice"]) .tm-paper{padding:16px;margin-top:12px}
-#tryme-preview .tm-phone:not([data-view="setup"]):not([data-view="notice"]) .tm-paper p{font-size:18px;line-height:1.38;margin:10px 0}
-#tryme-preview .tm-phone:not([data-view="setup"]):not([data-view="notice"]) .tm-paper .tm-fail-note{font:14px/1.4 Arial,sans-serif}
-#tryme-preview .tm-phone:not([data-view="setup"]):not([data-view="notice"]) .tm-paper .tm-safety-note{font:13px/1.4 Arial,sans-serif}
-#tryme-preview .tm-time{margin:10px 0;font-size:34px}
-#tryme-preview .tm-card-tools{margin-top:0}
-#tryme-preview .tm-phone .tm-action{margin-top:14px;padding:13px}
-#tryme-preview .tm-phone .tm-text-action{margin-top:8px}
-#tryme-preview .tm-dare-dock .tm-verdict h2{font:18px/1.3 Georgia,serif;margin:0 0 8px}
-#tryme-preview .tm-dare-dock [hidden]{display:none!important}
-#tryme-preview .tm-back{display:block;border:0;background:transparent;padding:4px 0;color:#721E19;font-size:15px;text-align:left;min-height:44px}
-#tryme-preview .tm-reward-tabs{display:flex;gap:10px}
-#tryme-preview .tm-reward-tabs button{flex:1;color:#721E19}
-#tryme-preview .tm-reward-tabs [aria-pressed="true"]{background:#721E19;color:#E4E4E3}
-#tryme-preview .tm-phone[data-view="home"] .tm-player-fields{margin-top:12px}
-#tryme-preview .tm-phone[data-view="home"] .tm-body-field{margin-top:2px}
-#tryme-preview .tm-phone[data-view="home"] #tm-body-help{margin:10px 0}
-#tryme-preview .tm-phone[data-view="home"]>main>.tm-fit-content>p{margin:10px 0}
-#tryme-preview .tm-phone[data-view="home"] .tm-resume-card{margin-top:12px;padding:12px}
-#tryme-preview .tm-phone[data-view="home"] .tm-resume-card p{margin:6px 0}
-@media(max-width:360px){#tryme-preview header{padding-left:12px;padding-right:12px}#tryme-preview .tm-brand{font-size:29px}#tryme-preview .tm-header-tools{grid-template-columns:112px auto}#tryme-preview .tm-header-tools select{width:112px}}
-
-
-#tryme-preview .tm-phone[data-view="envelope"] .tm-stop-reminder{color:#D6B8A9;font-style:italic;font-size:14px}
-#tryme-preview .tm-phone:is([data-view="duelintro"],[data-view="duel"],[data-view="duelresult"]){background:radial-gradient(ellipse at 50% 44%,#D6B8A91C 0,transparent 68%),#3D0F0C;color:#E4E4E3}
-#tryme-preview .tm-phone:is([data-view="duelintro"],[data-view="duel"],[data-view="duelresult"]) header,#tryme-preview .tm-phone:is([data-view="duelintro"],[data-view="duel"],[data-view="duelresult"]) .tm-brand,#tryme-preview .tm-phone:is([data-view="duelintro"],[data-view="duel"],[data-view="duelresult"]) .tm-dot,#tryme-preview .tm-phone:is([data-view="duelintro"],[data-view="duel"],[data-view="duelresult"]) h1{color:#E4E4E3}
-#tryme-preview .tm-phone:is([data-view="duelintro"],[data-view="duel"],[data-view="duelresult"]) .tm-route,#tryme-preview .tm-phone:is([data-view="duelintro"],[data-view="duel"],[data-view="duelresult"]) .tm-text-action{color:#D6B8A9}
-#tryme-preview .tm-phone[data-view="duel"] .tm-paper{border:2px solid transparent;transition:border-color .35s ease}
-#tryme-preview .tm-phone[data-view="duel"][data-duel-urgent="true"] .tm-paper{border-color:#D6B8A9}
-#tryme-preview .tm-phone[data-view="duel"] .tm-scene{opacity:.035}
-#tryme-preview .tm-dare-dock[data-duel="true"]{background:#3D0F0C;border-top-color:#D6B8A95C;color:#E4E4E3}
-#tryme-preview .tm-dare-dock[data-duel="true"] .tm-verdict h2,#tryme-preview .tm-dare-dock[data-duel="true"] #tm-duel-verdict h2{color:#D6B8A9}
-#tryme-preview .tm-dare-dock[data-duel="true"] .tm-secondary{color:#721E19;border-color:#D6B8A960}
-#tryme-preview .tm-dare-dock[data-duel="true"] .tm-duel-only{color:#D6B8A9}
-#tryme-preview .tm-duel-entrance{position:fixed;inset:0;z-index:65;overflow:hidden;cursor:pointer;isolation:isolate;color:#E4E4E3;touch-action:manipulation}
-#tryme-preview:has(.tm-phone[data-duel-heartbeat="true"]) .tm-dare-dock{visibility:hidden}
-#tryme-preview .tm-phone[data-duel-heartbeat="true"] header,#tryme-preview .tm-phone[data-duel-heartbeat="true"] main,#tryme-preview .tm-phone[data-duel-heartbeat="true"] footer{visibility:hidden}
-#tryme-preview .tm-duel-heartbeat{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 30%,#241A1870 65%,#DDD0CCB0 100%);animation:tm-duel-heartbeat .6s linear both}
-#tryme-preview .tm-duel-stage{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;background:radial-gradient(ellipse at center,#D6B8A928,transparent 68%),#3D0F0C;opacity:1;animation:tm-duel-stage 1.9s linear both}
-#tryme-preview .tm-duel-stage-title{position:absolute;top:22%;z-index:2;font:400 clamp(40px,11vw,64px)/1.15 Georgia,serif;color:#E4E4E3;opacity:0;animation:tm-duel-title .25s ease-out both}
-#tryme-preview .tm-duel-stage-subtitle{position:absolute;top:33%;z-index:2;font:20px/1.4 Georgia,serif;color:#D6B8A9;margin-top:12px;opacity:0;animation:tm-duel-fade .2s .25s both}
-#tryme-preview .tm-duel-versus{width:100%;display:grid;grid-template-columns:1fr 1fr;position:absolute;inset:0;margin:0;min-height:0;opacity:0;animation:tm-duel-fade .15s .45s both}
-#tryme-preview .tm-duel-side{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20vh 24px 0;text-align:center;overflow-wrap:anywhere;min-width:0}
-#tryme-preview .tm-duel-side strong{font:400 clamp(24px,7vw,38px)/1.2 Georgia,serif;color:#E4E4E3}
-#tryme-preview .tm-duel-side small{font:14px/1.4 Arial,sans-serif;color:#E4E4E3;margin-top:12px}
-#tryme-preview .tm-duel-resister{background:#721E19;animation:tm-duel-left .4s .45s ease-out both}
-#tryme-preview .tm-duel-attacker{background:#928478;animation:tm-duel-right .4s .45s ease-out both}
-#tryme-preview .tm-duel-hourglass{position:absolute;left:calc(50% - 25px);top:calc(60% - 25px);width:50px;height:50px;background:#3D0F0C;border:1px solid #D6B8A9;border-radius:50%;display:grid;place-items:center;font-size:27px;animation:tm-duel-hourglass .35s .85s ease-in-out both}
-#tryme-preview .tm-phone[data-view="duelintro"] .tm-duel-envelope{animation:tm-duel-envelope-rise .5s both;}
-#tryme-preview .tm-duel-seal{overflow:visible;background:transparent;box-shadow:none}
-#tryme-preview .tm-duel-seal-half{position:absolute;inset:0;display:grid;place-items:center;background:#721E19;border:1px solid #D6B8A9;border-radius:50%;font-size:21px;transition:none}
-#tryme-preview .tm-duel-seal-left{clip-path:polygon(0 0,50% 0,50% 100%,0 100%)}
-#tryme-preview .tm-duel-seal-right{clip-path:polygon(50% 0,100% 0,100% 100%,50% 100%)}
-#tryme-preview .tm-opening .tm-duel-seal{opacity:1;transform:none}
-#tryme-preview .tm-opening .tm-duel-seal-left{animation:tm-duel-seal-left .4s ease-in forwards}
-#tryme-preview .tm-opening .tm-duel-seal-right{animation:tm-duel-seal-right .4s ease-in forwards}
-#tryme-preview .tm-duel-envelope.tm-opening:before{transition-duration:.4s}
-@keyframes tm-duel-heartbeat{0%,45%,100%{opacity:.2;transform:scale(1)}18%,68%{opacity:1;transform:scale(.97)}}
-@keyframes tm-duel-stage{0%,76%{opacity:1}100%{opacity:0}}
-@keyframes tm-duel-title{from{opacity:0;transform:scale(1.4);filter:blur(8px)}to{opacity:1;transform:scale(1);filter:blur(0)}}
-@keyframes tm-duel-fade{from{opacity:0}to{opacity:1}}
-@keyframes tm-duel-left{from{transform:translateX(-100%)}to{transform:translateX(0)}}
-@keyframes tm-duel-right{from{transform:translateX(100%)}to{transform:translateX(0)}}
-@keyframes tm-duel-hourglass{from{transform:rotate(0)}to{transform:rotate(180deg)}}
-@keyframes tm-duel-envelope-rise{0%{opacity:0;transform:translateY(70px)}75%{opacity:1;transform:translateY(-6px)}100%{opacity:1;transform:translateY(0)}}
-@keyframes tm-duel-seal-left{to{opacity:0;transform:translate(-34px,-8px) rotate(-22deg)}}
-@keyframes tm-duel-seal-right{to{opacity:0;transform:translate(34px,-8px) rotate(22deg)}}
-#tryme-preview[data-motion="reduced"] .tm-duel-heartbeat,#tryme-preview[data-motion="reduced"] .tm-duel-stage{display:none}#tryme-preview[data-motion="reduced"] .tm-duel-entrance{background:#3D0F0C;animation:tm-duel-reduced .35s linear both}#tryme-preview[data-motion="reduced"] .tm-phone[data-view="duelintro"] .tm-duel-envelope,#tryme-preview[data-motion="reduced"] .tm-opening .tm-duel-seal-half{animation:none!important;transform:none!important}#tryme-preview[data-motion="reduced"] .tm-duel-envelope.tm-opening .tm-duel-seal{opacity:0;transition:none}#tryme-preview[data-motion="reduced"] .tm-duel-envelope:before{transition:none}
-
-@keyframes tm-duel-reduced{from{opacity:0}to{opacity:1}}
-
-
-#tryme-preview .tm-scores>span{min-width:0;flex:1;text-align:center}
-#tryme-preview > .tm-splash{animation:none;transition:none;opacity:1;position:fixed;inset:0;z-index:100;border-radius:0;width:100%;height:100%;height:100dvh;padding:max(26px,env(safe-area-inset-top)) max(18px,env(safe-area-inset-right)) max(26px,env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left))}
-</style>
-<link rel="stylesheet" href="crave.css?v=score-spacing-44">
-<link rel="stylesheet" href="crave-entry.css?v=entry-76">
-<link rel="stylesheet" href="crave-motion.css?v=fireworks-64">
-<link rel="stylesheet" href="connect/connect.css?v=journal-66">
-<link rel="stylesheet" href="roll/roll.css?v=original-rooms-83">
-<link rel="stylesheet" href="connect/motion.css?v=folder-book-68">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Caveat:wght@700&family=Jost:wght@300;400;500&display=swap">
-<link rel="stylesheet" href="home.css?v=logo-dot-72">
+<script src="shell.js?v=1a-1"></script>
 <script>
 (()=>{
  const root=document.getElementById('tryme-preview'),content=root.querySelector('#tm-content'),phone=root.querySelector('.tm-phone');
@@ -530,6 +82,8 @@ html,body{height:100%;overflow:hidden;overscroll-behavior:none}
  Object.keys(contentWords).forEach(language=>Object.assign(words[language],contentWords[language]));
  Object.assign(words.en,{fixedLevelNote:'With Fixed level, every card comes from the chosen level.',myFavorites:'My favorites',noFavorites:'No favorite cards yet.',targetLead:'{name} reached the target: needs a 2-point lead to win.',gameInProgress:'Game in progress'});
  Object.assign(words.es,{fixedLevelNote:'Con Nivel fijo, todas las tarjetas son del nivel elegido.',myFavorites:'Mis favoritas',noFavorites:'Todavía no hay tarjetas favoritas.',targetLead:'{name} llegó a la meta: necesita 2 puntos de ventaja para ganar.',gameInProgress:'Partida en curso'});
+ Object.assign(words.en,{passBtn:'Pass turn · −1',passTitle:'Pass this turn?',passText:'Passing costs 1 point. The turn goes to {partner}.',passFloor:'Scores never go below 0.',passConfirm:'Pass · −1',toastPass:'−1 for {name}',toastAbandon:'Dare abandoned · 0',scoreTitle:'Score',leadName:'Lead {name} +{n}',tied:'Tied',turnOf:"{name}'s turn",targetUp:'TARGET',homeKicker:'GAMES FOR COUPLES',homeTitle:'How do you want to <em>play</em> tonight?',homeConnect:'Conversations and games to get closer.',homeRoll:'Two dice. Whatever lands, you do.',homeCrave:'Truth or Dare. Desire and fun.',intimate:'Intimate',playful:'Playful',daringUp:'Daring',privateNote:'Private between you two. Nothing is shared.',chatWho:'You & me',chatTonight:'Tonight',chatToday:'Today',chatBored:'Bored tonight?',chatRead:'Read',chatSkip:'Skip',chatHint:'TAP TO SKIP',chatField:'Message',chatAria:'Skip intro',savedEnd:'End game',holdUp:'HOLDS OUT',attackUp:'ATTACKS',tapUp:'TAP THE ENVELOPE',duelSkipUp:'TAP TO SKIP TO THE ENVELOPE',optionUpA:'OPTION A',optionUpB:'OPTION B',hubHome:'Back to home'});
+ Object.assign(words.es,{passBtn:'Pasar turno · −1',passTitle:'¿Pasar turno?',passText:'Pasar cuesta 1 punto. El turno pasa a {partner}.',passFloor:'El marcador nunca baja de 0.',passConfirm:'Pasar · −1',toastPass:'−1 para {name}',toastAbandon:'Reto abandonado · 0',scoreTitle:'Marcador',leadName:'Ventaja {name} +{n}',tied:'Empate',turnOf:'Turno de {name}',targetUp:'META',homeKicker:'JUEGOS PARA PAREJAS',homeTitle:'¿Cómo quieren <em>jugar</em> esta noche?',homeConnect:'Conversaciones y juegos para acercarse.',homeRoll:'Dos dados. Lo que salga, lo hacen.',homeCrave:'Verdad o Reto. Deseo y diversión.',intimate:'Íntimo',playful:'Juguetón',daringUp:'Atrevido',privateNote:'Privado entre ustedes. No se comparte nada.',chatWho:'Tú y yo',chatTonight:'Esta noche',chatToday:'Hoy',chatBored:'¿Te aburres esta noche?',chatRead:'Leído',chatSkip:'Saltar',chatHint:'TOCA PARA SALTAR',chatField:'Mensaje',chatAria:'Saltar la introducción',savedEnd:'Terminar partida',holdUp:'AGUANTA',attackUp:'ATACA',tapUp:'TOCA EL SOBRE',duelSkipUp:'TOCA PARA IR AL SOBRE',optionUpA:'OPCIÓN A',optionUpB:'OPCIÓN B',hubHome:'Volver al inicio'});
  function speakerIcon(){return '<svg class="tm-line-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 5 5 9H2v6h3l5 4z"/><path d="M14 8a6 6 0 0 1 0 8M17 5a10 10 0 0 1 0 14"/></svg>';}
  const ruleText={
   en:{menu:'Menu',title:'Game rules',close:'Back to the game',intro:'A little chance. Clear rules.',sections:[
@@ -537,7 +91,7 @@ html,body{height:100%;overflow:hidden;overscroll-behavior:none}
    ['Turns and Random','The first player is chosen at random and revealed in an envelope. Players then alternate turns. Random chooses an available Truth or Dare for you.'],
    ['Keeping it balanced','In each block of 3 of your own turns, your first 2 choices are free. If both were Truth, your third is Dare; if both were Dare, your third is Truth. If you chose one of each, your third choice is free.'],
    ['Dare timer','Every Dare has a fixed duration. Start its timer when you begin. It cannot be paused. Stopping ends the dare. When time is up, confirm completion to earn 3 points. If the card has a failure condition, your partner decides whether you made it. Daring cards cannot appear on consecutive turns for the same player. Opening this menu does not pause an active timer.'],
-   ['Passing or abandoning',"Before a dare starts you can skip it: you just lose the turn. Once it's started, you can stop at any time with no extra penalty. The only exception is stopping because someone is about to orgasm: if the partner stops, they lose 1 point and the dare counts as completed."],
+   ['Passing or abandoning',"Before a card starts you can pass the turn: it costs 1 point (scores never go below 0) and the turn goes to your partner. Once a dare has started, you can stop at any time with no extra penalty. The only exception is stopping because someone is about to orgasm: if the partner stops, they lose 1 point and the dare counts as completed."],
    ['Levels and rooms','Fixed keeps your chosen level. Progressive moves from your starting level up to your selected maximum. Level and room changes occur between rounds. Tap Let’s do it to continue after a level change.'],
    ['Game limit and prize','Each player has up to 30 turns, reduced when the selected catalogue has fewer cards. If the limit is reached or the required compatible cards run out, the game ends in a draw. The winner opens their named envelope and chooses one of two compatible prizes. Orgasm reached and That’s enough both end the game.']
   ]},
@@ -546,7 +100,7 @@ html,body{height:100%;overflow:hidden;overscroll-behavior:none}
    ['Turnos y Random','La primera persona se elige al azar y su nombre aparece en un sobre. Después se alternan los turnos. Random escoge por ti una Verdad o un Reto disponible.'],
    ['Equilibrio entre tarjetas','En cada bloque de 3 turnos propios, las primeras 2 elecciones son libres. Si ambas fueron Truth, la tercera será Dare; si ambas fueron Dare, será Truth. Si elegiste uno de cada tipo, la tercera elección sigue siendo libre.'],
    ['Temporizador de Dare','Cada Dare tiene una duración fija. Inicia el contador cuando comiences. No se puede pausar. Pararlo termina el reto. Al terminar el tiempo, confirma que completaste el reto para sumar 3 puntos. Si la tarjeta tiene una condición de fallo, tu pareja decide si lo lograste. Una misma persona no recibe Atrevidas en turnos propios consecutivos. Abrir este menú no pausa un contador activo.'],
-   ['Pasar o abandonar',"Antes de empezar un reto pueden abandonarlo: pierden el turno, nada más. Ya empezado, pueden pararlo en cualquier momento sin castigo extra. La única excepción es parar porque alguien está por llegar al orgasmo: si para la pareja, pierde 1 punto y el reto cuenta como cumplido."],
+   ['Pasar o abandonar',"Antes de empezar una carta pueden pasar turno: cuesta 1 punto (el marcador nunca baja de 0) y el turno pasa a su pareja. Ya empezado un reto, pueden pararlo en cualquier momento sin castigo extra. La única excepción es parar porque alguien está por llegar al orgasmo: si para la pareja, pierde 1 punto y el reto cuenta como cumplido."],
    ['Niveles y lugares','Nivel fijo mantiene el nivel elegido. Progresiva avanza desde el nivel inicial hasta el máximo seleccionado. Los cambios de nivel y lugar ocurren entre rondas. Pulsa ¡Vamos a hacerlo! para seguir después de un cambio de nivel.'],
    ['Límite y premio','Cada persona tiene hasta 30 turnos, menos si el catálogo seleccionado tiene pocas tarjetas. Si se alcanza el límite o se agotan las tarjetas compatibles requeridas, hay empate. El ganador abre su sobre y elige uno de dos premios compatibles. Orgasmo logrado y Es suficiente terminan la partida.']
   ]}
@@ -628,11 +182,11 @@ html,body{height:100%;overflow:hidden;overscroll-behavior:none}
  const levelFields=()=>mode==='fixed'?`<label for="tm-fixed">${t('selectedLevel')}</label><select id="tm-fixed">${levelOptions(levelFixed)}</select>`:`<div class="tm-level-range"><div><label for="tm-from">${t('initialLevel')}</label><select id="tm-from">${levelOptions(levelFrom)}</select></div><div><label for="tm-to">${t('maximumLevel')}</label><select id="tm-to">${levelOptions(levelTo,levelFrom)}</select></div></div>`;
 const dareDock=root.querySelector('#tm-dare-dock');
  const dareControl=q=>dareDock.querySelector(q)||content.querySelector(q);
- function fitDareDock(){if(['dare','duel'].includes(screen))content.style.paddingBottom=(Math.ceil(dareDock.getBoundingClientRect().height)+16)+'px';else content.style.paddingBottom='';fitFrame();}
+ function fitDareDock(){if(['dare','duel'].includes(screen)&&!dareDock.hidden)content.style.paddingBottom=(Math.ceil(dareDock.getBoundingClientRect().height)+12)+'px';else content.style.paddingBottom='';}
  if(typeof ResizeObserver==='function')new ResizeObserver(fitDareDock).observe(dareDock);
  const storageKey='tryme-game-v3';
 
- const noticeCopy={"es": {"title": "Antes de empezar", "intro": "Try Me es un juego para parejas adultas con contenido sexual explícito. Para jugar, los dos aceptan esto:", "rules": ["Tenemos 18 años o más.", "Jugamos porque queremos. Cualquiera de los dos puede negarse a una tarjeta o parar un reto en cualquier momento. Eso cuenta como abandono: se pierden los puntos del turno, nada más. La única excepción es parar porque alguien está por llegar al orgasmo (ver Reglas).", "Cuidamos el cuerpo del otro. Usamos lubricante, vamos despacio con lo nuevo y paramos si algo duele. Las notas de seguridad de cada reto están ahí por algo.", "El juego no protege contra infecciones ni embarazos. Se recomienda usar condón u otro método profiláctico, sobre todo en el sexo oral, vaginal y anal, y cambiarlo al pasar del ano a la vagina o la boca.", "Si hay embarazo, una lesión o una condición médica, saltamos los retos que no nos convengan.", "Los tragos pueden ser sin alcohol. No jugamos bajo efectos fuertes de alcohol o drogas: para decir que sí hay que tener la cabeza clara.", "Jugamos en un lugar privado, sin menores ni otras personas cerca, y no grabamos a nadie que no lo haya aceptado.", "Try Me es entretenimiento. No es consejo médico ni terapia de pareja."], "agree": "Tengo 18 años o más y acepto.", "accept": "Aceptamos. ¡A jugar!", "exit": "Salir", "reminder": "Recuerden: cualquiera puede parar cuando quiera."}, "en": {"title": "Before you start", "intro": "Try Me is a game for adult couples with explicit sexual content. To play, you both agree to the following:", "rules": ["We are both 18 or older.", "We're playing because we want to. Either of us can refuse a card or stop a dare at any moment. That counts as quitting: you lose the turn's points, nothing more. The only exception is stopping because someone is about to orgasm (see Rules).", "We take care of each other's bodies. We use lube, go slow with anything new, and stop if something hurts. The safety notes on each dare are there for a reason.", "The game doesn't protect against infections or pregnancy. Using condoms or other protection is recommended, especially for oral, vaginal, and anal sex, and switching to a fresh one when going from anal to vaginal or oral.", "If there's a pregnancy, an injury, or a medical condition, we skip the dares that aren't right for us.", "Drinks can be alcohol-free. We don't play heavily drunk or high: saying yes takes a clear head.", "We play somewhere private, with no minors or other people around, and we don't record anyone who hasn't agreed to it.", "Try Me is entertainment. It isn't medical advice or couples therapy."], "agree": "I'm 18 or older and I agree.", "accept": "We agree. Let's play!", "exit": "Exit", "reminder": "Remember: either of you can stop whenever you want."}};
+ const noticeCopy={"es": {"title": "Antes de empezar", "intro": "Try Me es un juego para parejas adultas con contenido sexual explícito. Para jugar, los dos aceptan esto:", "rules": ["Tenemos 18 años o más.", "Jugamos porque queremos. Cualquiera de los dos puede negarse a una tarjeta o parar un reto en cualquier momento. Pasar antes de empezar una carta cuesta 1 punto; parar un reto ya empezado solo pierde los puntos del turno. La única excepción es parar porque alguien está por llegar al orgasmo (ver Reglas).", "Cuidamos el cuerpo del otro. Usamos lubricante, vamos despacio con lo nuevo y paramos si algo duele. Las notas de seguridad de cada reto están ahí por algo.", "El juego no protege contra infecciones ni embarazos. Se recomienda usar condón u otro método profiláctico, sobre todo en el sexo oral, vaginal y anal, y cambiarlo al pasar del ano a la vagina o la boca.", "Si hay embarazo, una lesión o una condición médica, saltamos los retos que no nos convengan.", "Los tragos pueden ser sin alcohol. No jugamos bajo efectos fuertes de alcohol o drogas: para decir que sí hay que tener la cabeza clara.", "Jugamos en un lugar privado, sin menores ni otras personas cerca, y no grabamos a nadie que no lo haya aceptado.", "Try Me es entretenimiento. No es consejo médico ni terapia de pareja."], "agree": "Tengo 18 años o más y acepto.", "accept": "Aceptamos. ¡A jugar!", "exit": "Salir", "reminder": "Recuerden: cualquiera puede parar cuando quiera."}, "en": {"title": "Before you start", "intro": "Try Me is a game for adult couples with explicit sexual content. To play, you both agree to the following:", "rules": ["We are both 18 or older.", "We're playing because we want to. Either of us can refuse a card or stop a dare at any moment. Passing before a card starts costs 1 point; stopping a dare that has started only loses the turn's points. The only exception is stopping because someone is about to orgasm (see Rules).", "We take care of each other's bodies. We use lube, go slow with anything new, and stop if something hurts. The safety notes on each dare are there for a reason.", "The game doesn't protect against infections or pregnancy. Using condoms or other protection is recommended, especially for oral, vaginal, and anal sex, and switching to a fresh one when going from anal to vaginal or oral.", "If there's a pregnancy, an injury, or a medical condition, we skip the dares that aren't right for us.", "Drinks can be alcohol-free. We don't play heavily drunk or high: saying yes takes a clear head.", "We play somewhere private, with no minors or other people around, and we don't record anyone who hasn't agreed to it.", "Try Me is entertainment. It isn't medical advice or couples therapy."], "agree": "I'm 18 or older and I agree.", "accept": "We agree. Let's play!", "exit": "Exit", "reminder": "Remember: either of you can stop whenever you want."}};
  const noticeStorageKey='tryme-notice-v1';
  let acceptedNames=null,noticeChecks=[false,false],noticeDestination='setup';
  const noticeAccepted=()=>Array.isArray(acceptedNames)&&names.every((name,i)=>name.trim()&&name.trim()===acceptedNames[i]);
@@ -654,7 +208,7 @@ const dareDock=root.querySelector('#tm-dare-dock');
   const button=content.querySelector('#tm-notice-accept');if(button)button.disabled=!noticeChecks.every(Boolean);
  }
 
-let newGameEntry=false,maxOwnTurns=30,drawReason='',prizeOptions=[],chosenPrizeId=null;
+let scoreView=null,lastToast=null,newGameEntry=false,maxOwnTurns=30,drawReason='',prizeOptions=[],chosenPrizeId=null;
  let availableItems=[],inventoryOpen=false,randomBusy=false,randomType='truth',timerAlarmPlayed=false;
  let audioContext=null,soundEnabled=true;
 let savedSnapshot=null,storageAvailable=true,resumeScreen='turn',endDestination='home';
@@ -862,27 +416,13 @@ Object.assign(words.es,{"stopDare": "Parar", "stopWho": "¿Quién está por veni
   duelStarted=false;duelEnd=0;duelAlarmPlayed=false;duelOpening=false;duelOutcome=null;beginDuelEntrance();return true;
  }
  function beginDuelEntrance(){
- navigationVersion++;transitionBusy=false;duelEntrance=true;lastDuelPulse=null;const version=++duelEntranceVersion,reduced=reducedMotion();resumeScreen='duelintro';saveGame();phone.dataset.duelHeartbeat=reduced?'false':'true';
- root.insertAdjacentHTML('beforeend',`<div id="tm-duel-entrance" class="tm-duel-entrance" role="button" tabindex="0" aria-label="${esc(t('duelSkip'))}"><div class="tm-duel-heartbeat" aria-hidden="true"></div></div>`);const ent=root.querySelector('#tm-duel-entrance');ent?.focus?.({preventScroll:true});
- if(!reduced&&ent){
- ent.animate?.([{backgroundColor:'rgba(0,0,0,0)'},{backgroundColor:'rgba(0,0,0,.65)',offset:.6},{backgroundColor:'#000'}],{duration:750,fill:'forwards',easing:'ease-in-out'});
- duelHeartbeatMotion=phone.animate?.([{transform:'scale(1)',offset:0},{transform:'scale(.985)',offset:.18},{transform:'scale(1)',offset:.45},{transform:'scale(.985)',offset:.68},{transform:'scale(1)',offset:1}],{duration:800,delay:450,easing:'linear'});setTimeout(()=>{if(version!==duelEntranceVersion||!duelEntrance||reducedMotion())return;playSound('heartbeat');try{if(soundEnabled)navigator.vibrate?.([80,60,80]);}catch{}},450);
- ent.insertAdjacentHTML('beforeend',`<div class="tm-dx" aria-hidden="true"><div class="tm-dx-l"></div><div class="tm-dx-r"></div><svg class="tm-dx-seam" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="62" y1="0" x2="38" y2="100" vector-effect="non-scaling-stroke"/></svg><div class="tm-dx-clash"></div><div class="tm-dx-band"><b>${t('duelTitle')}</b><span>${t('duelName')}</span></div><div class="tm-dx-name tm-dx-a"><strong>${esc(names[resister])}</strong><small>${t('duelHold')}</small></div><div class="tm-dx-name tm-dx-b"><strong>${esc(names[1-resister])}</strong><small>${t('duelAttack')}</small></div><div class="tm-dx-hg">${HOURGLASS_SVG}</div></div>`);
- const q=s=>ent.querySelector(s),A=(s,k,o)=>q(s)?.animate?.(k,{fill:'forwards',...o,delay:(o.delay||0)+450});
- A('.tm-duel-heartbeat',[{opacity:0},{opacity:1,offset:.18},{opacity:.45,offset:.45},{opacity:1,offset:.68},{opacity:.8}],{duration:800});
- A('.tm-dx-l',[{opacity:1,transform:'translateX(-100%)'},{opacity:1,transform:'none'}],{duration:320,delay:780,easing:'cubic-bezier(.7,0,.3,1)'});
- A('.tm-dx-r',[{opacity:1,transform:'translateX(100%)'},{opacity:1,transform:'none'}],{duration:320,delay:780,easing:'cubic-bezier(.7,0,.3,1)'});
- A('.tm-dx-seam',[{opacity:1},{opacity:1,offset:.6},{opacity:.4}],{duration:700,delay:1060});q('.tm-dx-seam line')?.animate?.([{strokeDashoffset:1400},{strokeDashoffset:0}],{duration:170,delay:1510,fill:'forwards',easing:'cubic-bezier(.6,0,.4,1)'});
- A('.tm-dx-clash',[{opacity:0,transform:'scale(.3)'},{opacity:1,transform:'scale(1)',offset:.25},{opacity:0,transform:'scale(1.5)'}],{duration:520,delay:1200,easing:'ease-out'});
- setTimeout(()=>{if(version!==duelEntranceVersion||!duelEntrance||reducedMotion())return;duelSparks(ent);playSound('click');try{if(soundEnabled)navigator.vibrate?.([30,20,70]);}catch{}phone.animate?.([{transform:'scale(1)'},{transform:'scale(1.03) translate(-5px,3px)',offset:.25},{transform:'translate(4px,-2px)',offset:.55},{transform:'none'}],{duration:340});},1670);
- A('.tm-dx-band',[{opacity:0,transform:'scale(1.7)',filter:'blur(8px)'},{opacity:1,transform:'scale(.97)',filter:'blur(0)',offset:.7},{opacity:1,transform:'scale(1)',filter:'blur(0)'}],{duration:380,delay:1330,easing:'cubic-bezier(.5,0,.3,1)'});
- A('.tm-dx-a',[{opacity:0,transform:'translateX(-40px)'},{opacity:1,transform:'none'}],{duration:420,delay:1450,easing:'cubic-bezier(.2,.8,.2,1)'});
- A('.tm-dx-b',[{opacity:0,transform:'translateX(40px)'},{opacity:1,transform:'none'}],{duration:420,delay:1520,easing:'cubic-bezier(.2,.8,.2,1)'});
- A('.tm-dx-hg',[{opacity:0,transform:'scale(.4) rotate(0deg)'},{opacity:1,transform:'scale(1.1) rotate(0deg)',offset:.35},{opacity:1,transform:'scale(1) rotate(180deg)'}],{duration:900,delay:1600,easing:'cubic-bezier(.4,0,.2,1)'});
- A('.tm-dx',[{opacity:1},{opacity:0}],{duration:400,delay:2650});
- }
- setTimeout(()=>{if(version===duelEntranceVersion&&duelEntrance){phone.dataset.duelHeartbeat='false';paint('duelintro');const envelope=content.querySelector('#tm-duel-envelope');if(envelope)envelope.style.animationDelay='2.2s';}},reduced?0:1300);
- setTimeout(()=>{if(version===duelEntranceVersion&&duelEntrance)finishDuelEntrance(false);},reduced?0:3500);
+ navigationVersion++;transitionBusy=false;duelEntrance=true;lastDuelPulse=null;const version=++duelEntranceVersion,reduced=reducedMotion();resumeScreen='duelintro';saveGame();
+ phone.dataset.scene='duel';
+ root.insertAdjacentHTML('beforeend',`<div id="tm-duel-entrance" class="tm-duel-entrance cr-dx ${reduced?'is-reduced':''}" role="button" tabindex="0" aria-label="${esc(t('duelSkip'))}"><div class="cr-dx-dim"></div><div class="cr-dx-stage"><h2 class="cr-dx-alto">${t('duelTitle')}</h2><p class="tm-kicker cr-dx-kicker">${t('duelName')}</p><div class="cr-dx-row"><div class="cr-dx-name cr-dx-left"><strong>${esc(names[resister])}</strong><small>${t('holdUp')}</small></div><div class="cr-dx-seal"><span class="cr-dx-ring"></span><span class="tm-seal"><b>TM</b></span></div><div class="cr-dx-name cr-dx-right"><strong>${esc(names[1-resister])}</strong><small>${t('attackUp')}</small></div></div><p class="cr-dx-roles">${esc(duelText(t('duelRoles')))}</p></div><p class="tm-kicker cr-dx-skip">${t('duelSkipUp')}</p></div>`);
+ const ent=root.querySelector('#tm-duel-entrance');ent?.focus?.({preventScroll:true});
+ if(!reduced){setTimeout(()=>{if(version!==duelEntranceVersion||!duelEntrance||reducedMotion())return;playSound('heartbeat');try{if(soundEnabled&&window.tryMeSettings?.vibration!==false)navigator.vibrate?.([80,60,80]);}catch{}},1550);}
+ setTimeout(()=>{if(version===duelEntranceVersion&&duelEntrance){paint('duelintro');}},reduced?0:1300);
+ setTimeout(()=>{if(version===duelEntranceVersion&&duelEntrance)finishDuelEntrance(false);},reduced?1400:3800);
  }
  function duelSparks(ent){
  if(reducedMotion())return;const r=ent.getBoundingClientRect(),W=r.width,H=r.height;let nx=H,ny=.24*W;const L=Math.hypot(nx,ny)||1;nx/=L;ny/=L;
@@ -890,13 +430,13 @@ Object.assign(words.es,{"stopDare": "Parar", "stopWho": "¿Quién está por veni
  }
  function paintDuelSand(f,running){const top=content.querySelector('.tm-sand-t'),bot=content.querySelector('.tm-sand-b'),st=content.querySelector('.tm-sand-stream');if(!top||!bot)return;top.setAttribute('y',8+28*f);top.setAttribute('height',28*(1-f));bot.setAttribute('y',66-18*f);bot.setAttribute('height',18*f);if(st)st.setAttribute('opacity',running?1:0);}
  function finishDuelEntrance(skipped=true){
-  if(!duelEntrance)return;phone.dataset.duelHeartbeat='false';duelHeartbeatMotion?.cancel();duelHeartbeatMotion=null;duelEntrance=false;duelEntranceVersion++;root.querySelector('#tm-duel-entrance')?.remove();
+  if(!duelEntrance)return;phone.dataset.duelHeartbeat='false';duelHeartbeatMotion?.cancel();duelHeartbeatMotion=null;duelEntrance=false;duelEntranceVersion++;const overlay=root.querySelector('#tm-duel-entrance');if(overlay){overlay.classList.add('is-leaving');setTimeout(()=>overlay.remove(),reducedMotion()?0:260);}
   if(skipped||screen!=='duelintro')paint('duelintro');const envelope=content.querySelector('#tm-duel-envelope');if(envelope&&skipped)envelope.style.animation='none';envelope?.focus?.({preventScroll:true});
  }
  function updateDuelTimer(){
   const d=selectedDuel(),clock=content.querySelector('#tm-duel-clock');if(!d||!clock)return;
   const remaining=duelStarted?Math.max(0,Math.ceil((duelEnd-Date.now())/1000)):d.duration_sec;
-  paintClock(clock,remaining,d.duration_sec,duelStarted);
+  paintClock(clock,remaining,d.duration_sec,duelStarted,duelStarted?Math.max(0,(duelEnd-Date.now())/1000):undefined);
   const urgent=duelStarted&&remaining>0&&remaining<=10;
   phone.dataset.duelUrgent=urgent?'true':'false';
   if(urgent)lastDuelPulse=remaining;
@@ -952,15 +492,16 @@ function validStopPending(v){
  const item=[...baseCatalogue,...(v.gameCustomCards||[]),...customCards].find(c=>c.id===v.currentCardId);
  return v.resumeScreen==='darestop'&&v.card==='dare'&&item?.type==='dare'&&['player','partner','both'].includes(item.stop_receiver)&&['reason','who'].includes(v.stopPending.stage)&&(v.stopPending.stage!=='who'||item.stop_receiver==='both')&&(v.started&&Number.isFinite(v.end)||!v.started&&v.end===0)&&v.winner===null;
 }
+function validScoreView(v){const sv=v.scoreView;return !!sv&&[0,1].includes(sv.i)&&[1,3].includes(sv.delta)&&['truth','dare'].includes(sv.kind)&&Array.isArray(sv.from)&&sv.from.length===2&&sv.from.every(n=>Number.isInteger(n)&&n>=0)&&v.card===null;}
 function validSnapshot(v){
- return !!(v&&validStopPending(v)&&validClothesChanges(v.clothesChanges)&&(v.clothes===undefined||Array.isArray(v.clothes)&&v.clothes.length===2&&v.clothes.every(state=>clothingStates.includes(state)))&&snapshotCustomCards(v)&&validDuelSnapshot(v)&&validOrgasmResult(v)&&v.version===3&&v.catalogueVersion===catalogueSource.version&&Array.isArray(v.anatomies)&&v.anatomies.length===2&&v.anatomies.every(a=>["penis","vulva","unspecified"].includes(a))&&Array.isArray(v.lastDaring)&&v.lastDaring.length===2&&v.lastDaring.every(d=>typeof d==="boolean")&&v.gameActive===true&&Number.isInteger(v.maxOwnTurns)&&v.maxOwnTurns>=1&&v.maxOwnTurns<=30&&Array.isArray(v.availableItems)&&v.availableItems.every(x=>accessories.includes(x))&&Array.isArray(v.prizeOptions)&&v.prizeOptions.every(id=>rewardCatalogue.some(r=>r.id===id))&&(!v.chosenPrizeId||rewardCatalogue.some(r=>r.id===v.chosenPrizeId))&&Array.isArray(v.names)&&v.names.length===2&&v.names.every(n=>typeof n==='string'&&n.length<=24)&&Array.isArray(v.genders)&&v.genders.length===2&&v.genders.every(g=>['woman','man','nonbinary','unspecified'].includes(g))&&[0,1,2,3].includes(v.levelFixed)&&(v.winner===null||v.winner===0||v.winner===1)&&Array.isArray(v.points)&&v.points.length===2&&v.points.every(n=>Number.isInteger(n)&&n>=0)&&Array.isArray(v.turns)&&v.turns.length===2&&v.turns.every(n=>Number.isInteger(n)&&n>=0&&n<=30)&&Array.isArray(v.usedCards)&&v.usedCards.every(id=>knownSnapshotCard(id,v))&&Array.isArray(v.history)&&v.history.length===2&&v.history.every(h=>Array.isArray(h)&&h.length<=2&&h.every(k=>['truth','dare'].includes(k)))&&['living','kitchen','bedroom'].includes(v.room)&&['en','es'].includes(v.lang)&&[0,1].includes(v.active)&&goalChoices.includes(v.goal)&&[0,1,2,3].includes(v.currentLevel)&&[0,1,2,3].includes(v.levelFrom)&&[0,1,2,3].includes(v.levelTo)&&v.levelTo>=v.levelFrom&&['progressive','fixed'].includes(v.mode)&&['journey','journey3','single','bedroomOnly'].includes(v.route)&&['envelope','turn','truth','dare','move','levelup','duelintro','duel','duelresult','winner','prize','chosen','prizecomplete','draw','orgasmresult','darestop'].includes(v.resumeScreen)&&(!v.currentCardId||[...baseCatalogue,...(v.gameCustomCards||[]),...customCards].some(c=>c.id===v.currentCardId&&c.type===v.card))&&(!v.started||Number.isFinite(v.end)));
+ return !!(v&&validStopPending(v)&&validClothesChanges(v.clothesChanges)&&(v.clothes===undefined||Array.isArray(v.clothes)&&v.clothes.length===2&&v.clothes.every(state=>clothingStates.includes(state)))&&snapshotCustomCards(v)&&validDuelSnapshot(v)&&validOrgasmResult(v)&&v.version===3&&v.catalogueVersion===catalogueSource.version&&Array.isArray(v.anatomies)&&v.anatomies.length===2&&v.anatomies.every(a=>["penis","vulva","unspecified"].includes(a))&&Array.isArray(v.lastDaring)&&v.lastDaring.length===2&&v.lastDaring.every(d=>typeof d==="boolean")&&v.gameActive===true&&Number.isInteger(v.maxOwnTurns)&&v.maxOwnTurns>=1&&v.maxOwnTurns<=30&&Array.isArray(v.availableItems)&&v.availableItems.every(x=>accessories.includes(x))&&Array.isArray(v.prizeOptions)&&v.prizeOptions.every(id=>rewardCatalogue.some(r=>r.id===id))&&(!v.chosenPrizeId||rewardCatalogue.some(r=>r.id===v.chosenPrizeId))&&Array.isArray(v.names)&&v.names.length===2&&v.names.every(n=>typeof n==='string'&&n.length<=24)&&Array.isArray(v.genders)&&v.genders.length===2&&v.genders.every(g=>['woman','man','nonbinary','unspecified'].includes(g))&&[0,1,2,3].includes(v.levelFixed)&&(v.winner===null||v.winner===0||v.winner===1)&&Array.isArray(v.points)&&v.points.length===2&&v.points.every(n=>Number.isInteger(n)&&n>=0)&&Array.isArray(v.turns)&&v.turns.length===2&&v.turns.every(n=>Number.isInteger(n)&&n>=0&&n<=30)&&Array.isArray(v.usedCards)&&v.usedCards.every(id=>knownSnapshotCard(id,v))&&Array.isArray(v.history)&&v.history.length===2&&v.history.every(h=>Array.isArray(h)&&h.length<=2&&h.every(k=>['truth','dare'].includes(k)))&&['living','kitchen','bedroom'].includes(v.room)&&['en','es'].includes(v.lang)&&[0,1].includes(v.active)&&goalChoices.includes(v.goal)&&[0,1,2,3].includes(v.currentLevel)&&[0,1,2,3].includes(v.levelFrom)&&[0,1,2,3].includes(v.levelTo)&&v.levelTo>=v.levelFrom&&['progressive','fixed'].includes(v.mode)&&['journey','journey3','single','bedroomOnly'].includes(v.route)&&['envelope','turn','truth','dare','move','levelup','duelintro','duel','duelresult','winner','prize','chosen','prizecomplete','draw','orgasmresult','darestop','score'].includes(v.resumeScreen)&&(v.resumeScreen!=='score'||validScoreView(v))&&(!v.currentCardId||[...baseCatalogue,...(v.gameCustomCards||[]),...customCards].some(c=>c.id===v.currentCardId&&c.type===v.card))&&(!v.started||Number.isFinite(v.end)));
 }
 function readSaved(){
  try{const raw=window.localStorage.getItem(storageKey);const value=raw?JSON.parse(raw):null;const before=JSON.stringify(value);if(value){if(Array.isArray(value.availableItems))value.availableItems=migrateItems(value.availableItems);if(Array.isArray(value.gameCustomCards))value.gameCustomCards=value.gameCustomCards.map(migrateCardItems);}savedSnapshot=validSnapshot(value)?value:null;if(savedSnapshot&&JSON.stringify(value)!==before)window.localStorage.setItem(storageKey,JSON.stringify(value));if(savedSnapshot){names=[...savedSnapshot.names];genders=[...savedSnapshot.genders];anatomies=[...savedSnapshot.anatomies];}}catch{storageAvailable=false;savedSnapshot=null;}
 }
 function saveGame(){
  if(!gameActive)return;
- const value={levelEnteredRound,roomEnteredRound,stopPending,clothesChanges:clothesChanges.map(entries=>entries.map(change=>({...change}))),clothes:[...clothes],orgasmResult,gameCustomCards,includeCustom,lastSkippedId,duelsPlayed,lastDuelRound,usedDuels:[...usedDuels],duelId,resister,duelStarted,duelEnd,duelAlarmPlayed,duelOutcome,version:3,catalogueVersion:catalogueSource.version,anatomies:[...anatomies],lastDaring:[...lastDaring],prizeCompleted,timerAlarmPlayed,maxOwnTurns,drawReason,availableItems:[...availableItems],prizeOptions:[...prizeOptions],chosenPrizeId,gameActive:true,lang,names:[...names],genders:[...genders],goal,room,route,mode,levelFrom,levelTo,levelFixed,currentLevel,previousLevel,pendingLevel,levelRoom,active,points:[...points],turns:[...turns],history:history.map(h=>[...h]),winner,card,currentCardId,usedCards:[...usedCards],started,end,initialOpened,nextRoom,prizeOpened,resumeScreen};
+ const value={scoreView,levelEnteredRound,roomEnteredRound,stopPending,clothesChanges:clothesChanges.map(entries=>entries.map(change=>({...change}))),clothes:[...clothes],orgasmResult,gameCustomCards,includeCustom,lastSkippedId,duelsPlayed,lastDuelRound,usedDuels:[...usedDuels],duelId,resister,duelStarted,duelEnd,duelAlarmPlayed,duelOutcome,version:3,catalogueVersion:catalogueSource.version,anatomies:[...anatomies],lastDaring:[...lastDaring],prizeCompleted,timerAlarmPlayed,maxOwnTurns,drawReason,availableItems:[...availableItems],prizeOptions:[...prizeOptions],chosenPrizeId,gameActive:true,lang,names:[...names],genders:[...genders],goal,room,route,mode,levelFrom,levelTo,levelFixed,currentLevel,previousLevel,pendingLevel,levelRoom,active,points:[...points],turns:[...turns],history:history.map(h=>[...h]),winner,card,currentCardId,usedCards:[...usedCards],started,end,initialOpened,nextRoom,prizeOpened,resumeScreen};
  savedSnapshot=value;
  try{window.localStorage.setItem(storageKey,JSON.stringify(value));}catch{storageAvailable=false;}
 }
@@ -973,7 +514,7 @@ function resumeGame(){
  newGameEntry=false;
  if(!validSnapshot(savedSnapshot))return;
  if(!Array.isArray(acceptedNames)||savedSnapshot.names.some((name,i)=>name.trim()!==acceptedNames[i])){names=[...savedSnapshot.names];genders=[...savedSnapshot.genders];anatomies=[...savedSnapshot.anatomies];lang=savedSnapshot.lang;showNotice('resume');return;}
- const v=savedSnapshot;clothes=v.clothes?[...v.clothes]:['dressed','dressed'];clothesChanges=v.clothesChanges?v.clothesChanges.map(entries=>entries.map(change=>({...change}))):[[],[]];orgasmResult=v.orgasmResult||null;stopPending=v.stopPending?{...v.stopPending}:null;
+ const v=savedSnapshot;scoreView=v.scoreView?{...v.scoreView,from:[...v.scoreView.from]}:null;clothes=v.clothes?[...v.clothes]:['dressed','dressed'];clothesChanges=v.clothesChanges?v.clothesChanges.map(entries=>entries.map(change=>({...change}))):[[],[]];orgasmResult=v.orgasmResult||null;stopPending=v.stopPending?{...v.stopPending}:null;
  gameCustomCards=(v.gameCustomCards||[]).map(c=>({...c}));includeCustom=v.includeCustom??customCards.length>0;lastSkippedId=v.lastSkippedId||null;
  duelsPlayed=v.duelsPlayed||0;lastDuelRound=v.lastDuelRound??Math.min(...v.turns);usedDuels=new Set(v.usedDuels||[]);duelId=v.duelId||null;resister=v.resister??0;duelStarted=!!v.duelStarted;duelEnd=v.duelEnd||0;duelAlarmPlayed=!!v.duelAlarmPlayed;duelOutcome=v.duelOutcome||null;duelOpening=false;
  anatomies=[...v.anatomies];lastDaring=[...v.lastDaring];
@@ -1029,11 +570,12 @@ function gameCard(type){
 
  const HOURGLASS_SVG=`<svg class="tm-hg" viewBox="0 0 30 38" aria-hidden="true"><path d="M5 2h20M5 36h20M7 2c0 10 16 10 16 17S7 26 7 36M23 2c0 10-16 10-16 17s16 7 16 17" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 8h10c-1 4-4 6-5 8-1-2-4-4-5-8z" fill="currentColor"/><path d="M9 34c1-4 4-5 6-6 2 1 5 2 6 6z" fill="currentColor"/></svg>`;
  const SAND_SVG=`<svg class="tm-sand" viewBox="0 0 56 74" aria-hidden="true"><defs><clipPath id="tm-sand-top"><rect class="tm-sand-t" x="0" y="8" width="56" height="28"/></clipPath><clipPath id="tm-sand-bot"><rect class="tm-sand-b" x="0" y="66" width="56" height="0"/></clipPath></defs><path d="M8 3h40M8 71h40M11 3c0 20 34 20 34 34S11 51 11 71M45 3c0 20-34 20-34 34s34 14 34 34" fill="none" stroke="#D6B8A9" stroke-width="2"/><path clip-path="url(#tm-sand-top)" d="M14 8h28c-2 9-9 15-14 21C23 23 16 17 14 8z" fill="#721E19"/><path clip-path="url(#tm-sand-bot)" d="M13 66c2-10 9-14 15-17 6 3 13 7 15 17z" fill="#721E19"/><line class="tm-sand-stream" x1="28" y1="37" x2="28" y2="64" stroke="#721E19" stroke-width="2" opacity="0"/></svg>`;
- const letterEnvelope=(index,opened,opening,actionName,id,kicker,address)=>`<div class="tm-letter-area"><button class="tm-envelope tm-prize-envelope ${opened?'tm-letter-open':opening?'tm-opening':''}" id="${id}" data-action="${actionName}" ${opened||opening?'disabled':''}><span class="tm-letter-sheet" aria-hidden="${opened||opening?'false':'true'}">${actionName==='prize'?`<span class="tm-prize-medal" aria-hidden="true">★</span><span class="tm-prize-letter-title">${t('claimTitle')}</span><span class="tm-prize-letter-note">${t('claimNote')}</span>`:`<span class="tm-letter-kicker">${kicker}</span><span class="tm-letter-name">${esc(names[index])}</span>`}</span><span class="tm-envelope-address" ${opened&&actionName==='open'?'hidden':''}>${address}</span><span class="tm-seal tm-heart-seal" aria-hidden="true"><span class="tm-duel-seal-half tm-duel-seal-left">♥</span><span class="tm-duel-seal-half tm-duel-seal-right">♥</span></span></button></div>`;
+ const letterEnvelope=(index,opened,opening,actionName,id,kicker,address)=>`<div class="tm-letter-area"><button class="tm-envelope tm-prize-envelope ${opened?'tm-letter-open':opening?'tm-opening':''}" id="${id}" data-action="${actionName}" ${opened||opening?'disabled':''}><span class="tm-letter-sheet" aria-hidden="${opened||opening?'false':'true'}">${actionName==='prize'?`<span class="tm-seal tm-prize-medal" aria-hidden="true"><b>TM</b></span><span class="tm-prize-letter-title">${t('claimTitle')}</span><span class="tm-prize-letter-note">${t('claimNote')}</span>`:`<span class="tm-letter-kicker">${kicker}</span><span class="tm-letter-name">${esc(names[index])}</span>`}</span><span class="tm-envelope-address" ${opened&&actionName==='open'?'hidden':''}>${address}</span><span class="tm-seal tm-env-seal" aria-hidden="true"><b>TM</b></span></button></div>`;
  const routePlaces=()=>route==='journey3'?['living','kitchen','bedroom']:route==='journey'?['living','bedroom']:route==='bedroomOnly'?['bedroom']:['living'];
  const routeSummary=()=>`<div class="tm-route-summary" aria-label="${t('setting')}">${routePlaces().map((place,i)=>`${i?'<span class="tm-route-arrow" aria-hidden="true">→</span>':''}<span class="tm-route-place">${t(place)}</span>`).join('')}</div>`;
  const scenery=()=>'';
- const sceneMarkup=(place)=>{
+ const sceneMarkup=(place)=>`<div class="tm-scene" data-place="${place}" aria-hidden="true"></div>`;
+ const legacySceneMarkup=(place)=>{
   const common=`<div class="tm-scene-wall"></div><div class="tm-scene-panels"></div><div class="tm-scene-floor"></div><div class="tm-scene-pendant"></div>`;
   const plant=`<div class="tm-scene-plant"><span></span><span></span><span></span></div>`;
   let furniture='';
@@ -1043,26 +585,52 @@ function gameCard(type){
   if(place==='office')furniture=`<div class="tm-scene-window"></div><div class="tm-scene-art"></div><div class="tm-scene-art cn-office-second-art"></div><div class="tm-scene-rug"></div><div class="tm-scene-lamp"></div>${plant}<div class="tm-scene-island cn-office-desk"></div><div class="tm-scene-couch cn-office-sofa"><div class="tm-scene-cushion"></div></div><div class="tm-scene-couch cn-office-chair"><div class="tm-scene-cushion"></div></div><div class="tm-scene-table"></div>`;
   return `<div class="tm-scene ${place==='office'?'cn-office-scene':''}" role="img" aria-label="${t('roomDrawing')}: ${place==='office'?(lang==='es'?'Oficina de terapia':'Therapy office'):t(place)}">${common}${furniture}</div>`;
  };
+ function craveWorld(){
+  const home=screen==='games',pre=['home','notice','setup','envelope','startconfirm','deckerror'].includes(screen)&&!gameActive||['home','notice','setup','startconfirm','deckerror'].includes(screen);
+  const duel=['duelintro','duel','duelresult'].includes(screen),prize=['winner','winnerintro','prize','chosen','prizecomplete'].includes(screen);
+  phone.dataset.game=home?'home':'crave';
+  phone.dataset.level=home?'':pre?'spark':levelKeys[currentLevel];
+  if(duel)phone.dataset.scene='duel';else if(prize)phone.dataset.scene='prize';else if(pre)phone.dataset.scene='setup';else delete phone.dataset.scene;
+  const place=home?'none':duel?'none':screen==='move'?nextRoom:screen==='levelup'&&levelRoom?levelRoom:pre?'living':room;
+  ['game','level','scene'].forEach(k=>{if(phone.dataset[k])dareDock.dataset[k]=phone.dataset[k];else delete dareDock.dataset[k];});
+  window.tryMeShell?.world({game:home?'home':'crave',title:'Crave',place});
+ }
  let chromeColorTimer;
  function syncHomeChrome(){
   clearTimeout(chromeColorTimer);
-  const apply=()=>{const introVisible=!!root.querySelector('.tm-chat-splash:not(.tm-chat-done)');const surface=getComputedStyle(phone).backgroundColor;const color=introVisible?'#0D0B0B':phone.dataset.view==='games'?'#EDEBE9':surface&&surface!=='rgba(0, 0, 0, 0)'?surface:'#DDD0CC';document.querySelector('meta[name="theme-color"]')?.setAttribute('content',color);document.documentElement.style.backgroundColor=color;document.body.style.backgroundColor=color;root.style.backgroundColor=color;};
+  const apply=()=>{const introVisible=!!root.querySelector('.tm-chat-splash:not(.tm-chat-done)');const surface=getComputedStyle(phone).backgroundColor;const color=introVisible?'#120D0C':surface&&surface!=='rgba(0, 0, 0, 0)'?surface:'#EFE8E1';document.querySelector('meta[name="theme-color"]')?.setAttribute('content',color);document.documentElement.style.backgroundColor=color;document.body.style.backgroundColor=color;root.style.backgroundColor=color;};
   apply();chromeColorTimer=setTimeout(apply,650);
  }
- const homeChromeObserver=new MutationObserver(syncHomeChrome);homeChromeObserver.observe(phone,{attributes:true,attributeFilter:['data-view','class','data-crave-palette','data-crave-level']});
+ const homeChromeObserver=new MutationObserver(syncHomeChrome);homeChromeObserver.observe(phone,{attributes:true,attributeFilter:['data-view','class','data-game','data-level','data-scene']});
  function intro(){
-  root.querySelector('.tm-splash')?.remove();
-  root.insertAdjacentHTML('beforeend',`<div class="tm-splash tm-chat-splash" role="button" tabindex="0" aria-label="Skip intro" lang="en"><div class="tm-chat-who">Tonight<b>You &amp; me</b></div><div class="tm-chat-in">Bored tonight?</div><div class="tm-chat-out"><div class="tm-chat-typing" aria-hidden="true"><i></i><i></i><i></i></div><div class="tm-chat-msg"><span class="tm-chat-logo">Try Me<span class="tm-chat-dot">.</span></span><span class="tm-chat-react" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24"><path d="M12 21s-8-5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 6-8 11-8 11z" fill="#721e19"/></svg></span></div></div><div class="tm-chat-read">Read <span class="tm-chat-now"></span></div><div class="tm-chat-skip">Tap to skip</div></div>`);
-  syncHomeChrome();const splash=root.querySelector('.tm-chat-splash');let hidden=false,closeTimer;
-  const updateTime=()=>{splash.querySelector('.tm-chat-now').textContent=new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true}).toLowerCase();};
-  updateTime();const timeTimer=setInterval(updateTime,1000);
-  const hide=()=>{if(hidden)return;hidden=true;clearTimeout(closeTimer);clearInterval(timeTimer);splash.classList.add('tm-chat-done');syncHomeChrome();splash.setAttribute('aria-hidden','true');splash.tabIndex=-1;setTimeout(()=>splash.remove(),reducedMotion()?0:600);};
-  splash.addEventListener('click',hide);
-  splash.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();hide();}});
-  closeTimer=setTimeout(hide,4000);
+  root.querySelector('.tm-chat-splash')?.remove();
+  let L=lang;try{const p=JSON.parse(localStorage.getItem('tryme-app-settings-v1')||'null');if(p&&['es','en'].includes(p.language))L=p.language;else L=/^es\b/i.test(navigator.language||'')?'es':'en';}catch{}
+  const w=k=>(L==='es'?words.es:words.en)[k],reduced=reducedMotion();
+  const now=new Date(),clock=now.toLocaleTimeString(L==='es'?'es-419':'en-US',{hour:'numeric',minute:'2-digit',hour12:true}).replace(/\s?a\.?\s?m\.?/i,L==='es'?' a. m.':' AM').replace(/\s?p\.?\s?m\.?/i,L==='es'?' p. m.':' PM');
+  root.insertAdjacentHTML('beforeend',`<div class="tm-chat-splash" role="button" tabindex="0" aria-label="${esc(w('chatAria'))}" lang="${L==='es'?'es-419':'en-US'}"><div class="tm-chat-bg"></div><div class="tm-chat-stage"><div class="tm-chat-head" aria-hidden="true"><div class="tm-chat-avatars"><i></i><i></i></div><div class="tm-chat-who">${esc(w('chatWho'))}</div><div class="tm-chat-tonight">${esc(w('chatTonight'))}</div></div><span class="tm-chat-skip">${esc(w('chatSkip'))}</span><div class="tm-chat-rule"></div><div class="tm-chat-thread" aria-live="polite"><div class="tm-chat-stamp">${esc(w('chatToday'))} ${esc(clock)}</div></div><div class="tm-chat-field" aria-hidden="true"><span class="tm-chat-typed">${esc(w('chatField'))}</span><span class="tm-chat-send"></span></div></div></div>`);
+  syncHomeChrome();const splash=root.querySelector('.tm-chat-splash'),thread=splash.querySelector('.tm-chat-thread'),field=splash.querySelector('.tm-chat-field'),typed=splash.querySelector('.tm-chat-typed');
+  let hidden=false;const timers=[];const at=(ms,fn)=>timers.push(setTimeout(()=>{if(!hidden)fn();},ms));
+  const add=html=>{thread.insertAdjacentHTML('beforeend',html);return thread.lastElementChild;};
+  const outgoing=`<div class="tm-chat-out"><span class="tm-chat-logo">Try Me<span>.</span></span></div>`;
+  const finish=(fly)=>{if(hidden)return;hidden=true;timers.forEach(clearTimeout);const seal=splash.querySelector('.tm-chat-react'),target=root.querySelector('#tm-home-seal');
+   if(fly&&seal&&target&&!reducedMotion()){const a=seal.getBoundingClientRect(),b2=target.getBoundingClientRect();const f=seal.cloneNode(true);f.className='tm-seal tm-chat-flight';Object.assign(f.style,{left:a.left+'px',top:a.top+'px'});document.body.appendChild(f);seal.style.visibility='hidden';target.style.visibility='hidden';
+    f.animate([{transform:'rotate(-6deg) scale(1)'},{transform:`translate(${(b2.left-a.left)*.55}px,${(b2.top-a.top)*.5-30}px) rotate(-20deg) scale(1.05)`,offset:.5},{transform:`translate(${b2.left-a.left+(b2.width-a.width)/2}px,${b2.top-a.top+(b2.height-a.height)/2}px) scale(${b2.width/a.width}) rotate(0deg)`}],{duration:640,easing:'cubic-bezier(.5,0,.2,1)',fill:'forwards'}).finished.catch(()=>{}).then(()=>{target.style.visibility='';f.remove();});}
+   splash.classList.add('is-leaving');splash.setAttribute('aria-hidden','true');splash.tabIndex=-1;syncHomeChrome();setTimeout(()=>{splash.remove();syncHomeChrome();},reducedMotion()?200:480);};
+  splash.addEventListener('click',()=>finish(false));
+  splash.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '||event.key==='Escape'){event.preventDefault();finish(false);}});
+  if(reduced){add(`<div class="tm-chat-in" style="animation:none">${esc(w('chatBored'))}</div>`);add(outgoing).style.animation='none';add(`<div class="tm-chat-read">${esc(w('chatRead'))} ${esc(clock)}</div>`);splash.querySelector('.tm-chat-out').insertAdjacentHTML('beforeend','<span class="tm-seal tm-chat-react" aria-hidden="true" style="animation:none"><b>TM</b></span>');at(1800,()=>finish(false));return;}
+  let dots=null;
+  at(250,()=>{dots=add('<div class="tm-chat-dots" aria-hidden="true"><i></i><i></i><i></i></div>');});
+  at(900,()=>{dots?.remove();add(`<div class="tm-chat-in">${esc(w('chatBored'))}</div>`);});
+  const word='Try Me.';
+  for(let i=1;i<=word.length;i++)at(1350+(i-1)*100,()=>{field.classList.add('is-typing');typed.innerHTML='<b>'+esc(word.slice(0,i))+'</b>';});
+  at(2400,()=>{field.classList.remove('is-typing');typed.textContent=w('chatField');add(outgoing);});
+  at(2900,()=>{add(`<div class="tm-chat-read">${esc(w('chatRead'))} ${esc(clock)}</div>`);});
+  at(3150,()=>{splash.querySelector('.tm-chat-out')?.insertAdjacentHTML('beforeend','<span class="tm-seal tm-chat-react" aria-hidden="true"><b>TM</b></span>');try{if(soundEnabled&&window.tryMeSettings?.vibration!==false)navigator.vibrate?.(12);}catch{}});
+  at(3950,()=>finish(true));
  }
 
- const initialEnvelope=()=>`<div class="tm-entry-letter-area"><div id="tm-initial-envelope" class="tm-entry-envelope ${initialOpened?'is-open is-peeking is-revealed':initialPeeking?'is-open is-peeking':''}"><div class="tm-entry-envelope-inside"></div><div class="tm-entry-flap"></div><button type="button" class="tm-entry-letter" data-action="pullinitial" ${initialOpened||!initialPeeking?'disabled':''} aria-label="${esc(t('firstMove'))}"><span class="tm-entry-letter-kicker">${t('firstMove')}</span><span class="tm-entry-letter-name">${esc(names[active])}</span></button><div class="tm-entry-pocket"></div><span class="tm-entry-envelope-address" aria-hidden="true">${t('firstEnvelope')}</span><button type="button" class="tm-entry-seal" data-action="open" ${initialOpened||initialPeeking?'disabled':''} aria-label="${esc(t('tapSeal'))}"><span aria-hidden="true">♥</span></button></div></div>`;
+ const initialEnvelope=()=>`<div class="tm-entry-letter-area"><div id="tm-initial-envelope" class="tm-entry-envelope ${initialOpened?'is-open is-peeking is-revealed':initialPeeking?'is-open is-peeking':''}"><div class="tm-entry-envelope-inside"></div><div class="tm-entry-flap"></div><button type="button" class="tm-entry-letter" data-action="pullinitial" ${initialOpened||!initialPeeking?'disabled':''} aria-label="${esc(t('firstMove'))}"><span class="tm-entry-letter-kicker">${t('firstMove')}</span><span class="tm-entry-letter-name">${esc(names[active])}</span></button><div class="tm-entry-pocket"></div><span class="tm-entry-envelope-address" aria-hidden="true">${t('firstEnvelope')}</span><button type="button" class="tm-entry-seal" data-action="open" ${initialOpened||initialPeeking?'disabled':''} aria-label="${esc(t('tapSeal'))}"><b aria-hidden="true">TM</b></button></div></div>`;
  function openInitialEnvelope(){
   if(initialOpened||initialOpening||initialPeeking)return;
   initialOpening=true;const el=content.querySelector('#tm-initial-envelope'),version=letterVersion;
@@ -1082,12 +650,15 @@ function gameCard(type){
  root.addEventListener('pointercancel',()=>{if(!initialDrag)return;initialDrag.sheet.style.transition='';initialDrag.sheet.style.transform='';initialDrag=null;});
 
  function targetLeadNotice(){if(winner!==null||!gameActive)return '';return points.map((value,i)=>value>=goal&&value-points[1-i]<2?`<p class="tm-target-notice" role="status">${esc(t('targetLead').replace('{name}',()=>names[i]))}</p>`:'').join('');}
- function animateScores(){const nodes=content.querySelectorAll('[data-score]');if(!nodes.length)return;const fly=flyFrom;flyFrom=null;if(fly&&!reducedMotion())flyPoints(fly);const previous=lastPaintedScores||points.slice();lastPaintedScores=points.slice();nodes.forEach(node=>{const i=Number(node.dataset.score),from=previous[i],to=points[i];if(from===to||reducedMotion())return;node.textContent=from;const run=()=>{if(!node.isConnected)return;node.classList.add(to>from?'tm-score-gain':'tm-score-loss');const start=performance.now();function count(now){if(!node.isConnected)return;const fraction=Math.min(1,(now-start)/400);node.textContent=Math.round(from+(to-from)*fraction);if(fraction<1)requestAnimationFrame(count);else setTimeout(()=>node.classList.remove('tm-score-gain','tm-score-loss'),500);}requestAnimationFrame(count);};if(fly&&fly.i===i)setTimeout(run,700);else run();});slideTurnLine();}
- function paintClock(clock,remaining,total,running){clock.classList.add('tm-clock-ring');clock.innerHTML='<span>'+Math.floor(remaining/60)+':'+String(remaining%60).padStart(2,'0')+'</span>';if(screen!=='duel'){const hint=content.querySelector('.tm-timer-hint');if(hint)hint.textContent=(lang==='es'?'de ':'of ')+Math.floor(total/60)+':'+String(total%60).padStart(2,'0')+(lang==='es'?' · sin pausa':' · no pause');}clock.style.setProperty('--timer-progress',Math.max(0,Math.min(1,remaining/Math.max(1,total))));clock.classList.toggle('tm-clock-urgent',running&&remaining>0&&remaining<=10);}
+ function animateScores(){const nodes=content.querySelectorAll('[data-score]');if(!nodes.length)return;flyFrom=null;const previous=scoreView&&screen==='score'?scoreView.from:(lastPaintedScores||points.slice());lastPaintedScores=points.slice();nodes.forEach(node=>{const i=Number(node.dataset.score),from=previous[i],to=points[i];if(from===to)return;const gain=to>from;const chip=gain&&node.closest('.cr-score-side')?node.closest('.cr-score-side').querySelector('.cr-chip'):null;if(reducedMotion()){node.classList.add(gain?'tm-score-gain':'tm-score-loss');setTimeout(()=>node.classList.remove('tm-score-gain','tm-score-loss'),1100);return;}node.textContent=from;node.classList.add(gain?'tm-score-gain':'tm-score-loss');if(!gain)node.animate?.([{transform:'none'},{transform:'translateX(-3px)'},{transform:'translateX(3px)'},{transform:'translateX(-2px)'},{transform:'none'}],{duration:320});let v=from;const step=gain?1:-1;const tick=setInterval(()=>{if(!node.isConnected){clearInterval(tick);return;}v+=step;node.textContent=v;if(v===to){clearInterval(tick);setTimeout(()=>node.classList.remove('tm-score-gain','tm-score-loss'),1100);}},130);});}
+ function paintClock(clock,remaining,total,running,exact){const C=307.9,f=Math.max(0,Math.min(1,(exact??remaining)/Math.max(1,total)));clock.classList.add('tm-clock-ring');clock.innerHTML='<svg viewBox="0 0 108 108" aria-hidden="true"><circle class="cr-ring-track" cx="54" cy="54" r="49"/><circle class="cr-ring-fill" cx="54" cy="54" r="49" stroke-dasharray="'+C+'" stroke-dashoffset="'+(C*(1-f)).toFixed(1)+'"/></svg><span>'+Math.floor(remaining/60)+':'+String(remaining%60).padStart(2,'0')+'</span>';clock.classList.toggle('cr-clock-pulse',!!running&&remaining>0&&remaining<=5);if(screen!=='duel'){const hint=content.querySelector('.tm-timer-hint');if(hint)hint.textContent=(lang==='es'?'de ':'of ')+Math.floor(total/60)+':'+String(total%60).padStart(2,'0')+(lang==='es'?' · sin pausa':' · no pause');}clock.style.setProperty('--timer-progress',Math.max(0,Math.min(1,remaining/Math.max(1,total))));clock.classList.toggle('tm-clock-urgent',running&&remaining>0&&remaining<=10);}
  const levelBars=()=>`<span class="tm-level-bars" aria-hidden="true">${[0,1,2,3].map(i=>`<i class="${i<=currentLevel?'is-filled':''}"></i>`).join('')}</span>`;
- const scores=()=>targetLeadNotice()+`<div class="tm-scores"><span class="${active===0?'tm-active-player':''}">${esc(names[0])}<strong data-score="0">${points[0]}</strong></span><span>${t('targetShort')}<strong>${goal}</strong></span><span class="${active===1?'tm-active-player':''}">${esc(names[1])}<strong data-score="1">${points[1]}</strong></span></div>`;
- const action=(name,label,extra='')=>`<button class="tm-action" data-action="${name}" ${extra}>${label}</button>`;
- const secondary=(name,label)=>`<button class="tm-secondary" data-action="${name}">${label}</button>`;
+ const barsMarkup=(level=currentLevel)=>`<span class="tm-bars" aria-hidden="true">${[0,1,2,3].map(i=>`<i class="${i<=level?'is-on':''}"></i>`).join('')}</span>`;
+ const scores=()=>targetLeadNotice()+`<div class="tm-plate cr-plate" role="group" aria-label="${esc(t('scoreTitle'))}">${[0,1].map(i=>`<div class="tm-plate-side"><span class="tm-plate-name ${active===i&&winner===null&&gameActive?'is-active':''}">${esc(names[i])}</span><strong class="tm-plate-score" data-score="${i}">${points[i]}</strong></div>`).join(`<div class="tm-plate-mid"><span class="tm-kicker">${t('targetUp')} ${goal}</span>${barsMarkup()}<span class="tm-plate-level">${t(levelKeys[currentLevel])}</span></div>`)}</div>`;
+ const turnLine=()=>{const h=history[active];return `<div class="cr-turnline"><p class="cr-yourturn">${t('yourturn')} <span class="tm-name">${esc(names[active])}</span></p><span class="cr-block"><span class="tm-kicker">${t('block')}</span><span class="cr-block-dots" aria-label="${h.length}/3">${[0,1,2].map(i=>`<i class="${i<h.length?'is-on':''}"></i>`).join('')}</span></span></div>`;};
+ const action=(name,label,extra='')=>`<button type="button" class="tm-action" data-action="${name}" ${extra}>${label}</button>`;
+ const secondary=(name,label)=>`<button type="button" class="tm-secondary" data-action="${name}">${label}</button>`;
+ const quietBtn=(name,label,extra='')=>`<button type="button" class="tm-quiet" data-action="${name}" ${extra}>${label}</button>`;
  const pending=()=>{const h=history[active];return h.length===2&&h[0]===h[1]?(h[0]==='truth'?'dare':'truth'):null;};
  function requireNames(){
   sync();names=names.map(n=>n.trim());nameError=names.some(n=>!n);
@@ -1098,23 +669,22 @@ function gameCard(type){
   if(screen==='home'){
    ['a','b'].forEach((id,i)=>{const n=content.querySelector('#tm-name-'+id),g=content.querySelector('#tm-gender-'+id);if(n){if(n.value!==names[i])invalidateNotice();names[i]=n.value;}if(g)genders[i]=g.value;const body=content.querySelector('#tm-anatomy-'+i);if(body)anatomies[i]=body.value;});rememberProfileBodies();
   }
-  if(screen==='setup'){const customSwitch=content.querySelector('#tm-include-custom');if(customSwitch)includeCustom=customSwitch.checked;inventoryOpen=!!content.querySelector('#tm-inventory')?.open;goal=Number(content.querySelector('#tm-goal').value);mode=content.querySelector('#tm-level').value;route=content.querySelector('#tm-route').value;const from=content.querySelector('#tm-from'),to=content.querySelector('#tm-to'),fixed=content.querySelector('#tm-fixed');if(from)levelFrom=Number(from.value);if(to)levelTo=Number(to.value);if(fixed)levelFixed=Number(fixed.value);availableItems=Array.from(content.querySelectorAll('[data-item]')).filter(x=>x.checked).map(x=>x.dataset.item);levelTo=Math.max(levelFrom,levelTo);}
+  if(screen==='setup'){const customSwitch=content.querySelector('#tm-include-custom');if(customSwitch)includeCustom=customSwitch.checked;inventoryOpen=!!content.querySelector('#tm-inventory')?.open;const routeSelect=content.querySelector('#tm-route');if(routeSelect)route=routeSelect.value;availableItems=Array.from(content.querySelectorAll('[data-item]')).filter(x=>x.checked).map(x=>x.dataset.item);levelTo=Math.max(levelFrom,levelTo);}
  }
- function reset(){petalsWinnerShown=false;morphFrom=null;lastTickSecond=null;flyFrom=null;lastActiveLine=null;levelEnteredRound=0;roomEnteredRound=0;lastPaintedScores=[0,0];names=(profileNames||names).slice();phone.dataset.duelHeartbeat='false';clothes=['dressed','dressed'];clothesChanges=[[],[]];duelHeartbeatMotion?.cancel();duelHeartbeatMotion=null;duelEntrance=false;duelEntranceVersion++;root.querySelector('#tm-duel-entrance')?.remove();lastDuelPulse=null;orgasmResult=null;stopPending=null;rewardPreview=0;lastSkippedId=null;gameCustomCards=[];duelsPlayed=0;lastDuelRound=0;usedDuels=new Set();duelId=null;resister=0;duelStarted=false;duelEnd=0;duelAlarmPlayed=false;duelOpening=false;duelOutcome=null;levelRoom=null;lastDaring=[false,false];prizeCompleted=false;celebrationPending=false;nameError=false;randomBusy=false;timerAlarmPlayed=false;inventoryOpen=false;drawReason='';prizeOptions=[];chosenPrizeId=null;gameActive=false;currentCardId=null;usedCards=new Set();letterVersion++;prizeOpened=false;prizeOpening=false;initialOpening=false;currentLevel=mode==='fixed'?levelFixed:levelFrom;pendingLevel=currentLevel;previousLevel=currentLevel;points=[0,0];turns=[0,0];history=[[],[]];winner=null;card=null;started=false;end=0;initialOpened=false;initialPeeking=false;room=route==='bedroomOnly'?'bedroom':'living';active=0;}
+ function reset(){scoreView=null;petalsWinnerShown=false;morphFrom=null;lastTickSecond=null;flyFrom=null;lastActiveLine=null;levelEnteredRound=0;roomEnteredRound=0;lastPaintedScores=[0,0];names=(profileNames||names).slice();phone.dataset.duelHeartbeat='false';clothes=['dressed','dressed'];clothesChanges=[[],[]];duelHeartbeatMotion?.cancel();duelHeartbeatMotion=null;duelEntrance=false;duelEntranceVersion++;root.querySelector('#tm-duel-entrance')?.remove();lastDuelPulse=null;orgasmResult=null;stopPending=null;rewardPreview=0;lastSkippedId=null;gameCustomCards=[];duelsPlayed=0;lastDuelRound=0;usedDuels=new Set();duelId=null;resister=0;duelStarted=false;duelEnd=0;duelAlarmPlayed=false;duelOpening=false;duelOutcome=null;levelRoom=null;lastDaring=[false,false];prizeCompleted=false;celebrationPending=false;nameError=false;randomBusy=false;timerAlarmPlayed=false;inventoryOpen=false;drawReason='';prizeOptions=[];chosenPrizeId=null;gameActive=false;currentCardId=null;usedCards=new Set();letterVersion++;prizeOpened=false;prizeOpening=false;initialOpening=false;currentLevel=mode==='fixed'?levelFixed:levelFrom;pendingLevel=currentLevel;previousLevel=currentLevel;points=[0,0];turns=[0,0];history=[[],[]];winner=null;card=null;started=false;end=0;initialOpened=false;initialPeeking=false;room=route==='bedroomOnly'?'bedroom':'living';active=0;}
  function updateTimer(){
   const clock=content.querySelector('#tm-clock');if(!clock)return;
   const remaining=started?Math.max(0,Math.ceil((end-Date.now())/1000)):cardSeconds();
   if(started&&remaining>0&&remaining<=5&&remaining!==lastTickSecond){lastTickSecond=remaining;try{if(soundEnabled&&!reducedMotion())navigator.vibrate?.(remaining<=2?[30,80,30]:20);}catch{}}
-  paintClock(clock,remaining,cardSeconds(),started);
-  if(started&&end)clock.style.setProperty('--timer-progress',Math.max(0,Math.min(1,(end-Date.now())/1000/Math.max(1,cardSeconds()))));
+  paintClock(clock,remaining,cardSeconds(),started,started&&end?Math.max(0,(end-Date.now())/1000):undefined);
   if(screen==='darestop'){if(started&&!remaining)backToDare();return;}
   const begin=dareControl('#tm-begin'),done=dareControl('#tm-done');
-  const ready=started&&remaining===0;begin.hidden=ready;const abandon=dareControl('#tm-abandon');if(abandon){abandon.hidden=ready;abandon.textContent=t(started?'stopDare':'abandon');}begin.disabled=started;begin.textContent=t(!started?'begin':remaining?'running':'elapsed');if(done){done.hidden=!ready;done.disabled=!ready;}const reportLink=dareDock.querySelector('[data-action="reportorgasm"]');if(reportLink)reportLink.hidden=!started||ready;const failed=dareControl('#tm-dare-failed');if(failed){failed.hidden=!ready;failed.disabled=!ready;}const verdict=dareControl('#tm-verdict');if(verdict)verdict.hidden=!ready;['tm-made-it','tm-didnt-make-it'].forEach(id=>{const button=dareControl('#'+id);if(button)button.disabled=!ready;});
+  const ready=started&&remaining===0;begin.hidden=ready;const abandon=dareControl('#tm-abandon');if(abandon){abandon.hidden=ready;abandon.textContent=t(started?'abandon':'passBtn');}begin.disabled=started;begin.textContent=t(!started?'begin':remaining?'running':'elapsed');dareDock.dataset.phase=!started?'idle':remaining?'running':'done';if(done){done.hidden=!ready;done.disabled=!ready;}const reportLink=dareDock.querySelector('[data-action="reportorgasm"]');if(reportLink)reportLink.hidden=!started||ready;const failed=dareControl('#tm-dare-failed');if(failed){failed.hidden=!ready;failed.disabled=!ready;}const verdict=dareControl('#tm-verdict');if(verdict)verdict.hidden=!ready;['tm-made-it','tm-didnt-make-it'].forEach(id=>{const button=dareControl('#'+id);if(button)button.disabled=!ready;});
   fitDareDock();
   if(started&&!remaining){clearInterval(timer);timer=null;if(!timerAlarmPlayed){timerAlarmPlayed=true;playSound('alarm');if(!reducedMotion())timeUpMoment();saveGame();}}
  }
  function fitFrame(){
-  content.style.minHeight='0px';
+  return;
   const wrap=content.querySelector('.tm-fit-content');if(!wrap)return;
   wrap.style.transform='';
   const available=content.clientHeight-parseFloat(window.getComputedStyle?.(content)?.paddingTop||0)-parseFloat(window.getComputedStyle?.(content)?.paddingBottom||0);
@@ -1147,89 +717,104 @@ function gameCard(type){
   if(next==='turn'&&gameActive&&((pending()&&!remainingCards(pending()).length)||(!remainingCards('truth').length&&!remainingCards('dare').length))){drawReason='outOfCards';next='draw';}
   clearInterval(timer);timer=null;screen=next;dareDock.hidden=!['dare','duel'].includes(screen);dareDock.innerHTML='';content.style.paddingBottom='';dareDock.lang=localeCode();dareDock.dataset.duel=screen==='duel'?'true':'false';if(screen!=='duel')phone.dataset.duelUrgent='false';if(screen==='setup')fitGoal();phone.dataset.view=screen;phone.dataset.craveLevel=levelKeys[currentLevel];if(['turn','truth','dare','darestop','orgasmresult','randomreveal','move','levelup'].includes(screen))phone.dataset.cravePalette=levelKeys[currentLevel];else delete phone.dataset.cravePalette;if(screen==='dare')dareDock.dataset.cravePalette=levelKeys[currentLevel];else delete dareDock.dataset.cravePalette;phone.lang=localeCode();document.documentElement.lang=localeCode();
   root.querySelector('[data-action="rulesmenu"]').textContent=screen==='games'?(lang==='es'?'Ajustes':'Settings'):ruleText[lang].menu;
-  const select=root.querySelector('#tm-language');select.value=localeCode();select.setAttribute('aria-label',t('language'));root.querySelector('#tm-language-label').textContent=t('language');
-  root.querySelector('#tm-adult').textContent=t('adult');root.querySelector('footer').textContent=t('footer');
-  if(screen==='games')content.innerHTML=`<section class="tm-home-menu" lang="en" aria-label="Games"><div class="tm-home-top"><span class="tm-home-logo">Try Me<span>.</span></span><button class="tm-home-settings" type="button" data-action="rulesmenu" aria-label="Settings" aria-haspopup="dialog" aria-controls="tm-app-settings"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="2" fill="none" stroke="#6c2620" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" fill="none" stroke="#6c2620" stroke-width="1.4"/></svg></button></div><p class="tm-home-eyebrow">GAMES FOR COUPLES</p><h1 class="tm-home-title">How do you want to <em>play</em> tonight?</h1><div class="tm-home-games"><button class="tm-home-game tm-home-connect" type="button" data-action="enterconnect"><span class="tm-home-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H10l-5 4v-4H4z" fill="none" stroke="#5a4a54" stroke-width="1.5" stroke-linejoin="round"/></svg></span><b>Connect</b><small>Conversations and games to get closer.</small><span class="tm-home-heat">Intimate<span aria-label="Intensity 1 of 3"><i></i><i class="off"></i><i class="off"></i></span></span></button><button class="tm-home-game tm-home-roll" type="button" data-action="enterroll"><span class="tm-home-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="9" cy="9" r="1.5" fill="#fff"/><circle cx="15" cy="15" r="1.5" fill="#fff"/><circle cx="12" cy="12" r="1.5" fill="#fff"/></svg></span><b>Roll</b><small>Two dice. Whatever lands, you do.</small><span class="tm-home-heat">Playful<span aria-label="Intensity 2 of 3"><i></i><i></i><i class="off"></i></span></span></button><button class="tm-home-game tm-home-crave" type="button" data-action="entercrave"><span class="tm-home-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c2 4 6 6 6 11a6 6 0 0 1-12 0c0-3 2-4 3-7 1 2 2 3 3 3 0-3-1-5 0-7z" fill="none" stroke="#d6b8a9" stroke-width="1.5" stroke-linejoin="round"/></svg></span><b>Crave</b><small>Truth or Dare. Desire and fun.${savedSnapshot?'<span class="tm-home-saved">Game in progress</span>':''}</small><span class="tm-home-heat">Daring<span aria-label="Intensity 3 of 3"><i></i><i></i><i></i></span></span></button></div><div class="tm-home-private"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1 2 3.5V8c0 3.5 2.6 6 6 7 3.4-1 6-3.5 6-7V3.5z" fill="none" stroke="#6c2620" stroke-width="1.3"/></svg>Private between you two. Nothing is shared.</div></section>`;
-  if(screen==='home')content.innerHTML=`<button type="button" class="tm-back" data-action="gamehub">${lang==='es'?'← Juegos':'← Games'}</button><div class="tm-small tm-entry-eyebrow">${t('entryEyebrow')}</div><h1 class="tm-crave-title">Crave.</h1><p class="tm-entry-intro">${t('introText')}</p>${savedSnapshot?`<div class="tm-resume-card tm-entry-resume"><div class="tm-small">${t('pausedEntry')}</div><p>${esc(savedSnapshot.names[0])} · ${savedSnapshot.points[0]} / ${esc(savedSnapshot.names[1])} · ${savedSnapshot.points[1]}</p><div class="tm-entry-resume-actions">${action('resume',t('resumeGame'))}<button type="button" class="tm-delete-saved" data-action="deletesaved" aria-label="${t('deleteSaved')}"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7M14 10v7"/></svg><span>${t('deleteShort')}</span></button></div></div>`:''}${['a','b'].map((id,i)=>`<fieldset class="tm-player-fields"><legend>${t('player')} ${i+1}</legend><div class="tm-player-row"><div><label for="tm-name-${id}">${t('name')}</label><input id="tm-name-${id}" maxlength="24" value="${esc(names[i])}" autocomplete="off" required aria-invalid="${nameError&&!names[i]?'true':'false'}" aria-describedby="tm-name-error"></div><div><label for="tm-gender-${id}">${t('gender')}</label><select id="tm-gender-${id}">${options([['woman','woman'],['man','man'],['nonbinary','nonbinary'],['unspecified','unspecified']],genders[i])}</select></div></div>${bodyField(i)}</fieldset>`).join('')}<p id="tm-body-help" class="tm-rule">${t('bodyHelp')}</p><p id="tm-name-error" class="tm-name-error" role="alert" ${nameError?'':'hidden'}>${nameError?t('namesRequired'):''}</p>${savedSnapshot?secondary('newgame',t('newGame')):action('continue',t('continue')+' →')}${!storageAvailable?`<p class="tm-rule">${t('storageNote')}</p>`:''}`;
-  if(screen==='randomreveal')content.innerHTML=`${scores()}<div class="tm-random-reveal" role="status"><div class="tm-small">${t('randomReveal')}</div><div class="tm-random-choices"><span class="tm-random-truth">${t('truth')}</span><span class="tm-random-dare">${t('dare')}</span></div><div class="tm-random-result">${t(randomType)}</div></div>`;
-  if(screen==='winnerintro')content.innerHTML=`<div class="tm-winner-intro" role="status"><div class="tm-small">Try Me.</div><h1>${t('winnerIntro')}</h1><div class="tm-winner-name">${esc(names[winner])}</div><p>${t('winnerIntroNote')}</p></div>`;
+  const select=root.querySelector('#tm-language');select.value=localeCode();root.querySelector('#tm-language-label').textContent=t('language');
+  root.querySelector('#tm-adult').textContent=t('adult');
+  craveWorld();
+  const heat=n=>`<span class="tm-heat" aria-hidden="true">${[0,1,2].map(i=>`<i class="${i<n?'':'off'}"></i>`).join('')}</span>`;
+  const pips=n=>({5:[[22,22],[49,22],[35.5,35.5],[22,49],[49,49]],4:[[22,22],[49,22],[22,49],[49,49]]}[n]||[]).map(([x,y])=>`<i style="left:${x-4.5}px;top:${y-4.5}px"></i>`).join('');
+  if(screen==='games')content.innerHTML=`<section class="tm-home" aria-labelledby="tm-home-title"><p class="tm-kicker">${t('homeKicker')}</p><h1 class="tm-home-title" id="tm-home-title">${t('homeTitle')}</h1><div class="tm-covers"><button type="button" class="tm-cover tm-cover-connect" data-action="enterconnect" aria-label="Connect. ${esc(t('homeConnect'))}"><span class="tm-label"><span class="tm-kicker">${t('intimate')}${heat(1)}</span><span class="tm-cover-name">Connect</span></span><span class="tm-cover-desc">${t('homeConnect')}</span></button><button type="button" class="tm-cover tm-cover-roll" data-action="enterroll" aria-label="Roll. ${esc(t('homeRoll'))}"><span class="tm-kicker">${t('playful')}${heat(2)}</span><span class="tm-cover-name">Roll</span><span class="tm-cover-desc">${t('homeRoll')}</span><span class="tm-cover-dice" aria-hidden="true"><span class="tm-cover-die red">${pips(5)}</span><span class="tm-cover-die slate">${pips(4)}</span></span></button><button type="button" class="tm-cover tm-cover-crave" data-action="entercrave" aria-label="Crave. ${esc(t('homeCrave'))}${savedSnapshot?' '+esc(t('gameInProgress')):''}">${savedSnapshot?`<span class="tm-cover-chip">${t('gameInProgress')}</span>`:''}<span class="tm-seal" aria-hidden="true"><b>TM</b></span><span class="tm-kicker">${t('daringUp')}${heat(3)}</span><span class="tm-cover-name">Crave</span><span class="tm-cover-desc">${t('homeCrave')}</span></button></div><p class="tm-home-foot">${t('privateNote')}</p></section>`;
+  if(screen==='home')content.innerHTML=`<div class="cr-entry"><p class="tm-kicker">${t('entryEyebrow')}</p><h1 class="cr-hero">Crave.</h1><p class="cr-lead">${t('introText')}</p>${savedSnapshot?`<div class="cr-resume"><p class="tm-kicker">${t('pausedEntry')}</p><div class="tm-plate cr-plate cr-plate-mini">${[0,1].map(i=>`<div class="tm-plate-side"><span class="tm-plate-name">${esc(savedSnapshot.names[i])}</span><strong class="tm-plate-score">${savedSnapshot.points[i]}</strong></div>`).join(`<div class="tm-plate-mid"><span class="tm-kicker">${t('targetUp')} ${savedSnapshot.goal}</span>${barsMarkup(savedSnapshot.currentLevel)}<span class="tm-plate-level">${t(levelKeys[savedSnapshot.currentLevel])}</span></div>`)}</div><div class="cr-resume-actions">${action('resume',t('resumeGame'))}<button type="button" class="tm-secondary cr-delete-saved" data-action="deletesaved" aria-label="${t('deleteSaved')}">${t('deleteShort')}</button></div></div>`:''}${['a','b'].map((id,i)=>`<fieldset class="cr-player"><legend class="tm-kicker">${t('player')} ${i+1}</legend><label class="cr-line-label" for="tm-name-${id}">${t('name')}</label><input class="cr-line-input" id="tm-name-${id}" maxlength="24" value="${esc(names[i])}" autocomplete="off" required aria-invalid="${nameError&&!names[i]?'true':'false'}" aria-describedby="tm-name-error"><div class="cr-player-row"><div><label for="tm-gender-${id}">${t('gender')}</label><select id="tm-gender-${id}">${options([['woman','woman'],['man','man'],['nonbinary','nonbinary'],['unspecified','unspecified']],genders[i])}</select></div>${bodyField(i)}</div></fieldset>`).join('')}<p id="tm-body-help" class="cr-note">${t('bodyHelp')}</p><p id="tm-name-error" class="cr-error" role="alert" ${nameError?'':'hidden'}>${nameError?t('namesRequired'):''}</p><div class="tm-bottom">${savedSnapshot?secondary('newgame',t('newGame')):action('continue',t('continue'))}</div>${!storageAvailable?`<p class="cr-note">${t('storageNote')}</p>`:''}</div>`;
+  if(screen==='randomreveal')content.innerHTML=`${scores()}<div class="tm-random-reveal" role="status"><p class="tm-kicker">${t('randomReveal')}</p><div class="cr-random-result">${t(randomType)}</div></div>`;
+  if(screen==='winnerintro')content.innerHTML=`<div class="cr-center cr-winner-intro" role="status"><p class="tm-kicker">Try Me</p><h1 class="cr-hero">${t('winnerIntro')}</h1><p class="cr-big-name">${esc(names[winner])}</p><p class="cr-lead">${t('winnerIntroNote')}</p></div>`;
   if(screen==='notice'){
    const copy=noticeCopy[lang];
-   content.innerHTML=`<div class="tm-notice"><h1>${copy.title}</h1><p>${esc(copy.intro)}</p><ol>${copy.rules.map(rule=>`<li>${esc(rule)}</li>`).join('')}</ol><fieldset class="tm-notice-checks" aria-label="${esc(copy.title)}">${names.map((name,i)=>`<label class="tm-notice-check" for="tm-notice-${i}"><input type="checkbox" id="tm-notice-${i}" data-notice-player="${i}" ${noticeChecks[i]?'checked':''}><span><strong>${esc(name)}:</strong> ${esc(copy.agree)}</span></label>`).join('')}</fieldset>${action('acceptnotice',esc(copy.accept),'id="tm-notice-accept" disabled')}${secondary('exitnotice',esc(copy.exit))}</div>`;
+   content.innerHTML=`<div class="cr-notice"><p class="tm-kicker">Crave · 18+</p><h1 class="tm-display">${copy.title}</h1><p class="cr-lead">${esc(copy.intro)}</p><ol class="cr-notice-list">${copy.rules.map(rule=>`<li>${esc(rule)}</li>`).join('')}</ol><fieldset class="tm-notice-checks" aria-label="${esc(copy.title)}">${names.map((name,i)=>`<label class="cr-check" for="tm-notice-${i}"><input type="checkbox" id="tm-notice-${i}" data-notice-player="${i}" ${noticeChecks[i]?'checked':''}><span><strong>${esc(name)}:</strong> ${esc(copy.agree)}</span></label>`).join('')}</fieldset><div class="tm-bottom">${action('acceptnotice',esc(copy.accept),'id="tm-notice-accept" disabled')}${quietBtn('exitnotice',esc(copy.exit))}</div></div>`;
    updateNoticeButton();
   }
-  if(screen==='setup')content.innerHTML=`<button type="button" class="tm-back" data-action="setupback">${t('backSetup')}</button><div class="tm-small">${t('prepare')}</div><h1>${t('yourway')}</h1><p class="tm-entry-intro">${t('entryPace')}</p><div class="tm-entry-setting"><label for="tm-goal">${t('target')}</label><select id="tm-goal">${goalOptions()}</select><p class="tm-rule">${t('targetCoverage')}</p></div><div class="tm-entry-setting"><label for="tm-level">${t('intensity')}</label><select id="tm-level">${options([['progressive','progressive'],['fixed','fixed']],mode)}</select>${levelFields()}<p class="tm-rule">${t(mode==='fixed'?'fixedLevelNote':'levelNote')}</p></div><div class="tm-entry-setting"><label for="tm-route">${t('setting')}</label><select id="tm-route">${options([['journey3','journey3'],['journey','journey'],['single','single'],['bedroomOnly','bedroomOnly']],route)}</select></div>${inventoryFields()}${customCards.length?`<label class="tm-switch-row" for="tm-include-custom"><span>${t('includeCustom')}</span><input type="checkbox" role="switch" id="tm-include-custom" ${includeCustom?'checked':''}></label>`:''}<p id="tm-capacity-note" class="tm-rule">${enoughCards()?t('capacity').replace('{n}',configuredCapacity()):t('capacityInvalid')}</p>${action('start',t('discover'))}`;
-  if(screen==='envelope')content.innerHTML=`<div class="tm-small">${t('chance')}</div><h1>${t('first')}</h1><p class="tm-entry-first-intro">${t('firstWaiting')}</p>${initialEnvelope()}<div class="tm-route tm-entry-hint" id="tm-initial-hint">${initialOpened?t('firstTurn')+': '+esc(names[active]):initialPeeking?t('envelopeOpening'):t('tapSeal')}</div>${action('turn',t('firstPlay'),initialOpened?'':'hidden')}<p class="tm-stop-reminder">${noticeCopy[lang].reminder}</p>`;
-  if(screen==='turn'){
-   const forced=pending(),slot=history[active].length+1;
-   content.innerHTML=`${scores()}<div class="tm-route">${t(room)} · ${t(levelKeys[currentLevel])}${levelBars()}</div>${scenery()}<h1>${t('yourturn')}<br><span class="tm-name">${esc(names[active])}</span>…</h1><div class="tm-options"><button class="tm-option" data-action="truth" ${forced==='dare'||!remainingCards('truth').length?'disabled':''}>${t('truth')}<small>${t('point')}</small></button><button class="tm-option" data-action="dare" ${forced==='truth'||!remainingCards('dare').length?'disabled':''}>${t('dare')}<small>${t('darepoints')}</small></button></div>${forced?`<p class="tm-rule">${t(forced==='dare'?'forcedDare':'forcedTruth')}</p>`:secondary('random',t('random'))}`;
+  if(screen==='setup'){
+   const fixed=mode==='fixed',lo=fixed?levelFixed:levelFrom,hi=fixed?levelFixed:levelTo,goals=allowedGoals(),gi=goals.indexOf(goal);
+   const tiles=levelKeys.map((key,i)=>{const inRange=i>=lo&&i<=hi,chip=fixed?(i===levelFixed?t('selectedLevel'):''):(i===levelFrom?t('initialLevel'):i===levelTo?t('maximumLevel'):'');return `<button type="button" class="cr-level" data-action="picklevel" data-level="${i}" data-tone="${key}" aria-pressed="${inRange}"><span class="cr-level-text"><span class="cr-level-name">${t(key)}</span><span class="cr-level-head">${i?esc(levelCopy[lang][i][0]):''}</span></span><span class="cr-level-side">${barsMarkup(i)}${chip?`<span class="cr-level-chip">${esc(chip)}</span>`:''}</span></button>`;}).join('');
+   content.innerHTML=`<div class="cr-setup"><p class="tm-kicker">${t('prepare')}</p><h1 class="tm-display">${t('selectedLevel')}</h1><div class="cr-mode" role="group" aria-label="${t('intensity')}"><button type="button" data-action="setmode" data-mode="progressive" aria-pressed="${!fixed}">${t('progressive')}</button><button type="button" data-action="setmode" data-mode="fixed" aria-pressed="${fixed}">${t('fixed')}</button></div><div class="cr-levels">${tiles}</div><p class="cr-note">${t(fixed?'fixedLevelNote':'levelNote')}</p><div class="cr-goal"><span class="cr-goal-label" id="tm-goal-label">${t('target')}</span><button type="button" class="cr-step" data-action="goaldown" aria-label="−" ${gi<=0?'disabled':''}>−</button><strong class="cr-goal-value" id="tm-goal" aria-labelledby="tm-goal-label" aria-live="polite">${goal}</strong><button type="button" class="cr-step" data-action="goalup" aria-label="+" ${gi<0||gi>=goals.length-1?'disabled':''}>+</button></div><p class="cr-note">${t('targetCoverage')}</p><div class="cr-field"><label for="tm-route">${t('setting')}</label><select id="tm-route">${options([['journey3','journey3'],['journey','journey'],['single','single'],['bedroomOnly','bedroomOnly']],route)}</select></div>${inventoryFields()}${customCards.length?`<label class="cr-switch-row" for="tm-include-custom"><span>${t('includeCustom')}</span><input type="checkbox" class="tm-switch" role="switch" id="tm-include-custom" ${includeCustom?'checked':''}></label>`:''}<p id="tm-capacity-note" class="cr-note">${enoughCards()?t('capacity').replace('{n}',configuredCapacity()):t('capacityInvalid')}</p><div class="tm-bottom">${action('start',t('discover'))}</div></div>`;
   }
-  if(screen==='truth')content.innerHTML=`${scores()}<div class="tm-route tm-card-meta">${t(room)} · ${t(levelKeys[currentLevel])}${levelBars()}</div><div class="tm-paper"><div class="tm-small">${t('truth').toUpperCase()} · ${t('point').toUpperCase()}</div>${cardTools(selectedCard())}${daringBadge(selectedCard())}${cardContext(selectedCard())}<p>${namedCardText()}</p>${cardExtras(selectedCard())}</div>${action('answered',t('answered'))}${secondary('abandon',t('pass'))}`;
+  if(screen==='envelope')content.innerHTML=`<div class="cr-center cr-first"><p class="tm-kicker">${t('chance')}</p><h1 class="tm-display">${t('first')}</h1><p class="cr-lead">${t('firstWaiting')}</p>${initialEnvelope()}<p class="tm-kicker cr-hint" id="tm-initial-hint">${initialOpened?t('firstTurn')+': '+esc(names[active]):initialPeeking?t('envelopeOpening'):t('tapSeal')}</p><div class="tm-bottom">${action('turn',t('firstPlay'),initialOpened?'':'hidden')}<p class="cr-note cr-center-text">${noticeCopy[lang].reminder}</p></div></div>`;
+  if(screen==='turn'){
+   const forced=pending();
+   content.innerHTML=`${scores()}${turnLine()}${forced?`<p class="cr-forced" role="status">${t(forced==='dare'?'forcedDare':'forcedTruth')}</p>`:''}<div class="tm-options cr-choices"><button type="button" class="tm-option cr-choice cr-truth" data-action="truth" ${forced==='dare'||!remainingCards('truth').length?'disabled':''}><span class="tm-seal cr-choice-seal" aria-hidden="true">+1</span><span class="cr-choice-name">${t('truth')}</span><small>${t('point')}</small></button><button type="button" class="tm-option cr-choice cr-dare" data-action="dare" ${forced==='truth'||!remainingCards('dare').length?'disabled':''}><span class="tm-seal tm-seal-light cr-choice-seal" aria-hidden="true">+3</span><span class="cr-choice-name">${t('dare')}</span><small>${t('darepoints')}</small></button></div><div class="tm-bottom">${quietBtn('random',t('random'),'aria-describedby="tm-random-note"')}${quietBtn('endgame',t('endGame'),'data-tone="muted"')}</div>`;
+  }
+  const cardMarkup=(kind)=>{const item=selectedCard(),dare=kind==='dare';return `<article class="tm-paper cr-card ${dare?'cr-card-dare':'cr-card-truth'}" aria-labelledby="tm-card-text"><span class="tm-seal ${dare?'':''} cr-card-seal" aria-hidden="true">${dare?'+3':'+1'}</span>${cardTools(item)}<p class="tm-kicker cr-card-kicker">${dare?t('dare').toUpperCase()+' · '+(lang==='en'?'3 POINTS':'3 PUNTOS')+' · '+(lang==='en'?'TIMED':'CON TIMER'):t('truth').toUpperCase()+' · '+t('point').toUpperCase()}${daringBadge(item)}</p>${cardContext(item)}<p class="cr-card-text ${String(item?.['text_'+lang]||'').length>90?'is-long':''}" id="tm-card-text">${namedCardText()}</p>${cardExtras(item)}${dare?`<div class="cr-timer"><div class="tm-time" id="tm-clock" role="timer"></div></div><p class="tm-timer-hint">${t('timerHint')}</p>`:''}</article>`;};
+  if(screen==='truth')content.innerHTML=`${scores()}${turnLine()}${cardMarkup('truth')}<div class="tm-bottom">${action('answered',t('answered'))}${secondary('abandon',t('passBtn'))}</div>`;
   if(screen==='dare'){
-   content.innerHTML=`${scores()}<div class="tm-route tm-card-meta">${t(room)} · ${t(levelKeys[currentLevel])}${levelBars()}</div><div class="tm-paper"><div class="tm-small">${t('dare').toUpperCase()} · ${lang==='en'?'3 POINTS':'3 PUNTOS'} ${daringBadge(selectedCard())}</div>${cardTools(selectedCard())}${cardContext(selectedCard())}<p>${namedCardText()}</p>${cardExtras(selectedCard())}<div class="tm-time" id="tm-clock"></div><div class="tm-timer-hint">${t('timerHint')}</div></div>`;
-   dareDock.innerHTML=`${action('timer',t('begin'),'id="tm-begin"')}${cardHasFail()?`<div id="tm-verdict" class="tm-verdict" hidden><h2>${esc(substituteNames(t('verdict')))}</h2>${action('madeit',t('madeIt'),'id="tm-made-it" disabled')}${secondary('didntmakeit',t('didntMakeIt')).replace('<button ','<button id="tm-didnt-make-it" disabled ')}</div>`:action('completed',t('complete'),'id="tm-done" hidden disabled')+secondary('darefailed',t('unmetDare')).replace('<button ','<button id="tm-dare-failed" hidden disabled ')}${secondary('abandon',t('abandon')).replace('<button ','<button id="tm-abandon" ')}${currentLevel>=2?`<button type="button" class="tm-orgasm-link" data-action="reportorgasm">${t('orgasmReport')}</button>`:''}`;
-
+   content.innerHTML=`${scores()}${turnLine()}${cardMarkup('dare')}`;
+   dareDock.innerHTML=`${action('timer',t('begin'),'id="tm-begin"')}${cardHasFail()?`<div id="tm-verdict" class="tm-verdict" hidden><p class="cr-verdict-title">${esc(substituteNames(t('verdict')))}</p>${action('madeit',t('madeIt'),'id="tm-made-it" disabled')}${secondary('didntmakeit',t('didntMakeIt')).replace('<button ','<button id="tm-didnt-make-it" disabled ')}</div>`:action('completed',t('complete'),'id="tm-done" hidden disabled')+secondary('darefailed',t('unmetDare')).replace('<button ','<button id="tm-dare-failed" hidden disabled ')}${secondary('abandon',t('passBtn')).replace('<button ','<button id="tm-abandon" ')}${currentLevel>=2?`<button type="button" class="tm-quiet tm-orgasm-link" data-action="reportorgasm">${t('orgasmReport')}</button>`:''}`;
   }
    if(screen==='darestop'&&stopPending){
-    content.innerHTML=`${scores()}<h1>${t(stopPending.stage==='who'?'stopWho':'stopWhy')}</h1>${stopPending.stage==='who'?stopRoles().map(person=>action('stopperson',esc(names[person]),`data-person="${person}"`)).join(''):action('stopalmost',t('stopAlmost'))+secondary('stoprather',t('stopRather'))}${secondary('backtodare',t('backToDare'))}<div class="tm-time" id="tm-clock"></div>`;
+    content.innerHTML=`${scores()}<div class="cr-center cr-stop"><h1 class="tm-display">${t(stopPending.stage==='who'?'stopWho':'stopWhy')}</h1><div class="cr-timer cr-timer-small"><div class="tm-time" id="tm-clock" role="timer"></div></div></div><div class="tm-bottom">${stopPending.stage==='who'?stopRoles().map(person=>action('stopperson',esc(names[person]),`data-person="${person}"`)).join(''):action('stopalmost',t('stopAlmost'))+secondary('stoprather',t('stopRather'))}${quietBtn('backtodare',t('backToDare'))}</div>`;
    }
    if(screen==='orgasmresult'&&orgasmResult){
     const r=orgasmResult,penalty=t('orgasmPenalty').replace('{person}',()=>names[r.person]),outcome=t(r.earned?'orgasmSuccess':'orgasmFailure').replace('{player}',()=>names[r.actor]),result=r.kind==='abandon'?t('stopAbandonedResult').replace('{player}',()=>names[r.actor]):r.kind==='stop'?t(r.earned?'stopPartnerResult':'stopPlayerResult').replace('{partner}',()=>names[1-r.actor]).replace('{player}',()=>names[r.actor]):penalty+' · '+outcome;
-    content.innerHTML=`<h1>${t('orgasmResultTitle')}</h1><div class="tm-paper"><p>${esc(result)}</p></div>${scores()}${action('orgasmcontinue',t('resultContinue'))}`;
+    content.innerHTML=`${scores()}<div class="cr-center cr-result"><p class="tm-kicker">Crave</p><h1 class="tm-display">${t('orgasmResultTitle')}</h1><div class="tm-paper cr-note-card"><p>${esc(result)}</p></div></div><div class="tm-bottom">${action('orgasmcontinue',t('resultContinue'))}</div>`;
    }
+  if(screen==='score'&&scoreView){
+   const q=qualifiedWinner(),lead=Math.abs(points[0]-points[1]),leader=points[0]>=points[1]?0:1;
+   content.innerHTML=`<div class="cr-center cr-score"><p class="tm-kicker cr-score-kicker">${scoreView.kind==='truth'?t('answered').toUpperCase():t('complete').toUpperCase()}</p><h1 class="tm-display">${t('scoreTitle')}</h1><div class="cr-score-card">${[0,1].map(i=>`<div class="cr-score-side"><span class="cr-score-name">${esc(names[i])}</span><strong class="cr-score-num" data-score="${i}">${points[i]}</strong>${scoreView.i===i?`<span class="cr-chip" aria-hidden="true">+${scoreView.delta}</span>`:''}<span class="cr-score-bar"><i style="width:${Math.min(100,Math.round(points[i]/goal*100))}%"></i></span></div>`).join('')}<div class="cr-score-foot"><span>${t('targetUp')} ${goal}</span><span>${lead?esc(t('leadName').replace('{name}',()=>names[leader]).replace('{n}',lead)):t('tied')}</span></div></div>${q===undefined?`<p class="cr-next-turn">${esc(t('turnOf').replace('{name}',()=>names[1-active]))}</p>`:''}</div><div class="tm-bottom">${action('scorecontinue',t('resultContinue'))}</div>`;
+  }
    if(screen==='duelintro'){
-   const envelope=letterEnvelope(resister,false,duelOpening,'openduel','tm-duel-envelope',t('duelName'),t('duelTap')).replace('tm-prize-envelope ','tm-prize-envelope tm-duel-envelope ').replace('<span class="tm-seal tm-heart-seal" aria-hidden="true"><span class="tm-duel-seal-half tm-duel-seal-left">♥</span><span class="tm-duel-seal-half tm-duel-seal-right">♥</span></span>',`<span class="tm-seal tm-duel-seal" aria-hidden="true"><span class="tm-duel-seal-half tm-duel-seal-left">${HOURGLASS_SVG}</span><span class="tm-duel-seal-half tm-duel-seal-right">${HOURGLASS_SVG}</span></span>`);
-   content.innerHTML=`<div class="tm-duel-intro"><h1>${t('duelTitle')}</h1><h2>${t('duelName')}</h2><p>${esc(duelText(t('duelRoles')))}</p>${envelope}</div>`;
+   content.innerHTML=`<div class="cr-center cr-duel-head"><h1 class="cr-alto">${t('duelTitle')}</h1><p class="tm-kicker">${t('duelName')}</p><p class="cr-lead">${esc(duelText(t('duelRoles')))}</p></div><div class="cr-env-wrap"><button type="button" class="cr-envelope cr-envelope-dark ${duelOpening?'is-opening':''}" id="tm-duel-envelope" data-action="openduel" ${duelOpening?'disabled':''} aria-label="${esc(t('duelTap'))}"><span class="cr-env-flap" aria-hidden="true"></span><span class="tm-seal cr-env-seal" aria-hidden="true"><b>TM</b></span></button></div><p class="tm-kicker cr-hint">${t('tapUp')}</p>`;
   }
   if(screen==='duel'){
    const d=selectedDuel();
-   content.innerHTML=`${scores()}<div class="tm-route">${t(room)} · ${t(levelKeys[currentLevel])}</div><h1>${t('duelName')}</h1><div class="tm-paper">${cardTools(d)}${cardContext(d)}<div class="tm-duel-vs"><span>${esc(names[resister])}<small>${t('duelHold')}</small></span><span>${esc(names[1-resister])}<small>${t('duelAttack')}</small></span></div><p>${namesHtml(d['text_'+lang],active,true)}</p><p class="tm-fail-note">${t('failLabel')}: ${namesHtml(d['fail_'+lang],active,true)}</p>${d['safety_'+lang]?`<p class="tm-safety-note">${namesHtml(d['safety_'+lang],active,true)}</p>`:''}<div class="tm-duel-timer">${SAND_SVG}<div class="tm-time" id="tm-duel-clock"></div></div></div>`;
-   dareDock.innerHTML=`${action('duelstart',t('duelStart'),'id="tm-duel-start"')}${action('duelstop',t('duelStop'),'id="tm-duel-stop" hidden disabled')}${currentLevel>=2?`<button type="button" class="tm-orgasm-link" id="tm-duel-orgasm-live" data-action="reportorgasm" hidden disabled>${t('orgasmReport')}</button>`:''}<p id="tm-duel-only" class="tm-duel-only" hidden>${esc(duelText(t('duelOnly')))}</p><div id="tm-duel-verdict" hidden><h2>${t('duelQuestion')}</h2>${action('duelheld',esc(duelText(t('duelHeld'))),'id="tm-duel-held" disabled')}${secondary('duelfailed',esc(duelText(t('duelFailed')))).replace('<button ','<button id="tm-duel-failed" disabled ')}${currentLevel>=2?secondary('duelorgasm',esc(duelText(t('duelOrgasm')))).replace('<button ','<button id="tm-duel-orgasm" disabled '):''}</div>`;
+   content.innerHTML=`<div class="cr-center cr-duel-head cr-duel-head-small"><h1 class="cr-alto">${t('duelTitle')}</h1><p class="tm-kicker">${t('duelName')}</p><p class="cr-lead">${esc(duelText(t('duelRoles')))}</p></div><article class="tm-paper cr-card cr-duel-card"><div class="cr-duel-vs"><span><strong>${esc(names[resister])}</strong><small>${t('holdUp')}</small></span><span><strong>${esc(names[1-resister])}</strong><small>${t('attackUp')}</small></span></div>${cardTools(d)}${cardContext(d)}<p class="cr-duel-text">${namesHtml(d['text_'+lang],active,true)}</p><p class="tm-fail-note">${t('failLabel')}: ${namesHtml(d['fail_'+lang],active,true)}</p>${d['safety_'+lang]?`<p class="tm-safety-note">${namesHtml(d['safety_'+lang],active,true)}</p>`:''}<div class="cr-duel-foot"><span class="tm-timer-hint">${t('timerHint')}</span><div class="cr-timer cr-timer-duel"><div class="tm-time" id="tm-duel-clock" role="timer"></div></div></div></article>`;
+   dareDock.innerHTML=`${action('duelstart',t('duelStart'),'id="tm-duel-start"')}${action('duelstop',t('duelStop')+' · '+esc(duelText(t('duelOnly'))),'id="tm-duel-stop" hidden disabled')}${currentLevel>=2?`<button type="button" class="tm-quiet tm-orgasm-link" id="tm-duel-orgasm-live" data-action="reportorgasm" hidden disabled>${t('orgasmReport')}</button>`:''}<p id="tm-duel-only" class="tm-duel-only" hidden>${esc(duelText(t('duelOnly')))}</p><div id="tm-duel-verdict" hidden><p class="cr-verdict-title">${t('duelQuestion')}</p>${action('duelheld',esc(duelText(t('duelHeld'))),'id="tm-duel-held" disabled')}${secondary('duelfailed',esc(duelText(t('duelFailed')))).replace('<button ','<button id="tm-duel-failed" disabled ')}${currentLevel>=2?secondary('duelorgasm',esc(duelText(t('duelOrgasm')))).replace('<button ','<button id="tm-duel-orgasm" disabled '):''}</div>`;
   }
   if(screen==='duelresult'){
-   const key=duelOutcome==='held'?'duelHeld':duelOutcome==='orgasm'?'duelOrgasm':duelOutcome==='stop'?'duelStopped':'duelFailed';
-   content.innerHTML=`<div class="tm-small">${t('duelName')}</div><h1>${esc(duelText(t(key)))}</h1>${scores()}${action('duelcontinue',t('duelContinue'))}`;
+   const key=duelOutcome==='held'?'duelHeld':duelOutcome==='orgasm'?'duelOrgasm':duelOutcome==='stop'?'duelStopped':'duelFailed',winnerIndex=duelOutcome==='held'?resister:1-resister,delta=duelOutcome==='held'?'+3':'+1';
+   content.innerHTML=`<div class="cr-center cr-duel-result"><p class="tm-kicker">${t('duelName')}</p><span class="tm-seal cr-win-seal" aria-hidden="true">${delta}</span><p class="cr-big-name">${esc(names[winnerIndex])}</p><h1 class="cr-outcome">${esc(duelText(t(key)))}</h1></div>${scores()}<div class="tm-bottom">${action('duelcontinue',t('duelContinue'))}</div>`;
   }
-  if(screen==='move')content.innerHTML=`<div class="tm-small">${t('change')}</div><h1>${t('changeTitle')}</h1><p>${lang==='en'?'Next stop: '+t(nextRoom)+'.':'Próxima parada: '+t(nextRoom)+'.'}</p>${action('bedroom',t('letsDoIt'))}`;
-  if(screen==='levelup'){const copy=levelCopy[lang][currentLevel];content.innerHTML=`<div class="tm-small">${t('levelChange')}</div>${levelRoom?`<p class="tm-new-place">${esc(t('newPlace').replace('{place}',t(levelRoom)))}</p>`:''}<h1>${esc(copy[0])}</h1><div class="tm-paper tm-level-notice"><div class="tm-small">${t(levelKeys[previousLevel])} → ${t(levelKeys[currentLevel])}</div><p>${esc(copy[1])}</p></div>${action('levelcontinue',t('letsDoIt'))}`;}
+  if(screen==='move')content.innerHTML=`<div class="cr-center cr-move"><p class="tm-kicker">${t('change')}</p><h1 class="tm-display">${t('changeTitle')}</h1><p class="cr-lead">${lang==='en'?'Next stop: '+t(nextRoom)+'.':'Próxima parada: '+t(nextRoom)+'.'}</p></div><div class="tm-bottom">${action('bedroom',t('letsDoIt'))}</div>`;
+  if(screen==='levelup'){const copy=levelCopy[lang][currentLevel];content.innerHTML=`<div class="cr-center cr-levelup"><p class="tm-kicker">${t('levelChange')}</p>${barsMarkup()}<h1 class="cr-level-big">${t(levelKeys[currentLevel])}</h1></div><div class="tm-paper cr-level-card"><p class="cr-level-card-title">${t('levelTitle').replace('<br>',' ')}</p><p class="cr-level-card-head">${esc(copy[0])}</p><p class="cr-level-card-desc">${esc(copy[1])}</p>${levelRoom?`<p class="cr-level-card-place">${esc(t('newPlace').replace('{place}',t(levelRoom)))}</p>`:''}</div><div class="tm-bottom">${action('levelcontinue',t('letsDoIt'))}</div>`;}
   if(screen==='winner'){
    const preview=winner===null,index=preview?active:winner;
-   content.innerHTML=`<div class="tm-small">${t(preview?'demoWinner':'completeGame')}</div><h1>${esc(names[index])},<br>${t('won')}</h1>${preview?'':`<div class="tm-final-result"><div class="tm-small">${t('finalScore')}</div><div class="tm-final-scores"><div><span>${esc(names[index])}</span><strong>${points[index]}</strong></div><span aria-hidden="true">–</span><div><span>${esc(names[1-index])}</span><strong>${points[1-index]}</strong></div></div><p class="tm-final-margin">${t('wonBy').replace('{n}',Math.abs(points[0]-points[1]))}</p></div>`}${scenery()}${letterEnvelope(index,prizeOpened,prizeOpening,'prize','tm-prize-envelope',t('forYou'),t('forYou')+' '+esc(names[index]))}<div class="tm-route" id="tm-letter-hint">${prizeOpened?t('letterOpening'):t('tapPrize')}</div>${prizeOpened?action('revealprize',t('revealPrize')):''}`;
+   content.innerHTML=`<div class="cr-center cr-winner"><p class="tm-kicker">${t(preview?'demoWinner':'completeGame')}</p><h1 class="cr-hero">${esc(names[index])}, ${t('won')}</h1>${preview?'':`<p class="cr-final-line"><span>${t('finalScore')} · ${points[index]} – ${points[1-index]}</span> <span>· ${t('wonBy').replace('{n}',Math.abs(points[0]-points[1]))}</span></p>`}</div>${letterEnvelope(index,prizeOpened,prizeOpening,'prize','tm-prize-envelope',t('forYou'),t('forYou')+' '+esc(names[index]))}<p class="tm-kicker cr-hint" id="tm-letter-hint">${prizeOpened?t('letterOpening'):t('tapPrize')}</p><div class="tm-bottom">${prizeOpened?action('revealprize',t('revealPrize')):''}</div>`;
   }
-  if(screen==='endconfirm')content.innerHTML=`<div class="tm-small">${t('endGame')}</div><h1>${t('endTitle')}</h1>${scores()}<p>${t('endText')}</p>${action('keepplaying',t('keepPlaying'))}${secondary('saveleave',t('saveLeave'))}${secondary('endnow',t('endNow'))}`;
-  if(screen==='startconfirm')content.innerHTML=`<h1>${t('replaceTitle')}</h1>${action('confirmnew',t('replaceGame'))}${secondary('cancelnew',t('cancel'))}`;
-  if(screen==='deckerror')content.innerHTML=`<h1>${t('deckTitle')}</h1><p>${t('coverage')}</p>${action('setup',t('backSetup'))}`;
+  if(screen==='endconfirm')content.innerHTML=`<div class="cr-center"><p class="tm-kicker">${t('endGame')}</p><h1 class="tm-display">${t('endTitle')}</h1>${scores()}<p class="cr-lead">${t('endText')}</p></div><div class="tm-bottom">${action('keepplaying',t('keepPlaying'))}${secondary('saveleave',t('saveLeave'))}${quietBtn('endnow',t('endNow'),'data-tone="danger"')}</div>`;
+  if(screen==='startconfirm')content.innerHTML=`<div class="cr-center"><h1 class="tm-display">${t('replaceTitle')}</h1></div><div class="tm-bottom">${action('confirmnew',t('replaceGame'))}${secondary('cancelnew',t('cancel'))}</div>`;
+  if(screen==='deckerror')content.innerHTML=`<div class="cr-center"><h1 class="tm-display">${t('deckTitle')}</h1><p class="cr-lead">${t('coverage')}</p></div><div class="tm-bottom">${action('setup',t('backSetup'))}</div>`;
   if(screen==='prizecomplete'){
    const index=prizeWinnerIndex();
    const confetti=celebrationPending&&!reducedMotion()?'<canvas class="tm-fireworks" aria-hidden="true"></canvas>':'';
-   content.innerHTML=confetti+`<div class="tm-small">${t('prizeCompleteLabel')}</div><h1>${t('prizeCompleteTitle')}</h1><p>${esc(names[index])}, ${t('prizeCompleteText')}</p>${action('home',t('prizeExit'))}`;celebrationPending=false;
+   content.innerHTML=confetti+`<div class="cr-center cr-complete"><p class="tm-kicker">${t('prizeCompleteLabel')}</p><h1 class="cr-hero">${t('prizeCompleteTitle')}</h1><p class="cr-lead">${esc(names[index])}, ${t('prizeCompleteText')}</p></div><div class="tm-bottom">${action('replay',t('playAgain'))}${secondary('hubhome',t('hubHome'))}</div>`;celebrationPending=false;
   }
-  if(screen==='draw')content.innerHTML=`<h1>${t('draw')}</h1>${scores()}<p>${t(drawReason||'limitDraw')}</p>${action('home',t('homeButton'))}`;
+  if(screen==='draw')content.innerHTML=`<div class="cr-center"><h1 class="tm-display">${t('draw')}</h1>${scores()}<p class="cr-lead">${t(drawReason||'limitDraw')}</p></div><div class="tm-bottom">${action('home',t('homeButton'))}</div>`;
   if(screen==='prize'){
    const eligibleRewards=rewardCatalogue.filter(r=>r.rooms.includes(room)&&hasItems(r)&&prizeCompatible(r));
    prizeOptions=prizeOptions.filter(id=>eligibleRewards.some(r=>r.id===id));
    if(!prizeOptions.length){const pool=[...eligibleRewards];while(pool.length&&prizeOptions.length<2){const chosen=weightedPick(pool);prizeOptions.push(chosen.id);pool.splice(pool.findIndex(c=>c.id===chosen.id),1);}}
-   content.innerHTML=`<div class="tm-small">${t('forYou')} ${esc(names[winner===null?active:winner])}</div><h1>${t('prizeChoice')}</h1>${prizeOptions.length?`<div class="tm-reward-tabs">${prizeOptions.map((id,i)=>`<button class="tm-secondary" data-action="previewreward" data-preview="${i}" aria-pressed="${i===Math.min(rewardPreview,prizeOptions.length-1)}">${t('prizeNumber').replace('{n}',i+1)}</button>`).join('')}</div>`:''}${prizeOptions.length?prizeOptions.filter((id,i)=>i===Math.min(rewardPreview,prizeOptions.length-1)).map(id=>{const item=rewardCatalogue.find(r=>r.id===id);return `<div class="tm-paper tm-reward-option">${cardTools(item)}${cardContext(item)}<p>${namedPrizeText(item)}</p>${prizeSafety(item)}${action('chooseprize',t('choosePrize'),`data-prize="${id}"`)}</div>`;}).join(''):`<p>${t('noReward')}</p>`}`;
+   content.innerHTML=`<div class="cr-prize-head"><p class="tm-kicker">${t('forYou')} ${esc(names[winner===null?active:winner])}</p><h1 class="tm-display">${t('prizeChoice')}</h1></div>${prizeOptions.length?`<div class="cr-prizes">${prizeOptions.map((id,i)=>{const item=rewardCatalogue.find(r=>r.id===id);return `<article class="tm-paper cr-prize-card" style="--r:${i?'.8deg':'-.8deg'}">${cardTools(item)}<p class="tm-kicker">${t(i?'optionUpB':'optionUpA')}</p>${cardContext(item)}<p class="cr-prize-title">${namesHtml(item['title_'+lang],prizeWinnerIndex())}</p><p class="cr-prize-text">${namesHtml(item['text_'+lang],prizeWinnerIndex())}</p>${prizeSafety(item)}${action('chooseprize',t('choosePrize'),`data-prize="${id}"`)}</article>`;}).join('')}</div>`:`<p class="cr-lead">${t('noReward')}</p>`}`;
   }
-  if(screen==='chosen'){const reward=rewardCatalogue.find(r=>r.id===chosenPrizeId);content.innerHTML=`<div class="tm-small">${t('forYou')} ${esc(names[winner===null?active:winner])}</div><h1>${t('chosen')}</h1>${reward?`<div class="tm-paper">${cardTools(reward)}${cardContext(reward)}<p>${namedPrizeText(reward)}</p>${prizeSafety(reward)}</div>`:''}${action('completeprize',t('orgasmAchieved'))}${secondary('enoughprize',t('enoughPrize'))}`;}
-  if(lastSkippedId&&gameActive&&!blockedIds.has(lastSkippedId)&&lookupCard(lastSkippedId))content.innerHTML+=`<div class="tm-block-last">${secondary('blockcard',t('blockCard')).replace('<button ','<button data-card="'+esc(lastSkippedId)+'" ')}</div>`;
+  if(screen==='chosen'){const reward=rewardCatalogue.find(r=>r.id===chosenPrizeId);content.innerHTML=`<div class="cr-center cr-chosen"><p class="tm-kicker">${t('chosen')}</p><h1 class="cr-hero">${t('moment').replace('<br>',' ')}</h1></div>${reward?`<article class="tm-paper cr-prize-card cr-prize-chosen">${cardTools(reward)}${cardContext(reward)}<p class="cr-prize-title">${namesHtml(reward['title_'+lang],prizeWinnerIndex())}</p><p class="cr-prize-text">${namesHtml(reward['text_'+lang],prizeWinnerIndex())}</p>${prizeSafety(reward)}</article>`:''}<div class="tm-bottom">${action('completeprize',t('orgasmAchieved'))}${secondary('enoughprize',t('enoughPrize'))}</div>`;}
+  if(lastSkippedId&&gameActive&&!blockedIds.has(lastSkippedId)&&lookupCard(lastSkippedId)){const markup=`<div class="tm-block-last">${quietBtn('blockcard',t('blockCard'),'data-card="'+esc(lastSkippedId)+'" data-tone="muted"')}</div>`;const bottom=content.querySelector('.tm-bottom');if(bottom)bottom.insertAdjacentHTML('beforeend',markup);else content.innerHTML+=markup;}
 
-  if(screen==='prizecomplete'||gameActive&&['winner','draw'].includes(screen))content.innerHTML+=secondary('replay',t('playAgain'));
-  if(['turn','truth','dare','move','levelup','duel','duelresult','winner','prize','chosen','prizecomplete','orgasmresult','darestop'].includes(screen)){const body=content.innerHTML;content.innerHTML=sceneMarkup(screen==='move'?nextRoom:screen==='levelup'&&levelRoom?levelRoom:room)+'<div class="tm-fit-content tm-foreground">'+body+'</div>';}
-  else if(!['setup','notice'].includes(screen))content.innerHTML='<div class="tm-fit-content">'+content.innerHTML+'</div>';
+  if(gameActive&&['winner','draw'].includes(screen))content.querySelector('.tm-bottom')?.insertAdjacentHTML('beforeend',secondary('replay',t('playAgain')));
+  content.innerHTML='<div class="tm-fit-content cr-screen" data-screen="'+screen+'">'+content.innerHTML+'</div>';
   if(screen==='duel'){updateDuelTimer();if(duelStarted&&Date.now()<duelEnd)timer=setInterval(updateDuelTimer,250);}
   if(['dare','darestop'].includes(screen)){updateTimer();if(started&&Date.now()<end)timer=setInterval(updateTimer,250);}
   if(screen==='home'&&nameError)content.querySelector('#tm-name-'+(names[0]?'b':'a'))?.focus?.();
   if(screen==='winner'&&!petalsWinnerShown){petalsWinnerShown=true;if(!reducedMotion()){const cv=document.createElement('canvas');cv.className='tm-petals';cv.setAttribute('aria-hidden','true');content.querySelector('.tm-fit-content')?.appendChild(cv);}}
   animateScores();fitDareDock();fitFrame();if(levelKeys[currentLevel]==='afterdark')addNightSky(content.querySelector('.tm-scene'));petalsBurst(content.querySelector('.tm-petals'));fireworksBurst(content.querySelector('.tm-fireworks'));if(gameActive)armHistoryGuard();
-  if(previousScreen!==screen&&(screen==='notice'||previousScreen==='notice'))window.scrollTo?.({top:0,left:0,behavior:'auto'});
+  if(previousScreen!==screen){content.scrollTop=0;window.scrollTo?.({top:0,left:0,behavior:'auto'});}
   if(gameActive){if(!['home','notice','setup','endconfirm','startconfirm','deckerror','randomreveal','winnerintro'].includes(screen))resumeScreen=screen;saveGame();}
  }
  function finish(earned,resolved=true){
   if(card===null)return;
   if(resolved)applyClothes(selectedCard());
+  const kind=card,before=points.slice();
   points[active]+=earned;turns[active]++;history[active].push(card);if(history[active].length===3)history[active]=[];
   card=null;currentCardId=null;started=false;end=0;clearInterval(timer);timer=null;
+  if(earned>0){scoreView={i:active,delta:earned,kind,from:before};resumeScreen='score';render('score');return;}
+  afterTurn();
+ }
+ function afterTurn(){
+  scoreView=null;
   const qualified=qualifiedWinner();if(qualified!==undefined){winner=qualified;announceWinner();return;}
   if(turns[0]>=maxOwnTurns&&turns[1]>=maxOwnTurns){render('draw');return;}
   active=1-active;
@@ -1255,30 +840,32 @@ function gameCard(type){
   render('turn');
  }
 
+ const LEVEL_LOOK=[{surface:'#EFE6E2',ink:'#241A18',bar:'#721E19',empty:'#DDCFCA',accent:'#721E19'},{surface:'#E5CBC6',ink:'#2A1716',bar:'#8A2522',empty:'#D3B5AF',accent:'#8A2522'},{surface:'#9B2621',ink:'#FFF1EC',bar:'#FFD3C8',empty:'#B5453E',accent:'#FFD3C8'},{surface:'#29213C',ink:'#F1EAF5',bar:'#D4A574',empty:'#3B2F55',accent:'#D4A574'}];
  async function levelTransition(next){
- if(reducedMotion()||typeof phone.animate!=='function'){render(next);return;}
- const toNight=next==='levelup'&&levelKeys[currentLevel]==='afterdark',oldScene=content.querySelector('.tm-scene'),oldRect=oldScene?.getBoundingClientRect(),oldClone=oldScene&&(next==='move'||levelRoom)?oldScene.cloneNode(true):null;
- transitionBusy=true;const version=++navigationVersion,dim=document.createElement('div');dim.className='tm-dim';phone.appendChild(dim);let lampTimer=null;
+ if(reducedMotion()||typeof phone.animate!=='function'||next!=='levelup'){render(next);return;}
+ transitionBusy=true;const version=++navigationVersion,from=previousLevel,to=currentLevel,look=LEVEL_LOOK[to];
+ const lu=document.createElement('div');lu.className='cr-lu';lu.setAttribute('aria-hidden','true');
+ lu.innerHTML=`<div class="cr-lu-dim"></div><div class="cr-lu-flood" style="background:${look.surface}"></div><div class="cr-lu-stage"><p class="tm-kicker cr-lu-kicker">${t('levelChange')}</p><span class="cr-lu-bars">${[0,1,2,3].map(i=>`<i class="${i<=from?'is-on':''} ${i===to?'is-new':''}"></i>`).join('')}</span><h2 class="cr-lu-name">${t(levelKeys[to])}</h2></div>`;
+ phone.appendChild(lu);lu.style.setProperty('--new-ink',look.ink);lu.style.setProperty('--new-bar',look.bar);lu.style.setProperty('--new-empty',look.empty);lu.style.setProperty('--new-accent',look.accent);
+ const wait=ms=>new Promise(r=>setTimeout(r,ms));
  try{
- if(next==='levelup')dim.animate([{opacity:0},{opacity:toNight?.92:.45}],{duration:toNight?900:600,fill:'forwards',easing:'ease-in'});
- await new Promise(r=>setTimeout(r,next==='levelup'?(toNight?1500:700):250));if(version!==navigationVersion)return;
- paint(next);const scene=content.querySelector('.tm-scene'),motions=[];
- if(oldClone&&scene&&oldRect){const r=phone.getBoundingClientRect();Object.assign(oldClone.style,{position:'absolute',inset:'auto',left:(oldRect.left-r.left)+'px',top:(oldRect.top-r.top)+'px',width:oldRect.width+'px',height:oldRect.height+'px',zIndex:0});phone.appendChild(oldClone);
- motions.push(oldClone.animate([{transform:'none',opacity:getComputedStyle(scene).opacity},{transform:'translateX(-44px)',opacity:0}],{duration:1000,easing:'cubic-bezier(.5,0,.2,1)',fill:'forwards'}).finished.catch(()=>{}));
- motions.push(scene.animate([{transform:'translateX(44px)',opacity:0},{transform:'none'}],{duration:1000,easing:'cubic-bezier(.5,0,.2,1)'}).finished.catch(()=>{}));}
- if(levelKeys[currentLevel]==='afterdark')addNightSky(scene);
- motions.push(dim.animate([{opacity:next==='levelup'?(toNight?.92:.45):0},{opacity:0}],{duration:toNight?1100:600,delay:toNight?500:0,fill:'forwards'}).finished.catch(()=>{}));
- if(next==='levelup'&&scene)lampTimer=setTimeout(()=>{if(version!==navigationVersion||!scene.isConnected||reducedMotion())return;scene.classList.add('tm-lamp-on');playSound('reveal');try{if(soundEnabled)navigator.vibrate?.(30);}catch{}},toNight?1300:500);
- await Promise.all(motions);
+  requestAnimationFrame(()=>lu.classList.add('st0'));
+  await wait(420);if(version!==navigationVersion)return;lu.classList.add('st1');playSound('reveal');try{if(soundEnabled&&window.tryMeSettings?.vibration!==false)navigator.vibrate?.(30);}catch{}
+  await wait(1130);if(version!==navigationVersion)return;lu.classList.add('st2');
+  await wait(950);if(version!==navigationVersion)return;
+  paint(next);lu.classList.add('st3');
+  await wait(800);
  }catch{if(version===navigationVersion)paint(next);}
- finally{clearTimeout(lampTimer);dim.remove();oldClone?.remove();if(version===navigationVersion)transitionBusy=false;}
+ finally{lu.remove();if(version===navigationVersion)transitionBusy=false;}
  }
  function addNightSky(scene){
+ return;
  if(!scene||scene.querySelector('.tm-stars'))return;const s=document.createElement('div');s.className='tm-stars';s.setAttribute('aria-hidden','true');
  for(let i=0;i<22;i++){const e=document.createElement('i');e.style.left=(4+Math.random()*92)+'%';e.style.top=(4+Math.random()*60)+'%';e.style.animationDelay=(Math.random()*2.4)+'s';s.appendChild(e);}scene.appendChild(s);
  }
- const PAL={day:[['#FFFFFF','#F6C2CF'],['#FFF1EC','#FF8FA3'],['#FFFFFF','#E0434F'],['#FFF6EE','#F3D2B8'],['#FFFFFF','#FFB3C1']],
+ const PAL_OLD={day:[['#FFFFFF','#F6C2CF'],['#FFF1EC','#FF8FA3'],['#FFFFFF','#E0434F'],['#FFF6EE','#F3D2B8'],['#FFFFFF','#FFB3C1']],
  night:[['#FFFFFF','#D4A574'],['#F6EEFF','#B98CF0'],['#FFFFFF','#F1EAF5'],['#FFF4E6','#E8C08C'],['#FFFFFF','#9E7BFF']]};
+ const FW=[['#FFFFFF','#F3EDE8'],['#FFF6EE','#E6C9BC'],['#FFFFFF','#D4A574'],['#FFF6EE','#F6C2CF'],['#FFFFFF','#FFD3C8']];const PAL={day:FW,night:FW};
  function fireworksBurst(cv){
  if(!cv||reducedMotion())return;const mode=(phone.dataset.cravePalette||phone.dataset.craveLevel)==='afterdark'?'night':'day';const box=cv.getBoundingClientRect(),dpr=Math.min(2,window.devicePixelRatio||1),cx=cv.getContext('2d');if(!cx||!box.width||!box.height)return;
  cv.width=box.width*dpr;cv.height=box.height*dpr;cx.setTransform(dpr,0,0,dpr,0,0);
@@ -1343,20 +930,54 @@ function gameCard(type){
  const l=document.createElement('i');l.className='tm-turn-line';scoreBox.appendChild(l);Object.assign(l.style,{left:(a.left-box.left)+'px',width:a.width+'px'});target.classList.add('tm-line-wait');
  const clean=()=>{l.remove();target.classList.remove('tm-line-wait');};l.animate([{transform:'translateX(0)'},{transform:`translateX(${b.left-a.left}px)`}],{duration:550,easing:'cubic-bezier(.5,0,.2,1)',fill:'forwards'}).finished.then(clean,clean);
  }
+ const sheetDialog=root.querySelector('#tm-sheet');
+ function openSheet(html,cls=''){sheetDialog.className='tm-sheet '+cls;sheetDialog.lang=localeCode();sheetDialog.innerHTML=html;if(!sheetDialog.open)sheetDialog.showModal();sheetDialog.querySelector('.tm-action')?.focus?.({preventScroll:true});}
+ function closeSheet(){if(sheetDialog.open)sheetDialog.close();}
+ sheetDialog.addEventListener('click',e=>{if(e.target===sheetDialog)closeSheet();});
+ function toast(text){window.tryMeShell?.toast(text);}
+ function repaintSetup(){const top=content.scrollTop;paint('setup');content.scrollTop=top;}
+ function openPassSheet(){
+  if(!gameActive||card===null||!['truth','dare'].includes(screen)||screen==='dare'&&started)return;
+  const from=points[active],to=Math.max(0,from-1);
+  openSheet(`<div class="cr-pass-head"><div><h2 id="tm-sheet-title">${t('passTitle')}</h2><p>${esc(t('passText').replace('{partner}',()=>names[1-active]))}</p></div><span class="cr-pass-seal" aria-hidden="true">−1</span></div><div class="cr-pass-row"><span>${esc(names[active])}</span><span class="cr-pass-nums"><b>${from}</b><i aria-hidden="true">→</i><b class="is-loss">${to}</b></span></div><p class="cr-pass-floor">${t('passFloor')}</p>${action('confirmpass',t('passConfirm'))}${secondary('cancelpass',t('keepPlaying'))}`,'cr-pass-sheet');
+ }
+ function confirmPass(){
+  if(!gameActive||card===null||!['truth','dare'].includes(screen)||screen==='dare'&&started){closeSheet();return;}
+  closeSheet();const who=active;points[who]=Math.max(0,points[who]-1);lastSkippedId=currentCardId;toast(t('toastPass').replace('{name}',()=>names[who]));finish(0,false);
+ }
+ function openSavedSheet(){
+  const v=savedSnapshot;if(!v){render('home');return;}
+  const L=levelKeys[v.currentLevel];
+  openSheet(`<div class="tm-saved-head"><span class="tm-seal" aria-hidden="true"><b>TM</b></span><div><p class="tm-kicker">${t('savedGame')}</p><h2 id="tm-sheet-title">Crave</h2></div></div><div class="tm-plate cr-plate" data-tone="${L}">${[0,1].map(i=>`<div class="tm-plate-side"><span class="tm-plate-name ${v.active===i?'is-active':''}">${esc(v.names[i])}</span><strong class="tm-plate-score">${v.points[i]}</strong></div>`).join(`<div class="tm-plate-mid"><span class="tm-kicker">${t('targetUp')} ${v.goal}</span>${barsMarkup(v.currentLevel)}<span class="tm-plate-level">${t(L)}</span></div>`)}</div>${action('savedresume',t('resumeGame'))}${secondary('savednew',t('newGame'))}${quietBtn('savedend',t('savedEnd'),'data-tone="danger"')}`,'tm-saved-sheet');
+ }
+ function craveBack(){
+  if(rulesDialog.open)rulesDialog.close();
+  if(screen==='games')return;
+  if(screen==='home'){render('games');return;}
+  if(screen==='setup'){sync();render('home');return;}
+  if(screen==='notice'){noticeChecks=[false,false];noticeDestination='setup';render('home');return;}
+  if(['startconfirm','deckerror'].includes(screen)){render('home');return;}
+  if(screen==='endconfirm'){render(resumeScreen);return;}
+  if(duelEntrance){finishDuelEntrance();}
+  if(gameActive&&winner===null&&!['draw'].includes(screen)){requestExit('games');return;}
+  if(gameActive&&!prizeCompleted){saveGame();gameActive=false;clearInterval(timer);timer=null;render('games');return;}
+  clearSaved();reset();availableItems=[];render('games');
+ }
  function choose(type){if(!gameActive)return;const forced=pending();if((forced&&forced!==type)||card!==null)return;const item=gameCard(type);if(!item){drawReason='outOfCards';render('draw');return;}lastSkippedId=null;card=type;currentCardId=item.id;usedCards.add(item.id);lastDaring[active]=!!item.daring;timerAlarmPlayed=false;lastTickSecond=null;started=false;end=0;const src=morphFrom||content.querySelector(`.tm-option[data-action="${type}"]`);const from=src?{r:src.getBoundingClientRect(),bg:getComputedStyle(src).backgroundColor}:null;morphFrom=null;render(type);if(from&&!reducedMotion())morphCard(from,type);}
  root.addEventListener('submit',e=>{if(e.target.id==='tm-custom-form'){e.preventDefault();saveCustomCard();}});
  root.addEventListener('input',e=>{if(e.target.id==='tm-custom-text'){captureCustomDraft();const count=rulesDialog.querySelector('#tm-custom-count');if(count)count.textContent=e.target.value.length+' / 200';}if(screen==='home'&&['tm-name-a','tm-name-b'].includes(e.target.id)){const index=e.target.id==='tm-name-a'?0:1;if(e.target.value!==names[index])invalidateNotice();}});
- root.addEventListener('change',e=>{if(window.connectGame?.active||window.rollGame?.active)return;if(transitionBusy)return;playSound('click');if(e.target.id==='tm-custom-type'){captureCustomDraft();paintCustomForm();return;}if(e.target.id==='tm-include-custom'&&screen==='setup'){sync();fitGoal();render('setup');return;}if(screen==='notice'&&e.target.dataset.noticePlayer!==undefined){noticeChecks[Number(e.target.dataset.noticePlayer)]=!!e.target.checked;updateNoticeButton();return;}if(e.target.dataset.item&&screen==='setup'){sync();fitGoal();const goalSelect=content.querySelector('#tm-goal');if(goalSelect){goalSelect.innerHTML=goalOptions();goalSelect.value=String(goal);}const note=content.querySelector('#tm-capacity-note');if(note)note.textContent=enoughCards()?t('capacity').replace('{n}',configuredCapacity()):t('capacityInvalid');return;}if(/^tm-anatomy-[01]$/.test(e.target.id)){sync();return;}if(e.target.id==='tm-language'){sync();lang=e.target.value==='es-419'?'es':'en';window.tryMeSettings?.rememberLanguage();render(screen);}else if((['tm-route','tm-level','tm-from','tm-to','tm-fixed'].includes(e.target.id)||e.target.dataset.item)&&screen==='setup'){sync();render('setup');}});
+ root.addEventListener('change',e=>{if(window.connectGame?.active||window.rollGame?.active)return;if(transitionBusy)return;playSound('click');if(e.target.id==='tm-custom-type'){captureCustomDraft();paintCustomForm();return;}if(e.target.id==='tm-include-custom'&&screen==='setup'){sync();fitGoal();render('setup');return;}if(screen==='notice'&&e.target.dataset.noticePlayer!==undefined){noticeChecks[Number(e.target.dataset.noticePlayer)]=!!e.target.checked;updateNoticeButton();return;}if(e.target.dataset.item&&screen==='setup'){sync();fitGoal();repaintSetup();return;}if(/^tm-anatomy-[01]$/.test(e.target.id)){sync();return;}if(e.target.id==='tm-language'){sync();lang=e.target.value==='es-419'?'es':'en';window.tryMeSettings?.rememberLanguage();render(screen);}else if(e.target.id==='tm-route'&&screen==='setup'){sync();fitGoal();repaintSetup();}});
  root.addEventListener('keydown',e=>{if(duelEntrance&&['Enter',' '].includes(e.key)){e.preventDefault();finishDuelEntrance();}});
  root.addEventListener('click',e=>{
   if(window.connectGame?.active||window.rollGame?.active)return;
   if(duelEntrance&&!leaveDialog.open){finishDuelEntrance();return;}
   const b=e.target.closest('button');if(!b||b.disabled||transitionBusy)return;
   if(randomBusy&&!['rulesmenu','closerules','togglesound','leavecancel','leaveconfirm'].includes(b.dataset.action))return;
+  if(b.dataset.shell||b.dataset.lang)return;
   playSound('click');
   const a=b.dataset.action;
   flyFrom=['answered','completed','madeit'].includes(a)&&card!==null?{r:b.getBoundingClientRect(),i:active,n:selectedCard().points}:null;
-  if(a==='entercrave'){render('home');return;}
+  if(a==='entercrave'){if(savedSnapshot&&validSnapshot(savedSnapshot)){openSavedSheet();return;}render('home');return;}
   if(a==='enterconnect'){window.connectGame?.enter();return;}
   if(a==='enterroll'){window.rollGame?.enter();return;}
   if(a==='gamehub'){sync();render('games');return;}
@@ -1396,9 +1017,10 @@ function gameCard(type){
   if(a==='duelcontinue'&&screen==='duelresult'){const qualified=qualifiedWinner();if(qualified!==undefined){winner=qualified;announceWinner();return;}duelId=null;duelStarted=false;duelEnd=0;duelOutcome=null;betweenRounds();return;}
   if(a==='togglesound'){soundEnabled=!soundEnabled;openRules();return;}
   if(a==='rulesmenu'){if(screen==='games')window.tryMeSettings?.open();else openRules();return;}
+  if(b.closest('#tm-sheet')&&!['confirmpass','cancelpass','savedresume','savednew','savedend','savedkeep','confirmdeletesaved2'].includes(a))return;
   if(a==='apphelp'){rulesDialog.close();window.connectGame?.showHelp(()=>openRules());return;}
   if(a==='closerules'){rulesDialog.close();return;}
-  if(a==='deletesaved'){sync();const dialog=root.querySelector('#tm-delete-dialog');dialog.lang=localeCode();dialog.innerHTML=`<h2 id="tm-delete-title">${t('deleteTitle')}</h2><p>${t('deleteWarning')}</p>${secondary('canceldeletesaved',t('keepSaved'))}${action('confirmdeletesaved',t('deleteConfirm'))}`;dialog.showModal();dialog.querySelector('[data-action="canceldeletesaved"]').focus();return;}
+  if(a==='deletesaved'){sync();const dialog=root.querySelector('#tm-delete-dialog');dialog.lang=localeCode();dialog.innerHTML=`<h2 id="tm-delete-title">${t('deleteTitle')}</h2><p>${t('deleteWarning')}</p>${action('confirmdeletesaved',t('deleteConfirm'))}${secondary('canceldeletesaved',t('keepSaved'))}`;dialog.showModal();dialog.querySelector('[data-action="canceldeletesaved"]').focus();return;}
   if(a==='canceldeletesaved'){root.querySelector('#tm-delete-dialog').close();return;}
   if(a==='confirmdeletesaved'){root.querySelector('#tm-delete-dialog').close();clearSaved();reset();availableItems=[];newGameEntry=false;render('home');return;}
   if(a==='newgame'){if(!requireNames())return;render('startconfirm');return;}
@@ -1414,7 +1036,19 @@ function gameCard(type){
   else if(a==='completed'&&screen==='dare'&&card==='dare'&&!cardHasFail()&&started&&Date.now()>=end)finish(selectedCard().points);
   else if(a==='darefailed'&&screen==='dare'&&card==='dare'&&!cardHasFail()&&started&&Date.now()>=end)finish(0);
   else if(['madeit','didntmakeit'].includes(a)&&screen==='dare'&&cardHasFail()&&started&&Date.now()>=end)finish(a==='madeit'?selectedCard().points:0);
-  else if(a==='abandon'&&['truth','dare'].includes(screen)&&card!==null&&!(screen==='dare'&&started&&Date.now()>=end)){if(screen==='dare'&&started)beginDareStop();else{lastSkippedId=currentCardId;finish(0,false);}}
+  else if(a==='abandon'&&['truth','dare'].includes(screen)&&card!==null&&!(screen==='dare'&&started&&Date.now()>=end)){if(screen==='dare'&&started)beginDareStop();else openPassSheet();}
+  else if(a==='confirmpass'){confirmPass();}
+  else if(a==='cancelpass'){closeSheet();}
+  else if(a==='scorecontinue'&&screen==='score'){afterTurn();}
+  else if(a==='setmode'&&screen==='setup'){sync();mode=b.dataset.mode==='fixed'?'fixed':'progressive';if(mode==='fixed')levelFixed=levelFrom;else levelTo=Math.max(levelTo,levelFrom);fitGoal();repaintSetup();}
+  else if(a==='picklevel'&&screen==='setup'){sync();const i=Number(b.dataset.level);if(mode==='fixed'){levelFixed=i;levelFrom=i;levelTo=Math.max(levelTo,i);}else if(i<levelFrom)levelFrom=i;else if(i>levelTo)levelTo=i;else if(levelFrom===levelTo)levelFrom=levelTo=i;else if(i-levelFrom<=levelTo-i)levelFrom=i;else levelTo=i;fitGoal();repaintSetup();}
+  else if((a==='goaldown'||a==='goalup')&&screen==='setup'){sync();const goals=allowedGoals(),gi=goals.indexOf(goal);if(gi>=0){goal=goals[Math.max(0,Math.min(goals.length-1,gi+(a==='goalup'?1:-1)))];}repaintSetup();}
+  else if(a==='hubhome'){clearSaved();reset();availableItems=[];newGameEntry=false;gameActive=false;render('games');}
+  else if(a==='savedresume'){closeSheet();resumeGame();}
+  else if(a==='savednew'){closeSheet();if(savedSnapshot){names=[...savedSnapshot.names];}render('startconfirm');}
+  else if(a==='savedend'){openSheet(`<h2 id="tm-sheet-title">${t('deleteTitle')}</h2><p>${t('deleteWarning')}</p>${action('confirmdeletesaved2',t('deleteConfirm'))}${secondary('savedkeep',t('keepSaved'))}`,'tm-modal');}
+  else if(a==='savedkeep'){closeSheet();}
+  else if(a==='confirmdeletesaved2'){closeSheet();clearSaved();reset();availableItems=[];newGameEntry=false;render('games');}
   else if(a==='timer'&&screen==='dare'&&card==='dare'&&!started){started=true;end=Date.now()+cardSeconds()*1000;updateTimer();timer=setInterval(updateTimer,250);saveGame();}
   else if(a==='bedroom'){room=nextRoom;roomEnteredRound=Math.min(...turns);betweenRounds();}
   else if(a==='prize'&&screen==='winner'&&!prizeOpened&&!prizeOpening){prizeOpening=true;b.disabled=true;b.classList.add('tm-opening');const sheet=b.querySelector('.tm-letter-sheet');if(sheet)sheet.setAttribute('aria-hidden','false');const hint=content.querySelector('#tm-letter-hint');if(hint)hint.textContent=t('letterOpening');const version=letterVersion;setTimeout(()=>{if(version!==letterVersion)return;prizeOpening=false;prizeOpened=true;if(screen==='winner')render('winner');},reducedMotion()?0:2200);}
@@ -1428,7 +1062,7 @@ function gameCard(type){
   else if(a==='endnow'){clearSaved();reset();availableItems=[];newGameEntry=false;render(endDestination);}
   else if(a==='replacestart'){clearSaved();startGame();}
   else if(a==='cancelstart')render('setup');
-  else if(a==='replay'){clearSaved();reset();availableItems=[];newGameEntry=false;render('home');}
+  else if(a==='replay'){clearSaved();reset();availableItems=[];newGameEntry=false;render('setup');}
   else if(a==='setup')render('setup');
   else if(a==='turn')render('turn');
   else if(a==='chooseprize'&&prizeOptions.includes(b.dataset.prize)){prizeCompleted=false;chosenPrizeId=b.dataset.prize;render('chosen');}
@@ -1460,7 +1094,7 @@ function gameCard(type){
   window.addEventListener('pagehide',()=>lifecycle.abort(),{once:true});
  }
 
- window.tryMeApp={scene:sceneMarkup,get soundEnabled(){return soundEnabled;},set soundEnabled(value){soundEnabled=!!value;},get reducedMotion(){return reducedMotion();},clearCraveSave(){clearSaved();},refresh(){if(window.rollGame?.active){window.rollGame.refresh();return;}if(!window.connectGame?.active)render(screen);},get language(){return lang;},set language(value){lang=value==='es'?'es':'en';},get profileAnatomies(){return (profileBodies||anatomies).slice();},set profileAnatomies(value){if(validProfileBodies(value)){anatomies=value.slice();rememberProfileBodies(value);}},get profiles(){return (profileNames||names).slice();},set profiles(value){if(rememberProfileNames(value)&&!gameActive)names=profileNames.slice();},enterCrave(){gameActive=false;clearInterval(timer);timer=null;names=(profileNames||names).slice();anatomies=(profileBodies||anatomies).slice();render('home');},hub(){gameActive=false;clearInterval(timer);timer=null;render('games');},click(){playSound('click');}};
+ window.tryMeApp={back:craveBack,get craveScreen(){return screen;},scene:sceneMarkup,get soundEnabled(){return soundEnabled;},set soundEnabled(value){soundEnabled=!!value;},get reducedMotion(){return reducedMotion();},clearCraveSave(){clearSaved();},refresh(){if(window.rollGame?.active){window.rollGame.refresh();return;}if(!window.connectGame?.active)render(screen);},get language(){return lang;},set language(value){lang=value==='es'?'es':'en';},get profileAnatomies(){return (profileBodies||anatomies).slice();},set profileAnatomies(value){if(validProfileBodies(value)){anatomies=value.slice();rememberProfileBodies(value);}},get profiles(){return (profileNames||names).slice();},set profiles(value){if(rememberProfileNames(value)&&!gameActive)names=profileNames.slice();},enterCrave(){gameActive=false;clearInterval(timer);timer=null;names=(profileNames||names).slice();anatomies=(profileBodies||anatomies).slice();render('home');},hub(){gameActive=false;clearInterval(timer);timer=null;render('games');},click(){playSound('click');}};
  root.dataset.motion=reducedMotion()?'reduced':'full';
  readPersonal();
  readNotice();
@@ -1474,13 +1108,13 @@ function gameCard(type){
 
 </script>
 
-<script src="connect/data.js?v=connect-v25-1"></script>
-<script src="connect/engine.js?v=connect-v25-1"></script>
-<script src="app-settings.js?v=empty-names-82"></script>
-<script src="connect/motion.js?v=pencil-two-71"></script>
-<script src="connect/ui.js?v=pencil-two-71"></script>
-<script src="roll/data.js?v=roll-catalog-150-1"></script>
-<script src="roll/engine.js?v=roll-2-2"></script>
-<script src="roll/ui.js?v=new-game-clear-84"></script>
+<script src="connect/data.js?v=1a-1"></script>
+<script src="connect/engine.js?v=1a-1"></script>
+<script src="app-settings.js?v=1a-1"></script>
+<script src="connect/motion.js?v=1a-1"></script>
+<script src="connect/ui.js?v=1a-1"></script>
+<script src="roll/data.js?v=1a-1"></script>
+<script src="roll/engine.js?v=1a-1"></script>
+<script src="roll/ui.js?v=1a-1"></script>
 </body>
 </html>

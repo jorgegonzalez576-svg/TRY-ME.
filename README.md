@@ -1,27 +1,24 @@
-# Try Me — código actualizado
+# Try Me
 
-Código completo de Crave, Connect y Roll.
-Versión de origen: fc4a5aa56169ed2724863d474e6d2e0afe545e92
+Juegos para parejas: **Connect**, **Roll** y **Crave**. App web estática (HTML/CSS/JS sin compilación), pensada para iPhone y Safari.
 
-Incluye los últimos arreglos:
-- Ajustes permite guardar uno o ambos nombres vacíos.
-- New Game en Roll elimina la partida anterior guardada.
+Rediseño visual 1a «Objetos de una noche en casa» integrado (ver `design_handoff_try_me_1a/`).
 
 ## Organización
-index.html: estructura, inicio, menú, código y catálogo de Crave.
-home.css: menú e inicio.
-crave.css, crave-motion.css, crave-entry.css: estilos y animaciones de Crave.
-app-settings.js: ajustes compartidos.
-connect/: interfaz, motor, catálogo, estilos y animaciones de Connect.
-roll/: interfaz, motor, catálogo, estilos y recursos de Roll.
-ambient.css y ambient/: recursos de ambientes.
+- `index.html`: estructura de la app, Inicio, splash y todo Crave (motor, catálogo y pantallas).
+- `shell.js`: encabezado común (volver · nombre · ES/EN · menú), ambiente fotográfico y avisos.
+- `app-settings.js`: hoja de Ajustes (idioma, sonido, vibración, animaciones, nombres, privacidad).
+- `css/tokens.css`: tokens de diseño por juego (`data-game`) y nivel (`data-level`).
+- `css/app.css`: lienzo, botones, hojas, modal, toast, splash, Inicio y Ajustes.
+- `css/crave.css`: pantallas de Crave.
+- `connect/`: motor, catálogo, interfaz, objetos animados y estilos de Connect.
+- `roll/`: motor, catálogo, interfaz y estilos de Roll.
+- `fonts/`: Gloock y Figtree autoalojadas (WOFF2, latin + latin-ext, licencia OFL).
+- `ambient/`: fotos de ambiente aprobadas y textura de grano.
 
 ## Ejecutar
-Desde esta carpeta:
     python3 -m http.server 8000
-Abre http://localhost:8000 en tu navegador.
-No requiere compilación. Las fuentes externas pueden requerir internet.
+Abre http://localhost:8000. No requiere internet.
 
-Los archivos se conservan tal como están en el repositorio, sin reescrituras.
-No incluye credenciales ni partidas personales del navegador.
-Verificación: integridad del ZIP y sintaxis JavaScript. No equivale a una prueba funcional completa en móvil.
+## Regla nueva (aprobada)
+Crave · Pasar turno antes de empezar la carta cuesta 1 punto (el marcador nunca baja de 0), con hoja de confirmación.

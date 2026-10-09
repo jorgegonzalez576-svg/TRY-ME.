@@ -1,11 +1,11 @@
 
-#roll-game{--rl-red:#C1123F;--rl-paper:#EEF1F5;--rl-ink:#2E3440;--rl-slate:#8B97A6;--rl-pink:#F6C2CF;--rl-line:rgba(46,52,64,.15);padding:20px 10px;display:flex;justify-content:center;background-color:transparent;color:var(--rl-ink);font-family:Arial,Helvetica,sans-serif}
+#roll-game{--rl-red:#C1123F;--rl-paper:#EEF1F5;--rl-ink:#2E3440;--rl-slate:#8B97A6;--rl-pink:#F6C2CF;--rl-line:rgba(46,52,64,.15);padding:20px 10px;display:flex;justify-content:center;background-color:transparent;color:var(--rl-ink);font-family:var(--font-text)}
 #roll-game *{box-sizing:border-box}
 #roll-game button,#roll-game input,#roll-game select{font-family:inherit}
 #roll-game .rl-phone{width:100%;max-width:390px;min-width:0;background:var(--rl-paper);border:1px solid var(--rl-line);border-radius:25px;padding:24px 22px 18px;box-shadow:0 16px 40px rgba(46,52,64,.13);overflow:clip}
 #roll-game .rl-header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px}
 #roll-game .rl-brand span{display:block;font-size:11px;letter-spacing:2.2px;font-weight:500;margin-bottom:3px}
-#roll-game .rl-brand strong{font:400 43px/1 Georgia,'Times New Roman',serif;letter-spacing:-1.6px}
+#roll-game .rl-brand strong{font:400 43px/1 var(--font-display);letter-spacing:-1.6px}
 #roll-game .rl-quiet{border:1px solid var(--rl-line);border-radius:8px;background:var(--rl-paper);color:var(--rl-ink);font-size:12px;padding:10px 13px;min-height:44px}
 #roll-game button:disabled{opacity:.55;cursor:default}
 #roll-game .rl-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:12px;color:var(--rl-ink)}
@@ -13,7 +13,7 @@
 #roll-game .rl-progress span{display:block;height:100%;width:0;background:var(--rl-red);transition:width .3s}
 #roll-game #rl-stage{min-height:466px;padding-top:25px}
 #roll-game .rl-eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:1.8px;margin:0 0 9px;color:var(--rl-red);font-weight:500}
-#roll-game .rl-title{font:400 30px/1.16 Georgia,'Times New Roman',serif;letter-spacing:-.55px;margin:0 0 10px;color:var(--rl-ink)}
+#roll-game .rl-title{font:400 30px/1.16 var(--font-display);letter-spacing:-.55px;margin:0 0 10px;color:var(--rl-ink)}
 #roll-game .rl-subtitle{font-size:14px;line-height:1.5;margin:0;color:var(--rl-ink)}
 #roll-game .rl-intro{text-align:center;min-height:82px}
 #roll-game .rl-dice-space{padding:33px 3px 0;position:relative}
@@ -23,7 +23,7 @@
 #roll-game .rl-die{position:relative;width:100%;aspect-ratio:1;border:0;border-radius:19px;display:flex;align-items:center;justify-content:center;text-align:center;padding:22px 12px;color:var(--rl-paper);background:var(--rl-red);box-shadow:3px 7px 0 color-mix(in srgb,var(--rl-red) 78%,var(--rl-ink)),7px 15px 19px rgba(46,52,64,.18),inset 0 2px 1px rgba(238,241,245,.3),inset 0 -3px 8px rgba(46,52,64,.15);transform:rotate(-7deg);transition:transform .32s,box-shadow .32s}
 #roll-game .rl-die.style{background:var(--rl-ink);box-shadow:3px 7px 0 color-mix(in srgb,var(--rl-ink) 83%,black),7px 15px 19px rgba(46,52,64,.18),inset 0 2px 1px rgba(238,241,245,.25),inset 0 -3px 8px rgba(46,52,64,.2);transform:rotate(7deg)}
 #roll-game .rl-die:before{content:'';position:absolute;inset:8px;border:1px solid rgba(238,241,245,.2);border-radius:12px;pointer-events:none}
-#roll-game .rl-word{font:400 21px/1.13 Georgia,'Times New Roman',serif;word-break:normal;position:relative}
+#roll-game .rl-word{font:400 21px/1.13 var(--font-display);word-break:normal;position:relative}
 #roll-game .rl-pip{width:6px;height:6px;background:var(--rl-paper);border-radius:50%;position:absolute;top:18px;left:18px;opacity:.85}
 #roll-game .rl-pip.bottom{top:auto;left:auto;right:18px;bottom:18px}
 #roll-game .rl-tray-caption{text-align:center;font-size:12px;line-height:1.45;margin:25px 0;color:var(--rl-ink)}
@@ -32,14 +32,14 @@
 #roll-game .rl-button.secondary{background:transparent;color:var(--rl-ink);border-color:var(--rl-line)}
 #roll-game .rl-text-button{border:0;background:transparent;color:var(--rl-ink);padding:12px;min-height:44px;font-size:13px;text-decoration:underline;text-underline-offset:4px}
 #roll-game .rl-footer{border-top:1px solid var(--rl-line);padding-top:15px;display:grid;gap:7px;text-align:center;margin-top:22px;font-size:11px;line-height:1.4}
-#roll-game .rl-footer span:first-child{font:400 16px Georgia,'Times New Roman',serif}
+#roll-game .rl-footer span:first-child{font:400 16px var(--font-display)}
 #roll-game .rl-mini-dice{display:flex;justify-content:center;align-items:center;gap:13px;margin:0 0 18px}
 #roll-game .rl-mini-dice .rl-die{width:91px;height:84px;aspect-ratio:auto;transform:rotate(-3deg);border-radius:12px;padding:12px;box-shadow:2px 4px 0 color-mix(in srgb,var(--rl-red) 78%,var(--rl-ink)),3px 7px 10px rgba(46,52,64,.12)}
 #roll-game .rl-mini-dice .rl-die.style{transform:rotate(3deg);box-shadow:2px 4px 0 color-mix(in srgb,var(--rl-ink) 83%,black),3px 7px 10px rgba(46,52,64,.12)}
 #roll-game .rl-mini-dice .rl-die:before{inset:5px;border-radius:7px}
 #roll-game .rl-mini-dice .rl-word{font-size:15px}
 #roll-game .rl-mini-dice .rl-pip{display:none}
-#roll-game .rl-plus{font:400 21px Georgia,'Times New Roman',serif;color:var(--rl-ink)}
+#roll-game .rl-plus{font:400 21px var(--font-display);color:var(--rl-ink)}
 #roll-game .rl-roles{text-align:center;font-size:12px;line-height:1.45;margin:0 0 15px}
 #roll-game .rl-reverse{background:var(--rl-pink);border-radius:8px;padding:12px 14px;margin-bottom:16px;font-size:13px;line-height:1.4;text-align:center;color:var(--rl-ink)}
 #roll-game .rl-reverse strong{display:block;font-weight:500;margin-bottom:3px}
@@ -54,12 +54,12 @@
 #roll-game .rl-card-back-note{font-size:12px;line-height:1.5;max-width:160px;letter-spacing:.2px}
 #roll-game .rl-card-front{background:var(--rl-pink);color:var(--rl-ink);transform:rotateY(180deg);display:flex;flex-direction:column;justify-content:space-between}
 #roll-game .rl-card-kicker{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;display:flex;justify-content:space-between;gap:10px;align-items:center}
-#roll-game .rl-card-kicker span:last-child{font-family:Georgia,'Times New Roman',serif;font-size:17px;text-transform:none;letter-spacing:0}
-#roll-game .rl-card-copy{font:400 23px/1.34 Georgia,'Times New Roman',serif;letter-spacing:-.35px;margin:18px 0;overflow-wrap:anywhere}
+#roll-game .rl-card-kicker span:last-child{font-family:var(--font-display);font-size:17px;text-transform:none;letter-spacing:0}
+#roll-game .rl-card-copy{font:400 23px/1.34 var(--font-display);letter-spacing:-.35px;margin:18px 0;overflow-wrap:anywhere}
 #roll-game .rl-card-bottom{font-size:12px;border-top:1px solid rgba(46,52,64,.22);padding-top:13px;display:flex;justify-content:space-between;gap:8px;align-items:center}
 #roll-game .rl-card-bottom span:last-child{white-space:nowrap;flex-shrink:0}
 #roll-game .rl-timer{text-align:center;margin:19px 0 0}
-#roll-game .rl-timer-value{font:400 34px/1.1 Georgia,'Times New Roman',serif;font-variant-numeric:tabular-nums}
+#roll-game .rl-timer-value{font:400 34px/1.1 var(--font-display);font-variant-numeric:tabular-nums}
 #roll-game .rl-timer-track{height:4px;background:rgba(46,52,64,.1);border-radius:3px;overflow:hidden;margin:11px 0 2px}
 #roll-game .rl-timer-track span{display:block;height:100%;background:var(--rl-red);width:100%;transition:width .25s}
 #roll-game .rl-form{display:grid;gap:17px}
@@ -67,7 +67,7 @@
 #roll-game .rl-form input,#roll-game .rl-form select{width:100%;min-height:48px;border:1px solid var(--rl-line);border-radius:8px;background:var(--rl-paper);color:var(--rl-ink);padding:12px;font-size:16px;min-width:0}
 #roll-game .rl-names{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 #roll-game .rl-choices{display:grid;gap:9px;margin:23px 0 10px}
-#roll-game .rl-choice{min-height:48px;border:1px solid var(--rl-line);border-radius:8px;text-align:left;background:var(--rl-paper);padding:13px 16px;color:var(--rl-ink);font:400 19px Georgia,'Times New Roman',serif}
+#roll-game .rl-choice{min-height:48px;border:1px solid var(--rl-line);border-radius:8px;text-align:left;background:var(--rl-paper);padding:13px 16px;color:var(--rl-ink);font:400 19px var(--font-display)}
 #roll-game .rl-consent{display:grid;gap:10px;margin:24px 0 0}
 #roll-game .rl-consent button[aria-pressed="true"]{background:var(--rl-pink);border-color:var(--rl-red)}
 #roll-game .rl-dice-space:before{content:'';position:absolute;left:-9px;right:-9px;top:90px;height:144px;background:radial-gradient(ellipse at 50% 72%,rgba(139,151,166,.20),rgba(139,151,166,.04) 58%,transparent 75%);pointer-events:none}
@@ -78,7 +78,7 @@
 #roll-game .rl-cube{position:absolute;inset:0;width:100%;height:100%;transform-style:preserve-3d;transform:rotateX(var(--rx)) rotateY(var(--ry)) rotateZ(var(--rz))}
 #roll-game .rl-face{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:13px 8px;border:1px solid color-mix(in srgb,var(--body) 80%,var(--rl-paper));border-radius:4%;background:linear-gradient(145deg,color-mix(in srgb,var(--body) 89%,var(--rl-paper)),var(--body) 65%);color:var(--rl-paper);backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:inset 0 2px 3px rgba(238,241,245,.22),inset 0 -3px 5px rgba(46,52,64,.15)}
 #roll-game .rl-face:after{content:'';position:absolute;inset:5px;border:1px solid rgba(238,241,245,.16);border-radius:7%;pointer-events:none}
-#roll-game .rl-face-label{font:400 19px/1.15 Georgia,'Times New Roman',serif;overflow-wrap:normal;text-align:center;position:relative;z-index:1}
+#roll-game .rl-face-label{font:400 19px/1.15 var(--font-display);overflow-wrap:normal;text-align:center;position:relative;z-index:1}
 #roll-game .rl-face .rl-pip{width:5px;height:5px;top:12px;left:12px;box-shadow:inset 0 1px 2px rgba(46,52,64,.25)}
 #roll-game .rl-face .rl-pip.bottom{top:auto;left:auto;right:12px;bottom:12px}
 #roll-game .rl-face.front{transform:translateZ(var(--half))}
@@ -103,18 +103,7 @@
 @media(max-width:350px){#roll-game{padding:12px 0}#roll-game .rl-phone{padding:21px 16px 17px;border-radius:18px}#roll-game .rl-dice{gap:17px}#roll-game .rl-word{font-size:19px}#roll-game .rl-card-copy{font-size:21px}}
 @media(prefers-reduced-motion:reduce){#roll-game *,#roll-game *:before,#roll-game *:after{animation:none!important;transition:none!important}}
 
-/* Roll uses the existing Try Me app frame and header. */
-#tryme-preview .tm-phone.tm-roll{background:#EEF1F5;--petrol:#EEF1F5;--deep:#2E3440;--cream:#EEF1F5;--coral:#C1123F;color:#2E3440}
-#tryme-preview .tm-roll .tm-brand,#tryme-preview .tm-roll .tm-dot{color:#C1123F}
-#tryme-preview .tm-roll .tm-menu-button{color:#C1123F;border-color:#8B97A680;background:#EEF1F5}
-#tryme-preview .tm-roll #tm-language{color:#2E3440;background:#EEF1F5}
-#tryme-preview .tm-roll #roll-game p,#tryme-preview .tm-roll #roll-game h2,#tryme-preview .tm-roll #roll-game label{color:#2E3440}
-#tryme-preview .tm-roll #roll-game .rl-eyebrow{color:#C1123F}
-#tryme-preview .tm-phone.tm-roll main{display:block;overflow-y:auto;overscroll-behavior:contain;padding:14px 18px 24px;scrollbar-width:thin}
-#tryme-preview .tm-phone[data-view="games"] main{overflow-y:auto;overscroll-behavior:contain}
-#tryme-preview .tm-game-choice.tm-game-roll{cursor:pointer;background:#D9D6DC;border-color:rgba(139,151,166,.45);color:#2E3440}
-#tryme-preview .tm-game-choice.tm-game-roll strong,#tryme-preview .tm-game-choice.tm-game-roll h2,#tryme-preview .tm-game-choice.tm-game-roll .tm-game-title{color:#A30F35}
-#roll-game{display:block;width:100%;padding:0;background:transparent;font-family:Arial,Helvetica,sans-serif}
+#roll-game{display:block;width:100%;padding:0;background:transparent;font-family:var(--font-text)}
 #roll-game .rl-header{margin-bottom:14px;gap:10px;flex-wrap:wrap}
 #roll-game .rl-brand{margin-left:auto;margin-right:auto}
 #roll-game .rl-brand strong{font-size:38px}
@@ -140,11 +129,11 @@
 #roll-game .rl-button{font-size:16px}
 #roll-game .rl-form label{font-size:14px}
 #roll-game .rl-choice{font-size:20px}
-#roll-game .rl-storage{font:13px/1.5 Arial,sans-serif;color:#2E3440;margin:18px 0 0}
-#tryme-preview .rl-dialog{background:#EEF1F5;color:#2E3440;border:1px solid #8B97A6}
+#roll-game .rl-storage{font:13px/1.5 var(--font-text);color:#2E3440;margin:18px 0 0}
+#tryme-preview .rl-dialog{background:#EEF1F5;color:#2E3440}
 #tryme-preview .rl-dialog h2{color:#2E3440}
-#tryme-preview .rl-dialog p{color:#2E3440;font:16px/1.5 Arial,sans-serif}
-#roll-dialog-content .rl-button{width:100%;display:block;min-height:48px;margin-top:12px;padding:13px 15px;border:1px solid transparent;border-radius:9px;background:#C1123F;color:#EEF1F5;font:16px/1.4 Arial,sans-serif}
+#tryme-preview .rl-dialog p{color:#2E3440;font:16px/1.5 var(--font-text)}
+#roll-dialog-content .rl-button{width:100%;display:block;min-height:48px;margin-top:12px;padding:13px 15px;border:1px solid transparent;border-radius:9px;background:#C1123F;color:#EEF1F5;font:16px/1.4 var(--font-text)}
 #roll-dialog-content .rl-button.secondary{background:#EEF1F5;color:#2E3440;border-color:#8B97A6}
 #tryme-preview[data-motion="reduced"] #roll-game *,#tryme-preview[data-motion="reduced"] #roll-game *:before,#tryme-preview[data-motion="reduced"] #roll-game *:after{animation:none!important;transition:none!important}
 @media(max-height:720px){#roll-game .rl-header{margin-bottom:10px}#roll-game .rl-brand strong{font-size:32px}#roll-game #rl-stage{padding-top:14px}#roll-game .rl-card,#roll-game .rl-card-side{min-height:225px}#roll-game .rl-card-copy{font-size:20px}#roll-game .rl-mini-dice .rl-die.rl-solid{height:62px;width:76px}#roll-game .rl-timer{margin-top:12px}#roll-game .rl-timer-value{font-size:28px}}
@@ -160,40 +149,11 @@
 #roll-game .rl-choice:disabled{opacity:.42;cursor:not-allowed}
 #roll-game .rl-notice{padding:12px 14px;border:1px solid var(--rl-line);border-left:3px solid var(--rl-red);border-radius:6px;font-size:14px;line-height:1.5;background:var(--rl-paper);margin:0 0 20px}
 #roll-game .rl-consent button[aria-pressed="true"]{background:var(--rl-red);color:var(--rl-paper)}
-/* Shared flat room illustration, covering the entire phone behind gameplay. */
-#tryme-preview .tm-roll .rl-room{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;opacity:.18}
-#tryme-preview .tm-roll .rl-room[hidden]{display:none}
-#tryme-preview .tm-roll .rl-room-drawing{position:absolute;inset:0;transform:scale(1.06);animation:rl-room-drift 22s ease-in-out infinite alternate}
-#tryme-preview .tm-roll .rl-room .tm-scene-wall{background:#EEF1F5}
-#tryme-preview .tm-roll .rl-room .tm-scene-floor{background:#8B97A6}
-#tryme-preview .tm-roll .rl-room .tm-scene-panels{border-color:#8B97A6;background:linear-gradient(90deg,transparent 32%,#8B97A6 32%,#8B97A6 32.5%,transparent 32.5%,transparent 67%,#8B97A6 67%,#8B97A6 67.5%,transparent 67.5%)}
-#tryme-preview .tm-roll .rl-room .tm-scene-window{left:10%;right:auto;background:#EEF1F5;border-color:#8B97A6}
-#tryme-preview .tm-roll .rl-room .tm-scene-window:before{background:linear-gradient(90deg,transparent 48%,#8B97A6 48%,#8B97A6 52%,transparent 52%),linear-gradient(transparent 48%,#8B97A6 48%,#8B97A6 52%,transparent 52%)}
-#tryme-preview .tm-roll .rl-room .tm-scene-pendant,#tryme-preview .tm-roll .rl-room .tm-scene-plant:before,#tryme-preview .tm-roll .rl-room .tm-scene-plant span{background:#8B97A6}
-#tryme-preview .tm-roll .rl-room .tm-scene-pendant:after{background:#F6C2CF;border-color:#8B97A6}
-#tryme-preview .tm-roll .rl-room .tm-scene-plant{border-bottom-color:#8B97A6}
-#tryme-preview .tm-roll .rl-room .tm-scene-rug{background:#EEF1F5;box-shadow:inset 0 0 0 5px #8B97A6}
-#tryme-preview .tm-roll .rl-room .tm-scene-table{left:12%;right:12%;bottom:22%;height:15%;background:#8B97A6;border:2px solid #2E3440;border-bottom:7px solid #2E3440}
-#tryme-preview .tm-roll .rl-room-table-leg{position:absolute;bottom:9%;height:20%;width:4%;background:#2E3440;border-radius:0 0 4px 4px}
-#tryme-preview .tm-roll .rl-room-table-leg-left{left:27%;transform:rotate(8deg)}
-#tryme-preview .tm-roll .rl-room-table-leg-right{right:27%;transform:rotate(-8deg)}
-#tryme-preview .tm-roll .rl-room-die{position:absolute;top:8%;width:18%;aspect-ratio:1;border:2px solid #2E3440;border-radius:8px;box-shadow:0 5px 0 #2E3440}
-#tryme-preview .tm-roll .rl-room-die-red{left:28%;background:#C1123F;transform:rotate(-12deg)}
-#tryme-preview .tm-roll .rl-room-die-slate{right:28%;background:#2E3440;transform:rotate(13deg)}
-#tryme-preview .tm-roll .rl-room-die i{position:absolute;width:13%;height:13%;border-radius:50%;background:#EEF1F5;left:44%;top:44%}
-#tryme-preview .tm-roll .rl-room-die i:first-child{left:19%;top:19%}
-#tryme-preview .tm-roll .rl-room-die i:last-child{left:69%;top:69%}
-#tryme-preview .tm-roll main,#tryme-preview .tm-roll > header{position:relative;z-index:1}
-#tryme-preview .tm-roll .rl-room[data-paused="true"] .rl-room-drawing{animation-play-state:paused}
-@keyframes rl-room-drift{from{transform:translate(-1.2%,-.6%) scale(1.06)}to{transform:translate(1.2%,.6%) scale(1.10)}}
-#tryme-preview[data-motion="reduced"] .tm-roll .rl-room-drawing{animation:none;transform:none}
-@media(prefers-reduced-motion:reduce){#tryme-preview .tm-roll .rl-room-drawing{animation:none;transform:none}}
-
 /* Explicit face visibility also avoids mirrored reverse text in Safari. */
 #roll-game .rl-card-back[hidden]{display:none}
 
 #roll-game .rl-start-consent .rl-button{flex-direction:column;align-items:flex-start;text-align:left;gap:5px;padding:16px;min-height:76px}
-#roll-game .rl-start-consent strong{font:400 22px/1.2 Georgia,'Times New Roman',serif;overflow-wrap:anywhere}
+#roll-game .rl-start-consent strong{font:400 22px/1.2 var(--font-display);overflow-wrap:anywhere}
 #roll-game .rl-start-consent span{font-size:15px;line-height:1.4}
 /* Optional anatomy and zone preferences remain inside Prepare Roll. */
 #roll-game .rl-preferences{border:1px solid var(--rl-line);border-radius:8px;padding:0 14px;background:var(--rl-paper)}
@@ -201,7 +161,7 @@
 #roll-game .rl-preferences>.rl-subtitle{font-size:14px;padding:0 0 8px}
 #roll-game .rl-filter-groups{display:grid;gap:18px;margin:12px 0 18px}
 #roll-game .rl-filter-group{min-width:0;border:1px solid var(--rl-line);padding:8px 12px;border-radius:8px;margin:0}
-#roll-game .rl-filter-group legend{padding:0 6px;font:18px/1.4 Georgia,serif;overflow-wrap:anywhere}
+#roll-game .rl-filter-group legend{padding:0 6px;font:18px/1.4 var(--font-display);overflow-wrap:anywhere}
 #roll-game .rl-form .rl-filter-row{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px;font-size:14px;border-bottom:1px solid var(--rl-line);cursor:pointer}
 #roll-game .rl-filter-row:last-child{border-bottom:0}
 #roll-game .rl-filter-row input{appearance:none;width:42px;min-height:26px;height:26px;padding:0;flex:0 0 42px;border-radius:13px;background:#727783;border:1px solid #626978;position:relative;cursor:pointer}
@@ -213,21 +173,15 @@
 #roll-game .rl-anatomy-hint{font-size:13px;line-height:1.5;margin:0 0 8px}
 #roll-dialog-content .rl-button:disabled{opacity:.45;cursor:default}
 
-/* Reuse the shared header language control, in its established grid position. */
-#tryme-preview .tm-roll .tm-header-tools #tm-language{display:block;width:100%;grid-column:1;grid-row:1}
-#tryme-preview .tm-roll .tm-header-tools{min-width:0;grid-template-columns:minmax(96px,126px) auto!important}
-@media(max-width:360px){#tryme-preview .tm-roll .tm-header-tools{grid-template-columns:minmax(96px,112px) auto!important}}
-
 /* Roll v2.2: centered header, contextual hints, and level-colored cards. */
-#roll-game .rl-header{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);flex-wrap:nowrap}
 #roll-game .rl-header>.rl-quiet:first-child{justify-self:start}
 #roll-game .rl-header>.rl-quiet:last-child{justify-self:end}
 #roll-game .rl-brand{margin:0;text-align:center}
 #roll-game .rl-header-spacer{min-height:44px}
-#roll-game .rl-level-description,#roll-game .rl-pool-warning{font:14px/1.5 Arial,sans-serif;margin:0}
+#roll-game .rl-level-description,#roll-game .rl-pool-warning{font:14px/1.5 var(--font-text);margin:0}
 #roll-game .rl-pool-warning{border-left:3px solid var(--rl-red);padding:8px 10px;margin-top:10px}
 #roll-game .rl-choice strong{display:block;font:inherit}
-#roll-game .rl-choice small{display:block;font:14px/1.4 Arial,sans-serif;margin-top:5px}
+#roll-game .rl-choice small{display:block;font:14px/1.4 var(--font-text);margin-top:5px}
 #roll-game .rl-card-front[data-level="0"]{background:#F6C2CF}
 #roll-game .rl-card-front[data-level="1"]{background:#EFA3B6}
 #tryme-preview .tm-roll #roll-game .rl-card-front[data-level="2"]{background:#C1123F;color:#FFFFFF}
@@ -236,9 +190,9 @@
 #tryme-preview .tm-roll #roll-game .rl-card-front[data-level="2"] .rl-card-bottom,
 #tryme-preview .tm-roll #roll-game .rl-card-front[data-level="2"] .rl-card-style{color:rgba(255,255,255,.86);border-color:rgba(255,255,255,.35)}
 #roll-game .rl-wrap-card{background:var(--rl-pink);border:1px solid var(--rl-line);border-radius:13px;padding:20px;margin-top:22px}
-#roll-game .rl-wrap-card h3{font:400 24px/1.2 Georgia,serif;margin:0 0 10px}
-#roll-game .rl-wrap-card p{font:16px/1.5 Arial,sans-serif;margin:0}
-#tryme-preview .rl-dialog .rl-rule-section h3{font:600 17px/1.4 Arial,sans-serif;color:#2E3440;margin:22px 0 6px}
+#roll-game .rl-wrap-card h3{font:400 24px/1.2 var(--font-display);margin:0 0 10px}
+#roll-game .rl-wrap-card p{font:16px/1.5 var(--font-text);margin:0}
+#tryme-preview .rl-dialog .rl-rule-section h3{font:600 17px/1.4 var(--font-text);color:#2E3440;margin:22px 0 6px}
 #tryme-preview .rl-dialog .rl-rule-section p{margin:0}
 @media(max-height:719px){
  #roll-game[data-phase="playing"] .rl-mini-dice{display:none}
@@ -276,7 +230,7 @@
 /* Playing-card treatment and reveal transfer; gameplay colors stay unchanged. */
 #roll-game .rl-card-back::after{background:radial-gradient(circle,rgba(238,241,245,.16) 1.6px,transparent 2.2px) 4px 4px/15px 15px}
 #roll-game .rl-emblem{position:relative;z-index:1;width:70px;height:70px;border-radius:15px;transform:rotate(-8deg);border:1.5px solid rgba(238,241,245,.85);background-color:var(--rl-red);box-shadow:0 0 0 8px var(--rl-red);background-image:radial-gradient(circle at 25% 25%,var(--rl-paper) 5px,transparent 5.6px),radial-gradient(circle at 75% 25%,var(--rl-paper) 5px,transparent 5.6px),radial-gradient(circle at 50% 50%,var(--rl-paper) 5px,transparent 5.6px),radial-gradient(circle at 25% 75%,var(--rl-paper) 5px,transparent 5.6px),radial-gradient(circle at 75% 75%,var(--rl-paper) 5px,transparent 5.6px)}
-#roll-game .rl-card-brand{position:relative;z-index:1;margin-top:14px;padding:0 10px;background:var(--rl-red);font:italic 400 26px Georgia,"Times New Roman",serif}
+#roll-game .rl-card-brand{position:relative;z-index:1;margin-top:14px;padding:0 10px;background:var(--rl-red);font:400 26px var(--font-display)}
 #roll-game .rl-card-back .rl-card-back-note{position:relative;z-index:1;margin-top:10px;background:var(--rl-red);padding:2px 8px}
 #roll-game .rl-card-front{padding:80px 26px;justify-content:center;text-align:center;overflow:hidden}
 #roll-game .rl-frame{position:absolute;inset:8px;border:1px solid rgba(46,52,64,.22);border-radius:9px;pointer-events:none}
@@ -286,13 +240,13 @@
 #roll-game .rl-card-front .rl-card-style{margin:12px 0 0;border-top:0;padding-top:0;opacity:.85;flex-shrink:0}
 #roll-game .rl-card-front .rl-card-bottom{margin-top:14px;border-top:0;padding-top:0;justify-content:center;gap:12px;opacity:.8;flex-shrink:0}
 #roll-game .rl-idx{position:absolute;display:flex;flex-direction:column;align-items:center;gap:5px;width:60px;transition:opacity .25s}
-#roll-game .rl-idx b{font:700 8.5px Arial,Helvetica,sans-serif;letter-spacing:1.2px;text-transform:uppercase;text-align:center;line-height:1.2;overflow-wrap:anywhere}
+#roll-game .rl-idx b{font:700 8.5px var(--font-text);letter-spacing:1.2px;text-transform:uppercase;text-align:center;line-height:1.2;overflow-wrap:anywhere}
 #roll-game .rl-idx.tl{top:16px;left:12px}
 #roll-game .rl-idx.br{bottom:16px;right:12px;transform:none;flex-direction:row-reverse}
 #roll-game .rl-mdie{width:24px;height:24px;border-radius:6px;background-color:var(--rl-red);box-shadow:1px 2px 0 rgba(46,52,64,.25);background-image:radial-gradient(circle at 27% 27%,var(--rl-paper) 2.2px,transparent 2.8px),radial-gradient(circle at 50% 50%,var(--rl-paper) 2.2px,transparent 2.8px),radial-gradient(circle at 73% 73%,var(--rl-paper) 2.2px,transparent 2.8px)}
 #roll-game .rl-mdie.style{background-color:var(--rl-ink)}
 #roll-game .rl-idx-wait .rl-idx{opacity:0}
-.rl-ghost{position:fixed;z-index:9999;display:grid;place-items:center;border-radius:12px;background:#C1123F;color:#EEF1F5;font:400 15px Georgia,"Times New Roman",serif;pointer-events:none;transform-origin:50% 50%}
+.rl-ghost{position:fixed;z-index:9999;display:grid;place-items:center;border-radius:12px;background:#C1123F;color:#EEF1F5;font:400 15px var(--font-display);pointer-events:none;transform-origin:50% 50%}
 .rl-ghost.style{background:#2E3440}
 #tryme-preview .tm-roll #roll-game .rl-card-front[data-level="2"] .rl-frame{border-color:rgba(255,255,255,.4)}
 #tryme-preview .tm-roll #roll-game .rl-card-front[data-level="2"] .rl-idx b{color:#fff}
@@ -321,15 +275,15 @@
 }
 
 /* Approved Roll entry identity: an inlaid dice tray, slate and raspberry. */
-#tryme-preview .tm-roll #roll-game:is([data-phase="setup"],[data-phase="consent"],[data-phase="resume"]) .rl-title{font:400 44px/1.12 Georgia,serif;letter-spacing:-1px;color:#2E3440;margin:0 0 12px}
+#tryme-preview .tm-roll #roll-game:is([data-phase="setup"],[data-phase="consent"],[data-phase="resume"]) .rl-title{font:400 44px/1.12 var(--font-display);letter-spacing:-1px;color:#2E3440;margin:0 0 12px}
 #tryme-preview .tm-roll #roll-game:is([data-phase="setup"],[data-phase="consent"],[data-phase="resume"]) .rl-header{margin-bottom:12px}
 #tryme-preview .tm-roll #roll-game:is([data-phase="setup"],[data-phase="consent"],[data-phase="resume"]) .rl-brand strong{font-size:26px;letter-spacing:-.5px}
-#tryme-preview .tm-roll #roll-game:is([data-phase="setup"],[data-phase="consent"],[data-phase="resume"]) .rl-eyebrow{font:10px/1.5 Arial,sans-serif;letter-spacing:2px;margin-bottom:10px}
-#tryme-preview .tm-roll #roll-game .rl-entry-subtitle{font:14px/1.6 Arial,sans-serif;margin:0 0 20px}
+#tryme-preview .tm-roll #roll-game:is([data-phase="setup"],[data-phase="consent"],[data-phase="resume"]) .rl-eyebrow{font:10px/1.5 var(--font-text);letter-spacing:2px;margin-bottom:10px}
+#tryme-preview .tm-roll #roll-game .rl-entry-subtitle{font:14px/1.6 var(--font-text);margin:0 0 20px}
 #tryme-preview .tm-roll #roll-game[data-phase="setup"] .rl-form{gap:16px}
-#tryme-preview .tm-roll #roll-game[data-phase="setup"] .rl-form label{font:12px/1.4 Arial,sans-serif;gap:7px}
+#tryme-preview .tm-roll #roll-game[data-phase="setup"] .rl-form label{font:12px/1.4 var(--font-text);gap:7px}
 #tryme-preview .tm-roll #roll-game[data-phase="setup"] .rl-form :is(input:not([type="checkbox"]),select){background:#FFFFFF;border:1px solid #CAD1DA;border-radius:9px;color:#2E3440;padding:12px 9px;font-size:16px;min-height:44px}
-#tryme-preview .tm-roll #roll-game[data-phase="setup"] .rl-form :is(.rl-level-description,.rl-subtitle){font:12px/1.6 Arial,sans-serif}
+#tryme-preview .tm-roll #roll-game[data-phase="setup"] .rl-form :is(.rl-level-description,.rl-subtitle){font:12px/1.6 var(--font-text)}
 #tryme-preview .tm-roll #roll-game .rl-entry-player-tray{background:#E2E7ED;border:2px solid #D0D8E1;border-radius:17px;padding:17px 14px;box-shadow:inset 0 3px 7px #2E34400D}
 #tryme-preview .tm-roll #roll-game .rl-entry-player-tray .rl-names{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
 #tryme-preview .tm-roll #roll-game .rl-entry-setting-pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
@@ -344,15 +298,75 @@
 #tryme-preview .tm-roll #roll-game .rl-entry-consent-tray .rl-button[aria-pressed="true"]{background:#F6C2CF;border-color:#C1123F;color:#2E3440}
 #tryme-preview .tm-roll #roll-game .rl-entry-check{width:26px;height:26px;border:1px solid #CAD1DA;border-radius:50%;display:grid;place-items:center;flex-shrink:0}
 #tryme-preview .tm-roll #roll-game .rl-entry-consent-tray [aria-pressed="true"] .rl-entry-check{background:#C1123F;color:#FFFFFF;border-color:#C1123F}
-#tryme-preview .tm-roll #roll-game .rl-entry-consent-tray [aria-pressed="true"] .rl-entry-check:after{content:'✓';font:15px Arial,sans-serif}
+#tryme-preview .tm-roll #roll-game .rl-entry-consent-tray [aria-pressed="true"] .rl-entry-check:after{content:'✓';font:15px var(--font-text)}
 #tryme-preview .tm-roll #roll-game .rl-entry-person{min-width:0;display:flex;flex-direction:column;gap:7px}
-#tryme-preview .tm-roll #roll-game .rl-entry-person strong{font:400 24px/1.2 Georgia,serif;color:#2E3440}
-#tryme-preview .tm-roll #roll-game .rl-entry-person small{font:12px/1.5 Arial,sans-serif;color:#2E3440}
-#tryme-preview .tm-roll #roll-game .rl-entry-footer{font:11px/1.5 Arial,sans-serif;letter-spacing:1.5px;text-align:center;margin:18px 0;color:#2E3440;opacity:.7}
+#tryme-preview .tm-roll #roll-game .rl-entry-person strong{font:400 24px/1.2 var(--font-display);color:#2E3440}
+#tryme-preview .tm-roll #roll-game .rl-entry-person small{font:12px/1.5 var(--font-text);color:#2E3440}
+#tryme-preview .tm-roll #roll-game .rl-entry-footer{font:11px/1.5 var(--font-text);letter-spacing:1.5px;text-align:center;margin:18px 0;color:#2E3440;opacity:.7}
 #tryme-preview .tm-roll #roll-game .rl-start-tray{padding:20px 15px 14px;background:#E2E7ED;border:2px solid #D0D8E1;border-radius:26px;box-shadow:inset 0 4px 14px #2E34401A;margin:16px 0 20px}
 #tryme-preview .tm-roll #roll-game .rl-start-tray .rl-dice-space{padding:30px 0 0}
 #tryme-preview .tm-roll #roll-game .rl-start-tray .rl-dice-space:before{content:none}
-#tryme-preview .tm-roll #roll-game .rl-start-tray .rl-tray-caption{font:12px/1.6 Arial,sans-serif;margin:20px 0 0}
+#tryme-preview .tm-roll #roll-game .rl-start-tray .rl-tray-caption{font:12px/1.6 var(--font-text);margin:20px 0 0}
 #tryme-preview .tm-roll #roll-game .rl-start-tray .rl-dice{gap:22px}
 #tryme-preview .tm-roll #roll-game:is([data-phase="setup"],[data-phase="consent"]) .rl-actions .rl-button{min-height:52px;border-radius:11px;font-size:15px}
 @media(max-width:360px){#tryme-preview .tm-roll #roll-game:is([data-phase="setup"],[data-phase="consent"],[data-phase="resume"]) .rl-title{font-size:38px}#tryme-preview .tm-roll #roll-game .rl-entry-player-tray{padding:15px 12px}#tryme-preview .tm-roll #roll-game .rl-entry-setting-pair{gap:8px}#tryme-preview .tm-roll #roll-game .rl-start-tray{padding-left:12px;padding-right:12px}#tryme-preview .tm-roll #roll-game .rl-start-tray .rl-dice{gap:17px}}
+
+/* ===== Try Me 1a · Roll sobre la mesa (pizarra y frambuesa) ===== */
+#tryme-preview .tm-phone.tm-roll{color:#EEF1F5}
+#tryme-preview .tm-roll #tm-content{padding-top:8px}
+#tryme-preview .tm-roll .rl-room{display:none!important}
+#tryme-preview .tm-roll #roll-game{--rl-on:#EEF1F5;--rl-on2:#D5DBE3;--rl-kick:#F08AA0;color:var(--rl-on);flex:1;display:flex;flex-direction:column}
+#tryme-preview .tm-roll #roll-game #rl-stage{flex:1;display:flex;flex-direction:column;padding-top:16px}
+#tryme-preview .tm-roll #roll-game :is(p,h2,label,legend,summary){color:var(--rl-on2)}
+#tryme-preview .tm-roll #roll-game .rl-meta{font:500 13px/1.3 var(--font-text);color:var(--rl-on2)}
+#tryme-preview .tm-roll #roll-game .rl-progress{height:2px;margin-top:10px;background:rgba(238,241,245,.15)}
+#tryme-preview .tm-roll #roll-game .rl-progress span{background:#C1123F}
+#tryme-preview .tm-roll #roll-game .rl-intro{text-align:left}
+#tryme-preview .tm-roll #roll-game .rl-eyebrow{font:700 11px/1.3 var(--font-text)!important;letter-spacing:.2em!important;text-transform:uppercase;color:var(--rl-kick)!important;margin:0 0 10px}
+#tryme-preview .tm-roll #roll-game .rl-title,#tryme-preview .tm-roll #roll-game:is([data-phase="setup"],[data-phase="consent"],[data-phase="resume"]) .rl-title{font:400 32px/1.1 var(--font-display)!important;letter-spacing:-.01em!important;color:var(--rl-on)!important;margin:0 0 12px}
+#tryme-preview .tm-roll #roll-game .rl-subtitle,#tryme-preview .tm-roll #roll-game .rl-entry-subtitle{font:500 15px/1.45 var(--font-text)!important;color:var(--rl-on2)!important}
+#tryme-preview .tm-roll #roll-game .rl-start-tray{margin:22px 0 0;padding:16px 14px 16px;border:0;border-radius:26px;background:#E2E7ED;box-shadow:var(--sh-tray)}
+#tryme-preview .tm-roll #roll-game .rl-start-tray :is(p,.rl-die-label,.rl-tray-caption,.rl-swipe-hint){color:#2E3440!important}
+#tryme-preview .tm-roll #roll-game .rl-die-label{font:700 11px/1 var(--font-text);letter-spacing:.2em}
+#tryme-preview .tm-roll #roll-game .rl-face-label{font-family:var(--font-display)}
+#tryme-preview .tm-roll #roll-game .rl-actions{margin-top:auto;padding-top:18px;gap:10px}
+#tryme-preview .tm-roll #roll-game .rl-button{min-height:54px;border:0;border-radius:14px;background:#C1123F;color:#fff;font:600 16px/1.2 var(--font-text);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 8px 18px -8px rgba(193,18,63,.7);transition:transform var(--dur-fast) ease,background-color .2s}
+#tryme-preview .tm-roll #roll-game .rl-button:active:not(:disabled){transform:scale(.98);background:#A30F35}
+#tryme-preview .tm-roll #roll-game .rl-button.secondary{min-height:52px;background:transparent;color:var(--rl-on);box-shadow:inset 0 0 0 1px rgba(238,241,245,.4);font-size:15px}
+#tryme-preview .tm-roll #roll-game .rl-button:disabled{opacity:.5}
+#tryme-preview .tm-roll #roll-game[data-phase="setup"] .rl-form label,#tryme-preview .tm-roll #roll-game .rl-form label{font:600 12px/1.35 var(--font-text)!important;color:var(--rl-on2)!important}
+#tryme-preview .tm-roll #roll-game[data-phase="setup"] .rl-form :is(input:not([type="checkbox"]),select){background-color:#EEF1F5;border:0;box-shadow:inset 0 0 0 1px #CAD1DA;border-radius:12px;color:#2E3440;min-height:48px}
+#tryme-preview .tm-roll #roll-game .rl-entry-player-tray{background:#E2E7ED;border:0;border-radius:18px;box-shadow:var(--sh-tray)}
+#tryme-preview .tm-roll #roll-game[data-phase] .rl-entry-player-tray label{color:#2E3440!important}
+#tryme-preview .tm-roll #roll-game[data-phase="setup"] .rl-preferences{background:rgba(238,241,245,.06);border:0;box-shadow:inset 0 0 0 1px rgba(238,241,245,.22);border-radius:14px}
+#tryme-preview .tm-roll #roll-game .rl-preferences summary{color:var(--rl-on)!important;font:600 15px/1.3 var(--font-text)!important}
+#tryme-preview .tm-roll #roll-game .rl-filter-group{border-color:rgba(238,241,245,.22)}
+#tryme-preview .tm-roll #roll-game .rl-filter-row{border-color:rgba(238,241,245,.15)!important;color:var(--rl-on2)}
+#tryme-preview .tm-roll #roll-game .rl-adult{color:var(--rl-on)!important}
+#tryme-preview .tm-roll #roll-game .rl-level-description,#tryme-preview .tm-roll #roll-game .rl-anatomy-hint,#tryme-preview .tm-roll #roll-game .rl-notice{color:var(--rl-on2)}
+#tryme-preview .tm-roll #roll-game .rl-notice{background:rgba(238,241,245,.06);border-color:rgba(238,241,245,.2)}
+#tryme-preview .tm-roll #roll-game .rl-entry-consent-tray{background:#E2E7ED;border:0;box-shadow:var(--sh-tray)}
+#tryme-preview .tm-roll #roll-game .rl-entry-footer{color:var(--rl-on2)}
+#tryme-preview .tm-roll #roll-game .rl-roles,#tryme-preview .tm-roll #roll-game .rl-mini-dice+p{color:var(--rl-on2)}
+#tryme-preview .tm-roll #roll-game .rl-card-scene{margin:6px auto 0;max-width:297px;width:100%}
+#tryme-preview .tm-roll #roll-game .rl-card,#tryme-preview .tm-roll #roll-game .rl-card-side{min-height:min(388px,50dvh)}
+#tryme-preview .tm-roll #roll-game .rl-card-side{border-radius:16px}
+#tryme-preview .tm-roll #roll-game .rl-card-front{box-shadow:var(--sh-naipe)}
+#tryme-preview .tm-roll #roll-game .rl-card-front .rl-card-copy{font:400 var(--fs-card-m)/1.32 var(--font-display)}
+#tryme-preview .tm-roll #roll-game .rl-card-front :is(p,span,b){color:#2E3440}
+#tryme-preview .tm-roll #roll-game .rl-card-front[data-level="2"] :is(p,span,b){color:#fff}
+#tryme-preview .tm-roll #roll-game .rl-card-back :is(p,div,span){color:#fff}
+#tryme-preview .tm-roll #roll-game .rl-reverse{border-radius:12px;background:#F6C2CF;color:#2E3440}
+#tryme-preview .tm-roll #roll-game .rl-reverse strong{color:#2E3440}
+#tryme-preview .tm-roll #roll-game .rl-timer{margin-top:14px;text-align:center}
+#tryme-preview .tm-roll #roll-game .rl-timer::before{content:"";display:block}
+#tryme-preview .tm-roll #roll-game .rl-timer-value{font:400 32px/1 var(--font-display);font-variant-numeric:tabular-nums;color:var(--rl-on)}
+#tryme-preview .tm-roll #roll-game .rl-timer-track{height:3px;background:rgba(238,241,245,.15);border-radius:2px;margin-top:10px;overflow:hidden}
+#tryme-preview .tm-roll #roll-game .rl-timer-track span{background:#C1123F}
+#tryme-preview .tm-roll #roll-game .rl-choice{border:0;border-radius:16px;background:#F6C2CF;color:#2E3440;box-shadow:var(--sh-naipe);font-family:var(--font-display)}
+#tryme-preview .tm-roll #roll-game .rl-choice small{color:#4A5262}
+#tryme-preview .tm-roll #roll-game .rl-consent .rl-button[aria-pressed="true"]{background:#C1123F;color:#fff}
+#tryme-preview .tm-roll #roll-game .rl-wrap-card{border:0;border-radius:16px;box-shadow:var(--sh-naipe)}
+#tryme-preview .tm-roll #roll-game .rl-wrap-card :is(h3,p){color:#2E3440}
+#tryme-preview .tm-roll #roll-game .rl-storage{color:var(--rl-on2)}
+#tryme-preview .rl-dialog .rl-button{border-radius:14px!important;font-weight:600!important;min-height:52px!important}

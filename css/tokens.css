@@ -1,0 +1,45 @@
+/* Try Me · Dirección 1a «Objetos de una noche en casa» · tokens.
+   Base: design_handoff_try_me_1a/tokens.css. Variables semánticas por juego (data-game) y nivel (data-level). */
+@layer tokens, components, worlds;
+@layer tokens {
+:root{
+  --tm-oxblood:#721E19; --tm-paper:#EFE8E1; --tm-ink:#241A18; --tm-muted:#6E605B; --tm-line:#D9CFC8; --tm-cream:#F3EDE8; --tm-control:#F7F2EE;
+  --tm-gain:#158353; --tm-loss:#C44359; --tm-off:#CFC5BF;
+  --font-display:'Gloock',Georgia,'Times New Roman',serif; --font-text:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --fs-display-xl:46px; --fs-display-l:35px; --fs-card-xl:27px; --fs-card-l:24px; --fs-card-m:21px; --fs-title:21px;
+  --fs-body-l:17px; --fs-body:15px; --fs-button:16px; --fs-caption:13px; --fs-kicker:11px; --ls-kicker:.2em;
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px; --sp-6:24px; --sp-8:32px; --sp-10:40px; --sp-14:56px;
+  --gutter:20px; --tap:44px; --btn-h:54px; --btn2-h:52px;
+  --r-ficha:6px; --r-die:13px; --r-btn:14px; --r-naipe:16px; --r-plate:16px; --r-card:20px; --r-pill:22px; --r-modal:24px; --r-sheet:28px;
+  --sh-paper:0 1px 1px rgba(36,26,24,.14);
+  --sh-card:0 1px 1px rgba(71,59,64,.14),0 26px 40px -24px rgba(71,59,64,.55);
+  --sh-naipe:inset 0 1px 0 rgba(255,255,255,.55),0 2px 3px rgba(0,0,0,.3),0 36px 50px -20px rgba(0,0,0,.7);
+  --sh-tray:inset 0 0 0 2px #D0D8E1,inset 0 6px 18px rgba(46,52,64,.22),0 30px 40px -24px rgba(0,0,0,.7);
+  --sh-seal:inset 0 2px 0 rgba(255,255,255,.16),inset 0 -3px 6px rgba(0,0,0,.35),0 8px 14px -4px rgba(0,0,0,.55);
+  --ease-out:cubic-bezier(.2,.8,.2,1); --ease-flip:cubic-bezier(.2,.7,.2,1); --ease-in:cubic-bezier(.4,0,1,1); --ease-pop:cubic-bezier(.3,1.4,.5,1);
+  --dur-fast:120ms; --dur-sheet:320ms; --dur-deal:460ms; --dur-flip:680ms; --dur-roll:1250ms;
+  --safe-top:env(safe-area-inset-top,0px); --safe-bottom:env(safe-area-inset-bottom,0px);
+  --bar-top:max(14px,calc(var(--safe-top) + 6px));
+  --grain:url("../ambient/grain-128.png");
+  /* Superficie por defecto (Inicio) */
+  --surface:#EFE8E1; --ink:#241A18; --muted:#6E605B; --accent:#721E19; --line:#D9CFC8; --card:#FBF8F6;
+  --primary:#721E19; --primary-pressed:#5E1814; --on-primary:#FFFFFF; --secondary-line:#B9A49E;
+  --ctl:#F7F2EE; --ctl-line:#D9CFC8; --ctl-ink:#241A18; --title-ink:#241A18;
+  --seal-1:#A9382E; --seal-2:#721E19; --seal-3:#4A0F0C;
+}
+[data-game="connect"]{ --surface:#E1DBD4; --card:#F6F0ED; --card-back:#EAE1DC; --mauve:#DCCBD3; --line:#A39590; --ink:#473B40; --muted:#62535C; --accent:#735568; --primary:#74586A; --primary-pressed:#634C5C; --on-primary:#FFF9F6; --secondary-line:#A39590;
+  --ctl:#F6F0EDee; --ctl-line:#A39590; --ctl-ink:#473B40; --title-ink:#473B40; }
+[data-game="roll"]{ --surface:#2E3440; --tray:#E2E7ED; --tray-line:#D0D8E1; --paper:#EEF1F5; --slate:#8B97A6; --ink:#EEF1F5; --muted:#D5DBE3; --accent:#C1123F; --primary:#C1123F; --primary-pressed:#A30F35; --die-edge:#861233; --pink:#F6C2CF; --on-primary:#FFFFFF; --line:rgba(238,241,245,.28); --secondary-line:rgba(238,241,245,.4);
+  --ctl:rgba(238,241,245,.08); --ctl-line:rgba(238,241,245,.28); --ctl-ink:#EEF1F5; --title-ink:#EEF1F5; }
+[data-game="crave"],[data-game="crave"][data-level="spark"]{ --surface:#EFE6E2; --card:#FBF8F6; --ink:#241A18; --muted:#6E605B; --accent:#721E19; --line:#DDCFCA; --plate:#F8F3F0; --plate-ink:#241A18; --plate-muted:#6E605B; --card-ink:#241A18; --card-accent:#721E19; --card-muted:#6E605B; --truth:#FBF8F6; --truth-ink:#241A18; --truth-line:#DDCFCA; --dare:#E6CEC8; --dare-ink:#5A1612; --dare-sub:#5A1612; --primary:#721E19; --primary-pressed:#5E1814; --on-primary:#FFFFFF; --stop:#B9A49E; --track:#E9DFDB; --ring:#721E19; --bar:#721E19; --bar-empty:#DDCFCA; --seal-1:#A9382E; --seal-2:#721E19; --seal-3:#4A0F0C;
+  --ctl:#F8F3F0; --ctl-line:#CDBBB5; --ctl-ink:#241A18; --title-ink:#721E19; --secondary-line:#B9A49E; --wash-a:e2; --wash-b:c4; --wash-c:96; }
+[data-game="crave"][data-level="tease"]{ --surface:#E5CBC6; --card:#F8EEEC; --ink:#2A1716; --muted:#6B4E4A; --accent:#8A2522; --line:#D3B5AF; --plate:#F3E5E2; --plate-ink:#2A1716; --plate-muted:#6B4E4A; --card-ink:#2A1716; --card-accent:#8A2522; --card-muted:#6B4E4A; --truth:#F6ECEA; --truth-ink:#2A1716; --truth-line:#D3B5AF; --dare:#8A2522; --dare-ink:#FFF3EF; --dare-sub:#F4D6CF; --primary:#8A2522; --primary-pressed:#731D1B; --on-primary:#FFFFFF; --stop:#B48A83; --track:#EBD7D3; --ring:#8A2522; --bar:#8A2522; --bar-empty:#D3B5AF; --seal-1:#B7443A; --seal-2:#8A2522; --seal-3:#561310;
+  --ctl:#F3E5E2; --ctl-line:#C9A59E; --ctl-ink:#2A1716; --title-ink:#8A2522; --secondary-line:#B48A83; }
+[data-game="crave"][data-level="heat"]{ --surface:#9B2621; --card:#F7ECE9; --ink:#FFF1EC; --muted:#F2C9C0; --accent:#FFD3C8; --line:#B5453E; --plate:#F5E6E2; --plate-ink:#2A1716; --plate-muted:#6B4E4A; --card-ink:#241A18; --card-accent:#9B2621; --card-muted:#6B4E4A; --truth:#F5E6E2; --truth-ink:#2A1716; --truth-line:#E8CFC9; --dare:#5C1310; --dare-ink:#FFF1EC; --dare-sub:#F2C9C0; --primary:#F5E6E2; --primary-pressed:#E8D3CD; --on-primary:#721E19; --stop:#F2C9C0; --track:#EDD8D3; --ring:#9B2621; --bar:#FFD3C8; --bar-empty:#B5453E; --seal-1:#C2453A; --seal-2:#9B2621; --seal-3:#5C1310;
+  --ctl:#F5E6E2; --ctl-line:#CDBBB5; --ctl-ink:#721E19; --title-ink:#FFF1EC; --secondary-line:#F2C9C0; --wash-a:f0; --wash-b:d1; --wash-c:ad; }
+[data-game="crave"][data-level="afterdark"]{ --surface:#29213C; --card:#1B1E39; --ink:#F1EAF5; --muted:#B7A9C6; --accent:#D4A574; --line:#3B2F55; --plate:#1B1E39; --plate-ink:#F1EAF5; --plate-muted:#B7A9C6; --card-ink:#F1EAF5; --card-accent:#D4A574; --card-muted:#B7A9C6; --truth:#1B1E39; --truth-ink:#F1EAF5; --truth-line:#452552; --dare:#4F0E70; --dare-ink:#FFFFFF; --dare-sub:#DCC6EA; --primary:#4F0E70; --primary-pressed:#420B5E; --on-primary:#FFFFFF; --stop:#5E4A78; --track:#3B2F55; --ring:#D4A574; --bar:#D4A574; --bar-empty:#3B2F55; --seal-1:#E0B88C; --seal-2:#B98A57; --seal-3:#7A5530;
+  --ctl:#1B1E39; --ctl-line:#452552; --ctl-ink:#D4A574; --title-ink:#F1EAF5; --secondary-line:#5E4A78; --tm-gain:#7ED9A8; --tm-loss:#F08AA0; --wash-a:f0; --wash-b:d1; --wash-c:ad; }
+[data-game="crave"][data-view="duel"],[data-game="crave"][data-scene="duel"]{ --surface:#3D0F0C; --ink:#E4E4E3; --muted:#D6B8A9; --accent:#D6B8A9; --ctl:rgba(228,228,227,.08); --ctl-line:rgba(228,228,227,.28); --ctl-ink:#E4E4E3; --title-ink:#E4E4E3; --primary:#F3EDE8; --primary-pressed:#E3D9D2; --on-primary:#721E19; --secondary-line:rgba(228,228,227,.4); }
+[data-game="crave"][data-scene="prize"]{ --surface:#721E19; --ink:#F3EDE8; --muted:#D6B8A9; --accent:#E6C9BC; --ctl:rgba(243,237,232,.1); --ctl-line:rgba(243,237,232,.3); --ctl-ink:#F3EDE8; --title-ink:#F3EDE8; --primary:#F3EDE8; --primary-pressed:#E3D9D2; --on-primary:#721E19; --secondary-line:rgba(243,237,232,.45); --seal-1:#A9382E; --seal-2:#721E19; --seal-3:#4A0F0C; }
+[data-motion="reduced"]{ --dur-deal:200ms; --dur-flip:200ms; --dur-roll:200ms; --dur-sheet:180ms; }
+}
