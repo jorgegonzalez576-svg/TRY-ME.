@@ -263,3 +263,7 @@ body{font-family:var(--font-text);-webkit-font-smoothing:antialiased;-moz-osx-fo
 #tryme-preview dialog .tm-kicker{font:700 11px/1 var(--font-text);letter-spacing:.2em;text-transform:uppercase;color:#6E605B;margin:0}
 #tryme-preview dialog .tm-saved-head .tm-kicker{color:#721E19}
 #tryme-preview dialog label.tm-row{display:flex;font:500 16px/1.25 var(--font-text);color:#241A18;margin:0}
+.tm-bar-dot{color:var(--tm-oxblood)}
+.tm-chat-like{position:absolute;right:-12px;top:-16px;width:38px;height:34px;border-radius:17px;background:#2A211F;box-shadow:0 0 0 3px #120D0C;display:grid;place-items:center;animation:tmLike .45s cubic-bezier(.3,1.5,.5,1) both}
+.tm-chat-like svg{width:19px;height:19px}
+@keyframes tmLike{0%{opacity:0;transform:scale(.3)}60%{opacity:1;transform:scale(1.18)}100%{opacity:1;transform:none}}
