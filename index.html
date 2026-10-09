@@ -261,8 +261,10 @@ const accessories=['ice','lotion_oil','food_sauce','blindfold_silk','restraints'
  function validClothesChanges(value){return value===undefined||Array.isArray(value)&&value.length===2&&value.every(entries=>Array.isArray(entries)&&entries.every(change=>change&&typeof change.id==='string'&&change.id.length<=100&&clothingStates.includes(change.from)&&clothingStates.includes(change.to)&&clothingStates.indexOf(change.to)>clothingStates.indexOf(change.from)&&['sets','genital'].includes(change.via)));}
  const matchesPeople=(item,actor=active)=>anatomyCompatible(item.anatomy,actor);
  const eligible=(item,level=currentLevel,place=room,actor=active,ignoreClothes=false)=>cardAllowed(item)&&(ignoreClothes||clothesCompatible(item,actor))&&item.levels.includes(level)&&item.rooms_allowed.includes(place)&&hasItems(item)&&matchesPeople(item,actor)&&(!item.daring||!lastDaring[actor]);
+ const cardFamily=id=>String(id).replace(/^([DT]\d_\w*\d)[BC]$/,'$1');
+ const cardUsed=c=>{if(usedCards.has(c.id))return true;const f=cardFamily(c.id);for(const u of usedCards)if(cardFamily(u)===f)return true;return false;};
  const remainingCards=(type,level=currentLevel,place=room)=>{
-  const base=catalogue.filter(c=>c.type===type&&eligible(c,level,place,active,true)&&!usedCards.has(c.id));
+  const base=catalogue.filter(c=>c.type===type&&eligible(c,level,place,active,true)&&!cardUsed(c));
   const compatible=base.filter(c=>clothesCompatible(c));
   return compatible.length?compatible:base;
  };
@@ -826,7 +828,7 @@ function gameCard(type){
    let destination=room;
    if(route==='journey'&&progress>=.5)destination='bedroom';
    if(route==='journey3'){if(mode==='fixed')destination=progress>=2/3?'bedroom':progress>=1/3?'kitchen':room;else if(room==='kitchen'&&progress>=2/3)destination='bedroom';else if(room==='living'&&progress>=1/3)destination='kitchen';}
-   const covered=place=>[0,1].every(actor=>['truth','dare'].every(type=>catalogue.some(c=>c.type===type&&eligible(c,nextLevel,place,actor,true)&&!usedCards.has(c.id))));
+   const covered=place=>[0,1].every(actor=>['truth','dare'].every(type=>catalogue.some(c=>c.type===type&&eligible(c,nextLevel,place,actor,true)&&!cardUsed(c))));
    if(destination!==room&&!covered(destination))destination=room;
    if(destination===room&&['journey','journey3'].includes(route)&&['truth','dare'].some(type=>remainingCards(type,nextLevel).length<2)){
     const places=routePlaces(),index=places.indexOf(room);destination=places.slice(index+1).find(covered)||room;
