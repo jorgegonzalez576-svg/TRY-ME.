@@ -24,6 +24,15 @@ body{margin:0;--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
 @keyframes crToast{0%{opacity:0;transform:translate(-50%,-10px)}12%{opacity:1;transform:translate(-50%,0)}85%{opacity:1}100%{opacity:0}}
 @keyframes crFlap{from{transform:rotateX(0)}to{transform:rotateX(-178deg)}}
 @keyframes crGlow{0%{box-shadow:0 0 0 0 rgba(214,184,169,.7)}100%{box-shadow:0 0 0 26px rgba(214,184,169,0)}}
+@keyframes crSlam{0%{opacity:0;transform:scale(1.9)}55%{opacity:1;transform:scale(.93)}75%{transform:scale(1.04)}100%{opacity:1;transform:scale(1)}}
+@keyframes crFromL{from{opacity:0;transform:translateX(-90px)}to{opacity:1;transform:none}}
+@keyframes crFromR{from{opacity:0;transform:translateX(90px)}to{opacity:1;transform:none}}
+@keyframes crDim{from{opacity:0}to{opacity:.72}}
+@keyframes crBeat{0%{transform:scale(1)}14%{transform:scale(1.13)}28%{transform:scale(1)}42%{transform:scale(1.08)}70%,100%{transform:scale(1)}}
+@keyframes crBeatRing{0%{opacity:.7;transform:scale(1)}60%,100%{opacity:0;transform:scale(1.9)}}
+@keyframes crFw{0%,19%{opacity:0;transform:translate(0,0) scale(.5)}21%{opacity:1}52%{opacity:1;transform:translate(var(--dx),var(--dy)) scale(1)}80%{opacity:0;transform:translate(calc(var(--dx) * 1.12),calc(var(--dy) * 1.12 + 38px)) scale(.35)}100%{opacity:0}}
+@keyframes crRocket{0%{opacity:0;transform:translateY(300px)}3%{opacity:1}19%{opacity:1;transform:translateY(0)}21%,100%{opacity:0;transform:translateY(0)}}
+@keyframes crFlash{0%,19%{opacity:0;transform:scale(.2)}22%{opacity:.75}40%,100%{opacity:0;transform:scale(1.4)}}
 @keyframes crWin{0%{transform:scale(1)}40%{transform:scale(1.08)}100%{transform:scale(1)}}
 </style>
 </helmet>
@@ -89,22 +98,25 @@ body{margin:0;--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
 <span style="display:flex;align-items:center;gap:6px;font:700 10px/1 'Figtree';letter-spacing:.18em;color:{{ p.muted }}">{{ t.block }}<span style="display:flex;gap:3px"><sc-for list="{{ blockDots }}" as="d" hint-placeholder-count="3"><span style="width:6px;height:6px;border-radius:50%;background:{{ d.bg }};box-shadow:{{ d.ring }}"></span></sc-for></span></span>
 </div>
 <sc-if value="{{ forcedOn }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;top:240px;left:20px;right:20px;padding:9px 12px;border-radius:10px;box-shadow:inset 0 0 0 1px {{ p.line }};font:500 13px/1.35 'Figtree';color:{{ p.ink }}">{{ forcedText }}</div></sc-if>
-<div style="position:absolute;top:{{ choiceTop }};left:20px;right:20px;display:grid;grid-template-columns:1fr 1fr;gap:16px">
-<button onClick="{{ pickTruth }}" disabled="{{ truthOff }}" style="position:relative;height:262px;border:0;cursor:pointer;border-radius:18px;background:{{ p.truth }};box-shadow:inset 0 0 0 1px {{ p.truthLine }},0 2px 3px rgba(0,0,0,.12),0 26px 36px -22px rgba(0,0,0,.55);color:{{ p.truthInk }};opacity:{{ truthOp }};animation:{{ a.dealL }};transform:rotate(-1.6deg);transition:transform .18s" style-active="transform:rotate(-1.6deg) scale(.97)">
+<div style="position:absolute;top:{{ choiceTop }};left:20px;right:20px;display:grid;grid-template-columns:1fr 1fr;gap:16px;pointer-events:{{ choicePE }}">
+<div style="animation:{{ a.dealL }}"><button onClick="{{ pickTruth }}" disabled="{{ truthOff }}" style="position:relative;width:100%;height:262px;border:0;cursor:pointer;border-radius:18px;background:{{ p.truth }};box-shadow:inset 0 0 0 1px {{ p.truthLine }},0 2px 3px rgba(0,0,0,.12),0 26px 36px -22px rgba(0,0,0,.55);color:{{ p.truthInk }};opacity:{{ truthOp }};transform:{{ truthTf }};transition:{{ rouletteTr }}">
+<span style="position:absolute;inset:-7px;border-radius:24px;box-shadow:0 0 0 2px {{ p.accent }},0 0 28px {{ p.accent }};opacity:{{ truthGlow }};transition:opacity .1s"></span>
 <span style="position:absolute;inset:7px;border-radius:13px;box-shadow:inset 0 0 0 1px {{ p.truthLine }}"></span>
 <span style="position:absolute;left:50%;top:62px;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:{{ sealBg }};box-shadow:inset 0 2px 0 rgba(255,255,255,.16),inset 0 -3px 6px rgba(0,0,0,.35),0 7px 12px -4px rgba(0,0,0,.5);display:grid;place-items:center"><span style="width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,243,239,.3);display:grid;place-items:center;font:400 18px/1 'Gloock',serif;color:#FFF3EF">+1</span></span>
 <span style="position:absolute;left:0;right:0;bottom:54px;text-align:center;font:400 34px/1 'Gloock',serif">{{ t.truth }}</span>
 <span style="position:absolute;left:0;right:0;bottom:28px;text-align:center;font:600 13px/1 'Figtree';opacity:.8">{{ t.point }}</span>
-</button>
-<button onClick="{{ pickDare }}" disabled="{{ dareOff }}" style="position:relative;height:262px;border:0;cursor:pointer;border-radius:18px;background:{{ p.dare }};box-shadow:0 2px 3px rgba(0,0,0,.18),0 26px 36px -22px rgba(0,0,0,.65);color:{{ p.dareInk }};opacity:{{ dareOp }};animation:{{ a.dealR }};transform:rotate(1.6deg);transition:transform .18s" style-active="transform:rotate(1.6deg) scale(.97)">
+</button></div>
+<div style="animation:{{ a.dealR }}"><button onClick="{{ pickDare }}" disabled="{{ dareOff }}" style="position:relative;width:100%;height:262px;border:0;cursor:pointer;border-radius:18px;background:{{ p.dare }};box-shadow:0 2px 3px rgba(0,0,0,.18),0 26px 36px -22px rgba(0,0,0,.65);color:{{ p.dareInk }};opacity:{{ dareOp }};transform:{{ dareTf }};transition:{{ rouletteTr }}">
+<span style="position:absolute;inset:-7px;border-radius:24px;box-shadow:0 0 0 2px {{ p.accent }},0 0 28px {{ p.accent }};opacity:{{ dareGlow }};transition:opacity .1s"></span>
 <span style="position:absolute;inset:7px;border-radius:13px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)"></span>
 <span style="position:absolute;left:50%;top:62px;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:radial-gradient(circle at 34% 30%,#FFFAF6 0,#EBD9D2 50%,#BFA196 100%);box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -3px 6px rgba(0,0,0,.2),0 7px 12px -4px rgba(0,0,0,.5);display:grid;place-items:center"><span style="width:42px;height:42px;border-radius:50%;border:1px solid rgba(90,22,18,.25);display:grid;place-items:center;font:400 18px/1 'Gloock',serif;color:{{ p.dareSealInk }}">+3</span></span>
 <span style="position:absolute;left:0;right:0;bottom:54px;text-align:center;font:400 34px/1 'Gloock',serif">{{ t.dare }}</span>
 <span style="position:absolute;left:0;right:0;bottom:28px;text-align:center;font:600 13px/1 'Figtree';color:{{ p.dareSub }}">{{ t.darepoints }}</span>
-</button>
+</button></div>
 </div>
+<sc-if value="{{ randomRun }}" hint-placeholder-val="{{ false }}"><div role="status" style="position:absolute;top:{{ suspenseTop }};left:0;right:0;text-align:center;font:400 20px/1.2 'Gloock',serif;color:{{ p.ink }};animation:crFade .3s ease both">{{ t.randomReveal }}</div></sc-if>
 <div style="position:absolute;left:20px;right:20px;bottom:42px;display:flex;flex-direction:column;gap:8px">
-<button onClick="{{ pickRandom }}" style="height:54px;border:0;cursor:pointer;border-radius:14px;background:transparent;box-shadow:inset 0 0 0 1px {{ p.stop }};color:{{ p.ink }};font:600 15px/1 'Figtree'" style-active="transform:scale(.98)">{{ t.random }}</button>
+<button onClick="{{ pickRandom }}" disabled="{{ randomRun }}" style="opacity:{{ randomBtnOp }};height:54px;border:0;cursor:pointer;border-radius:14px;background:transparent;box-shadow:inset 0 0 0 1px {{ p.stop }};color:{{ p.ink }};font:600 15px/1 'Figtree'" style-active="transform:scale(.98)">{{ t.random }}</button>
 <button onClick="{{ exit }}" style="height:44px;border:0;cursor:pointer;background:transparent;color:{{ p.ink }};font:600 15px/1 'Figtree';opacity:.85">{{ t.endGame }}</button>
 </div>
 </sc-if>
@@ -193,11 +205,32 @@ body{margin:0;--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
 </sc-if>
 
 <sc-if value="{{ v.duel }}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{ dp.intro }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ skipIntro }}" style="position:absolute;inset:0;z-index:4;cursor:pointer">
+<div style="position:absolute;inset:0;background:#07060B;opacity:.72;animation:{{ di.dim }}"></div>
+<div style="position:absolute;top:150px;left:0;right:0;text-align:center">
+<div style="font:400 76px/1 'Gloock',serif;color:#F3EDE8;animation:{{ di.alto }}">{{ t.duelTitle }}</div>
+<div style="margin-top:16px;font:700 11px/1 'Figtree';letter-spacing:.26em;color:#D6B8A9;animation:{{ di.kicker }}">{{ duelNameUp }}</div>
+</div>
+<div style="position:absolute;top:350px;left:20px;right:20px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px">
+<div style="animation:{{ di.left }}"><div style="font:400 34px/1 'Gloock',serif;color:#F3EDE8">{{ resisterName }}</div><div style="margin-top:8px;font:700 11px/1 'Figtree';letter-spacing:.2em;color:#D6B8A9">{{ holdUp }}</div></div>
+<div style="position:relative;width:64px;height:64px;animation:{{ di.sealIn }}">
+<div style="position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 2px rgba(214,184,169,.6);animation:{{ di.ring }}"></div>
+<div style="position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 34% 30%,#A9382E 0,#7A1D17 48%,#4A0F0C 100%);box-shadow:inset 0 2px 0 rgba(255,255,255,.14),inset 0 -3px 6px rgba(0,0,0,.4),0 8px 16px -4px rgba(0,0,0,.8);display:grid;place-items:center;animation:{{ di.beat }}"><span style="width:46px;height:46px;border-radius:50%;border:1px solid rgba(243,237,232,.26);display:grid;place-items:center;font:400 16px/1 'Gloock',serif;color:#E9D3CB">TM</span></div>
+</div>
+<div style="text-align:right;animation:{{ di.right }}"><div style="font:400 34px/1 'Gloock',serif;color:#F3EDE8">{{ attackerName }}</div><div style="margin-top:8px;font:700 11px/1 'Figtree';letter-spacing:.2em;color:#D6B8A9">{{ attackUp }}</div></div>
+</div>
+<div style="position:absolute;top:470px;left:32px;right:32px;text-align:center;font:500 16px/1.45 'Figtree';color:#E4E4E3;animation:{{ di.roles }}">{{ duelRoles }}</div>
+<div style="position:absolute;bottom:60px;left:0;right:0;text-align:center;font:700 11px/1 'Figtree';letter-spacing:.22em;color:#9C8A80;animation:{{ di.skip }}">{{ skipUp }}</div>
+</div>
+</sc-if>
+<sc-if value="{{ dp.notIntro }}" hint-placeholder-val="{{ true }}">
 <div style="position:absolute;top:126px;left:24px;right:24px;text-align:center;animation:{{ a.rise }}">
 <div style="font:400 50px/1 'Gloock',serif;color:#E4E4E3">{{ t.duelTitle }}</div>
 <div style="margin-top:10px;font:700 11px/1 'Figtree';letter-spacing:.24em;color:#D6B8A9">{{ duelNameUp }}</div>
 <div style="margin-top:14px;font:500 15px/1.4 'Figtree';color:#E4E4E3">{{ duelRoles }}</div>
 </div>
+</sc-if>
 <sc-if value="{{ dp.envelope }}" hint-placeholder-val="{{ false }}">
 <div onClick="{{ openEnvelope }}" style="position:absolute;top:300px;left:36px;right:36px;height:220px;cursor:pointer;perspective:900px;animation:{{ a.card }}">
 <div style="position:absolute;inset:0;border-radius:10px;background:linear-gradient(160deg,#7E241E,#5E1814);box-shadow:0 30px 40px -20px rgba(0,0,0,.8)"></div>
@@ -252,20 +285,26 @@ body{margin:0;--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
 </sc-if>
 
 <sc-if value="{{ v.levelup }}" hint-placeholder-val="{{ false }}">
-<div style="position:absolute;top:150px;left:28px;right:28px">
-<div style="font:700 11px/1 'Figtree';letter-spacing:.24em;color:{{ p.accent }};animation:{{ a.rise }}">{{ t.levelChange }}</div>
-<div style="margin-top:14px;font:400 40px/1.04 'Gloock',serif;color:{{ p.ink }};animation:{{ a.rise2 }}">{{ t.levelTitle }}</div>
+<div style="position:absolute;inset:0;z-index:4;background:#07060B;opacity:{{ lu.dim }};transition:{{ lu.dimTr }};pointer-events:none"></div>
+<div style="position:absolute;inset:0;z-index:4;background:{{ lu.newSurface }};clip-path:{{ lu.clip }};-webkit-clip-path:{{ lu.clip }};opacity:{{ lu.floodOp }};transition:{{ lu.clipTr }};pointer-events:none"></div>
+<div style="position:absolute;left:0;right:0;top:{{ lu.top }};z-index:6;text-align:center;transition:{{ lu.moveTr }}">
+<div style="font:700 11px/1 'Figtree';letter-spacing:.26em;color:{{ lu.kicker }};opacity:{{ lu.kickerOp }};transition:opacity .4s,color .5s">{{ t.levelChange }}</div>
+<div style="margin:22px auto 0;display:flex;justify-content:center;gap:8px">
+<sc-for list="{{ lu.bars }}" as="b" hint-placeholder-count="4"><span style="width:46px;height:8px;border-radius:4px;background:{{ b.bg }};box-shadow:{{ b.glow }};transition:background .35s {{ b.delay }}, box-shadow .6s {{ b.delay }}"></span></sc-for>
 </div>
-<div style="position:absolute;top:330px;left:20px;right:20px;padding:26px 24px;border-radius:22px;background:{{ p.card }};box-shadow:0 34px 50px -24px rgba(0,0,0,.6);color:{{ p.cardInk }};animation:{{ a.card }};transition:{{ bgTr }}">
-<div style="display:flex;align-items:center;justify-content:space-between"><span style="font:700 10px/1 'Figtree';letter-spacing:.2em;color:{{ p.cardAccent }}">{{ t.levelLabel }}</span><span style="display:flex;gap:4px"><sc-for list="{{ bars }}" as="b" hint-placeholder-count="4"><span style="width:22px;height:5px;border-radius:3px;background:{{ b }};transition:background .5s .3s"></span></sc-for></span></div>
-<div style="margin-top:16px;font:400 46px/1 'Gloock',serif;color:{{ p.cardAccent }}">{{ levelName }}</div>
-<div style="margin-top:12px;font:400 22px/1.2 'Gloock',serif">{{ levelHead }}</div>
-<div style="margin-top:10px;font:500 14px/1.45 'Figtree';color:{{ p.cardMuted }}">{{ levelDesc }}</div>
-<div style="margin-top:18px;padding-top:14px;border-top:1px solid {{ p.truthLine }};font:600 13px/1 'Figtree';color:{{ p.cardMuted }}">{{ newPlace }}</div>
+<div style="margin-top:22px;font:400 64px/1 'Gloock',serif;color:{{ lu.nameColor }};clip-path:{{ lu.nameClip }};-webkit-clip-path:{{ lu.nameClip }};transition:{{ lu.nameTr }}">{{ lu.name }}</div>
 </div>
-<div style="position:absolute;left:20px;right:20px;bottom:42px">
-<button onClick="{{ afterLevel }}" style="width:100%;height:56px;border:0;cursor:pointer;border-radius:14px;background:{{ p.primary }};color:{{ p.primaryInk }};font:600 16px/1 'Figtree';transition:{{ bgTr }}" style-active="transform:scale(.98)">{{ t.letsDoIt }}</button>
+<sc-if value="{{ lu.showCard }}" hint-placeholder-val="{{ true }}">
+<div style="position:absolute;top:372px;left:20px;right:20px;z-index:6;padding:24px;border-radius:22px;background:{{ p.card }};box-shadow:0 34px 50px -24px rgba(0,0,0,.6);color:{{ p.cardInk }};animation:{{ a.card }}">
+<div style="font:400 26px/1.1 'Gloock',serif">{{ t.levelTitle }}</div>
+<div style="margin-top:14px;font:400 21px/1.2 'Gloock',serif;color:{{ p.cardAccent }}">{{ levelHead }}</div>
+<div style="margin-top:8px;font:500 14px/1.45 'Figtree';color:{{ p.cardMuted }}">{{ levelDesc }}</div>
+<div style="margin-top:16px;padding-top:14px;border-top:1px solid {{ p.truthLine }};font:600 13px/1 'Figtree';color:{{ p.cardMuted }}">{{ newPlace }}</div>
 </div>
+<div style="position:absolute;left:20px;right:20px;bottom:42px;z-index:6;animation:{{ a.rise2 }}">
+<button onClick="{{ afterLevel }}" style="width:100%;height:56px;border:0;cursor:pointer;border-radius:14px;background:{{ p.primary }};color:{{ p.primaryInk }};font:600 16px/1 'Figtree'" style-active="transform:scale(.98)">{{ t.letsDoIt }}</button>
+</div>
+</sc-if>
 </sc-if>
 
 <sc-if value="{{ v.prize }}" hint-placeholder-val="{{ false }}">
@@ -311,8 +350,29 @@ body{margin:0;--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
 <div style="margin-top:14px;font:400 22px/1.2 'Gloock',serif;color:#E8D6CF">{{ chosenTitle }}</div>
 </div>
 <div style="position:absolute;left:20px;right:20px;bottom:42px;display:grid;grid-template-columns:1fr 1fr;gap:10px">
-<button onClick="{{ exit }}" style="height:56px;border:0;cursor:pointer;border-radius:14px;background:#F3EDE8;color:#721E19;font:600 15px/1 'Figtree'">{{ t.orgasm }}</button>
+<button onClick="{{ orgasmDone }}" style="height:56px;border:0;cursor:pointer;border-radius:14px;background:#F3EDE8;color:#721E19;font:600 15px/1 'Figtree'">{{ t.orgasm }}</button>
 <button onClick="{{ exit }}" style="height:56px;border:0;cursor:pointer;border-radius:14px;background:transparent;box-shadow:inset 0 0 0 1px rgba(214,184,169,.5);color:#F3EDE8;font:600 15px/1 'Figtree'">{{ t.enough }}</button>
+</div>
+</sc-if>
+<sc-if value="{{ pz.complete }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(0,0,0,0) 0,rgba(10,4,4,.55) 70%);pointer-events:none"></div>
+<div aria-hidden="true" style="position:absolute;left:0;right:0;top:116px;bottom:0;overflow:hidden;pointer-events:none">
+<sc-for list="{{ fw }}" as="b" hint-placeholder-count="5">
+<div style="position:absolute;left:{{ b.x }};top:{{ b.y }};width:0;height:0">
+<span style="position:absolute;left:-2px;top:0;width:4px;height:14px;border-radius:2px;background:linear-gradient(#F3EDE8,rgba(243,237,232,0));animation:{{ b.rocket }}"></span>
+<span style="position:absolute;left:-40px;top:-40px;width:80px;height:80px;border-radius:50%;background:radial-gradient(circle,{{ b.flashColor }} 0,rgba(255,255,255,0) 70%);animation:{{ b.flash }}"></span>
+<sc-for list="{{ b.parts }}" as="q" hint-placeholder-count="14"><span style="position:absolute;left:-3px;top:-3px;width:6px;height:6px;border-radius:50%;background:{{ q.c }};box-shadow:0 0 6px {{ q.c }};--dx:{{ q.dx }};--dy:{{ q.dy }};animation:{{ q.anim }}"></span></sc-for>
+</div>
+</sc-for>
+</div>
+<div style="position:absolute;top:372px;left:24px;right:24px;text-align:center">
+<div style="font:700 11px/1 'Figtree';letter-spacing:.26em;color:#E6C9BC;animation:{{ a.rise }}">{{ t.prizeCompleteLabel }}</div>
+<div style="margin-top:14px;font:400 48px/1.02 'Gloock',serif;color:#F3EDE8;animation:{{ a.rise2 }}">{{ t.prizeCompleteTitle }}</div>
+<div style="margin-top:14px;font:500 17px/1.4 'Figtree';color:#E8D6CF;animation:{{ a.rise2 }}">Ana, {{ t.prizeCompleteText }}</div>
+</div>
+<div style="position:absolute;left:20px;right:20px;bottom:42px;display:flex;flex-direction:column;gap:10px">
+<button onClick="{{ playAgain }}" style="height:56px;border:0;cursor:pointer;border-radius:14px;background:#F3EDE8;color:#721E19;font:600 16px/1 'Figtree'" style-active="transform:scale(.98)">{{ t.playAgain }}</button>
+<button onClick="{{ exit }}" style="height:52px;border:0;cursor:pointer;border-radius:14px;background:transparent;box-shadow:inset 0 0 0 1px rgba(214,184,169,.5);color:#F3EDE8;font:600 15px/1 'Figtree'">{{ t.homeButton }}</button>
 </div>
 </sc-if>
 </sc-if>
@@ -322,7 +382,7 @@ body{margin:0;--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { view: 'turn', level: 1, start: 0, max: 2, mode: 'prog', goal: 15, scores: [7, 5], disp: [7, 5], active: 0, round: 6, duels: 0, blocks: [['truth'], []], ctype: 'dare', cidx: 0, phase: 'idle', left: 0, total: 0, passSheet: false, flash: null, toast: null, scoreDelta: 0, scoreKind: '', duelPhase: 'envelope', duelResult: null, luFrom: 1, luStage: 1, prizePhase: 'winner', chosen: 0, opening: false };
+  state = { view: 'turn', level: 1, start: 0, max: 2, mode: 'prog', goal: 15, scores: [7, 5], disp: [7, 5], active: 0, round: 6, duels: 0, blocks: [['truth'], []], ctype: 'dare', cidx: 0, phase: 'idle', left: 0, total: 0, passSheet: false, flash: null, toast: null, scoreDelta: 0, scoreKind: '', duelPhase: 'envelope', duelResult: null, luFrom: 1, luStage: 1, prizePhase: 'winner', chosen: 0, opening: false, randomRun: false, randomHi: 'truth', randomDone: false };
   names = ['Ana', 'Leo'];
   lv = ['spark', 'tease', 'heat', 'afterdark'];
   P = {
@@ -346,6 +406,7 @@ class Component extends DCLogic {
       passBtn: 'Pasar turno · −1', passTitle: '¿Pasar turno?', passText: 'Pasar cuesta 1 punto. El turno pasa a {partner}.', passFloor: 'El marcador nunca baja de 0.', passConfirm: 'Pasar · −1', keepPlaying: 'Seguir jugando', toastPass: '−1 para {name}', toastAbandon: 'Reto abandonado · 0',
       target: 'META', lead: 'Ventaja {name} +{n}', tied: 'Empate', turnOf: 'Turno de {name}', continue: 'Seguir', finalScoreLive: 'Marcador',
       duelTitle: '¡Alto!', duelName: 'Duelo de aguante', duelRoles: '{resister}, aguanta. {attacker}, haz que se rinda.', duelTapUp: 'TOCA EL SOBRE', duelStart: 'Iniciar', duelStop: '¡Paro!', duelOnly: 'Solo {resister}', duelQuestion: '¿Cómo terminó?', duelHeld: '{resister} aguantó · +3', duelFailed: '{resister} falló · +1 para {attacker}',
+      holdUp: 'AGUANTA', attackUp: 'ATACA', skipUp: 'TOCA PARA IR AL SOBRE', randomReveal: 'Un poco de suspenso…', prizeCompleteLabel: 'PREMIO COMPLETADO', prizeCompleteTitle: '¡Qué final!', prizeCompleteText: 'completaste tu premio.', playAgain: 'Jugar de nuevo', homeButton: 'Volver al inicio',
       duelText: ['besa el cuello y las orejas de {resister}.', 'ojos cerrados, sin moverte ni hacer ningún sonido.'], duelFail: 'Te mueves o haces un sonido',
       levelChange: '¿UN POCO MÁS?', levelTitle: 'Subimos la intensidad.', levelLabel: 'NIVEL', letsDoIt: '¡Vamos a hacerlo!', newPlace: 'Nuevo lugar: {place}', bedroom: 'Cuarto',
       completeGame: 'PARTIDA COMPLETADA', won: 'ganaste.', finalScore: 'Marcador final', wonBy: 'Ganó por {n} puntos', forYou: 'Para ti,', tapPrize: 'TOCA EL SOBRE PARA REVELAR TU PREMIO', revealPrize: 'Revelar tu premio', claimNote: 'AHORA RECLAMA TU PREMIO', prizeChoice: 'Elige tu premio', choosePrize: 'Elegir este premio', optionA: 'OPCIÓN A', optionB: 'OPCIÓN B', chosen: 'ELECCIÓN CONFIRMADA', moment: 'El momento es de ustedes.', orgasm: 'Orgasmo logrado', enough: 'Es suficiente',
@@ -357,6 +418,7 @@ class Component extends DCLogic {
       passBtn: 'Pass turn · −1', passTitle: 'Pass this turn?', passText: 'Passing costs 1 point. The turn goes to {partner}.', passFloor: 'Scores never go below 0.', passConfirm: 'Pass · −1', keepPlaying: 'Keep playing', toastPass: '−1 for {name}', toastAbandon: 'Dare abandoned · 0',
       target: 'TARGET', lead: 'Lead {name} +{n}', tied: 'Tied', turnOf: "{name}'s turn", continue: 'Continue', finalScoreLive: 'Score',
       duelTitle: 'Hold on!', duelName: 'Endurance duel', duelRoles: '{resister}, hold out. {attacker}, make them give in.', duelTapUp: 'TAP THE ENVELOPE', duelStart: 'Start', duelStop: 'Stop!', duelOnly: '{resister} only', duelQuestion: 'How did it end?', duelHeld: '{resister} held out · +3', duelFailed: '{resister} failed · +1 for {attacker}',
+      holdUp: 'HOLDS OUT', attackUp: 'ATTACKS', skipUp: 'TAP TO SKIP TO THE ENVELOPE', randomReveal: 'A little suspense…', prizeCompleteLabel: 'PRIZE COMPLETE', prizeCompleteTitle: 'What a finish.', prizeCompleteText: 'you’ve completed your prize.', playAgain: 'Play again', homeButton: 'Back to home',
       duelText: ["kiss {resister}'s neck and ears.", 'eyes closed, no moving and no sound.'], duelFail: 'You move or make a sound',
       levelChange: 'A LITTLE MORE?', levelTitle: 'Turning up the spark.', levelLabel: 'LEVEL', letsDoIt: 'Let’s do it', newPlace: 'New place: {place}', bedroom: 'Bedroom',
       completeGame: 'GAME COMPLETE', won: 'you won.', finalScore: 'Final score', wonBy: 'Won by {n} points', forYou: 'For you,', tapPrize: 'TAP THE ENVELOPE TO REVEAL YOUR PRIZE', revealPrize: 'Reveal your prize', claimNote: 'NOW CLAIM YOUR PRIZE', prizeChoice: 'Choose your prize', choosePrize: 'Choose this prize', optionA: 'OPTION A', optionB: 'OPTION B', chosen: 'CHOICE CONFIRMED', moment: 'The moment is yours.', orgasm: 'Orgasm reached', enough: "That's enough",
@@ -366,12 +428,12 @@ class Component extends DCLogic {
   componentDidMount() { this.applyStart(); }
   componentDidUpdate(p, ps) {
     if (p.nonce !== this.props.nonce) this.applyStart();
-    const tint = this.pal().tint; if (tint !== this.lastTint) { this.lastTint = tint; this.props.onTint && this.props.onTint(tint); }
+    const tint = (this.state.view === 'levelup' && this.state.luStage < 3) || this.state.view === 'duel' ? 'light' : this.pal().tint; if (tint !== this.lastTint) { this.lastTint = tint; this.props.onTint && this.props.onTint(tint); }
   }
   componentWillUnmount() { this.clear(); }
-  clear() { clearInterval(this.iv); clearInterval(this.cnt); clearTimeout(this.t1); clearTimeout(this.t2); clearTimeout(this.t3); }
+  clear() { clearInterval(this.iv); clearInterval(this.cnt); clearTimeout(this.t1); clearTimeout(this.t2); clearTimeout(this.t3); (this.rt || []).forEach(clearTimeout); this.rt = []; }
   red() { return !!this.props.reduced; }
-  pal() { const s = this.state; if (s.view === 'duel') return this.P.duel; if (s.view === 'prize') return this.P.prize; if (s.view === 'level') return this.P.spark; const L = s.view === 'levelup' ? (s.luStage ? s.level : s.luFrom) : s.level; return this.P[this.lv[L]]; }
+  pal() { const s = this.state; if (s.view === 'duel') return this.P.duel; if (s.view === 'prize') return this.P.prize; if (s.view === 'level') return this.P.spark; const L = s.view === 'levelup' ? (s.luStage >= 3 ? s.level : s.luFrom) : s.level; return this.P[this.lv[L]]; }
   applyStart() {
     this.clear();
     const id = this.props.startAt || 'crave-level';
@@ -379,10 +441,10 @@ class Component extends DCLogic {
     const m = {
       'crave-level': { view: 'level' }, 'crave-turn': { view: 'turn' }, 'crave-card': { view: 'card' }, 'crave-pass': { view: 'card', passSheet: true },
       'crave-score': { view: 'score', scores: [10, 5], disp: [10, 5], scoreDelta: 3, scoreKind: 'complete', blocks: [['truth', 'dare'], []] },
-      'crave-duel': { view: 'duel', duelPhase: 'card', left: 45000, total: 45000 }, 'crave-levelup': { view: 'levelup', level: 2, luFrom: 1, luStage: 1 }, 'crave-prize': { view: 'prize', scores: [16, 12], disp: [16, 12] }
+      'crave-duel': { view: 'duel', duelPhase: 'card', left: 45000, total: 45000 }, 'crave-duelintro': { view: 'duel', duelPhase: 'intro', left: 45000, total: 45000 }, 'crave-random': { view: 'turn' }, 'crave-levelup': { view: 'levelup', level: 2, luFrom: 1, luStage: 0 }, 'crave-prize': { view: 'prize', scores: [16, 12], disp: [16, 12] }, 'crave-complete': { view: 'prize', scores: [16, 12], disp: [16, 12], prizePhase: 'complete' }
     };
-    this.setState(Object.assign(base, m[id] || m['crave-level']), () => { if (id === 'crave-levelup') this.animateLevel(1, 2); });
-    const tint = (m[id] && ['duel', 'prize'].includes(m[id].view)) ? 'light' : 'dark';
+    this.setState(Object.assign(base, { randomRun: false, randomDone: false }, m[id] || m['crave-level']), () => { if (id === 'crave-levelup') this.animateLevel(); if (id === 'crave-duelintro') this.armIntro(); if (id === 'crave-random') this.runRandom('dare'); });
+    const tint = (m[id] && ['duel', 'prize', 'levelup'].includes(m[id].view)) ? 'light' : 'dark';
     this.lastTint = tint; this.props.onTint && this.props.onTint(tint);
   }
   card() { const s = this.state; const key = this.lv[Math.min(s.level, 2)]; const list = this.pool[key][s.ctype]; return list[s.cidx % list.length]; }
@@ -426,10 +488,44 @@ class Component extends DCLogic {
       else if (round > 3 && s.duels < 2 && Math.random() < 0.15) next = 'duel';
     }
     clearInterval(this.iv);
-    const extra = next === 'levelup' ? { luFrom: s.level, level: s.level + 1, luStage: 0 } : next === 'duel' ? { duelPhase: 'envelope', duels: s.duels + 1, left: 45000, total: 45000 } : next === 'prize' ? { prizePhase: 'winner' } : {};
-    this.setState(Object.assign({ blocks, active, round, view: next, phase: 'idle', passSheet: false }, extra), () => { if (next === 'levelup') this.animateLevel(s.level, s.level + 1); });
+    const extra = next === 'levelup' ? { luFrom: s.level, level: s.level + 1, luStage: 0 } : next === 'duel' ? { duelPhase: 'intro', duels: s.duels + 1, left: 45000, total: 45000 } : next === 'prize' ? { prizePhase: 'winner' } : {};
+    this.setState(Object.assign({ blocks, active, round, view: next, phase: 'idle', passSheet: false }, extra), () => { if (next === 'levelup') this.animateLevel(); if (next === 'duel') this.armIntro(); });
   }
-  animateLevel() { this.setState({ luStage: 0 }); clearTimeout(this.t1); this.t1 = setTimeout(() => this.setState({ luStage: 1 }), this.red() ? 0 : 450); }
+  animateLevel() {
+    (this.rt || []).forEach(clearTimeout); this.rt = [];
+    if (this.red()) { this.setState({ luStage: 3 }); return; }
+    this.setState({ luStage: 0 });
+    [[1, 420], [2, 1550], [3, 2500]].forEach(([st, ms]) => this.rt.push(setTimeout(() => this.setState({ luStage: st }), ms)));
+  }
+  armIntro() {
+    clearTimeout(this.t1);
+    if (this.props.mode === 'board') return;
+    this.t1 = setTimeout(() => { if (this.state.view === 'duel' && this.state.duelPhase === 'intro') this.setState({ duelPhase: 'envelope' }); }, this.red() ? 1400 : 3800);
+  }
+  runRandom(forceTarget) {
+    if (this.state.randomRun) return;
+    const f = this.forced(), target = forceTarget || f || (Math.random() < 0.5 ? 'truth' : 'dare'), other = target === 'truth' ? 'dare' : 'truth';
+    (this.rt || []).forEach(clearTimeout); this.rt = [];
+    if (this.red()) { this.setState({ randomRun: true, randomHi: target, randomDone: true }); if (this.props.mode !== 'board') this.rt.push(setTimeout(() => { this.setState({ randomRun: false, randomDone: false }); this.choose(target); }, 450)); return; }
+    const delays = [70, 70, 80, 90, 100, 115, 135, 160, 190, 230, 280, 340, 420];
+    let hi = delays.length % 2 === 0 ? target : other, at = 0;
+    this.setState({ randomRun: true, randomHi: hi, randomDone: false });
+    delays.forEach((d) => { at += d; this.rt.push(setTimeout(() => { hi = hi === 'truth' ? 'dare' : 'truth'; this.setState({ randomHi: hi }); }, at)); });
+    this.rt.push(setTimeout(() => this.setState({ randomDone: true }), at + 60));
+    if (this.props.mode === 'board') return;
+    this.rt.push(setTimeout(() => { this.setState({ randomRun: false, randomDone: false }); this.choose(target); }, at + 700));
+  }
+  fireworks() {
+    if (this.fwCache) return this.fwCache;
+    const cols = ['#F3EDE8', '#E6C9BC', '#D4A574', '#F6C2CF', '#FFD3C8'];
+    const spots = [['24%', 96, 0], ['74%', 70, .55], ['50%', 150, 1.1], ['30%', 196, 1.6], ['70%', 176, 2.05]];
+    this.fwCache = spots.map(([x, y, d], k) => {
+      const n = 14, r0 = 74 + (k % 3) * 14, dur = 2.6;
+      return { x, y: y + 'px', flashColor: cols[k % cols.length], rocket: 'crRocket ' + dur + 's ' + d + 's cubic-bezier(.2,.7,.3,1) infinite', flash: 'crFlash ' + dur + 's ' + d + 's ease-out infinite',
+        parts: Array.from({ length: n }, (_, i) => { const ang = (i / n) * Math.PI * 2 + k * 0.4, r = r0 * (0.82 + ((i * 37) % 10) / 40); return { c: cols[(i + k) % cols.length], dx: Math.round(Math.cos(ang) * r) + 'px', dy: Math.round(Math.sin(ang) * r) + 'px', anim: 'crFw ' + dur + 's ' + d + 's cubic-bezier(.12,.75,.3,1) infinite' }; }) };
+    });
+    return this.fwCache;
+  }
   resister() { const [a, b] = this.state.scores; return a < b ? 0 : 1; }
   startDuel() {
     const end = Date.now() + this.state.left;
@@ -475,7 +571,20 @@ class Component extends DCLogic {
         pick: () => { if (s.mode === 'fixed') this.setState({ start: i, max: i }); else if (i < s.start || i === s.start) this.setState({ start: i, max: Math.max(i, s.max) }); else this.setState({ max: i }); } };
     });
     const goals = [10, 15, 20, 30, 40, 50], gi = goals.indexOf(s.goal);
-    const dp = { envelope: s.duelPhase === 'envelope', card: s.duelPhase === 'card' || s.duelPhase === 'running', question: s.duelPhase === 'question', result: s.duelPhase === 'result' };
+    const rTf = (k) => { if (!s.randomRun || red) return 'none'; if (s.randomHi !== k) return 'scale(.97)'; return s.randomDone ? 'translateY(-18px) scale(1.06)' : 'translateY(-10px) scale(1.03)'; };
+    const st = s.luStage, newP = this.P[this.lv[s.level]], fromL = s.luFrom;
+    const luVals = {
+      dim: st >= 1 && st < 3 || st === 0 ? (st >= 3 ? 0 : 0.9) : 0, dimTr: red ? 'none' : 'opacity .4s ease',
+      newSurface: newP.surface, clip: st >= 2 ? 'circle(150% at 50% 34%)' : 'circle(0% at 50% 34%)', floodOp: st >= 3 ? 0 : 1,
+      clipTr: red ? 'none' : (st >= 3 ? 'opacity .8s ease' : 'clip-path .95s cubic-bezier(.6,0,.2,1), -webkit-clip-path .95s cubic-bezier(.6,0,.2,1)'),
+      top: st >= 3 ? '140px' : '250px', moveTr: red ? 'none' : 'top .6s cubic-bezier(.2,.8,.2,1)',
+      kicker: st >= 2 ? newP.accent : '#D6B8A9', kickerOp: 1,
+      bars: [0, 1, 2, 3].map(i => { const filled = i <= fromL || (i === s.level && st >= 1); const onDark = st < 2; const bg = filled ? (onDark ? '#F3EDE8' : newP.bar) : (onDark ? 'rgba(243,237,232,.16)' : newP.barEmpty); const isNew = i === s.level && st >= 1; return { bg, glow: isNew && st < 3 ? '0 0 16px ' + (onDark ? '#F3EDE8' : newP.bar) : 'none', delay: isNew ? '.05s' : '0s' }; }),
+      name: t.levels[s.level], nameColor: st >= 2 ? newP.ink : '#F3EDE8', nameClip: st >= 1 ? 'inset(0 0 0 0)' : 'inset(0 100% 0 0)', nameTr: red ? 'none' : 'clip-path .7s ease .15s, -webkit-clip-path .7s ease .15s, color .5s',
+      showCard: st >= 3
+    };
+    luVals.dim = st >= 3 ? 0 : 0.9;
+    const dp = { intro: s.duelPhase === 'intro', notIntro: s.duelPhase !== 'intro', envelope: s.duelPhase === 'envelope', card: s.duelPhase === 'card' || s.duelPhase === 'running', question: s.duelPhase === 'question', result: s.duelPhase === 'result' };
     return {
       t, a, p, v: { level: s.view === 'level', plate: ['turn', 'card'].includes(s.view), turn: s.view === 'turn', card: s.view === 'card', pass: s.passSheet, score: s.view === 'score', duel: s.view === 'duel', levelup: s.view === 'levelup', prize: s.view === 'prize' },
       bgTr: red ? 'none' : 'background .6s ease, background-color .6s ease, color .6s ease, box-shadow .6s ease',
@@ -536,13 +645,25 @@ class Component extends DCLogic {
       duelOutcome: s.duelResult === 'failed' ? dsub(t.duelFailed) : dsub(t.duelHeld),
       afterDuel: () => this.setState({ view: 'turn', duelPhase: 'envelope', duelResult: null }),
       afterLevel: () => this.setState({ view: 'turn' }),
-      pz: { winner: s.prizePhase === 'winner', choose: s.prizePhase === 'choose', chosen: s.prizePhase === 'chosen' },
+      pz: { winner: s.prizePhase === 'winner', choose: s.prizePhase === 'choose', chosen: s.prizePhase === 'chosen', complete: s.prizePhase === 'complete' },
       wonBy: t.wonBy.replace('{n}', Math.abs(s.scores[0] - s.scores[1]) || 4),
       prizeFlap: s.opening && !red ? 'crFlap .42s cubic-bezier(.4,0,.2,1) both' : 'none',
       openPrize: () => { this.setState({ opening: true }); clearTimeout(this.t1); this.t1 = setTimeout(() => this.setState({ prizePhase: 'choose', opening: false }), red ? 100 : 520); },
       prizes: t.prizes.map((z, i) => ({ label: i ? t.optionB : t.optionA, title: z[0], text: z[1].replaceAll('{winner}', N[0]).replaceAll('{partner}', N[1]), rot: i ? '.8deg' : '-.8deg', anim: red ? 'crFade .2s both' : (i ? 'crDealR .45s .08s cubic-bezier(.2,.8,.2,1) both' : 'crDealL .45s cubic-bezier(.2,.8,.2,1) both'), pick: () => this.setState({ prizePhase: 'chosen', chosen: i }) })),
       chosenTitle: t.prizes[s.chosen][0],
-      toastOn: !!s.toast, toastText: s.toast ? s.toast.text : ''
+      toastOn: !!s.toast, toastText: s.toast ? s.toast.text : '',
+      choicePE: s.randomRun ? 'none' : 'auto', randomRun: s.randomRun, randomBtnOp: s.randomRun ? 0.5 : 1, suspenseTop: f ? '584px' : '552px',
+      rouletteTr: red ? 'opacity .2s' : 'transform .12s cubic-bezier(.2,.8,.2,1), opacity .12s',
+      truthTf: rTf('truth'), dareTf: rTf('dare'), truthGlow: s.randomRun && s.randomHi === 'truth' ? 1 : 0, dareGlow: s.randomRun && s.randomHi === 'dare' ? 1 : 0,
+      truthOp: s.randomRun ? (s.randomHi === 'truth' ? 1 : 0.55) : (f === 'dare' ? 0.4 : 1), dareOp: s.randomRun ? (s.randomHi === 'dare' ? 1 : 0.55) : (f === 'truth' ? 0.4 : 1),
+      pickRandom: () => this.runRandom(),
+      di: { dim: red ? 'none' : 'crDim .45s ease both', alto: A('crSlam .55s .3s cubic-bezier(.2,.8,.2,1) both'), kicker: A('crRise .4s .8s ease both'), left: A('crFromL .55s 1.1s cubic-bezier(.2,.8,.2,1) both'), right: A('crFromR .55s 1.1s cubic-bezier(.2,.8,.2,1) both'), sealIn: A('crSlam .45s 1.55s cubic-bezier(.2,.8,.2,1) both'), beat: red ? 'none' : 'crBeat 1s 2s ease-in-out infinite', ring: red ? 'none' : 'crBeatRing 1s 2s ease-out infinite', roles: A('crRise .45s 2.3s ease both'), skip: A('crFade .5s 1.2s ease both') },
+      holdUp: t.holdUp, attackUp: t.attackUp, skipUp: t.skipUp,
+      skipIntro: () => this.setState({ duelPhase: 'envelope' }),
+      lu: luVals,
+      fw: red ? [] : this.fireworks(),
+      orgasmDone: () => this.setState({ prizePhase: 'complete' }),
+      playAgain: () => this.setState({ view: 'level', prizePhase: 'winner' })
     };
   }
 }

@@ -1,0 +1,22 @@
+/* Photographic rooms sit behind the existing paper, journal and dice UI. */
+#tryme-preview .tm-phone .tm-scene.tm-photo-scene{
+ --ambient-wash:var(--crave-surface,#F3EDE8);
+ opacity:1;animation:tm-photo-appear .65s ease both;background:var(--ambient-wash);
+}
+#tryme-preview .tm-photo-scene .tm-scene-photo{
+ position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;
+}
+#tryme-preview .tm-photo-scene:after{
+ content:'';position:absolute;inset:0;pointer-events:none;
+ background:linear-gradient(to bottom,color-mix(in srgb,var(--ambient-wash) 88%,transparent) 0%,color-mix(in srgb,var(--ambient-wash) 76%,transparent) 35%,color-mix(in srgb,var(--ambient-wash) 58%,transparent) 100%);
+}
+#tryme-preview .tm-phone:is([data-crave-level="heat"],[data-crave-level="afterdark"]) .tm-photo-scene:after{
+ background:linear-gradient(to bottom,color-mix(in srgb,var(--ambient-wash) 94%,transparent),color-mix(in srgb,var(--ambient-wash) 82%,transparent) 40%,color-mix(in srgb,var(--ambient-wash) 68%,transparent));
+}
+#tryme-preview .tm-phone.tm-connect .cn-office-scene.tm-photo-scene{--ambient-wash:#E1DBD4;opacity:1;animation:tm-photo-appear .65s ease both}
+#tryme-preview .tm-phone.tm-connect .cn-office-scene.tm-photo-scene:after{
+ background:linear-gradient(to bottom,#E1DBD4dd,#E1DBD4b8 45%,#E1DBD480);
+}
+@keyframes tm-photo-appear{from{opacity:0}to{opacity:1}}
+#tryme-preview[data-motion="reduced"] .tm-phone .tm-scene.tm-photo-scene{animation:none}
+@media(prefers-reduced-motion:reduce){#tryme-preview .tm-phone .tm-scene.tm-photo-scene{animation:none}}

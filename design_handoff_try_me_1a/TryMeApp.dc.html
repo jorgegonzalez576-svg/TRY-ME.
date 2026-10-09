@@ -142,13 +142,13 @@ a{color:#721E19}a:hover{color:#4A0F0C}
 </sc-if>
 
 <sc-if value="{{ isConnect }}" hint-placeholder-val="{{ false }}">
-<dc-import name="ConnectGame" lang="{{ lang }}" reduced="{{ reduced }}" start-at="{{ childStart }}" nonce="{{ nonce }}" on-exit="{{ goHome }}" on-lang="{{ setLang }}" on-menu="{{ openSettings }}" on-tint="{{ setTint }}" hint-size="393px,852px" style="position:absolute;inset:0"></dc-import>
+<dc-import name="ConnectGame" lang="{{ lang }}" reduced="{{ reduced }}" start-at="{{ childStart }}" nonce="{{ nonce }}" on-exit="{{ goHome }}" on-lang="{{ setLang }}" on-menu="{{ openSettings }}" on-tint="{{ setTint }}" mode="{{ childMode }}" hint-size="393px,852px" style="position:absolute;inset:0"></dc-import>
 </sc-if>
 <sc-if value="{{ isRoll }}" hint-placeholder-val="{{ false }}">
-<dc-import name="RollGame" lang="{{ lang }}" reduced="{{ reduced }}" start-at="{{ childStart }}" nonce="{{ nonce }}" on-exit="{{ goHome }}" on-lang="{{ setLang }}" on-menu="{{ openSettings }}" on-tint="{{ setTint }}" hint-size="393px,852px" style="position:absolute;inset:0"></dc-import>
+<dc-import name="RollGame" lang="{{ lang }}" reduced="{{ reduced }}" start-at="{{ childStart }}" nonce="{{ nonce }}" on-exit="{{ goHome }}" on-lang="{{ setLang }}" on-menu="{{ openSettings }}" on-tint="{{ setTint }}" mode="{{ childMode }}" hint-size="393px,852px" style="position:absolute;inset:0"></dc-import>
 </sc-if>
 <sc-if value="{{ isCrave }}" hint-placeholder-val="{{ false }}">
-<dc-import name="CraveGame" lang="{{ lang }}" reduced="{{ reduced }}" start-at="{{ childStart }}" nonce="{{ nonce }}" on-exit="{{ goHome }}" on-lang="{{ setLang }}" on-menu="{{ openSettings }}" on-tint="{{ setTint }}" hint-size="393px,852px" style="position:absolute;inset:0"></dc-import>
+<dc-import name="CraveGame" lang="{{ lang }}" reduced="{{ reduced }}" start-at="{{ childStart }}" nonce="{{ nonce }}" on-exit="{{ goHome }}" on-lang="{{ setLang }}" on-menu="{{ openSettings }}" on-tint="{{ setTint }}" mode="{{ childMode }}" hint-size="393px,852px" style="position:absolute;inset:0"></dc-import>
 </sc-if>
 
 <sc-if value="{{ showSaved }}" hint-placeholder-val="{{ false }}">
@@ -286,7 +286,7 @@ class Component extends DCLogic {
     ['Try Me', [['splash', 'Splash'], ['home', 'Inicio'], ['saved', 'Partida guardada'], ['settings', 'Ajustes']]],
     ['Connect', [['connect-start', 'Inicio de sesión'], ['connect-round', 'Inicio de ronda'], ['connect-question', 'Carta de pregunta'], ['connect-challenge', 'Carta de mini reto'], ['connect-roundend', 'Fin de ronda'], ['connect-end', 'Fin de sesión']]],
     ['Roll', [['roll-ready', 'Pantalla de tirada'], ['roll-rolling', 'Dados en movimiento'], ['roll-back', 'Carta boca abajo'], ['roll-card', 'Naipe revelado']]],
-    ['Crave', [['crave-level', 'Selección de nivel'], ['crave-turn', 'Verdad o Reto'], ['crave-card', 'Carta (Reto)'], ['crave-pass', 'Pasar turno · −1'], ['crave-score', 'Marcador'], ['crave-duel', 'Duelo'], ['crave-levelup', 'Subir de nivel'], ['crave-prize', 'Premio']]]
+    ['Crave', [['crave-level', 'Selección de nivel'], ['crave-turn', 'Verdad o Reto'], ['crave-random', 'Sorpréndeme · ruleta'], ['crave-card', 'Carta (Reto)'], ['crave-pass', 'Pasar turno · −1'], ['crave-score', 'Marcador'], ['crave-duelintro', 'Duelo · aparece'], ['crave-duel', 'Duelo · carta'], ['crave-levelup', 'Subir de nivel'], ['crave-prize', 'Premio'], ['crave-complete', 'Premio completado']]]
   ];
 
   componentDidMount() {
@@ -399,7 +399,7 @@ class Component extends DCLogic {
     const linkRows = [[t.names, 'Ana · Leo'], [t.privacy, ''], [t.help, ''], [t.about, '']].map((r, i, arr) => ({ label: r[0], value: r[1], border: i < arr.length - 1 ? '1px solid #EAE1DB' : '0' }));
     const index = this.screens.map(([name, items]) => ({ name: name.toUpperCase(), items: items.map(([id, label]) => ({ label, go: () => this.jump(id), bg: s.current === id ? '#721E19' : 'transparent', fg: s.current === id ? '#fff' : '#241A18' })) }));
     return {
-      t, a, ...this.splashVals(t, red), lang: s.lang, isEs, isEn: !isEs, reduced: red, nonce: s.nonce, childStart: s.childStart, hasSaved: s.hasSaved,
+      childMode: this.board() ? 'board' : 'app', t, a, ...this.splashVals(t, red), lang: s.lang, isEs, isEn: !isEs, reduced: red, nonce: s.nonce, childStart: s.childStart, hasSaved: s.hasSaved,
       isSplash: s.route === 'splash', isHome: s.route === 'home', isConnect: s.route === 'connect', isRoll: s.route === 'roll', isCrave: s.route === 'crave',
       showSaved: s.overlay === 'saved', showConfirm: s.overlay === 'confirm', showSettings: s.overlay === 'settings',
       showIndex: !this.board() && this.props.mode !== 'phone', showReplay: this.props.mode === 'phone', pagePad: this.board() || this.props.mode === 'phone' ? '0' : '40px 32px', minH: this.board() || this.props.mode === 'phone' ? '0' : '100vh',
