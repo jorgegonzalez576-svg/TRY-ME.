@@ -13,19 +13,14 @@ body{font-family:var(--font-text);-webkit-font-smoothing:antialiased;-moz-osx-fo
 @media (min-width:600px){#tryme-preview .tm-phone{box-shadow:0 0 0 1px rgba(0,0,0,.06),0 30px 80px -30px rgba(40,20,15,.45)}}
 #tryme-preview[data-motion="reduced"] .tm-phone{transition:none}
 
-/* Ambiente fotográfico + lavado de color + grano */
+/* Ambiente: dibujo a tinta + lavado de color por escena + grano */
 .tm-ambient{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:var(--surface);transition:background-color .6s ease}
-.tm-ambient-photo{position:absolute;inset:0;background-position:center;background-size:cover;opacity:0;transition:opacity .8s ease}
-.tm-ambient-photo.is-on{opacity:1}
-.tm-ambient-photo[data-place="living"]{background-image:url("../ambient/crave-living-v79.webp")}
-.tm-ambient-photo[data-place="bedroom"]{background-image:url("../ambient/crave-bedroom-v79.webp")}
-.tm-ambient-photo[data-place="kitchen"]{background-image:url("../ambient/crave-kitchen-v79.webp")}
-.tm-ambient-photo[data-place="office"]{background-image:url("../ambient/connect-office-v79.webp")}
-.tm-ambient-photo[data-place="table"]{background-image:url("../ambient/roll-table-v79.webp")}
-.tm-ambient-wash{position:absolute;inset:0;background:linear-gradient(to bottom,color-mix(in srgb,var(--surface) 89%,transparent),color-mix(in srgb,var(--surface) 77%,transparent) 40%,color-mix(in srgb,var(--surface) 59%,transparent));transition:background .6s ease}
-.tm-phone[data-game="crave"]:is([data-level="heat"],[data-level="afterdark"]) .tm-ambient-wash{background:linear-gradient(to bottom,color-mix(in srgb,var(--surface) 94%,transparent),color-mix(in srgb,var(--surface) 82%,transparent) 40%,color-mix(in srgb,var(--surface) 68%,transparent))}
-.tm-phone[data-game="connect"] .tm-ambient-wash{background:linear-gradient(to bottom,color-mix(in srgb,#E1DBD4 92%,transparent),color-mix(in srgb,#E1DBD4 74%,transparent) 45%,color-mix(in srgb,#E1DBD4 58%,transparent))}
-.tm-phone[data-game="roll"] .tm-ambient-wash{background:linear-gradient(to bottom,color-mix(in srgb,#2E3440 95%,transparent),color-mix(in srgb,#2E3440 86%,transparent) 45%,color-mix(in srgb,#2E3440 82%,transparent))}
+.tm-ambient-photo{position:absolute;inset:0;opacity:0;color:var(--accent);transition:opacity .8s ease}
+.tm-ambient-photo svg{position:absolute;left:0;bottom:0;width:100%;height:min(62%,600px)}
+.tm-ambient-photo.is-on{opacity:.26}
+.tm-phone:is([data-level="heat"],[data-level="afterdark"]) .tm-ambient-photo.is-on{opacity:.22}
+.tm-phone[data-game="roll"] .tm-ambient-photo{color:var(--ink)}.tm-phone[data-game="roll"] .tm-ambient-photo.is-on{opacity:.14}
+.tm-ambient-wash{position:absolute;inset:0;background:none;transition:background .6s ease}
 .tm-phone[data-scene="duel"] .tm-ambient-wash{background:radial-gradient(ellipse at 50% 44%,#D6B8A92a 0,transparent 68%),#3D0F0C}
 .tm-phone[data-scene="prize"] .tm-ambient-wash{background:linear-gradient(to bottom,#721E19f2,#721E19d8 45%,#4A0F0Cf0)}
 .tm-phone[data-scene="setup"] .tm-ambient-wash{background:linear-gradient(to bottom,#EFE6E2f4,#EFE6E2e6 50%,#EFE6E2cc)}
@@ -153,7 +148,6 @@ body{font-family:var(--font-text);-webkit-font-smoothing:antialiased;-moz-osx-fo
 .tm-chat-out::before{content:"";position:absolute;inset:0;border-radius:inherit;background-image:var(--grain);background-size:128px;opacity:.35;mix-blend-mode:overlay}
 .tm-chat-logo{position:relative;font:400 50px/1 var(--font-display);letter-spacing:-.02em;color:#F3EDE8}
 .tm-chat-logo span{color:#E6C9BC}
-.tm-chat-react{position:absolute;left:-14px;top:-14px;width:36px;height:36px;font-size:11px;box-shadow:var(--sh-seal),0 0 0 3px #120D0C;animation:tmStamp .4s cubic-bezier(.3,1.4,.5,1) both}
 .tm-chat-read{align-self:flex-end;font:500 12px/1 var(--font-text);color:#A8968C;animation:tmFade .3s both}
 .tm-chat-field{position:absolute;left:12px;right:12px;bottom:max(24px,var(--safe-bottom));height:44px;border-radius:22px;box-shadow:inset 0 0 0 1px rgba(243,237,232,.16);display:flex;align-items:center;padding:0 6px 0 16px;font:500 17px/1 var(--font-text);color:#7E6E66}
 .tm-chat-field b{font-weight:500;color:#F3EDE8}
@@ -166,7 +160,6 @@ body{font-family:var(--font-text);-webkit-font-smoothing:antialiased;-moz-osx-fo
 .tm-chat-hint{position:absolute;left:0;right:0;bottom:calc(max(24px,var(--safe-bottom)) + 58px);text-align:center;font:700 10px/1 var(--font-text);letter-spacing:.2em;color:#7E6E66;animation:tmFade .5s 1.2s both}
 .tm-chat-splash.is-leaving .tm-chat-bg{opacity:0}
 .tm-chat-splash.is-leaving .tm-chat-stage{opacity:0;transform:scale(.98)}
-.tm-chat-flight{position:fixed;z-index:101;width:36px;height:36px;font-size:11px;pointer-events:none}
 @keyframes tmPopIn{0%{opacity:0;transform:scale(.6) translateY(8px)}70%{opacity:1;transform:scale(1.03)}100%{opacity:1;transform:none}}
 @keyframes tmHop{0%,60%,100%{transform:none}30%{transform:translateY(-4px)}}
 @keyframes tmSend{0%{opacity:0;transform:translate(-18px,40px) scale(.3)}45%{opacity:1}75%{opacity:1;transform:translate(0,-4px) scale(1.04)}100%{opacity:1;transform:none}}
@@ -264,6 +257,7 @@ body{font-family:var(--font-text);-webkit-font-smoothing:antialiased;-moz-osx-fo
 #tryme-preview dialog .tm-saved-head .tm-kicker{color:#721E19}
 #tryme-preview dialog label.tm-row{display:flex;font:500 16px/1.25 var(--font-text);color:#241A18;margin:0}
 .tm-bar-dot{color:var(--tm-oxblood)}
-.tm-chat-like{position:absolute;right:-12px;top:-16px;width:38px;height:34px;border-radius:17px;background:#2A211F;box-shadow:0 0 0 3px #120D0C;display:grid;place-items:center;animation:tmLike .45s cubic-bezier(.3,1.5,.5,1) both}
-.tm-chat-like svg{width:19px;height:19px}
+.tm-chat-out:has(.tm-chat-like){margin-bottom:16px}
+.tm-chat-like{position:absolute;right:16px;bottom:-20px;min-width:34px;height:28px;padding:0 8px;border-radius:14px;background:#2A211F;box-shadow:0 0 0 2.5px #120D0C;display:grid;place-items:center;transform-origin:50% 50%;animation:tmLike .45s cubic-bezier(.3,1.5,.5,1) both}
+.tm-chat-like svg{width:16px;height:16px}
 @keyframes tmLike{0%{opacity:0;transform:scale(.3)}60%{opacity:1;transform:scale(1.18)}100%{opacity:1;transform:none}}
