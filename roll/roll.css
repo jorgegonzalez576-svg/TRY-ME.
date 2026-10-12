@@ -370,3 +370,15 @@
 #tryme-preview .tm-roll #roll-game .rl-wrap-card :is(h3,p){color:#2E3440}
 #tryme-preview .tm-roll #roll-game .rl-storage{color:var(--rl-on2)}
 #tryme-preview .rl-dialog .rl-button{border-radius:14px!important;font-weight:600!important;min-height:52px!important}
+
+/* Roll v2 motion: hold-to-shake tray, winning face glow, card sheen */
+#tryme-preview .tm-roll #roll-game{overflow-y:clip}
+#tryme-preview .tm-roll #roll-game[data-phase="ready"] .rl-start-tray{touch-action:none;cursor:grab;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+#tryme-preview .tm-roll #roll-game[data-phase="ready"] .rl-start-tray:active{cursor:grabbing}
+#roll-game .rl-hold-hint{gap:9px;opacity:1}
+#roll-game .rl-hold-hint b{font:600 12px/1.2 var(--font-text);color:#2E3440}
+#roll-game .rl-meter{position:relative;width:96px;height:3px;border-radius:3px;background:rgba(46,52,64,.14);overflow:hidden}
+#roll-game .rl-meter i{position:absolute;inset:0;border-radius:3px;background:var(--rl-red,#C1123F);transform:scaleX(0);transform-origin:left center}
+#roll-game .rl-face::after{transition:box-shadow .45s ease,border-color .45s ease}
+#roll-game .rl-face.rl-win::after{border-color:#F6C2CF;box-shadow:inset 0 0 0 1.5px #F6C2CF,0 0 18px rgba(246,194,207,.7)}
+#roll-game .rl-card-back .rl-sheen{position:absolute;top:-20%;bottom:-20%;left:0;width:38%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.16),transparent);transform:translateX(-130%) skewX(-16deg);pointer-events:none;z-index:1}
