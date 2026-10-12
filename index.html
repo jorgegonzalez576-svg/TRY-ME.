@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="fonts/fonts.css?v=1a-1">
 <link rel="stylesheet" href="css/tokens.css?v=1a-1">
 <link rel="stylesheet" href="css/app.css?v=1a-3">
-<link rel="stylesheet" href="css/crave.css?v=1a-1">
+<link rel="stylesheet" href="css/crave.css?v=1a-2">
 <link rel="stylesheet" href="connect/connect.css?v=1a-1">
 <link rel="stylesheet" href="connect/motion.css?v=1a-1">
 <link rel="stylesheet" href="roll/roll.css?v=1a-3">
@@ -641,8 +641,18 @@ function gameCard(type){
  }
  function pullInitialLetter(){
   if(initialOpened||!initialPeeking)return;initialOpened=true;initialOpening=false;
-  const el=content.querySelector('#tm-initial-envelope');if(!el)return;const sheet=el.querySelector('.tm-entry-letter');sheet.style.transform='';sheet.disabled=true;el.classList.add('is-revealed');content.querySelector('#tm-initial-hint').textContent=t('firstTurn')+': '+names[active];saveGame();
-  const version=letterVersion;setTimeout(()=>{if(version!==letterVersion||screen!=='envelope'||!el.isConnected)return;content.querySelector('[data-action="turn"]').hidden=false;fitViewport();},reducedMotion()?0:450);
+  const el=content.querySelector('#tm-initial-envelope');if(!el)return;const sheet=el.querySelector('.tm-entry-letter');sheet.style.transform='';sheet.disabled=true;content.querySelector('#tm-initial-hint').textContent=t('firstTurn')+': '+names[active];saveGame();
+  const version=letterVersion,alive=()=>version===letterVersion&&screen==='envelope'&&el.isConnected;
+  // The letter slides all the way out of the pocket, clears the envelope, then drops in front of it.
+  let wait=0;
+  if(!reducedMotion()&&typeof sheet.animate==='function'){
+   const from=getComputedStyle(sheet).transform;sheet.style.transition='none';
+   const fly=sheet.animate([{transform:from==='none'?'translateY(0)':from,boxShadow:'0 3px 12px rgba(82,36,29,.25)',easing:'cubic-bezier(.25,.7,.3,1)'},{offset:.44,transform:'translateY(-192px) rotate(-1.4deg) scale(.99)',easing:'cubic-bezier(.4,0,.6,1)'},{offset:.52,transform:'translateY(-198px) rotate(-1deg) scale(1)',boxShadow:'0 10px 22px rgba(82,36,29,.28)',easing:'cubic-bezier(.45,0,.25,1)'},{offset:.84,transform:'translateY(-84px) rotate(.6deg) scale(1.045)',boxShadow:'0 26px 34px -14px rgba(60,16,12,.5)',easing:'cubic-bezier(.3,.6,.3,1)'},{transform:'translateY(-92px) rotate(0deg) scale(1)',boxShadow:'0 18px 30px -12px rgba(60,16,12,.45)'}],{duration:1350,fill:'forwards'});
+   setTimeout(()=>{if(alive())el.classList.add('is-revealed');},610);
+   fly.finished.then(()=>{if(!alive())return;sheet.style.transition='';fly.cancel();if(soundEnabled&&window.tryMeSettings?.vibration!==false)try{navigator.vibrate?.(8);}catch{}}).catch(()=>{});
+   wait=1250;
+  }else el.classList.add('is-revealed');
+  setTimeout(()=>{if(!alive())return;content.querySelector('[data-action="turn"]').hidden=false;fitViewport();},reducedMotion()?0:wait);
  }
  let initialDrag=null;
  root.addEventListener('pointerdown',event=>{const sheet=event.target.closest('.tm-entry-letter');if(!sheet||sheet.disabled||screen!=='envelope'||!initialPeeking||initialOpened)return;initialPullSuppress=false;initialDrag={sheet,y:event.clientY,moved:false};sheet.setPointerCapture?.(event.pointerId);sheet.style.transition='none';});
