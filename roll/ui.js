@@ -517,20 +517,24 @@ function perform(a,b){
  if(a==='confirm-finish'){stop();clearSaved();s=null;exit();}
 }
 function rlCanRoll(){return active&&!busy&&!rlCharge&&main.querySelector('.rl-dice-space')&&main.querySelector('[data-rl="roll"]:not(:disabled)');}
-main.addEventListener('pointerdown',e=>{const zone=e.target.closest('.rl-start-tray');if(!zone||!e.isPrimary||e.button!==0||!rlCanRoll())return;primeCue();
- if(rlReduced())return;
- if(rlStartCharge()){rlSwipe={id:e.pointerId,x:e.clientX,y:e.clientY,down:0,side:0};zone.setPointerCapture?.(e.pointerId);}});
-main.addEventListener('pointermove',e=>{if(!rlSwipe||e.pointerId!==rlSwipe.id)return;rlSwipe.down=Math.max(rlSwipe.down,e.clientY-rlSwipe.y);rlSwipe.side=Math.max(rlSwipe.side,Math.abs(e.clientX-rlSwipe.x));});
-function rlPointerEnd(e,cancelled){if(!rlSwipe||e.pointerId!==rlSwipe.id)return;const sw=rlSwipe;rlSwipe=null;
- const up=sw.y-e.clientY,held=rlCharge?performance.now()-rlCharge.t0:0;
- // Only a deliberate hold (or an upward flick) throws; taps, scrolls and cancelled touches put the dice back.
+// Touch uses touch events (reliable on iPhone Safari); mouse and pen use pointer events.
+function rlBegin(id,x,y){if(!rlCanRoll()||rlReduced())return false;primeCue();if(!rlStartCharge())return false;rlSwipe={id,x,y,down:0,side:0};return true;}
+function rlTrack(x,y){if(!rlSwipe)return;rlSwipe.down=Math.max(rlSwipe.down,y-rlSwipe.y);rlSwipe.side=Math.max(rlSwipe.side,Math.abs(x-rlSwipe.x));}
+function rlFinish(y,cancelled){const sw=rlSwipe;if(!sw)return;rlSwipe=null;primeCue();const up=sw.y-y,held=rlCharge?performance.now()-rlCharge.t0:0;
+ // A hold of a quarter second (or an upward flick) throws when the finger lifts; quick taps and downward drags put the dice back.
  if(sw.down>40||(sw.side>60&&up<=40)||(held<250&&up<=40)){rlAbortCharge();return;}
  rlRelease(up>40?.25:0);}
-main.addEventListener('pointerup',e=>rlPointerEnd(e,false));
+const rlTouch=(e)=>rlSwipe&&typeof rlSwipe.id==='string'?[...e.changedTouches].find(x=>'t'+x.identifier===rlSwipe.id):null;
+main.addEventListener('touchstart',e=>{const zone=e.target.closest?.('.rl-start-tray');if(!zone||rlSwipe||e.touches.length>1)return;if(!rlCanRoll()||rlReduced())return;e.preventDefault();const t0=e.changedTouches[0];rlBegin('t'+t0.identifier,t0.clientX,t0.clientY);},{passive:false});
+main.addEventListener('touchmove',e=>{const t0=rlTouch(e);if(!t0)return;e.preventDefault();rlTrack(t0.clientX,t0.clientY);},{passive:false});
+window.addEventListener('touchend',e=>{const t0=rlTouch(e);if(t0)rlFinish(t0.clientY,false);});
+window.addEventListener('touchcancel',e=>{const t0=rlTouch(e);if(t0)rlFinish(t0.clientY,true);});
+main.addEventListener('pointerdown',e=>{if(e.pointerType==='touch')return;const zone=e.target.closest('.rl-start-tray');if(!zone||!e.isPrimary||e.button!==0||rlSwipe)return;if(rlBegin(e.pointerId,e.clientX,e.clientY))zone.setPointerCapture?.(e.pointerId);});
+main.addEventListener('pointermove',e=>{if(rlSwipe&&e.pointerId===rlSwipe.id)rlTrack(e.clientX,e.clientY);});
+const rlPointerEnd=(e,cancelled)=>{if(rlSwipe&&e.pointerId===rlSwipe.id)rlFinish(e.clientY,cancelled);};
 window.addEventListener('pointerup',e=>rlPointerEnd(e,false));
-main.addEventListener('lostpointercapture',e=>rlPointerEnd(e,true));
+window.addEventListener('pointercancel',e=>rlPointerEnd(e,true));
 main.addEventListener('contextmenu',e=>{if(e.target.closest?.('.rl-start-tray, .rl-card-scene'))e.preventDefault();});
-main.addEventListener('pointercancel',e=>rlPointerEnd(e,true));
 root.addEventListener('click',e=>{if(!active||busy||view!=='game'||s?.phase!=='covered'||rlWaiting())return;if(e.target.closest('button'))return;if(!e.target.closest('#roll-game .rl-card-scene'))return;app.click();reveal();});
 root.addEventListener('keydown',e=>{if(!active||busy||s?.phase!=='covered'||!e.target.closest?.('#roll-game .rl-card-scene')||!['Enter',' '].includes(e.key))return;e.preventDefault();app.click();reveal();});
 root.addEventListener('click',e=>{if(!active)return;const b=e.target.closest('button');if(!b||b.disabled)return;if(busy&&!['resume-saved','resume-away'].includes(b.dataset.rl))return;if(b===menuButton){app.click();openDialog();return;}if(!b.dataset.rl)return;app.click();perform(b.dataset.rl,b);});
