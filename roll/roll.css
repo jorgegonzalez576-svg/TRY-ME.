@@ -382,3 +382,5 @@
 #roll-game .rl-face::after{transition:box-shadow .45s ease,border-color .45s ease}
 #roll-game .rl-face.rl-win::after{border-color:#F6C2CF;box-shadow:inset 0 0 0 1.5px #F6C2CF,0 0 18px rgba(246,194,207,.7)}
 #roll-game .rl-card-back .rl-sheen{position:absolute;top:-20%;bottom:-20%;left:0;width:38%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.16),transparent);transform:translateX(-130%) skewX(-16deg);pointer-events:none;z-index:1}
+#roll-game[data-phase="covered"] .rl-card-scene{cursor:pointer;-webkit-tap-highlight-color:transparent;border-radius:14px}
+#roll-game[data-phase="covered"] .rl-card-scene:focus-visible{outline:2px solid #F6C2CF;outline-offset:6px}
